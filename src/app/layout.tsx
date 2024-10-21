@@ -49,6 +49,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        {/* Metaetiqueta de verificación de Google Search Console */}
+        <meta
+          name="google-site-verification"
+          content="AGpNPOb2L1Z4p1pOdNGsInrVPMiVKBk020FAa0TxGV0"
+        />
+      </head>
       <body
         className={`${inter.className} min-h-screen flex flex-col bg-background text-foreground`}
       >
