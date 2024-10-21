@@ -40,7 +40,7 @@ export interface ImageUrl {
           description: "Personajes principales de la sexta temporada",
         },
       ],
-      date: "2024-10-01",
+      date: "2024-10-1",
       content: "Detalles sobre la temporada de otoño 2024",
     },
   ];
