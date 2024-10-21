@@ -27,16 +27,16 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Síguenos</h3>
             <div className="flex space-x-4">
-              <Link href="https://www.facebook.com" target="_blank" className="text-muted-foreground hover:text-foreground" aria-label="Facebook">
+              <Link href="https://www.facebook.com/techotaku1" target="_blank" className="text-muted-foreground hover:text-foreground" aria-label="Facebook">
                 <SiFacebook className="w-6 h-6" />
               </Link>
-              <Link href="https://www.instagram.com" target="_blank" className="text-muted-foreground hover:text-foreground" aria-label="Instagram">
+              <Link href="https://www.instagram.com/techotaku1" target="_blank" className="text-muted-foreground hover:text-foreground" aria-label="Instagram">
                 <SiInstagram className="w-6 h-6" />
               </Link>
-              <Link href="https://www.tiktok.com" target="_blank" className="text-muted-foreground hover:text-foreground" aria-label="TikTok">
+              <Link href="https://www.tiktok.com/@techotaku1" target="_blank" className="text-muted-foreground hover:text-foreground" aria-label="TikTok">
                 <SiTiktok className="w-6 h-6" />
               </Link>
-              <Link href="https://www.youtube.com" target="_blank" className="text-muted-foreground hover:text-foreground" aria-label="YouTube">
+              <Link href="https://www.youtube.com/@techotaku1" target="_blank" className="text-muted-foreground hover:text-foreground" aria-label="YouTube">
                 <SiYoutube className="w-6 h-6" />
               </Link>
             </div>
