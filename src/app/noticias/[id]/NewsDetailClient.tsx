@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { newsItems } from "../newsData"; // Importa los datos aquí
+import classNames from "classnames"; // Importa classNames para manejar clases condicionales
 
 export default function NewsDetailClient({ id }: { id: number }) {
   const newsItem = newsItems.find((item) => item.id === id); // Encuentra el item basado en el ID
 
   const [currentIndex, setCurrentIndex] = useState(0); // Inicializa el estado aquí
-  const [isAnimating, setIsAnimating] = useState(false); // Estado para controlar la animación
+  const [loading, setLoading] = useState(true); // Estado para controlar la carga de la imagen
+  const [isTransitioning, setIsTransitioning] = useState(false); // Estado para controlar la transición
 
   useEffect(() => {
     if (!newsItem) return; // Asegúrate de que existe newsItem
@@ -23,24 +25,33 @@ export default function NewsDetailClient({ id }: { id: number }) {
   }
 
   const handlePrev = () => {
-    setIsAnimating(true); // Inicia la animación
+    setIsTransitioning(true); // Inicia la transición
     setTimeout(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === 0 ? newsItem.imageUrls.length - 1 : prevIndex - 1
       );
-      setIsAnimating(false); // Termina la animación
-    }, 300); // Duración de la animación
+      setIsTransitioning(false); // Termina la transición
+    }, 300); // Duración del efecto de transición
   };
 
   const handleNext = () => {
-    setIsAnimating(true); // Inicia la animación
+    setIsTransitioning(true); // Inicia la transición
     setTimeout(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === newsItem.imageUrls.length - 1 ? 0 : prevIndex + 1
       );
-      setIsAnimating(false); // Termina la animación
-    }, 300); // Duración de la animación
+      setIsTransitioning(false); // Termina la transición
+    }, 300); // Duración del efecto de transición
   };
+
+  // Definir la clase para el contenedor de la imagen
+  const imageContainerClasses = classNames(
+    "relative w-full h-full transition-opacity duration-500",
+    {
+      "opacity-0": loading || isTransitioning, // Oculta el contenedor mientras carga o está en transición
+      "opacity-100": !loading && !isTransitioning, // Muestra el contenedor una vez cargado y no en transición
+    }
+  );
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-4 px-4 space-y-8">
@@ -58,17 +69,18 @@ export default function NewsDetailClient({ id }: { id: number }) {
         <div className="flex flex-col sm:flex-row w-full">
           {/* Card para la imagen */}
           <div className="relative flex-shrink-0 w-full max-w-md aspect-[2/3] overflow-hidden sm:mr-4">
-            <Image
-              src={newsItem.imageUrls[currentIndex].url}
-              alt={newsItem.imageUrls[currentIndex].title}
-              fill
-              className={`rounded-lg border-4 border-gray-300 transition-opacity duration-300 ${
-                isAnimating ? "opacity-0" : "opacity-100"
-              }`} // Clases de transición de opacidad
-              quality={85}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
+            <div className={imageContainerClasses} onLoad={() => setLoading(false)}>
+              <Image
+                src={newsItem.imageUrls[currentIndex].url}
+                alt={newsItem.imageUrls[currentIndex].title}
+                fill
+                className="rounded-lg border-4 border-gray-300"
+                quality={85}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+                onLoadingComplete={() => setLoading(false)} // Una vez que la imagen se carga, se quita la opacidad
+              />
+            </div>
             <div className="absolute inset-0 flex justify-between items-center">
               <Button
                 onClick={handlePrev}
