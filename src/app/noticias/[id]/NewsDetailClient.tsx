@@ -11,6 +11,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
   const newsItem = newsItems.find((item) => item.id === id); // Encuentra el item basado en el ID
 
   const [currentIndex, setCurrentIndex] = useState(0); // Inicializa el estado aquí
+  const [isAnimating, setIsAnimating] = useState(false); // Estado para controlar la animación
 
   useEffect(() => {
     if (!newsItem) return; // Asegúrate de que existe newsItem
@@ -22,15 +23,23 @@ export default function NewsDetailClient({ id }: { id: number }) {
   }
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? newsItem.imageUrls.length - 1 : prevIndex - 1
-    );
+    setIsAnimating(true); // Inicia la animación
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? newsItem.imageUrls.length - 1 : prevIndex - 1
+      );
+      setIsAnimating(false); // Termina la animación
+    }, 300); // Duración de la animación
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === newsItem.imageUrls.length - 1 ? 0 : prevIndex + 1
-    );
+    setIsAnimating(true); // Inicia la animación
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === newsItem.imageUrls.length - 1 ? 0 : prevIndex + 1
+      );
+      setIsAnimating(false); // Termina la animación
+    }, 300); // Duración de la animación
   };
 
   return (
@@ -38,8 +47,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
       <div
         className="relative w-full h-64 bg-cover bg-center"
         style={{ backgroundImage: `url('${newsItem.backgroundImage}')` }}
-      >
-      </div>
+      ></div>
 
       {/* Aquí cambiamos la disposición del título y la descripción */}
       <div className="flex flex-col items-center w-full max-w-4xl">
@@ -54,8 +62,10 @@ export default function NewsDetailClient({ id }: { id: number }) {
               src={newsItem.imageUrls[currentIndex].url}
               alt={newsItem.imageUrls[currentIndex].title}
               fill
-              className="rounded-lg border-4 border-gray-300"
-              quality={100}
+              className={`rounded-lg border-4 border-gray-300 transition-opacity duration-300 ${
+                isAnimating ? "opacity-0" : "opacity-100"
+              }`} // Clases de transición de opacidad
+              quality={85}
               sizes="(max-width: 768px) 100vw, 50vw"
               priority
             />
@@ -100,7 +110,9 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 </p>
                 {/* Botón para enlazar a MyAnimeList específico para cada imagen */}
                 <Button
-                  onClick={() => window.open(newsItem.imageUrls[currentIndex].malLink, "_blank")}
+                  onClick={() =>
+                    window.open(newsItem.imageUrls[currentIndex].malLink, "_blank")
+                  }
                   className="mt-4"
                 >
                   Ver en MyAnimeList
