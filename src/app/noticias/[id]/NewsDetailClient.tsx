@@ -13,11 +13,11 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
   const [currentIndex, setCurrentIndex] = useState(0); // Inicializa el estado aquí
   const [loading, setLoading] = useState(true); // Estado para controlar la carga de la imagen
-  const [isTransitioning, setIsTransitioning] = useState(false); // Estado para controlar la transición
 
   useEffect(() => {
     if (!newsItem) return; // Asegúrate de que existe newsItem
     setCurrentIndex(0); // Resetea el índice al cargar un nuevo item
+    setLoading(true); // Establece loading a true al cambiar de newsItem
   }, [newsItem]);
 
   // Este efecto se ejecuta cuando currentIndex cambia
@@ -26,24 +26,22 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
     const timer = setTimeout(() => {
       setLoading(false); // Desbloquea la visibilidad de la nueva imagen
-      setIsTransitioning(false); // Termina la transición
     }, 300); // Duración de la transición
 
     return () => {
       clearTimeout(timer); // Limpia el timeout al cambiar el índice
-      setLoading(true); // Reinicia la carga para la siguiente imagen
     };
   }, [currentIndex, newsItem]); // Añadir newsItem para asegurar que se ejecute correctamente
 
   const handlePrev = () => {
-    setIsTransitioning(true); // Inicia la transición
+    setLoading(true); // Inicia la carga
     setCurrentIndex((prevIndex) => 
       prevIndex === 0 ? (newsItem ? newsItem.imageUrls.length - 1 : 0) : prevIndex - 1
     );
   };
 
   const handleNext = () => {
-    setIsTransitioning(true); // Inicia la transición
+    setLoading(true); // Inicia la carga
     setCurrentIndex((prevIndex) => 
       prevIndex === (newsItem ? newsItem.imageUrls.length - 1 : 0) ? 0 : prevIndex + 1
     );
@@ -58,8 +56,8 @@ export default function NewsDetailClient({ id }: { id: number }) {
   const imageContainerClasses = classNames(
     "relative w-full h-full transition-opacity duration-300", // Ajusta la duración según sea necesario
     {
-      "opacity-0": loading || isTransitioning, // Oculta el contenedor mientras está cargando o en transición
-      "opacity-100": !loading && !isTransitioning, // Muestra el contenedor una vez cargado y no en transición
+      "opacity-0": loading, // Oculta el contenedor mientras está cargando
+      "opacity-100": !loading, // Muestra el contenedor una vez cargado
     }
   );
 
