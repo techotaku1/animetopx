@@ -54,7 +54,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
   // Definir la clase para el contenedor de la imagen
   const imageContainerClasses = classNames(
-    "relative w-full h-full transition-opacity duration-300", // Ajusta la duración según sea necesario
+    "relative w-full h-full transition-opacity duration-300", // Aquí mantenemos la transición
     {
       "opacity-0": loading, // Oculta el contenedor mientras está cargando
       "opacity-100": !loading, // Muestra el contenedor una vez cargado
