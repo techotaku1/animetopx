@@ -20,34 +20,39 @@ export default function NewsDetailClient({ id }: { id: number }) {
     setCurrentIndex(0); // Resetea el índice al cargar un nuevo item
   }, [newsItem]);
 
-  if (!newsItem) {
-    return <p className="text-center">Noticia no encontrada</p>;
-  }
+  // Este efecto se ejecuta cuando currentIndex cambia
+  useEffect(() => {
+    if (!newsItem) return; // Verificar si newsItem existe antes de establecer el temporizador
+
+    const timer = setTimeout(() => {
+      setLoading(false); // Desbloquea la visibilidad de la nueva imagen
+      setIsTransitioning(false); // Termina la transición
+    }, 300); // Duración de la transición
+
+    return () => {
+      clearTimeout(timer); // Limpia el timeout al cambiar el índice
+      setLoading(true); // Reinicia la carga para la siguiente imagen
+    };
+  }, [currentIndex, newsItem]); // Añadir newsItem para asegurar que se ejecute correctamente
 
   const handlePrev = () => {
     setIsTransitioning(true); // Inicia la transición
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? newsItem.imageUrls.length - 1 : prevIndex - 1
+      prevIndex === 0 ? (newsItem ? newsItem.imageUrls.length - 1 : 0) : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setIsTransitioning(true); // Inicia la transición
     setCurrentIndex((prevIndex) => 
-      prevIndex === newsItem.imageUrls.length - 1 ? 0 : prevIndex + 1
+      prevIndex === (newsItem ? newsItem.imageUrls.length - 1 : 0) ? 0 : prevIndex + 1
     );
   };
 
-  // Este efecto se ejecuta cuando currentIndex cambia
-  useEffect(() => {
-    // Retrasa la visibilidad de la nueva imagen
-    const timer = setTimeout(() => {
-      setLoading(false); // Desbloquea la visibilidad de la nueva imagen
-      setIsTransitioning(false); // Termina la transición
-    }, 300); // Duración de la transición
-
-    return () => clearTimeout(timer); // Limpia el timeout al cambiar el índice
-  }, [currentIndex]);
+  // Comprueba si newsItem existe antes de renderizar
+  if (!newsItem) {
+    return <p className="text-center">Noticia no encontrada</p>;
+  }
 
   // Definir la clase para el contenedor de la imagen
   const imageContainerClasses = classNames(
