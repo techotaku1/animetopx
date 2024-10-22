@@ -26,29 +26,34 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
   const handlePrev = () => {
     setIsTransitioning(true); // Inicia la transición
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? newsItem.imageUrls.length - 1 : prevIndex - 1
-      );
-      setIsTransitioning(false); // Termina la transición
-    }, 300); // Duración del efecto de transición
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? newsItem.imageUrls.length - 1 : prevIndex - 1
+    );
   };
 
   const handleNext = () => {
     setIsTransitioning(true); // Inicia la transición
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === newsItem.imageUrls.length - 1 ? 0 : prevIndex + 1
-      );
-      setIsTransitioning(false); // Termina la transición
-    }, 300); // Duración del efecto de transición
+    setCurrentIndex((prevIndex) => 
+      prevIndex === newsItem.imageUrls.length - 1 ? 0 : prevIndex + 1
+    );
   };
+
+  // Este efecto se ejecuta cuando currentIndex cambia
+  useEffect(() => {
+    // Retrasa la visibilidad de la nueva imagen
+    const timer = setTimeout(() => {
+      setLoading(false); // Desbloquea la visibilidad de la nueva imagen
+      setIsTransitioning(false); // Termina la transición
+    }, 300); // Duración de la transición
+
+    return () => clearTimeout(timer); // Limpia el timeout al cambiar el índice
+  }, [currentIndex]);
 
   // Definir la clase para el contenedor de la imagen
   const imageContainerClasses = classNames(
-    "relative w-full h-full transition-opacity duration-500",
+    "relative w-full h-full transition-opacity duration-300", // Ajusta la duración según sea necesario
     {
-      "opacity-0": loading || isTransitioning, // Oculta el contenedor mientras carga o está en transición
+      "opacity-0": loading || isTransitioning, // Oculta el contenedor mientras está cargando o en transición
       "opacity-100": !loading && !isTransitioning, // Muestra el contenedor una vez cargado y no en transición
     }
   );
@@ -69,7 +74,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
         <div className="flex flex-col sm:flex-row w-full">
           {/* Card para la imagen */}
           <div className="relative flex-shrink-0 w-full max-w-md aspect-[2/3] overflow-hidden sm:mr-4">
-            <div className={imageContainerClasses} onLoad={() => setLoading(false)}>
+            <div className={imageContainerClasses}>
               <Image
                 src={newsItem.imageUrls[currentIndex].url}
                 alt={newsItem.imageUrls[currentIndex].title}
@@ -78,7 +83,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 quality={85}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
-                onLoadingComplete={() => setLoading(false)} // Una vez que la imagen se carga, se quita la opacidad
+                onLoadingComplete={() => setLoading(false)} // Establece la imagen como cargada
               />
             </div>
             <div className="absolute inset-0 flex justify-between items-center">
