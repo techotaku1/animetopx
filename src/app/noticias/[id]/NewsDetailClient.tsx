@@ -109,7 +109,8 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "") return;
+    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "")
+      return;
 
     // Agregar el comentario y la calificación a Firebase
     await addDoc(collection(db, "comments"), {
@@ -137,8 +138,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
   // Calcular la suma y el promedio de estrellas
   const totalStars = comments.reduce((acc, comment) => acc + comment.rating, 0);
-  const averageStars =
-    comments.length > 0 ? totalStars / comments.length : 0; // Asegúrate de que averageStars sea un número
+  const averageStars = comments.length > 0 ? totalStars / comments.length : 0; // Asegúrate de que averageStars sea un número
 
   const imageContainerClasses = classNames(
     "relative w-full h-full transition-opacity duration-300",
@@ -167,7 +167,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 src={newsItem.imageUrls[currentIndex].url}
                 alt={newsItem.imageUrls[currentIndex].title}
                 fill
-                className="rounded-lg border-4 border-gray-300"
+                className="rounded-lg border-4 border-gray-300" // Añadir object-cover para ajustar la imagen
                 quality={85}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
@@ -227,27 +227,36 @@ export default function NewsDetailClient({ id }: { id: number }) {
             </Card>
           </div>
         </div>
-
+        {/* Botón "Volver a las noticias" */}
+        <Button onClick={() => window.history.back()} className="mt-4">
+          Volver a las noticias
+        </Button>
         {/* Mostrar suma y promedio de estrellas */}
         <div className="text-center mb-4 mt-4">
           <h3 className="text-lg font-semibold">
             Total de Comentarios: {comments.length}
           </h3>
-          <h3 className="text-lg font-semibold">
-            Score: {totalStars}
-          </h3>
+          <h3 className="text-lg font-semibold">Score: {totalStars}</h3>
           <div className="flex items-center justify-center">
             <h3 className="text-lg font-semibold mr-2">Puntaje:</h3>
             {Array.from({ length: Math.round(averageStars) }, (_, index) => (
-              <Star key={index} className="inline-block w-6 h-6 text-yellow-500" />
+              <Star
+                key={index}
+                className="inline-block w-6 h-6 text-yellow-500"
+              />
             ))}
-            <span className="ml-2 text-lg font-semibold">{averageStars.toFixed(1)}</span>
+            <span className="ml-2 text-lg font-semibold">
+              {averageStars.toFixed(1)}
+            </span>
           </div>
         </div>
 
         <div className="w-full max-w-4xl p-4 border rounded">
           <h2 className="text-xl font-semibold mb-2">Comentarios</h2>
-          <form onSubmit={handleCommentSubmit} className="flex flex-col space-y-2 mb-4">
+          <form
+            onSubmit={handleCommentSubmit}
+            className="flex flex-col space-y-2 mb-4"
+          >
             <input
               type="text"
               placeholder="Tu nombre"
@@ -285,14 +294,20 @@ export default function NewsDetailClient({ id }: { id: number }) {
             <p className="text-center">No hay comentarios.</p>
           ) : (
             comments.map((comment) => (
-              <div key={comment.id} className="flex justify-between items-center p-2 border-b">
+              <div
+                key={comment.id}
+                className="flex justify-between items-center p-2 border-b"
+              >
                 <div>
                   <p className="font-bold">{comment.userName}</p>
                   <p className="text-gray-600">{comment.comment}</p>
                   <p className="text-xs text-gray-400">
-                    Publicado: {comment.date.toLocaleDateString()} - 
+                    Publicado: {comment.date.toLocaleDateString()} -
                     {Array.from({ length: comment.rating }, (_, index) => (
-                      <Star key={index} className="inline-block w-4 h-4 text-yellow-500" />
+                      <Star
+                        key={index}
+                        className="inline-block w-4 h-4 text-yellow-500"
+                      />
                     ))}
                   </p>
                 </div>
