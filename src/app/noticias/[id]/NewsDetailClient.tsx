@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { newsItems } from "../newsData"; // Importa los datos aquí
+import { newsItems } from "@/lib/newsData"; // Importa los datos aquí
 import classNames from "classnames"; // Importa classNames para manejar clases condicionales
 import {
   collection,

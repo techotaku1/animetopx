@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+// app/layout.tsx
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/header";
@@ -8,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Suspense } from "react";
 import { NavigationEvents } from "@/components/navigation-events";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import CustomProgressBar from "@/components/ProgressBar"; // Importa tu componente de barra de progreso
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime",
   keywords:
-    "anime, noticias, manga, japón, otaku, top animes,top, animes verano, animes primavera, animes otoño, animes invierno",
+    "anime, noticias, manga, japón, otaku, top animes, animes verano, animes primavera, animes otoño, animes invierno",
   openGraph: {
     title: "AnimeTopX",
     description:
@@ -61,6 +63,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
+          <CustomProgressBar /> {/* Aquí se incluye la barra de progreso */}
           <main className="flex-grow container mx-auto px-4 py-8">
             {children}
             <Suspense fallback={null}>
