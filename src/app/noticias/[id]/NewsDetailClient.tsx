@@ -7,15 +7,26 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { newsItems } from "../newsData"; // Importa los datos aquí
 import classNames from "classnames"; // Importa classNames para manejar clases condicionales
-import { collection,  query, where, addDoc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  Timestamp,
+  query,
+  where,
+  addDoc,
+  onSnapshot,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "@/db/firebaseConfig"; // Importa tu configuración de Firebase
 import { Star } from "lucide-react"; // Importa el icono de estrella
 
 // Definimos la interfaz para los comentarios
 interface Comment {
+  id: string; // Añadimos un ID para poder eliminar el comentario
   comment: string;
   date: Date;
   rating: number; // Añadir la calificación al comentario
+  userName: string; // Nombre del usuario
 }
 
 export default function NewsDetailClient({ id }: { id: number }) {
@@ -24,9 +35,9 @@ export default function NewsDetailClient({ id }: { id: number }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState<Comment[]>([]);
-  const [rating, setRating] = useState<number>(0);
   const [newComment, setNewComment] = useState<string>(""); // Estado para el nuevo comentario
   const [userRating, setUserRating] = useState<number>(0); // Estado para la calificación del usuario
+  const [userName, setUserName] = useState<string>(""); // Estado para el nombre del usuario
 
   useEffect(() => {
     if (!newsItem) return;
@@ -46,68 +57,88 @@ export default function NewsDetailClient({ id }: { id: number }) {
     };
   }, [currentIndex, newsItem]);
 
-  // Función para recuperar comentarios y calificaciones desde Firestore
-  const fetchCommentsAndRating = useCallback(() => {
-    const commentsQuery = query(collection(db, "comments"), where("newsId", "==", id));
+  // Función para recuperar comentarios desde Firestore
+  const fetchComments = useCallback(() => {
+    const commentsQuery = query(
+      collection(db, "comments"),
+      where("newsId", "==", id)
+    );
     onSnapshot(commentsQuery, (snapshot) => {
       const fetchedComments: Comment[] = [];
-      let totalRating = 0;
 
       snapshot.forEach((doc) => {
         const data = doc.data();
         fetchedComments.push({
+          id: doc.id, // Guardar el ID del documento
           comment: data.comment,
           date: data.date.toDate(),
           rating: data.rating,
+          userName: data.userName, // Guardar el nombre del usuario
         });
-        totalRating += data.rating; // Sumar las calificaciones
       });
 
       setComments(fetchedComments);
-      const averageRating = fetchedComments.length > 0 ? totalRating / fetchedComments.length : 0;
-      setRating(averageRating);
+      // No estamos usando setRating aquí, así que simplemente calculamos el promedio
     });
   }, [id]);
 
   useEffect(() => {
     if (!id) return;
-    fetchCommentsAndRating();
-  }, [fetchCommentsAndRating, id]);
+    fetchComments();
+  }, [fetchComments, id]);
 
   const handlePrev = () => {
     setLoading(true);
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? (newsItem ? newsItem.imageUrls.length - 1 : 0) : prevIndex - 1
+      prevIndex === 0
+        ? newsItem
+          ? newsItem.imageUrls.length - 1
+          : 0
+        : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setLoading(true);
     setCurrentIndex((prevIndex) =>
-      prevIndex === (newsItem ? newsItem.imageUrls.length - 1 : 0) ? 0 : prevIndex + 1
+      prevIndex === (newsItem ? newsItem.imageUrls.length - 1 : 0)
+        ? 0
+        : prevIndex + 1
     );
   };
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newComment.trim() === "" || userRating === 0) return;
+    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "") return;
 
     // Agregar el comentario y la calificación a Firebase
     await addDoc(collection(db, "comments"), {
       comment: newComment,
-      date: new Date(),
+      date: Timestamp.fromDate(new Date()),
       newsId: id,
       rating: userRating,
+      userName: userName, // Guardar el nombre del usuario
     });
 
     // Limpiar los campos
     setNewComment("");
     setUserRating(0); // Reiniciar la calificación del usuario
+    setUserName(""); // Reiniciar el nombre del usuario
+  };
+
+  const handleDeleteComment = async (commentId: string) => {
+    const commentRef = doc(db, "comments", commentId);
+    await deleteDoc(commentRef);
   };
 
   if (!newsItem) {
     return <p className="text-center">Noticia no encontrada</p>;
   }
+
+  // Calcular la suma y el promedio de estrellas
+  const totalStars = comments.reduce((acc, comment) => acc + comment.rating, 0);
+  const averageStars =
+    comments.length > 0 ? totalStars / comments.length : 0; // Asegúrate de que averageStars sea un número
 
   const imageContainerClasses = classNames(
     "relative w-full h-full transition-opacity duration-300",
@@ -165,7 +196,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
             </div>
           </div>
 
-          <div className="flex flex-col ml-0 sm:ml-4">
+          <div className="flex flex-col ml-0 sm:ml-4 mb-4">
             <Card className="flex flex-col shadow-2xl transform translate-y-2">
               <CardHeader className="text-left">
                 <h2 className="text-xl font-semibold sm:text-2xl">
@@ -183,7 +214,10 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 </p>
                 <Button
                   onClick={() =>
-                    window.open(newsItem.imageUrls[currentIndex].malLink, "_blank")
+                    window.open(
+                      newsItem.imageUrls[currentIndex].malLink,
+                      "_blank"
+                    )
                   }
                   className="mt-4"
                 >
@@ -193,70 +227,87 @@ export default function NewsDetailClient({ id }: { id: number }) {
             </Card>
           </div>
         </div>
-      </div>
 
-      <p className="text-base sm:text-lg mb-4 text-center">{newsItem.content}</p>
-      <p className="text-xs sm:text-sm text-muted-foreground">Categoría: {newsItem.category}</p>
-      <p className="text-xs sm:text-sm text-muted-foreground">
-        Fecha:{" "}
-        {new Date(newsItem.date).toLocaleDateString("es-ES", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </p>
-
-      <div className="flex flex-col items-center mb-4">
-        <h3 className="text-xl font-semibold">Calificación promedio</h3>
-        <p className="text-2xl font-bold">{rating.toFixed(1)} / 5</p>
-      </div>
-
-      {/* Sección de comentarios */}
-      <div className="flex flex-col items-center w-full max-w-4xl space-y-4">
-        <h3 className="text-xl font-semibold">Comentarios</h3>
-        {comments.length > 0 ? (
-          comments.map((comment, index) => (
-            <div key={index} className="p-4 border-b border-gray-300 w-full">
-              <p className="text-base">{comment.comment}</p>
-              <p className="text-xs text-gray-500">Calificación: {comment.rating} ⭐</p>
-              <p className="text-xs text-gray-500">
-                {new Date(comment.date).toLocaleString("es-ES")}
-              </p>
-            </div>
-          ))
-        ) : (
-          <p className="text-center text-gray-500">No hay comentarios aún.</p>
-        )}
-
-        <h3 className="text-xl font-semibold">Deja tu comentario</h3>
-        <form onSubmit={handleCommentSubmit} className="flex flex-col w-full">
-          <textarea
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Escribe tu comentario aquí..."
-            className="border rounded-lg p-2 mb-2"
-            rows={3}
-            required
-          />
-          <div className="flex items-center mb-2">
-            <span className="mr-2">Calificación:</span>
-            {[1, 2, 3, 4, 5].map((star) => (
-              <Star
-                key={star}
-                className={`w-6 h-6 cursor-pointer ${
-                  userRating >= star ? "text-yellow-500" : "text-gray-300"
-                }`}
-                onClick={() => setUserRating(star)}
-              />
+        {/* Mostrar suma y promedio de estrellas */}
+        <div className="text-center mb-4 mt-4">
+          <h3 className="text-lg font-semibold">
+            Total de Comentarios: {comments.length}
+          </h3>
+          <h3 className="text-lg font-semibold">
+            Score: {totalStars}
+          </h3>
+          <div className="flex items-center justify-center">
+            <h3 className="text-lg font-semibold mr-2">Puntaje:</h3>
+            {Array.from({ length: Math.round(averageStars) }, (_, index) => (
+              <Star key={index} className="inline-block w-6 h-6 text-yellow-500" />
             ))}
+            <span className="ml-2 text-lg font-semibold">{averageStars.toFixed(1)}</span>
           </div>
-          <Button type="submit">Enviar</Button>
-        </form>
-      </div>
+        </div>
 
-      <Button onClick={() => window.history.back()} className="mt-4">
-        Volver a noticias
-      </Button>
+        <div className="w-full max-w-4xl p-4 border rounded">
+          <h2 className="text-xl font-semibold mb-2">Comentarios</h2>
+          <form onSubmit={handleCommentSubmit} className="flex flex-col space-y-2 mb-4">
+            <input
+              type="text"
+              placeholder="Tu nombre"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              className="border border-gray-300 rounded p-2"
+              required
+            />
+            <textarea
+              placeholder="Escribe tu comentario..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              className="border border-gray-300 rounded p-2"
+              required
+            />
+            <div className="flex items-center space-x-2">
+              <span className="text-lg">Calificación:</span>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star
+                  key={star}
+                  className={classNames("w-6 h-6 cursor-pointer", {
+                    "text-yellow-500": userRating >= star,
+                    "text-gray-300": userRating < star,
+                  })}
+                  onClick={() => setUserRating(star)}
+                />
+              ))}
+            </div>
+            <Button type="submit" className="mt-2">
+              Agregar Comentario
+            </Button>
+          </form>
+
+          {comments.length === 0 ? (
+            <p className="text-center">No hay comentarios.</p>
+          ) : (
+            comments.map((comment) => (
+              <div key={comment.id} className="flex justify-between items-center p-2 border-b">
+                <div>
+                  <p className="font-bold">{comment.userName}</p>
+                  <p className="text-gray-600">{comment.comment}</p>
+                  <p className="text-xs text-gray-400">
+                    Publicado: {comment.date.toLocaleDateString()} - 
+                    {Array.from({ length: comment.rating }, (_, index) => (
+                      <Star key={index} className="inline-block w-4 h-4 text-yellow-500" />
+                    ))}
+                  </p>
+                </div>
+                <Button
+                  variant="destructive"
+                  onClick={() => handleDeleteComment(comment.id)}
+                  className="ml-4"
+                >
+                  Eliminar
+                </Button>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 }
