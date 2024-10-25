@@ -2,7 +2,7 @@
 const nextConfig = {
     output: 'export',
     images: {
-      unoptimized: true, // Esto permite cargar imágenes sin optimización
+      unoptimized: false, // Esto permite cargar imágenes sin optimización
     },
   };
   
