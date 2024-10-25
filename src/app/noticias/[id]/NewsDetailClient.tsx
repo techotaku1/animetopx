@@ -50,7 +50,6 @@ export default function NewsDetailClient({ id }: { id: number }) {
   }, [newsItem]);
 
   // Pre-cargar imágenes y actualizar el progreso
-  // Pre-cargar imágenes y actualizar el progreso
   useEffect(() => {
     if (!newsItem) return;
 
@@ -69,7 +68,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
     };
 
     imageUrls.forEach((url) => {
-      const img: HTMLImageElement = new window.Image(); // Usa window.Image para asegurarte de que sea reconocible
+      const img: HTMLImageElement = new window.Image();
       img.src = url;
       img.onload = handleImageLoad;
       img.onerror = () => {
@@ -92,7 +91,10 @@ export default function NewsDetailClient({ id }: { id: number }) {
         fetchedComments.push({
           id: doc.id,
           comment: data.comment,
-          date: data.date.toDate(),
+          date:
+            data.date instanceof Timestamp
+              ? data.date.toDate()
+              : new Date(data.date), // Verifica si es un Timestamp
           rating: data.rating,
           userName: data.userName,
         });
@@ -211,7 +213,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 size="icon"
                 className="rounded-full"
                 aria-label="Imagen anterior"
-                disabled={!isAllImagesLoaded} // Desactivar si no están cargadas
+                disabled={!isAllImagesLoaded}
               >
                 <ChevronLeft className="w-6 h-6" />
               </Button>
@@ -221,7 +223,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 size="icon"
                 className="rounded-full"
                 aria-label="Siguiente imagen"
-                disabled={!isAllImagesLoaded} // Desactivar si no están cargadas
+                disabled={!isAllImagesLoaded}
               >
                 <ChevronRight className="w-6 h-6" />
               </Button>
@@ -259,71 +261,106 @@ export default function NewsDetailClient({ id }: { id: number }) {
             </Card>
           </div>
         </div>
-        <Button onClick={() => window.history.back()} className="mt-4">
-          Volver a las noticias
-        </Button>
-        <div className="text-center mb-4 mt-4">
-          <h3 className="text-lg font-semibold">
-            Total de Comentarios: {comments.length}
-          </h3>
-          <h3 className="text-lg font-semibold">Score: {totalStars}</h3>
-          <div className="flex items-center justify-center">
-            <h3 className="text-lg font-semibold mr-2">Valoración promedio:</h3>
-            {Array.from({ length: Math.round(averageStars) }).map(
-              (_, index) => (
-                <Star key={index} className="w-5 h-5 text-yellow-500" />
-              )
-            )}
-          </div>
-        </div>
-        <div className="flex flex-col w-full">
-          <form onSubmit={handleCommentSubmit} className="mb-4">
+
+        {/* Fecha de publicación */}
+        <span className="text-sm text-gray-500 mb-2">
+          Publicado el: {new Date(newsItem.date).toLocaleDateString()}
+        </span>
+
+        {/* Sección de comentarios */}
+        <div className="mt-6 w-full">
+          <h2 className="text-lg font-semibold mb-2">
+            Comentarios ({comments.length}){" "}
+            {/* Añadido el conteo de comentarios */}
+          </h2>
+          
+          {/* Promedio de estrellas */}
+          {comments.length > 0 && (
+            <div className="flex items-center mb-4">
+              <span className="text-lg font-bold mr-2">Promedio:</span>
+              {[...Array(5)].map((_, index) => (
+                <Star
+                  key={index}
+                  className={classNames("w-6 h-6", {
+                    "text-yellow-500": index < averageStars,
+                    "text-gray-300": index >= averageStars,
+                  })}
+                />
+              ))}
+              <span className="ml-2 text-lg font-semibold">
+                {averageStars.toFixed(1)} / 5
+              </span>
+            </div>
+          )}
+
+          <form
+            onSubmit={handleCommentSubmit}
+            className="flex flex-col space-y-4"
+          >
             <textarea
-              className="w-full p-2 border rounded"
-              placeholder="Escribe tu comentario..."
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Deja un comentario"
+              className="p-2 border border-gray-300 rounded-md"
+              required
             />
             <input
-              className="w-full p-2 border rounded mt-2"
               type="text"
-              placeholder="Tu nombre"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
+              placeholder="Tu nombre"
+              className="p-2 border border-gray-300 rounded-md"
+              required
             />
-            <input
-              className="w-full p-2 border rounded mt-2"
-              type="number"
-              min="1"
-              max="5"
-              placeholder="Valoración (1-5)"
-              value={userRating}
-              onChange={(e) => setUserRating(Number(e.target.value))}
-            />
-            <Button
-              type="submit"
-              className="mt-2"
-              disabled={!newComment || !userRating || !userName}
-            >
+            <div className="flex items-center">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star
+                  key={star}
+                  className={classNames("w-6 h-6 cursor-pointer", {
+                    "text-yellow-500": star <= userRating,
+                    "text-gray-300": star > userRating,
+                  })}
+                  onClick={() => setUserRating(star)}
+                />
+              ))}
+            </div>
+            <Button type="submit" className="mt-2">
               Enviar Comentario
             </Button>
           </form>
 
+          {/* Listado de comentarios */}
           {comments.map((comment) => (
-            <div key={comment.id} className="border p-4 mb-2 rounded">
-              <h4 className="font-semibold">{comment.userName}</h4>
-              <p>{comment.comment}</p>
-              <p className="text-sm text-gray-500">
-                {comment.date.toLocaleDateString()} -{" "}
-                {comment.date.toLocaleTimeString()}
-              </p>
-              <Button
-                onClick={() => handleDeleteComment(comment.id)}
-                variant="outline"
-                className="mt-2"
-              >
-                Eliminar Comentario
-              </Button>
+            <div
+              key={comment.id}
+              className="p-4 my-2 border border-gray-300 rounded-md"
+            >
+              <div className="flex justify-between">
+                <div>
+                  <h3 className="font-semibold">{comment.userName}</h3>
+                  <p className="text-sm text-gray-500">
+                    {new Date(comment.date).toLocaleDateString()}
+                  </p>
+                </div>
+                <Button
+                  variant="destructive"
+                  onClick={() => handleDeleteComment(comment.id)}
+                >
+                  Eliminar
+                </Button>
+              </div>
+              <p className="mt-2">{comment.comment}</p>
+              <div className="flex mt-2">
+                {[...Array(5)].map((_, index) => (
+                  <Star
+                    key={index}
+                    className={classNames("w-6 h-6", {
+                      "text-yellow-500": index < comment.rating,
+                      "text-gray-300": index >= comment.rating,
+                    })}
+                  />
+                ))}
+              </div>
             </div>
           ))}
         </div>
