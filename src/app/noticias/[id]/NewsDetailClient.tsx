@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { newsItems } from "@/lib/newsData";
+import Link from "next/link";
 import classNames from "classnames";
 import {
   collection,
@@ -267,13 +268,20 @@ export default function NewsDetailClient({ id }: { id: number }) {
           Publicado el: {new Date(newsItem.date).toLocaleDateString()}
         </span>
 
+        {/* Botón "Volver a las Noticias" */}
+        <Link href="/" className="mt-4">
+        <Button>
+          Volver a las Noticias
+        </Button>
+      </Link>
+
         {/* Sección de comentarios */}
         <div className="mt-6 w-full">
           <h2 className="text-lg font-semibold mb-2">
             Comentarios ({comments.length}){" "}
             {/* Añadido el conteo de comentarios */}
           </h2>
-          
+
           {/* Promedio de estrellas */}
           {comments.length > 0 && (
             <div className="flex items-center mb-4">
