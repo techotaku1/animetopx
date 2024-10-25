@@ -1,12 +1,12 @@
-"use client"; // Asegúrate de que esto esté presente
+"use client";
 
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { newsItems } from "@/lib/newsData"; // Importa los datos aquí
-import classNames from "classnames"; // Importa classNames para manejar clases condicionales
+import { newsItems } from "@/lib/newsData";
+import classNames from "classnames";
 import {
   collection,
   Timestamp,
@@ -17,27 +17,25 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { db } from "@/db/firebaseConfig"; // Importa tu configuración de Firebase
-import { Star } from "lucide-react"; // Importa el icono de estrella
+import { db } from "@/db/firebaseConfig";
 
-// Definimos la interfaz para los comentarios
 interface Comment {
-  id: string; // Añadimos un ID para poder eliminar el comentario
+  id: string;
   comment: string;
   date: Date;
-  rating: number; // Añadir la calificación al comentario
-  userName: string; // Nombre del usuario
+  rating: number;
+  userName: string;
 }
 
 export default function NewsDetailClient({ id }: { id: number }) {
-  const newsItem = newsItems.find((item) => item.id === id); // Encuentra el item basado en el ID
+  const newsItem = newsItems.find((item) => item.id === id);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState<Comment[]>([]);
-  const [newComment, setNewComment] = useState<string>(""); // Estado para el nuevo comentario
-  const [userRating, setUserRating] = useState<number>(0); // Estado para la calificación del usuario
-  const [userName, setUserName] = useState<string>(""); // Estado para el nombre del usuario
+  const [newComment, setNewComment] = useState<string>("");
+  const [userRating, setUserRating] = useState<number>(0);
+  const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
     if (!newsItem) return;
@@ -57,7 +55,6 @@ export default function NewsDetailClient({ id }: { id: number }) {
     };
   }, [currentIndex, newsItem]);
 
-  // Función para recuperar comentarios desde Firestore
   const fetchComments = useCallback(() => {
     const commentsQuery = query(
       collection(db, "comments"),
@@ -69,16 +66,15 @@ export default function NewsDetailClient({ id }: { id: number }) {
       snapshot.forEach((doc) => {
         const data = doc.data();
         fetchedComments.push({
-          id: doc.id, // Guardar el ID del documento
+          id: doc.id,
           comment: data.comment,
           date: data.date.toDate(),
           rating: data.rating,
-          userName: data.userName, // Guardar el nombre del usuario
+          userName: data.userName,
         });
       });
 
       setComments(fetchedComments);
-      // No estamos usando setRating aquí, así que simplemente calculamos el promedio
     });
   }, [id]);
 
@@ -112,19 +108,17 @@ export default function NewsDetailClient({ id }: { id: number }) {
     if (newComment.trim() === "" || userRating === 0 || userName.trim() === "")
       return;
 
-    // Agregar el comentario y la calificación a Firebase
     await addDoc(collection(db, "comments"), {
       comment: newComment,
       date: Timestamp.fromDate(new Date()),
       newsId: id,
       rating: userRating,
-      userName: userName, // Guardar el nombre del usuario
+      userName: userName,
     });
 
-    // Limpiar los campos
     setNewComment("");
-    setUserRating(0); // Reiniciar la calificación del usuario
-    setUserName(""); // Reiniciar el nombre del usuario
+    setUserRating(0);
+    setUserName("");
   };
 
   const handleDeleteComment = async (commentId: string) => {
@@ -136,9 +130,8 @@ export default function NewsDetailClient({ id }: { id: number }) {
     return <p className="text-center">Noticia no encontrada</p>;
   }
 
-  // Calcular la suma y el promedio de estrellas
   const totalStars = comments.reduce((acc, comment) => acc + comment.rating, 0);
-  const averageStars = comments.length > 0 ? totalStars / comments.length : 0; // Asegúrate de que averageStars sea un número
+  const averageStars = comments.length > 0 ? totalStars / comments.length : 0;
 
   const imageContainerClasses = classNames(
     "relative w-full h-full transition-opacity duration-300",
@@ -165,9 +158,10 @@ export default function NewsDetailClient({ id }: { id: number }) {
             <div className={imageContainerClasses}>
               <Image
                 src={newsItem.imageUrls[currentIndex].url}
-                alt={newsItem.imageUrls[currentIndex].title}
+                alt={newsItem.imageUrls[currentIndex].alt || newsItem.imageUrls[currentIndex].description}
+                title={newsItem.imageUrls[currentIndex].title}
                 fill
-                className="rounded-lg border-4 border-gray-300" // Añadir object-cover para ajustar la imagen
+                className="rounded-lg border-4 border-gray-300 object-cover"
                 quality={85}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
@@ -227,11 +221,9 @@ export default function NewsDetailClient({ id }: { id: number }) {
             </Card>
           </div>
         </div>
-        {/* Botón "Volver a las noticias" */}
         <Button onClick={() => window.history.back()} className="mt-4">
           Volver a las noticias
         </Button>
-        {/* Mostrar suma y promedio de estrellas */}
         <div className="text-center mb-4 mt-4">
           <h3 className="text-lg font-semibold">
             Total de Comentarios: {comments.length}

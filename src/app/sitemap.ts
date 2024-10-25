@@ -1,28 +1,54 @@
-import { MetadataRoute } from 'next';
-
-// Simulación de un array de noticias con IDs y fechas
-const newsItems = [
-  { id: 1, date: new Date() },
-  { id: 2, date: new Date() },
-  { id: 3, date: new Date() },
-  // Agrega más noticias según sea necesario
-];
+import { MetadataRoute } from 'next'
+import { newsItems } from '../app/lib/newsData'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://animetopx.vercel.app';
+  const baseUrl = 'https://animetopx.vercel.app'
 
-  return [
+  // Rutas estáticas
+  const staticRoutes = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'yearly', // Cambia esto a un valor válido
+      changeFrequency: 'daily' as const,
       priority: 1,
     },
-    ...newsItems.map((item) => ({
-      url: `${baseUrl}/noticias/${item.id}`,
-      lastModified: item.date,
-      changeFrequency: 'monthly' as const, // Asegúrate de que sea un valor literal
+    {
+      url: `${baseUrl}/noticias`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.9,
+    },
+  ]
+
+  // Rutas dinámicas de noticias con imágenes
+  const newsRoutes = newsItems.flatMap((newsItem) => {
+    const newsUrl = `${baseUrl}/noticias/${newsItem.id}`
+    const lastModified = new Date(newsItem.date)
+
+    // Entrada principal de la noticia
+    const mainEntry = {
+      url: newsUrl,
+      lastModified,
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
-    })),
-  ];
+    }
+
+    // Entradas para cada imagen de la noticia
+    const imageEntries = newsItem.imageUrls.map((image) => ({
+      url: newsUrl,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+      images: [{
+        loc: `${baseUrl}${image.url}`,
+        title: image.title,
+        caption: image.description,
+        alt: image.alt || image.description,
+      }],
+    }))
+
+    return [mainEntry, ...imageEntries]
+  })
+
+  return [...staticRoutes, ...newsRoutes]
 }

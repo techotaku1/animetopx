@@ -1,4 +1,3 @@
-// app/layout.tsx
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -9,7 +8,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { Suspense } from "react";
 import { NavigationEvents } from "@/components/navigation-events";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import CustomProgressBar from "@/components/ProgressBar"; // Importa tu componente de barra de progreso
+import CustomProgressBar from "@/components/ProgressBar";
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,10 +52,27 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        {/* Metaetiqueta de verificación de Google Search Console */}
         <meta
           name="google-site-verification"
           content="AGpNPOb2L1Z4p1pOdNGsInrVPMiVKBk020FAa0TxGV0"
+        />
+        <Script
+          id="json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "AnimeTopX",
+              "url": "https://animetopx.vercel.app",
+              "description": "Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://animetopx.vercel.app/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
         />
       </head>
       <body
@@ -63,7 +80,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
-          <CustomProgressBar /> {/* Aquí se incluye la barra de progreso */}
+          <CustomProgressBar />
           <main className="flex-grow container mx-auto px-4 py-8">
             {children}
             <Suspense fallback={null}>
