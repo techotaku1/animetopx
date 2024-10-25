@@ -20,34 +20,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Rutas dinámicas de noticias con imágenes
-  const newsRoutes = newsItems.flatMap((newsItem) => {
+  // Rutas dinámicas de noticias con imágenes agrupadas
+  const newsRoutes = newsItems.map((newsItem) => {
     const newsUrl = `${baseUrl}/noticias/${newsItem.id}`
     const lastModified = new Date(newsItem.date)
 
-    // Entrada principal de la noticia
-    const mainEntry = {
+    // Entrada principal de la noticia con todas las imágenes incluidas
+    return {
       url: newsUrl,
       lastModified,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
-    }
-
-    // Entradas para cada imagen de la noticia
-    const imageEntries = newsItem.imageUrls.map((image) => ({
-      url: newsUrl,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-      images: [{
+      images: newsItem.imageUrls.map((image) => ({
         loc: `${baseUrl}${image.url}`,
         title: image.title,
         caption: image.description,
         alt: image.alt || image.description,
-      }],
-    }))
-
-    return [mainEntry, ...imageEntries]
+      })),
+    }
   })
 
   return [...staticRoutes, ...newsRoutes]
