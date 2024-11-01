@@ -24,13 +24,15 @@ export function NewsCard({ item }: { item: NewsItem }) {
   return (
     <Card className="flex flex-col">
       <CardHeader>
-        <div className="relative w-full h-64"> {/* Ajustar la altura para un estilo vertical */}
+        <div className="relative w-full h-64">
+          {" "}
+          {/* Ajustar la altura para un estilo vertical */}
           <Image
             src={item.imageUrl}
             alt={item.title}
-            layout="fill" // Utiliza fill para que ocupe todo el contenedor
-            objectFit="contain" // Mantiene la relación de aspecto sin recortar
-            className="rounded-t-lg" // Esquinas redondeadas
+            fill // Para que ocupe todo el contenedor
+            style={{ objectFit: "contain" }} // Ajusta la imagen sin recortar
+            className="rounded-t-lg" // Bordes redondeados
           />
         </div>
       </CardHeader>
@@ -40,10 +42,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
         <CardDescription>{item.description}</CardDescription>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
-        <time
-          dateTime={item.date}
-          className="text-sm text-muted-foreground"
-        >
+        <time dateTime={item.date} className="text-sm text-muted-foreground">
           {new Date(item.date).toLocaleDateString("es-ES", {
             year: "numeric",
             month: "long",

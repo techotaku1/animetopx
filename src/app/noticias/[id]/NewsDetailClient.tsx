@@ -170,10 +170,16 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-4 px-4 space-y-8">
-      <div
-        className="relative w-full h-64 bg-cover bg-center"
-        style={{ backgroundImage: `url('${newsItem.backgroundImage}')` }}
-      ></div>
+      <div className="relative w-full max-w-[1200px] mx-auto">
+        <div className="overflow-x-auto">
+          <div className="relative w-[1200px] h-[400px]">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url('${newsItem.backgroundImage}')` }}
+            ></div>
+          </div>
+        </div>
+      </div>
 
       <div className="flex flex-col items-center w-full max-w-4xl">
         <h1 className="text-3xl font-bold mb-4 text-center sm:text-4xl">
@@ -182,21 +188,23 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
         <div className="flex flex-col sm:flex-row w-full">
           <div className="relative flex-shrink-0 w-full max-w-md aspect-[2/3] overflow-hidden sm:mr-4">
-            <div className={imageContainerClasses}>
-              <Image
-                src={newsItem.imageUrls[currentIndex].url}
-                alt={
-                  newsItem.imageUrls[currentIndex].alt ||
-                  newsItem.imageUrls[currentIndex].description
-                }
-                title={newsItem.imageUrls[currentIndex].title}
-                fill
-                className="rounded-lg border-4 border-gray-300 object-cover"
-                quality={85}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-                onLoadingComplete={() => setLoading(false)}
-              />
+            <div className="relative flex-shrink-0 w-full max-w-md aspect-[2/3] overflow-hidden sm:mr-4">
+              <div className={imageContainerClasses}>
+                <Image
+                  src={newsItem.imageUrls[currentIndex].url}
+                  alt={
+                    newsItem.imageUrls[currentIndex].alt ||
+                    newsItem.imageUrls[currentIndex].description
+                  }
+                  title={newsItem.imageUrls[currentIndex].title}
+                  fill
+                  className="object-contain"
+                  quality={100}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                  onLoad={() => setLoading(false)} // Cambia onLoadingComplete por onLoad
+                />
+              </div>
             </div>
             {/* Barra de progreso */}
             {!isAllImagesLoaded && (
@@ -238,9 +246,17 @@ export default function NewsDetailClient({ id }: { id: number }) {
                   {newsItem.imageUrls[currentIndex].title}
                 </h2>
                 <div className="flex justify-start mt-4">
-                  <span className="bg-red-500 text-white text-xl sm:text-3xl font-bold rounded px-2">
-                    TOP {currentIndex + 1}
-                  </span>
+                  {id === 2 ? (
+                    // Solo el número sin "Top" para la noticia con ID 2
+                    <span className="bg-red-500 text-white text-xl sm:text-3xl font-bold rounded px-2">
+                      {currentIndex + 1} {/* Solo el número */}
+                    </span>
+                  ) : (
+                    // Muestra "TOP" para otras noticias
+                    <span className="bg-red-500 text-white text-xl sm:text-3xl font-bold rounded px-2">
+                      TOP {currentIndex + 1}
+                    </span>
+                  )}
                 </div>
               </CardHeader>
               <CardContent>
@@ -270,10 +286,8 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
         {/* Botón "Volver a las Noticias" */}
         <Link href="/" className="mt-4">
-        <Button>
-          Volver a las Noticias
-        </Button>
-      </Link>
+          <Button>Volver a las Noticias</Button>
+        </Link>
 
         {/* Sección de comentarios */}
         <div className="mt-6 w-full">

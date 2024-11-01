@@ -101,5 +101,71 @@ export const newsItems: NewsItem[] = [
         malLink: "https://myanimelist.net/anime/58511/Nanatsu_no_Taizai__Mokushiroku_no_Yonkishi_2nd_Season?q=Mokushiroku%20no%20Yonkishi&cat=anime"
       }
     ]
-  }
+  },
+  {
+    id: 2,
+    title: "LAS BRUJAS Y SUS ARZOBISPOS",
+    category: "RE:ZERO",
+    date: "2024-11-1",
+    content: "Las brujas y sus arzobispos",
+    backgroundImage: "/RE-ZERO/PORTADA4.webp",
+    publicationDate: new Date("2024-11-01"),
+    imageUrls: [
+      {
+        url: "/RE-ZERO/PEREZA.webp",
+        title: "Pecado De La Pereza (Sekhmet - Petelgeuse Romanee)",
+        description: "Este poder otorga una fuerza invisible y descomunal que puede ser usada a distancia, y permite que el portador de Pereza manipule a otros como extensiones de sí mismo. Es una fuerza implacable y brutal que se impone sobre la voluntad ajena.",
+        alt: "Imagen de re:zero, mostrando la bruja de la pereza y su arzobispo.",
+        malLink: "https://myanimelist.net/https://myanimelist.net/character/149519/Sekhmet?q=Sekhmet&cat=character"
+      },
+      {
+        url: "/RE-ZERO/CODICIA.webp",
+        title: "Pecado De La Codicia (Echidna - Regulus Corneas)",
+        description: "La codicia permite al portador adueñarse de la experiencia o vida de otros, anulando su independencia y dominando cada aspecto de su existencia. Este poder convierte a los demás en posesiones de la persona que lo controla, sin capacidad de escapar.",
+        alt: "Imagen de re:zero, mostrando la bruja de la codicia y su arzobispo.",
+        malLink: "https://myanimelist.net/character/145877/Echidna?q=echidna&cat=character"
+      },
+      {
+        url: "/RE-ZERO/GULA.webp",
+        title: "Pecado De La Gula (Daphne - Ley Batenkaitos)",
+        description:
+          "El portador de Gula tiene la habilidad de devorar la esencia de otros, consumiendo sus recuerdos, identidad y existencia misma. Aquellos devorados caen en el olvido absoluto.",
+        alt: "Imagen de Re:Zero, mostrando a la Bruja de la Gula y su arzobispo.",
+        malLink: "https://myanimelist.net/character/147409/Daphne?q=Daphne&cat=character"
+      },
+      {
+        url: "/RE-ZERO/LUJURIA.webp",
+        title: "Pecado De La Lujuria (Carmilla - Capella Emerada)",
+        description:
+          "Lujuria otorga el poder de manipular y distorsionar el cuerpo de otros. Con esta habilidad, el portador puede modificar su apariencia y asumir la forma de otras personas.",
+        alt: "Imagen de Re:Zero, mostrando a la Bruja de la Lujuria y su arzobispo.",
+        malLink: "https://myanimelist.net/character/149021/Carmilla?q=Carmilla%20luju&cat=character"
+      },
+      {
+        url: "/RE-ZERO/IRA.webp",
+        title: "Pecado De La Ira (Minerva - Sirius)",
+        description:
+          "Ira otorga la habilidad de sanar heridas y restaurar la vitalidad de otros, aunque también puede manifestarse de formas destructivas cuando el portador es consumido por una furia desbordante.",
+        alt: "Imagen de Re:Zero, mostrando a la Bruja de la Ira y su arzobispo.",
+        malLink: "https://myanimelist.net/character/147408/Minerva?q=Minerva&cat=character"
+      },
+      {
+        url: "/RE-ZERO/ENVIDIA.webp",
+        title: "Pecado De La Envidia (Satella - ?)",
+        description:
+          "El poder de la Envidia permite al portador manipular sombras que consumen todo a su paso. Es una fuerza destructiva que busca apoderarse de lo que desea, sin dejar rastro.",
+        alt: "Imagen de Re:Zero, mostrando a la Bruja de la Envidia.",
+        malLink: "https://myanimelist.net/character/145877/Echidna?q=echidna&cat=character"
+      },
+      {
+        url: "/RE-ZERO/ORGULLO.webp",
+        title: "Pecado Del Orgullo (Typhon - ?)",
+        description:
+          "Orgullo permite al portador ejercer una influencia total sobre aquellos que considera inferiores. Este poder incrementa con la autopercepción, siendo tanto un arma como una carga para el portador.",
+        alt: "Imagen de Re:Zero, mostrando a la Bruja de Orgullo y su arzobispo.",
+        malLink: "https://myanimelist.net/character/147407/Typhon?q=Typhon&cat=character"
+      }
+    ]
+  },
 ];
+

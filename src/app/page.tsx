@@ -6,14 +6,21 @@ import Image from "next/image";
 // Simulación de datos de noticias
 const newsItems = [
   {
+    id: 2,
+    title: "RE:ZERO BRUJAS Y ARZOBISPOS ✝️🔮",
+    description: "Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.",
+    category: "Curiosidades",
+    imageUrl: "/RE-ZERO/COLLAGE3.webp",
+    date: "1 noviembre 2024",
+  },
+  {
     id: 1,
     title: "TOP ANIME OTOÑO 2024",
-    description: "La sexta temporada del popular anime llegará este otoño",
+    description: "Top estrenos de la temporada de OTOÑO 2024",
     category: "Otoño",
     imageUrl: "/OTOÑO-2024/COLLAGE.webp",
     date: "octubre 2024",
   },
-  
 ];
 
 export default function Home() {
