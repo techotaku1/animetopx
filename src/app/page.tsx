@@ -7,8 +7,9 @@ import Image from "next/image";
 const newsItems = [
   {
     id: 2,
-    title: "RE:ZERO BRUJAS Y ARZOBISPOS ✝️🔮",
-    description: "Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.",
+    title: "BRUJAS Y ARZOBISPOS EN RE:ZERO ✝️🔮",
+    description:
+      "Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.",
     category: "Curiosidades",
     imageUrl: "/RE-ZERO/COLLAGE3.webp",
     date: "1 noviembre 2024",
@@ -31,8 +32,8 @@ export default function Home() {
         <Image
           src="/OTOÑO-2024/PORTADA1.webp"
           alt="Banner publicitario"
-          fill
-          objectFit="cover"
+          fill // Esto hace que la imagen llene el contenedor
+          style={{ objectFit: "cover" }} // 'cover' asegura que la imagen llene el contenedor sin recortar
           priority
         />
       </div>
