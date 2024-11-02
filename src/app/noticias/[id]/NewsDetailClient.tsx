@@ -146,8 +146,6 @@ export default function NewsDetailClient({ id }: { id: number }) {
     setUserName("");
   };
 
-  
-
   if (!newsItem) {
     return <p className="text-center">Noticia no encontrada</p>;
   }
@@ -175,12 +173,12 @@ export default function NewsDetailClient({ id }: { id: number }) {
           </div>
         </div>
       </div>
-  
+
       <div className="flex flex-col items-center w-full max-w-4xl">
         <h1 className="text-3xl font-bold mb-2 text-center sm:text-4xl">
           {newsItem.title}
         </h1>
-  
+
         <div className="relative flex flex-col items-start w-full max-w-4xl">
           {/* Contenedor de botones "Anterior" y "Siguiente" */}
           <div className="flex justify-between w-full max-w-md mb-3">
@@ -203,12 +201,16 @@ export default function NewsDetailClient({ id }: { id: number }) {
               Siguiente
             </Button>
           </div>
-  
+
           {/* Contenedor de imagen y detalles */}
           <div className="flex flex-col sm:flex-row items-start w-full">
             {/* Contenedor de la imagen */}
             <div className="relative flex-shrink-0 w-full max-w-md overflow-hidden sm:mr-4 mb-4 sm:mb-0">
-              <div className="relative flex items-center justify-center">
+              <div
+                className="relative flex items-center justify-center"
+              >
+                {" "}
+                {/* Ajusta la altura aquí */}
                 <div className={imageContainerClasses}>
                   <Image
                     src={newsItem.imageUrls[currentIndex].url}
@@ -217,13 +219,11 @@ export default function NewsDetailClient({ id }: { id: number }) {
                       newsItem.imageUrls[currentIndex].description
                     }
                     title={newsItem.imageUrls[currentIndex].title}
-                    width={newsItem.imageUrls[currentIndex].width}
-                    height={newsItem.imageUrls[currentIndex].height}
-                    className="object-contain"
-                    quality={100}
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    width={800}
+                    height={600}
+                    className="object-contain rounded-lg"  // Mantiene la imagen dentro del contenedor sin recortar
+                    quality={100} // Calidad máxima
                     priority
-                    style={{ objectFit: "contain" }}
                     onLoad={() => setLoading(false)}
                   />
                 </div>
@@ -237,7 +237,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 </div>
               )}
             </div>
-  
+
             {/* Sección de Título y Descripción */}
             <div className="flex flex-col justify-start max-w-md">
               <Card className="flex flex-col shadow-2xl transform mb-2">
@@ -365,7 +365,6 @@ export default function NewsDetailClient({ id }: { id: number }) {
                   {new Date(comment.date).toLocaleDateString()}
                 </p>
               </div>
-              
             </div>
             <p className="mt-2">{comment.comment}</p>
             <div className="flex mt-2">
