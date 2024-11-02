@@ -185,7 +185,7 @@ export const newsItems: NewsItem[] = [
         description:
           "El poder de la Envidia permite al portador manipular sombras que consumen todo a su paso. Es una fuerza destructiva que busca apoderarse de lo que desea, sin dejar rastro.",
         alt: "Imagen de Re:Zero, mostrando a la Bruja de la Envidia.",
-        malLink: "https://myanimelist.net/character/145877/Echidna?q=echidna&cat=character",
+        malLink: "https://myanimelist.net/character/144319/Satella?q=satella&cat=character",
        
       },
       {
