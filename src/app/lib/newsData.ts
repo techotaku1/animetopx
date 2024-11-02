@@ -141,7 +141,7 @@ export const newsItems: NewsItem[] = [
         title: "Pecado De La Pereza (Sekhmet - Petelgeuse Romanee)",
         description: "Este poder otorga una fuerza invisible y descomunal que puede ser usada a distancia, y permite que el portador de Pereza manipule a otros como extensiones de sí mismo. Es una fuerza implacable y brutal que se impone sobre la voluntad ajena.",
         alt: "Imagen de re:zero, mostrando la bruja de la pereza y su arzobispo.",
-        malLink: "https://myanimelist.net/https://myanimelist.net/character/149519/Sekhmet?q=Sekhmet&cat=character",
+        malLink: "https://myanimelist.net/character/149519/Sekhmet?q=Sekhmet%20&cat=character",
        
       },
       {
