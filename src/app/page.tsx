@@ -31,7 +31,7 @@ export default function Home() {
         <Image
           src="/OTOÑO-2024/PORTADA1.webp"
           alt="Banner publicitario"
-          layout="fill"
+          fill
           objectFit="cover"
           priority
         />
