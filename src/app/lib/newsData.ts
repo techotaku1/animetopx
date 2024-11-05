@@ -16,7 +16,7 @@ export interface NewsItem {
   imageUrls: ImageUrl[];
   date: string;
   content: string;
-  backgroundImage?: string;
+  backgroundImage: string; // Asegúrate de que esto no sea undefined
   publicationDate: Date;
 }
 

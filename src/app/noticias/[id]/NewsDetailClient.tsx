@@ -5,9 +5,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { newsItems } from "@/lib/newsData";
+import { newsItems } from "@/lib/newsData"; // Asegúrate de que esta ruta sea correcta
 import Link from "next/link";
-import classNames from "classnames";
 import {
   collection,
   Timestamp,
@@ -28,53 +27,15 @@ interface Comment {
 
 export default function NewsDetailClient({ id }: { id: number }) {
   const newsItem = newsItems.find((item) => item.id === id);
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<string>("");
   const [userRating, setUserRating] = useState<number>(0);
   const [userName, setUserName] = useState<string>("");
 
-  // Nuevas variables de estado para la pre-carga de imágenes
-  const [isAllImagesLoaded, setIsAllImagesLoaded] = useState(false);
-  const [imageLoadProgress, setImageLoadProgress] = useState(0);
-
   useEffect(() => {
     if (!newsItem) return;
     setCurrentIndex(0);
-    setLoading(true);
-    setIsAllImagesLoaded(false);
-    setImageLoadProgress(0);
-  }, [newsItem]);
-
-  // Pre-cargar imágenes y actualizar el progreso
-  useEffect(() => {
-    if (!newsItem) return;
-
-    const imageUrls = newsItem.imageUrls.map((image) => image.url);
-    let loadedImagesCount = 0;
-
-    const handleImageLoad = () => {
-      loadedImagesCount += 1;
-      const progress = Math.round((loadedImagesCount / imageUrls.length) * 100);
-      setImageLoadProgress(progress);
-
-      if (loadedImagesCount === imageUrls.length) {
-        setIsAllImagesLoaded(true);
-        setLoading(false);
-      }
-    };
-
-    imageUrls.forEach((url) => {
-      const img: HTMLImageElement = new window.Image();
-      img.src = url;
-      img.onload = handleImageLoad;
-      img.onerror = () => {
-        console.error(`Error loading image: ${url}`);
-        handleImageLoad(); // Consideramos la imagen como cargada en caso de error
-      };
-    });
   }, [newsItem]);
 
   const fetchComments = useCallback(() => {
@@ -84,7 +45,6 @@ export default function NewsDetailClient({ id }: { id: number }) {
     );
     onSnapshot(commentsQuery, (snapshot) => {
       const fetchedComments: Comment[] = [];
-
       snapshot.forEach((doc) => {
         const data = doc.data();
         fetchedComments.push({
@@ -93,12 +53,11 @@ export default function NewsDetailClient({ id }: { id: number }) {
           date:
             data.date instanceof Timestamp
               ? data.date.toDate()
-              : new Date(data.date), // Verifica si es un Timestamp
+              : new Date(data.date),
           rating: data.rating,
           userName: data.userName,
         });
       });
-
       setComments(fetchedComments);
     });
   }, [id]);
@@ -109,22 +68,14 @@ export default function NewsDetailClient({ id }: { id: number }) {
   }, [fetchComments, id]);
 
   const handlePrev = () => {
-    setLoading(true);
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0
-        ? newsItem
-          ? newsItem.imageUrls.length - 1
-          : 0
-        : prevIndex - 1
+      prevIndex === 0 ? newsItem!.imageUrls.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
-    setLoading(true);
     setCurrentIndex((prevIndex) =>
-      prevIndex === (newsItem ? newsItem.imageUrls.length - 1 : 0)
-        ? 0
-        : prevIndex + 1
+      prevIndex === newsItem!.imageUrls.length - 1 ? 0 : prevIndex + 1
     );
   };
 
@@ -153,161 +104,114 @@ export default function NewsDetailClient({ id }: { id: number }) {
   const totalStars = comments.reduce((acc, comment) => acc + comment.rating, 0);
   const averageStars = comments.length > 0 ? totalStars / comments.length : 0;
 
-  const imageContainerClasses = classNames(
-    "relative w-full h-full transition-opacity duration-300",
-    {
-      "opacity-0": loading,
-      "opacity-100": !loading,
-    }
-  );
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-4 px-4 space-y-8">
-      <div className="relative w-full max-w-[1200px] mx-auto">
-        <div className="overflow-x-auto">
-          <div className="relative w-[1200px] h-[400px]">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url('${newsItem.backgroundImage}')` }}
-            ></div>
-          </div>
-        </div>
+      {/* Portada de la noticia */}
+      <div className="relative w-full h-[400px] mb-4">
+        <Image
+          src={newsItem.backgroundImage} // Usando la propiedad de la imagen de portada
+          alt={newsItem.title}
+          fill // Cambiado a fill para ocupar todo el contenedor
+          style={{ objectFit: "cover" }} // Aplica el estilo en línea para objectFit
+          className="rounded-lg"
+          priority
+        />
       </div>
 
-      <div className="flex flex-col items-center w-full max-w-4xl">
+      <div className="flex flex-col items-center w-full">
         <h1 className="text-3xl font-bold mb-2 text-center sm:text-4xl">
           {newsItem.title}
         </h1>
+        <div className="flex justify-between w-full max-w-md mb-3">
+          <Button
+            onClick={handlePrev}
+            className="bg-red-500 hover:bg-red-600 text-white flex-1 h-12 mr-2"
+          >
+            Anterior
+          </Button>
+          <Button
+            onClick={handleNext}
+            className="bg-red-500 hover:bg-red-600 text-white flex-1 h-12 ml-2"
+          >
+            Siguiente
+          </Button>
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row w-full max-w-4xl">
+        {/* Image section */}
+        <div className="relative w-full sm:w-1/2 flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
+          <Image
+            key={currentIndex}
+            src={newsItem.imageUrls[currentIndex].url}
+            alt={
+              newsItem.imageUrls[currentIndex].alt ||
+              newsItem.imageUrls[currentIndex].description
+            }
+            width={800} // Especifica el ancho deseado
+            height={600} // Especifica la altura deseada
+            style={{ objectFit: "contain" }} // Usando style para aplicar objectFit
+            className="rounded-lg transition-opacity duration-500 opacity-0" // Comienza en opacity-0
+            loading={currentIndex === 0 ? "eager" : "lazy"}
+            priority={currentIndex === 0}
+            onLoad={(e) => e.currentTarget.classList.add("opacity-100")} // Desvanece la imagen
+          />
+        </div>
 
-        <div className="relative flex flex-col items-start w-full max-w-4xl">
-          {/* Contenedor de botones "Anterior" y "Siguiente" */}
-          <div className="flex justify-between w-full max-w-md mb-3">
-            <Button
-              onClick={handlePrev}
-              variant="secondary"
-              className="bg-red-500 hover:bg-red-600 text-white flex-1 h-12 mr-2"
-              aria-label="Imagen anterior"
-              disabled={!isAllImagesLoaded}
-            >
-              Anterior
-            </Button>
-            <Button
-              onClick={handleNext}
-              variant="secondary"
-              className="bg-red-500 hover:bg-red-600 text-white flex-1 h-12 ml-2"
-              aria-label="Siguiente imagen"
-              disabled={!isAllImagesLoaded}
-            >
-              Siguiente
-            </Button>
-          </div>
-
-          {/* Contenedor de imagen y detalles */}
-          <div className="flex flex-col sm:flex-row items-start w-full">
-            {/* Contenedor de la imagen */}
-            <div className="relative flex-shrink-0 w-full max-w-md overflow-hidden sm:mr-4 mb-4 sm:mb-0">
-              <div
-                className="relative flex items-center justify-center"
-              >
-                {" "}
-                {/* Ajusta la altura aquí */}
-                <div className={imageContainerClasses}>
-                  <Image
-                    src={newsItem.imageUrls[currentIndex].url}
-                    alt={
-                      newsItem.imageUrls[currentIndex].alt ||
-                      newsItem.imageUrls[currentIndex].description
-                    }
-                    title={newsItem.imageUrls[currentIndex].title}
-                    width={800}
-                    height={600}
-                    className="object-contain rounded-lg"  // Mantiene la imagen dentro del contenedor sin recortar
-                    quality={100} // Calidad máxima
-                    priority
-                    onLoad={() => setLoading(false)}
-                  />
+        {/* Details section */}
+        <Card className="w-full sm:w-1/2 shadow-2xl flex flex-col h-full">
+          <CardHeader className="flex flex-col flex-grow">
+            <h2 className="text-xl font-semibold sm:text-2xl">
+              {newsItem.imageUrls[currentIndex].title}
+            </h2>
+            <div className="mt-2 flex space-x-2">
+              {id === 1 && (
+                <div className="bg-red-500 text-white py-1 px-3 rounded">
+                  Top {currentIndex + 1}
                 </div>
-              </div>
-              {!isAllImagesLoaded && (
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-300">
-                  <div
-                    className="h-full bg-blue-500"
-                    style={{ width: `${imageLoadProgress}%` }}
-                  />
+              )}
+              {id === 2 && (
+                <div className="bg-red-500 text-white py-1 px-3 rounded">
+                  {currentIndex + 1}
                 </div>
               )}
             </div>
+          </CardHeader>
 
-            {/* Sección de Título y Descripción */}
-            <div className="flex flex-col justify-start max-w-md">
-              <Card className="flex flex-col shadow-2xl transform mb-2">
-                <CardHeader className="text-left">
-                  <h2 className="text-xl font-semibold sm:text-2xl">
-                    {newsItem.imageUrls[currentIndex].title}
-                  </h2>
-                  <div className="flex justify-start mt-2">
-                    {id === 2 ? (
-                      <span className="bg-red-500 text-white text-xl sm:text-3xl font-bold rounded px-2">
-                        {currentIndex + 1}
-                      </span>
-                    ) : (
-                      <span className="bg-red-500 text-white text-xl sm:text-3xl font-bold rounded px-2">
-                        TOP {currentIndex + 1}
-                      </span>
-                    )}
-                  </div>
-                </CardHeader>
-                <CardContent className="pb-6">
-                  <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-0">
-                    {newsItem.imageUrls[currentIndex].description}
-                  </p>
-                  <Button
-                    onClick={() =>
-                      window.open(
-                        newsItem.imageUrls[currentIndex].malLink,
-                        "_blank"
-                      )
-                    }
-                    className="mt-2"
-                  >
-                    Ver en MyAnimeList
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
+          {/* CardContent that adapts vertically */}
+          <CardContent className="flex flex-col flex-grow mt-2">
+            <p className="text-sm sm:text-base text-muted-foreground mb-2">
+              {newsItem.imageUrls[currentIndex].description}
+            </p>
+            <Button
+              onClick={() =>
+                window.open(newsItem.imageUrls[currentIndex].malLink, "_blank")
+              }
+              className="mt-2"
+            >
+              Ver en MyAnimeList
+            </Button>
+          </CardContent>
+        </Card>
       </div>
-
-      {/* Sección de fecha de publicación integrada con otras secciones */}
-      <span className="text-sm text-gray-500 mt-3">
-        Publicado el: {new Date(newsItem.date).toLocaleDateString()}
+      <span className="text-sm text-gray-500">
+        Publicado el: {new Date(newsItem.publicationDate).toLocaleDateString()}
       </span>
-
-      {/* Ajuste del margen inferior dependiendo del ID */}
-      <div>
-        <Link href="/">
-          <Button>Volver a las Noticias</Button>
-        </Link>
-      </div>
-
-      {/* Sección de comentarios */}
+      <Link href="/">
+        <Button>Volver a las Noticias</Button>
+      </Link>
       <div className="mt-3 w-full">
         <h2 className="text-lg font-semibold mb-2">
           Comentarios ({comments.length})
         </h2>
-
-        {/* Promedio de estrellas */}
         {comments.length > 0 && (
           <div className="flex items-center mb-4">
             <span className="text-lg font-bold mr-2">Promedio:</span>
             {[...Array(5)].map((_, index) => (
               <Star
                 key={index}
-                className={classNames("w-6 h-6", {
-                  "text-yellow-500": index < averageStars,
-                  "text-gray-300": index >= averageStars,
-                })}
+                className={
+                  index < averageStars ? "text-yellow-500" : "text-gray-300"
+                }
               />
             ))}
             <span className="ml-2 text-lg font-semibold">
@@ -339,42 +243,35 @@ export default function NewsDetailClient({ id }: { id: number }) {
             {[1, 2, 3, 4, 5].map((star) => (
               <Star
                 key={star}
-                className={classNames("w-6 h-6 cursor-pointer", {
-                  "text-yellow-500": star <= userRating,
-                  "text-gray-300": star > userRating,
-                })}
+                className={
+                  star <= userRating
+                    ? "text-yellow-500 cursor-pointer"
+                    : "text-gray-300 cursor-pointer"
+                }
                 onClick={() => setUserRating(star)}
               />
             ))}
           </div>
-          <Button type="submit" className="mt-2">
-            Enviar Comentario
-          </Button>
+          <Button type="submit">Enviar Comentario</Button>
         </form>
 
-        {/* Listado de comentarios */}
         {comments.map((comment) => (
           <div
             key={comment.id}
             className="p-4 my-2 border border-gray-300 rounded-md"
           >
-            <div className="flex justify-between">
-              <div>
-                <h3 className="font-semibold">{comment.userName}</h3>
-                <p className="text-sm text-gray-500">
-                  {new Date(comment.date).toLocaleDateString()}
-                </p>
-              </div>
-            </div>
+            <h3 className="font-semibold">{comment.userName}</h3>
+            <p className="text-sm text-gray-500">
+              {new Date(comment.date).toLocaleDateString()}
+            </p>
             <p className="mt-2">{comment.comment}</p>
             <div className="flex mt-2">
               {[...Array(5)].map((_, index) => (
                 <Star
                   key={index}
-                  className={classNames("w-6 h-6", {
-                    "text-yellow-500": index < comment.rating,
-                    "text-gray-300": index >= comment.rating,
-                  })}
+                  className={
+                    index < comment.rating ? "text-yellow-500" : "text-gray-300"
+                  }
                 />
               ))}
             </div>
