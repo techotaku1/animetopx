@@ -28,6 +28,7 @@ interface Comment {
 export default function NewsDetailClient({ id }: { id: number }) {
   const newsItem = newsItems.find((item) => item.id === id);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loadingImage, setLoadingImage] = useState(false); // Estado para cargar imagen
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<string>("");
   const [userRating, setUserRating] = useState<number>(0);
@@ -71,12 +72,14 @@ export default function NewsDetailClient({ id }: { id: number }) {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? newsItem!.imageUrls.length - 1 : prevIndex - 1
     );
+    setLoadingImage(true); // Inicia la carga de la nueva imagen
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === newsItem!.imageUrls.length - 1 ? 0 : prevIndex + 1
     );
+    setLoadingImage(true); // Inicia la carga de la nueva imagen
   };
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
@@ -137,9 +140,16 @@ export default function NewsDetailClient({ id }: { id: number }) {
           </Button>
         </div>
       </div>
+
       <div className="flex flex-col sm:flex-row w-full max-w-4xl">
         {/* Image section */}
         <div className="relative w-full sm:w-1/2 flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
+          {/* Mensaje de carga */}
+          {loadingImage && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50 z-10">
+              <span className="text-lg font-bold">Cargando imagen...</span>
+            </div>
+          )}
           <Image
             key={currentIndex}
             src={newsItem.imageUrls[currentIndex].url}
@@ -150,10 +160,12 @@ export default function NewsDetailClient({ id }: { id: number }) {
             width={800} // Especifica el ancho deseado
             height={600} // Especifica la altura deseada
             style={{ objectFit: "contain" }} // Usando style para aplicar objectFit
-            className="rounded-lg transition-opacity duration-500 opacity-0" // Comienza en opacity-0
+            className={`rounded-lg transition-opacity duration-500 ${
+              loadingImage ? "opacity-0" : "opacity-100"
+            }`} // Cambia la opacidad mientras carga
             loading={currentIndex === 0 ? "eager" : "lazy"}
             priority={currentIndex === 0}
-            onLoad={(e) => e.currentTarget.classList.add("opacity-100")} // Desvanece la imagen
+            onLoad={() => setLoadingImage(false)} // Finaliza la carga de la imagen
           />
         </div>
 
