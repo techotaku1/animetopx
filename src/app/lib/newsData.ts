@@ -26,10 +26,10 @@ export const newsItems: NewsItem[] = [
     id: 1,
     title: "TEMPORADA OTOÑO 2024",
     category: "Estrenos Otoño 2024",
-    date: "2024-10-1",
+    date: "2024-10-01",
     content: "Detalles sobre la temporada de otoño 2024",
     backgroundImage: "/OTOÑO-2024/PORTADA2.webp",
-    publicationDate: new Date("2024-10-24"),
+    publicationDate: new Date("2024-10-01"),
     imageUrls: [
       {
         url: "/OTOÑO-2024/ReZeroSeason3.webp",
@@ -134,7 +134,7 @@ export const newsItems: NewsItem[] = [
     date: "2024-11-1",
     content: "Las brujas y sus arzobispos",
     backgroundImage: "/RE-ZERO/PORTADA4.webp",
-    publicationDate: new Date("2024-11-01"),
+    publicationDate: new Date("2024-11-1"),
     imageUrls: [
       {
         url: "/RE-ZERO/PEREZA.webp",
