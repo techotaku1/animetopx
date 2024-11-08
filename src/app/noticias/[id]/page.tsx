@@ -30,17 +30,14 @@ export default function NewsDetail({ params }: { params: { id: string } }) {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "AnimeTopX",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://animetopx.vercel.app/logo.png" // Asegúrate de tener un logo y ajusta la URL
-      }
+      "name": "AnimeTopX"
+      // Se elimina el logo porque aún no está disponible
     },
     "image": newsItem.imageUrls.map(image => ({
       "@type": "ImageObject",
       "url": `https://animetopx.vercel.app${image.url}`,
-      "width": "1200", // Ajusta según el tamaño real de tus imágenes
-      "height": "630", // Ajusta según el tamaño real de tus imágenes
+      "width": "800",  // Ajuste a tamaño vertical estándar
+      "height": "1200", // Ajuste a tamaño vertical estándar
       "caption": image.description,
       "name": image.title
     })),

@@ -2,7 +2,7 @@
 module.exports = {
   siteUrl: 'https://animetopx.vercel.app',
   generateRobotsTxt: true,
-  changefreq: 'daily',
+  changefreq: 'weekly',
   priority: 0.7,
   sitemapSize: 5000,
   exclude: ['/404'],
