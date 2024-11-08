@@ -7,8 +7,17 @@ import { NewsCard } from "@/components/news/news-card";
 // Simulación de datos de noticias
 const newsItems = [
   {
+    id: 3,
+    title: "EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES DE HUNTER X HUNTER",
+    description:
+      "Descubre las 5 calamidades del continente oscuro de HUNTER X HUNTER y lo que hace cada una de ellas.",
+    category: "Curiosidades",
+    imageUrl: "/HUNTERXHUNTER/portada-6.webp",
+    date: "8 noviembre 2024",
+  },
+  {
     id: 2,
-    title: "RE:ZERO BRUJAS Y ARZOBISPOS ✝️🔮",
+    title: "RE:ZERO BRUJAS Y ARZOBISPOS",
     description: "Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.",
     category: "Curiosidades",
     imageUrl: "/RE-ZERO/COLLAGE3.webp",

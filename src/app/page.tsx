@@ -6,8 +6,17 @@ import Image from "next/image";
 // Simulación de datos de noticias
 const newsItems = [
   {
+    id: 3,
+    title: "EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES DE HUNTER X HUNTER",
+    description:
+      "Descubre las 5 calamidades del continente oscuro de HUNTER X HUNTER y lo que hace cada una de ellas.",
+    category: "Curiosidades",
+    imageUrl: "/HUNTERXHUNTER/portada-6.webp",
+    date: "8 noviembre 2024",
+  },
+  {
     id: 2,
-    title: "BRUJAS Y ARZOBISPOS EN RE:ZERO ✝️🔮",
+    title: "BRUJAS Y ARZOBISPOS EN RE:ZERO",
     description:
       "Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.",
     category: "Curiosidades",

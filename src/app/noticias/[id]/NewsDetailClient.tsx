@@ -186,6 +186,11 @@ export default function NewsDetailClient({ id }: { id: number }) {
                   {currentIndex + 1}
                 </div>
               )}
+              {id === 3 && (
+                <div className="bg-red-500 text-white py-1 px-3 rounded">
+                  {currentIndex + 1}
+                </div>
+              )}
             </div>
           </CardHeader>
 
