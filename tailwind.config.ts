@@ -54,9 +54,8 @@ const tailwindConfig = {
         },
       },
       fontFamily: {
-        title: ["var(--font-title)", "serif"], // Aplica las fuentes definidas en las variables
-        body: ["var(--font-body)", "serif"], // Aplica las fuentes definidas en las variables
-
+        sans: ['var(--font-shantell-sans)'],
+        mono: ['var(--font-roboto-mono)'],
       },
       borderRadius: {
         lg: "var(--radius)",

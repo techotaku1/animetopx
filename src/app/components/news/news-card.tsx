@@ -40,8 +40,8 @@ export function NewsCard({ item }: { item: NewsItem }) {
       </CardHeader>
       <CardContent className="flex-grow">
         <Badge className="mb-2">{item.category}</Badge>
-        <CardTitle className="text-xl mb-2">{item.title}</CardTitle>
-        <CardDescription className="">{item.description}</CardDescription>
+        <CardTitle className=" text-xl mb-2">{item.title}</CardTitle>
+        <CardDescription>{item.description}</CardDescription>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <time dateTime={item.date} className="text-sm text-muted-foreground">

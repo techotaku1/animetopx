@@ -11,20 +11,21 @@ import CustomProgressBar from "@/components/ProgressBar";
 import Script from "next/script";
 import { Shantell_Sans, Roboto_Mono } from "next/font/google";
 
-const font1 = Shantell_Sans({
-  subsets: ["latin"],
-  variable: "--font-title", // Asegúrate de que la variable sea correcta
-  weight: ["400", "700"],
-  display: "swap",
+const shantellSans = Shantell_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-shantell-sans',
+    weight: ['700'],  // Bold y Ultra-Bold
 
 });
 
-const font2 = Roboto_Mono({
-  subsets: ["latin"],
-  variable: "--font-body", // Asegúrate de que la variable sea correcta
-  weight: ["400"],
-  display: "swap",
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-mono',
+  weight: ['500'],  // Bold y Ultra-Bold
 
+  
 });
 
 export const metadata: Metadata = {
@@ -67,7 +68,7 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${font1.className} ${font2.className}`}
+      className={`${shantellSans.variable} ${robotoMono.variable}`}
     >
       <head>
         <meta

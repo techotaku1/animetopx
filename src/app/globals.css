@@ -6,9 +6,10 @@
 
 @layer base {
   :root {
-    /* Define las fuentes globales */
-    --font-title: "Shantell Sans", serif;
-    --font-body: "Roboto Mono", serif;
+  
+    p, .description, li, .long-text {
+      font-family: var(--font-roboto-mono);
+    }
 
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -60,20 +61,10 @@
     --ring: 212.7 26.8% 83.9%;
   }
 
-  body {
-    font-family: var(--font-body); /* Aplica la fuente para el cuerpo */
-    font-weight: 400; /* Peso normal */
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-title); /* Aplica la fuente para los títulos */
-    font-weight: 700; /* Aplica el peso bold a los títulos */
-  }
 }
 
-@layer base {
-  /* Estilos adicionales */
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+
+
+
+
+
