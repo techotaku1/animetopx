@@ -9,7 +9,7 @@ import { NavigationEvents } from "@/components/navigation-events";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomProgressBar from "@/components/ProgressBar";
 import Script from "next/script";
-import { Shantell_Sans, Roboto_Mono } from "next/font/google";
+import { Shantell_Sans, Grandstander } from "next/font/google";
 
 const shantellSans = Shantell_Sans({
   subsets: ['latin'],
@@ -19,11 +19,11 @@ const shantellSans = Shantell_Sans({
 
 });
 
-const robotoMono = Roboto_Mono({
+const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-roboto-mono',
-  weight: ['500'],  // Bold y Ultra-Bold
+  variable: '--font-grandstander',
+  weight: ['400'],  // Bold y Ultra-Bold
 
   
 });
@@ -68,7 +68,7 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${shantellSans.variable} ${robotoMono.variable}`}
+      className={`${shantellSans.variable} ${grandstander.variable}`}
     >
       <head>
         <meta
@@ -97,7 +97,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-background text-foreground">
+      <body className="font-sans min-h-screen flex flex-col bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <CustomProgressBar />

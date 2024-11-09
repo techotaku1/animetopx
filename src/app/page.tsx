@@ -1,51 +1,61 @@
+// pages/page.tsx
+
+"use client"
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { NewsCard } from "@/components/news/news-card";
 import Image from "next/image";
-
-// Simulación de datos de noticias
-const newsItems = [
-  {
-    id: 3,
-    title: "EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES DE HUNTER X HUNTER",
-    description:
-      "Descubre las 5 calamidades del continente oscuro de HUNTER X HUNTER y lo que hace cada una de ellas.",
-    category: "Curiosidades",
-    imageUrl: "/HUNTERXHUNTER/portada-6.webp",
-    date: "8 noviembre 2024",
-  },
-  {
-    id: 2,
-    title: "BRUJAS Y ARZOBISPOS EN RE:ZERO",
-    description:
-      "Lista REAL de los arzobispos del pecado en Re:Zero y sus respectivas brujas.",
-    category: "Curiosidades",
-    imageUrl: "/RE-ZERO/COLLAGE3.webp",
-    date: "1 noviembre 2024",
-  },
-  {
-    id: 1,
-    title: "TOP ANIME OTOÑO 2024",
-    description: "Los Mejores ESTRENOS de la temporada de OROÑO 2024.",
-    category: "Otoño",
-    imageUrl: "/OTOÑO-2024/COLLAGE.webp",
-    date: "octubre 2024",
-  },
-];
+import { useState, useEffect } from "react";
+import { carouselData } from "@/lib/carouselData";
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Cambia de slide automáticamente cada 5 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselData.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="space-y-8">
-      {/* Portada Principal */}
-      <div className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] overflow-hidden">
-        <Image
-          src="/OTOÑO-2024/PORTADA1.webp"
-          alt="Banner publicitario"
-          fill // Esto hace que la imagen llene el contenedor
-          style={{ objectFit: "cover" }} // 'cover' asegura que la imagen llene el contenedor sin recortar
-          priority
-        />
+      {/* Portada Principal con Carousel */}
+      <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden">
+        {carouselData.map((item, index) => (
+          <Link href={`/noticias/${item.id}`} key={item.id}>
+            <div
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <Image
+                src={item.imageUrl}
+                alt={item.title}
+                fill
+                style={{ objectFit: "cover" }}
+                priority={index === currentSlide}
+              />
+              
+            </div>
+          </Link>
+        ))}
+        {/* Navegación de puntos */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {carouselData.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full ${
+                currentSlide === index ? "bg-white" : "bg-gray-400"
+              }`}
+            ></button>
+          ))}
+        </div>
       </div>
+
+      {/* Sección de noticias */}
       <section>
         <h1 className="text-4xl font-bold mb-4">Últimas Noticias de Anime</h1>
         <p className="text-xl text-muted-foreground mb-8">
@@ -54,10 +64,12 @@ export default function Home() {
       </section>
 
       <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {newsItems.map((item) => (
+        {carouselData.map((item) => (
           <NewsCard key={item.id} item={item} />
         ))}
       </section>
+
+      {/* Botón para ver todas las noticias */}
       <section className="text-center">
         <Button asChild size="lg">
           <Link href="/noticias">Ver todas las noticias</Link>

@@ -6,9 +6,11 @@
 
 @layer base {
   :root {
-  
-    p, .description, li, .long-text {
-      font-family: var(--font-roboto-mono);
+    p,
+    .description,
+    li,
+    .long-text {
+      font-family: var(--font-grandstander); /* La fuente principal es --font-roboto-mono y el respaldo es serif */
     }
 
     --background: 0 0% 100%;
@@ -60,11 +62,4 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
-
 }
-
-
-
-
-
-

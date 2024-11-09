@@ -54,8 +54,8 @@ const tailwindConfig = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-shantell-sans)'],
-        mono: ['var(--font-roboto-mono)'],
+        sans: ["var(--font-shantell-sans)"], // Agregar 'cursive' como fuente de respaldo
+        grandstander: ["var(--font-grandstander)"], // Agregar 'serif' como fuente de respaldo
       },
       borderRadius: {
         lg: "var(--radius)",
