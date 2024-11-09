@@ -1,17 +1,28 @@
 import { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import "./globals.css";
+import "./globals.css"; // Asegúrate de que aquí tienes los estilos globales
 import { Analytics } from "@vercel/analytics/react";
 import { Suspense } from "react";
 import { NavigationEvents } from "@/components/navigation-events";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomProgressBar from "@/components/ProgressBar";
-import Script from 'next/script';
+import Script from "next/script";
+import { Covered_By_Your_Grace, Roboto_Slab } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"] });
+const font1 = Covered_By_Your_Grace({
+  subsets: ['latin'],
+  variable: '--font-body',
+  weight : '400',
+  display: 'swap',
+});
+
+const font2 = Roboto_Slab({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "AnimeTopX",
@@ -50,7 +61,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html
+      lang="es"
+      suppressHydrationWarning
+      className={`${font1.className} ${font2.className}`}
+    >
       <head>
         <meta
           name="google-site-verification"
@@ -59,25 +74,26 @@ export default function RootLayout({
         <Script
           id="json-ld"
           type="application/ld+json"
+          strategy="afterInteractive" // Ejecuta después de que la página se haya cargado
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "name": "AnimeTopX",
-              "url": "https://animetopx.vercel.app",
-              "description": "Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime",
-              "potentialAction": {
+              name: "AnimeTopX",
+              url: "https://animetopx.vercel.app",
+              description:
+                "Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime",
+              potentialAction: {
                 "@type": "SearchAction",
-                "target": "https://animetopx.vercel.app/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
-            })
+                target:
+                  "https://animetopx.vercel.app/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
           }}
         />
       </head>
-      <body
-        className={`${inter.className} min-h-screen flex flex-col bg-background text-foreground`}
-      >
+      <body className="min-h-screen flex flex-col bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <CustomProgressBar />

@@ -33,13 +33,15 @@ export function NewsCard({ item }: { item: NewsItem }) {
             fill // Para que ocupe todo el contenedor
             style={{ objectFit: "contain" }} // Ajusta la imagen sin recortar
             className="rounded-t-lg" // Bordes redondeados
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px" // Tamaños de la imagen para diferentes pantallas
+            priority
           />
         </div>
       </CardHeader>
       <CardContent className="flex-grow">
         <Badge className="mb-2">{item.category}</Badge>
         <CardTitle className="text-xl mb-2">{item.title}</CardTitle>
-        <CardDescription>{item.description}</CardDescription>
+        <CardDescription className="">{item.description}</CardDescription>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <time dateTime={item.date} className="text-sm text-muted-foreground">

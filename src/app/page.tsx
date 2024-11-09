@@ -18,7 +18,7 @@ const newsItems = [
     id: 2,
     title: "BRUJAS Y ARZOBISPOS EN RE:ZERO",
     description:
-      "Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.",
+      "Lista REAL de los arzobispos del pecado en Re:Zero y sus respectivas brujas.",
     category: "Curiosidades",
     imageUrl: "/RE-ZERO/COLLAGE3.webp",
     date: "1 noviembre 2024",
@@ -26,7 +26,7 @@ const newsItems = [
   {
     id: 1,
     title: "TOP ANIME OTOÑO 2024",
-    description: "Top estrenos de la temporada de OTOÑO 2024",
+    description: "Los Mejores ESTRENOS de la temporada de OROÑO 2024.",
     category: "Otoño",
     imageUrl: "/OTOÑO-2024/COLLAGE.webp",
     date: "octubre 2024",

@@ -139,16 +139,23 @@ export default function NewsDetailClient({ id }: { id: number }) {
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {newsItem.imageUrls.map((image, index) => (
-                <div key={index} className="w-full flex-shrink-0">
+                <div
+                  key={index}
+                  className="w-full flex-shrink-0 relative"
+                  style={{
+                    display: "flex",
+                  }}
+                >
                   <Image
                     src={image.url}
                     alt={image.alt || image.description}
-                    width={800}
-                    height={600}
-                    className="w-full h-full object-cover rounded-lg"
+                    width={800} // Ancho de la imagen
+                    height={600} // Alto de la imagen
+                    className="rounded-lg w-full" // Mantener la imagen dentro del contenedor sin recorte
+                    priority
                     style={{
-                      maxHeight: "1200px", // La imagen no debe superar esta altura
-                      minHeight: "300px", // Puedes ajustar la altura mínima de todas las imágenes
+                      maxHeight: "100%", // Asegura que la imagen no exceda la altura del contenedor
+                      minHeight: "300px", // Altura mínima de la imagen
                     }}
                   />
                 </div>
@@ -176,7 +183,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
         <div className="w-full lg:w-1/2 lg:sticky lg:top-4">
           <div className="flex flex-col h-full p-6 rounded-lg shadow-[0_10px_20px_rgba(0,0,0,0.1)] transition-shadow duration-300 hover:shadow-[0_15px_30px_rgba(0,0,0,0.2)] border border-gray-300 dark:border-white">
             {id <= 3 && (
-              <div className="bg-red-500 py-1 px-3 rounded mb-4 inline-block self-start">
+              <div className="bg-red-500 py-1 px-3 rounded mb-4 inline-block self-start text-white font-bold">
                 {id === 1 ? `Top ${currentIndex + 1}` : `${currentIndex + 1}`}
               </div>
             )}

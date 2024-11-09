@@ -1,13 +1,13 @@
-import animate from "tailwindcss-animate"
+// tailwind.config.ts
+import animate from "tailwindcss-animate";
 
-/** @type {import('tailwindcss').Config} */
 const tailwindConfig = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
     container: {
@@ -53,6 +53,10 @@ const tailwindConfig = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      fontFamily: {
+        title: ["var(--font-title)", "cursive"],  // Para títulos
+        body: ["var(--font-body)", "serif"],         // Para textos largos
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -77,5 +81,4 @@ const tailwindConfig = {
   plugins: [animate],
 };
 
-// Exporta la configuración como predeterminada
 export default tailwindConfig;
