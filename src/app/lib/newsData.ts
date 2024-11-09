@@ -197,7 +197,7 @@ export const newsItems: NewsItem[] = [
     category: "HUNTER X HUNTER",
     date: "2024-11-8",
     content: "Las calamidades del Continente Oscuro y sus amenazas mortales",
-    backgroundImage: "/HUNTERXHUNTER/continente-oscuro1.webp",
+    backgroundImage: "/HUNTERXHUNTER/PORTADA-7.webp",
     publicationDate: new Date("2024-11-8"),
     imageUrls: [
       {
