@@ -27,7 +27,7 @@ export const newsItems: NewsItem[] = [
     category: "Estrenos Otoño 2024",
     date: "2024-10-1",
     content: "Detalles sobre la temporada de otoño 2024",
-    backgroundImage: "/OTOÑO-2024/PORTADA-7.webp",
+    backgroundImage: "/OTOÑO-2024/PORTADA2.webp",
     publicationDate: new Date("2024-10-1"),
     imageUrls: [
       {

@@ -3,9 +3,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { newsItems } from "@/lib/newsData"; // Asegúrate de que esta ruta sea correcta
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { newsItems } from "@/lib/newsData";
 import Link from "next/link";
 import {
   collection,
@@ -28,7 +27,6 @@ interface Comment {
 export default function NewsDetailClient({ id }: { id: number }) {
   const newsItem = newsItems.find((item) => item.id === id);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loadingImage, setLoadingImage] = useState(false); // Estado para cargar imagen
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<string>("");
   const [userRating, setUserRating] = useState<number>(0);
@@ -69,17 +67,23 @@ export default function NewsDetailClient({ id }: { id: number }) {
   }, [fetchComments, id]);
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? newsItem!.imageUrls.length - 1 : prevIndex - 1
-    );
-    setLoadingImage(true); // Inicia la carga de la nueva imagen
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex > 0) {
+        return prevIndex - 1;
+      } else {
+        return prevIndex; // No permite retroceder más allá de la primera imagen
+      }
+    });
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === newsItem!.imageUrls.length - 1 ? 0 : prevIndex + 1
-    );
-    setLoadingImage(true); // Inicia la carga de la nueva imagen
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex < newsItem!.imageUrls.length - 1) {
+        return prevIndex + 1;
+      } else {
+        return prevIndex; // No permite avanzar más allá de la última imagen
+      }
+    });
   };
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
@@ -108,115 +112,102 @@ export default function NewsDetailClient({ id }: { id: number }) {
   const averageStars = comments.length > 0 ? totalStars / comments.length : 0;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-4 px-4 space-y-8">
+    <div className="flex flex-col items-center justify-center min-h-screen py-4 px-4 space-y-8 max-w-6xl mx-auto">
       {/* Portada de la noticia */}
       <div className="relative w-full h-[400px] mb-4">
         <Image
-          src={newsItem.backgroundImage} // Usando la propiedad de la imagen de portada
+          src={newsItem.backgroundImage}
           alt={newsItem.title}
-          fill // Cambiado a fill para ocupar todo el contenedor
-          style={{ objectFit: "cover" }} // Aplica el estilo en línea para objectFit
+          fill
+          style={{ objectFit: "cover" }}
           className="rounded-lg"
           priority
         />
       </div>
 
-      <div className="flex flex-col items-center w-full">
-        <h1 className="text-3xl font-bold mb-2 text-center sm:text-4xl">
-          {newsItem.title}
-        </h1>
-        <div className="flex justify-between w-full max-w-md mb-3">
+      <h1 className="text-3xl font-bold mb-6 text-center sm:text-4xl">
+        {newsItem.title}
+      </h1>
+
+      {/* Carousel and Image details */}
+      <div className="w-full max-w-6xl mb-8 flex flex-col lg:flex-row lg:space-x-8 lg:items-start">
+        {/* Carousel */}
+        <div className="relative w-full lg:w-1/2 mb-8 lg:mb-0">
+          <div className="overflow-hidden rounded-lg shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-shadow duration-300 hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)]">
+            <div
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {newsItem.imageUrls.map((image, index) => (
+                <div key={index} className="w-full flex-shrink-0">
+                  <Image
+                    src={image.url}
+                    alt={image.alt || image.description}
+                    width={800}
+                    height={600}
+                    className="w-full h-full object-cover rounded-lg"
+                    style={{
+                      maxHeight: "1200px", // La imagen no debe superar esta altura
+                      minHeight: "300px", // Puedes ajustar la altura mínima de todas las imágenes
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
           <Button
             onClick={handlePrev}
-            className="bg-red-500 hover:bg-red-600 text-white flex-1 h-12 mr-2"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-red-500 hover:bg-red-600 text-white p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90"
+            aria-label="Anterior"
           >
-            Anterior
+            <ChevronLeft size={24} />
           </Button>
+
           <Button
             onClick={handleNext}
-            className="bg-red-500 hover:bg-red-600 text-white flex-1 h-12 ml-2"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-red-500 hover:bg-red-600 text-white p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90"
+            aria-label="Siguiente"
           >
-            Siguiente
+            <ChevronRight size={24} />
           </Button>
         </div>
-      </div>
 
-      <div className="flex flex-col sm:flex-row w-full max-w-4xl">
-        {/* Image section */}
-        <div className="relative w-full sm:w-1/2 flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
-          {/* Mensaje de carga */}
-          {loadingImage && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50 z-10">
-              <span className="text-lg font-bold">Cargando imagen...</span>
-            </div>
-          )}
-          <Image
-            key={currentIndex}
-            src={newsItem.imageUrls[currentIndex].url}
-            alt={
-              newsItem.imageUrls[currentIndex].alt ||
-              newsItem.imageUrls[currentIndex].description
-            }
-            width={800} // Especifica el ancho deseado
-            height={600} // Especifica la altura deseada
-            style={{ objectFit: "contain" }} // Usando style para aplicar objectFit
-            className={`rounded-lg transition-opacity duration-500 ${
-              loadingImage ? "opacity-0" : "opacity-100"
-            }`} // Cambia la opacidad mientras carga
-            loading={currentIndex === 0 ? "eager" : "lazy"}
-            priority={currentIndex === 0}
-            onLoad={() => setLoadingImage(false)} // Finaliza la carga de la imagen
-          />
-        </div>
-
-        {/* Details section */}
-        <Card className="w-full sm:w-1/2 shadow-2xl flex flex-col h-full">
-          <CardHeader className="flex flex-col flex-grow">
-            <h2 className="text-xl font-semibold sm:text-2xl">
+        {/* Image details */}
+        <div className="w-full lg:w-1/2 lg:sticky lg:top-4">
+          <div className="flex flex-col h-full p-6 rounded-lg shadow-[0_10px_20px_rgba(0,0,0,0.1)] transition-shadow duration-300 hover:shadow-[0_15px_30px_rgba(0,0,0,0.2)] border border-gray-300 dark:border-white">
+            {id <= 3 && (
+              <div className="bg-red-500 py-1 px-3 rounded mb-4 inline-block self-start">
+                {id === 1 ? `Top ${currentIndex + 1}` : `${currentIndex + 1}`}
+              </div>
+            )}
+            <h2 className="text-xl font-semibold sm:text-2xl mb-4">
               {newsItem.imageUrls[currentIndex].title}
             </h2>
-            <div className="mt-2 flex space-x-2">
-              {id === 1 && (
-                <div className="bg-red-500 text-white py-1 px-3 rounded">
-                  Top {currentIndex + 1}
-                </div>
-              )}
-              {id === 2 && (
-                <div className="bg-red-500 text-white py-1 px-3 rounded">
-                  {currentIndex + 1}
-                </div>
-              )}
-              {id === 3 && (
-                <div className="bg-red-500 text-white py-1 px-3 rounded">
-                  {currentIndex + 1}
-                </div>
-              )}
-            </div>
-          </CardHeader>
-
-          {/* CardContent that adapts vertically */}
-          <CardContent className="flex flex-col flex-grow mt-2">
-            <p className="text-sm sm:text-base text-muted-foreground mb-2">
+            <p className="text-sm sm:text-base text-muted-foreground mb-6 flex-grow">
               {newsItem.imageUrls[currentIndex].description}
             </p>
             <Button
               onClick={() =>
                 window.open(newsItem.imageUrls[currentIndex].malLink, "_blank")
               }
-              className="mt-2"
+              className="self-start shadow-md hover:shadow-lg transition-shadow"
             >
               Ver en MyAnimeList
             </Button>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
+
       <span className="text-sm text-gray-500">
         Publicado el: {new Date(newsItem.publicationDate).toLocaleDateString()}
       </span>
+
       <Link href="/">
         <Button>Volver a las Noticias</Button>
       </Link>
-      <div className="mt-3 w-full">
+
+      {/* Comments section */}
+      <div className="w-full max-w-4xl">
         <h2 className="text-lg font-semibold mb-2">
           Comentarios ({comments.length})
         </h2>

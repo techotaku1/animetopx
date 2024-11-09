@@ -36,7 +36,7 @@ const newsItems = [
 export default function Home() {
   return (
     <div className="space-y-8">
-      {/* Banner de publicidad */}
+      {/* Portada Principal */}
       <div className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] overflow-hidden">
         <Image
           src="/OTOÑO-2024/PORTADA1.webp"
