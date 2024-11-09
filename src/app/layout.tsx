@@ -9,19 +9,22 @@ import { NavigationEvents } from "@/components/navigation-events";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomProgressBar from "@/components/ProgressBar";
 import Script from "next/script";
-import { Covered_By_Your_Grace, Roboto_Slab } from 'next/font/google';
+import { Shantell_Sans, Roboto_Mono } from "next/font/google";
 
-const font1 = Covered_By_Your_Grace({
-  subsets: ['latin'],
-  variable: '--font-body',
-  weight : '400',
-  display: 'swap',
+const font1 = Shantell_Sans({
+  subsets: ["latin"],
+  variable: "--font-title", // Asegúrate de que la variable sea correcta
+  weight: ["400", "700"],
+  display: "swap",
+
 });
 
-const font2 = Roboto_Slab({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
+const font2 = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-body", // Asegúrate de que la variable sea correcta
+  weight: ["400"],
+  display: "swap",
+
 });
 
 export const metadata: Metadata = {
