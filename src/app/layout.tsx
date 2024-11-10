@@ -15,7 +15,7 @@ const shantellSans = Shantell_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-shantell-sans',
-    weight: ['700'],  // Bold y Ultra-Bold
+    weight: ['700'],
 
 });
 
@@ -23,7 +23,7 @@ const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-grandstander',
-  weight: ['400'],  // Bold y Ultra-Bold
+  weight: ['400'],  
 
   
 });

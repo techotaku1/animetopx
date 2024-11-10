@@ -8,9 +8,8 @@
   :root {
     p,
     .description,
-    li,
-    .long-text {
-      font-family: var(--font-grandstander); /* La fuente principal es --font-roboto-mono y el respaldo es serif */
+    li {
+      font-family: var(--font-grandstander); 
     }
 
     --background: 0 0% 100%;
