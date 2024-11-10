@@ -123,7 +123,7 @@ export const newsItems: NewsItem[] = [
     category: "RE:ZERO",
     date: "2024-11-1",
     content: "Las brujas y sus arzobispos",
-    backgroundImage: "/RE-ZERO/PORTADA4.webp",
+    backgroundImage: "/RE-ZERO/PORTADA-REZERO.webp",
     publicationDate: new Date("2024-11-1"),
     imageUrls: [
       {

@@ -16,7 +16,7 @@ export const carouselData = [
       description:
         "Lista REAL de los arzobispos del pecado en Re:Zero y sus respectivas brujas.",
       category: "Curiosidades",
-      imageUrl: "/RE-ZERO/PORTADA4.webp",
+      imageUrl: "/RE-ZERO/PORTADA-REZERO.webp",
       date: "1 noviembre 2024",
     },
     {
