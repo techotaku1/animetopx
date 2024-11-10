@@ -1,17 +1,18 @@
 // pages/page.tsx
 
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { NewsCard } from "@/components/news/news-card";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { carouselData } from "@/lib/carouselData";
+import Link from "next/link";  // Esto es lo correcto
+import { carouselData } from "@/lib/carouselData"; // Importar los datos del carrusel
+
+
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Cambia de slide automáticamente cada 5 segundos
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselData.length);
@@ -22,24 +23,20 @@ export default function Home() {
   return (
     <div className="space-y-8">
       {/* Portada Principal con Carousel */}
-      <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden">
+      <div className="relative w-full h-[400px] overflow-hidden">
         {carouselData.map((item, index) => (
-          <Link href={`/noticias/${item.id}`} key={item.id}>
-            <div
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                index === currentSlide ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Image
-                src={item.imageUrl}
-                alt={item.title}
-                fill
-                style={{ objectFit: "cover" }}
-                priority={index === currentSlide}
-              />
-              
-            </div>
-          </Link>
+          <div
+            key={item.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"}`}
+          >
+            <Image
+              src={item.imageUrl}
+              alt={item.title}
+              fill
+              style={{ objectFit: "cover" }}
+              priority={index === currentSlide}
+            />
+          </div>
         ))}
         {/* Navegación de puntos */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
@@ -47,9 +44,9 @@ export default function Home() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full ${
-                currentSlide === index ? "bg-white" : "bg-gray-400"
-              }`}
+              className={`w-3 h-3 rounded-full 
+        ${currentSlide === index ? "bg-white" : "bg-red-500"} 
+        hover:bg-white transition-all duration-300`}
             ></button>
           ))}
         </div>
@@ -64,12 +61,13 @@ export default function Home() {
       </section>
 
       <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {carouselData.map((item) => (
-          <NewsCard key={item.id} item={item} />
-        ))}
+        {carouselData
+          .filter((item) => !item.isCover) // Filtrar solo las noticias (excluyendo la portada)
+          .map((item) => (
+            <NewsCard key={item.id} item={item} />
+          ))}
       </section>
 
-      {/* Botón para ver todas las noticias */}
       <section className="text-center">
         <Button asChild size="lg">
           <Link href="/noticias">Ver todas las noticias</Link>
