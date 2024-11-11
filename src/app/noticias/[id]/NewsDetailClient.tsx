@@ -145,7 +145,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 <div
                   key={index}
                   className="w-full flex-shrink-0 relative"
-                  style={{ aspectRatio: "16/9" }}
+                  style={{ aspectRatio: "4/4" }} // Hacer la imagen más "grande" cambiando la relación de aspecto
                 >
                   <Image
                     src={image.url}
@@ -161,16 +161,18 @@ export default function NewsDetailClient({ id }: { id: number }) {
           </div>
           <Button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90 border-none hover:shadow-lg"
             aria-label="Previous"
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
           <Button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90 border-none hover:shadow-lg"
             aria-label="Next"
-          ><ChevronRight className="h-6 w-6" /></Button>
+          >
+            <ChevronRight className="h-6 w-6" />
+          </Button>
         </div>
 
         {/* Image details */}
