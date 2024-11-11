@@ -49,7 +49,7 @@ export const carouselData = [
   {
     id: 3,  // ID único para la noticia 1
     title: "EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES EN HUNTER X HUNTER",
-    description: "Descubre las 5 calamidades del continente oscuro...",
+    description: "Descubre las 5 calamidades del continente oscuro.",
     category: "Curiosidades",
     imageUrl: "/HUNTERXHUNTER/cover-hunter.webp",
     alt: "El continente oscuro y sus calamidades en Hunter X Hunter",

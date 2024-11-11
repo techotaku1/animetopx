@@ -7,19 +7,17 @@ import Link from "next/link";
 import { carouselData } from "@/lib/carouselData"; // Importar los datos del carrusel
 
 export default function Home() {
+  const portadaItems = carouselData.filter((item) => item.isCover);
+  const newsItems = carouselData.filter((item) => !item.isCover);
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % carouselData.length);
+      setCurrentSlide((prev) => (prev + 1) % portadaItems.length); // Ajustar a portadaItems
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
-
-  // Filtrar las imágenes de portada (isCover: true)
-  const portadaItems = carouselData.filter((item) => item.isCover);
-  // Filtrar las imágenes de noticias (isCover: false)
-  const newsItems = carouselData.filter((item) => !item.isCover);
+  }, [portadaItems.length]); // Asegurarse de que el intervalo responda a cambios en portadaItems
 
   return (
     <div className="space-y-8">
