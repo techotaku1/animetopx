@@ -5,7 +5,7 @@ import Script from "next/script";
 // Genera parámetros estáticos para las rutas dinámicas
 export async function generateStaticParams() {
   return newsItems.map((item) => ({
-    id: item.id.toString(), // Convierte el id a string
+    id: item.id.toString(),
   }));
 }
 
@@ -27,7 +27,7 @@ export default function NewsDetail({ params }: { params: { id: string } }) {
     "@type": "NewsArticle",
     "headline": newsItem.title,
     "datePublished": publicationDate,
-    "dateModified": publicationDate, // Se usa la misma fecha para la modificación
+    "dateModified": publicationDate,
     "author": {
       "@type": "Organization",
       "name": "AnimeTopX",
@@ -35,16 +35,22 @@ export default function NewsDetail({ params }: { params: { id: string } }) {
     "publisher": {
       "@type": "Organization",
       "name": "AnimeTopX",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://animetopx.vercel.app/logo.png", // Ruta al logo de la organización
+        "width": 60,
+        "height": 60,
+      },
     },
     "image": newsItem.imageUrls.map((image) => ({
       "@type": "ImageObject",
-      "url": `https://animetopx.vercel.app${image.url}`, // URL completa para la imagen
-      "contentUrl": `https://animetopx.vercel.app${image.url}`, // Asegura que Google pueda acceder al contenido
-      "width": "800", // Ajuste a tamaño estándar
-      "height": "1200", // Ajuste a tamaño estándar
+      "url": `https://animetopx.vercel.app${image.url}`,
+      "contentUrl": `https://animetopx.vercel.app${image.url}`,
+      "width": "800",
+      "height": "1200",
       "caption": image.description,
       "name": image.title,
-      "thumbnailUrl": `https://animetopx.vercel.app${image.url}`, // URL del thumbnail si tienes una versión más pequeña
+      "thumbnailUrl": `https://animetopx.vercel.app${image.url}`,
     })),
     "articleSection": newsItem.category,
     "mainEntityOfPage": {

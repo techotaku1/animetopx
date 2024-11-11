@@ -114,14 +114,17 @@ export default function NewsDetailClient({ id }: { id: number }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-4 px-4 space-y-8 max-w-6xl mx-auto">
       {/* Portada de la noticia */}
-      <div className="relative w-full h-[400px] mb-4">
+      <div
+        className="relative w-full overflow-hidden mb-4"
+        style={{ aspectRatio: "1920/600" }}
+      >
         <Image
           src={newsItem.backgroundImage}
           alt={newsItem.title}
           fill
-          style={{ objectFit: "cover" }}
-          className="rounded-lg"
+          sizes="(min-width: 1920px) 1920px, 100vw"
           priority
+          className="object-cover object-center rounded-lg"
         />
       </div>
 
@@ -142,21 +145,15 @@ export default function NewsDetailClient({ id }: { id: number }) {
                 <div
                   key={index}
                   className="w-full flex-shrink-0 relative"
-                  style={{
-                    display: "flex",
-                  }}
+                  style={{ aspectRatio: "16/9" }}
                 >
                   <Image
                     src={image.url}
-                    alt={image.alt || image.description}
-                    width={800} // Ancho de la imagen
-                    height={600} // Alto de la imagen
-                    className="rounded-lg w-full" // Mantener la imagen dentro del contenedor sin recorte
-                    priority
-                    style={{
-                      maxHeight: "100%", // Asegura que la imagen no exceda la altura del contenedor
-                      minHeight: "300px", // Altura mínima de la imagen
-                    }}
+                    alt={image.title || image.description}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="rounded-lg object-contain"
+                    priority={index === 0}
                   />
                 </div>
               ))}
@@ -164,19 +161,16 @@ export default function NewsDetailClient({ id }: { id: number }) {
           </div>
           <Button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-red-500 hover:bg-red-600 text-white p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90"
-            aria-label="Anterior"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90"
+            aria-label="Previous"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft className="h-6 w-6" />
           </Button>
-
           <Button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-red-500 hover:bg-red-600 text-white p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90"
-            aria-label="Siguiente"
-          >
-            <ChevronRight size={24} />
-          </Button>
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all duration-300 ease-in-out hover:scale-110 active:scale-90"
+            aria-label="Next"
+          ><ChevronRight className="h-6 w-6" /></Button>
         </div>
 
         {/* Image details */}
