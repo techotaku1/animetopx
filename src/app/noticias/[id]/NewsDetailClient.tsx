@@ -31,6 +31,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
   const [newComment, setNewComment] = useState<string>("");
   const [userRating, setUserRating] = useState<number>(0);
   const [userName, setUserName] = useState<string>("");
+  const [loading, setLoading] = useState(true); // Estado para la imagen en carga
 
   useEffect(() => {
     if (!newsItem) return;
@@ -137,6 +138,11 @@ export default function NewsDetailClient({ id }: { id: number }) {
         {/* Carousel */}
         <div className="relative w-full lg:w-1/2 mb-8 lg:mb-0">
           <div className="overflow-hidden rounded-lg shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-shadow duration-300 hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)]">
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+              <p>Cargando imagen...</p>
+            </div>
+          )}
             <div
               className="flex transition-transform duration-300 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -154,6 +160,8 @@ export default function NewsDetailClient({ id }: { id: number }) {
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     className="rounded-lg object-contain"
                     priority={index === 0}
+                    onLoadingComplete={() => setLoading(false)} // Detiene el mensaje al completar la carga
+
                   />
                 </div>
               ))}
