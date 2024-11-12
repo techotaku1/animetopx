@@ -148,7 +148,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     className="rounded-lg object-contain transition-opacity duration-300"
-                    onLoadingComplete={() => setIsLoading(false)}
+                    onLoad={() => setIsLoading(false)}
                     priority={index === 0}
                     loading={index === 0 ? "eager" : "lazy"}
                     quality={85}
