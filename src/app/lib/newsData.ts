@@ -187,29 +187,34 @@ export const newsItems: NewsItem[] = [
         title: "PAP",
         description:
           "Es una bestia carnívora que se alimenta de humanos. Se encuentra en una cadena montañosa en el Continente Oscuro. Su existencia representa una amenaza constante para los viajeros que se adentran en esa región​.",
+          malLink: "https://myanimelist.net/manga/26/Hunter_x_Hunter"
       },
       {
         url: "/HUNTERXHUNTER/calamidad-ai.webp",
         title: "AI",
         description: "Una forma de vida gaseosa con apéndices extendidos que parece influir en el comportamiento de otros seres. Promueve conductas autodestructivas, causando que los individuos bajo su influencia actúen de manera peligrosa.",
+        malLink: "https://myanimelist.net/manga/26/Hunter_x_Hunter"
       },
       {
         url: "/HUNTERXHUNTER/calamidad-brion.webp",
         title: "BRION",
         description:
           "Un ser misterioso que posee una apariencia humanoide con una enorme esfera como cabeza. Se encuentra en un laberinto dentro de unas antiguas ruinas en el norte del Lago Mobius. Brion es conocido por ser un ser y un arma a la vez​.",
+          malLink: "https://myanimelist.net/manga/26/Hunter_x_Hunter"
       },
       {
         url: "/HUNTERXHUNTER/calamidad-hellbell.webp",
         title: "HELLBELL",
         description:
           "Una serpiente peligrosa que habita en los pantanos del sur del Continente Oscuro. Su presencia tiene la capacidad de infectar a las personas con un deseo homicida, convirtiéndola en una amenaza psicológica y física.",
+          malLink: "https://myanimelist.net/manga/26/Hunter_x_Hunter"
       },
       {
         url: "/HUNTERXHUNTER/calamidad-zobae.webp",
         title: "ZOBAE",
         description:
           "Conocida como la enfermedad inmortal, Zobae es una enfermedad extremadamente peligrosa que afecta a quienes la contraen, causando que su piel se vuelva oscura y llevando a la muerte a la mayoría de las víctimas. Se encuentra en el sureste del Continente Oscuro.",
+          malLink: "https://myanimelist.net/manga/26/Hunter_x_Hunter"
       },
     ],
   },

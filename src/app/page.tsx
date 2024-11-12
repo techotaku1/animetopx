@@ -1,10 +1,14 @@
-"use client";
+"use client"
+
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { NewsCard } from "@/components/news/news-card";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { carouselData } from "@/lib/carouselData"; // Importar los datos del carrusel
+import Loading from "@/loading";  // Ajusta la ruta si es necesario
+
 
 export default function Home() {
   const portadaItems = carouselData.filter((item) => item.isCover);
@@ -17,47 +21,49 @@ export default function Home() {
       setCurrentSlide((prev) => (prev + 1) % portadaItems.length); // Ajustar a portadaItems
     }, 5000);
     return () => clearInterval(interval);
-  }, [portadaItems.length]); // Asegurarse de que el intervalo responda a cambios en portadaItems
+  }, [portadaItems.length]);
 
   return (
     <div className="space-y-8">
       {/* Sección de Portada */}
-      <div
-        className="relative w-full overflow-hidden"
-        style={{ aspectRatio: "1920/600" }}
-      >
-        {portadaItems.map((item, index) => (
-          <div
-            key={item.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={item.imageUrl}
-              alt={item.title}
-              fill
-              sizes="(min-width: 1920px) 1920px, 100vw"
-              priority={index === 0}
-              quality={85}
-              className="object-cover"
-              loading={index === 0 ? "eager" : "lazy"}
-            />
-          </div>
-        ))}
-        {/* Navegación de puntos */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {portadaItems.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full 
-                ${currentSlide === index ? "bg-white" : "bg-red-500"} 
-                hover:bg-white transition-all duration-300`}
-            ></button>
+      <Suspense fallback={<Loading />}>
+        <div
+          className="relative w-full overflow-hidden"
+          style={{ aspectRatio: "1920/600" }}
+        >
+          {portadaItems.map((item, index) => (
+            <div
+              key={item.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <Image
+                src={item.imageUrl}
+                alt={item.title}
+                fill
+                sizes="(min-width: 1920px) 1920px, 100vw"
+                priority={index === 0}
+                quality={85}
+                className="object-cover"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </div>
           ))}
+          {/* Navegación de puntos */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            {portadaItems.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-3 h-3 rounded-full 
+                  ${currentSlide === index ? "bg-white" : "bg-red-500"} 
+                  hover:bg-white transition-all duration-300`}
+              ></button>
+            ))}
+          </div>
         </div>
-      </div>
+      </Suspense>
 
       {/* Sección de Noticias */}
       <section>
@@ -67,11 +73,13 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {newsItems.map((item) => (
-          <NewsCard key={item.id} item={item} />
-        ))}
-      </section>
+      <Suspense fallback={<Loading />}>
+        <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {newsItems.map((item) => (
+            <NewsCard key={item.id} item={item} />
+          ))}
+        </section>
+      </Suspense>
 
       <section className="text-center">
         <Button asChild size="lg">
