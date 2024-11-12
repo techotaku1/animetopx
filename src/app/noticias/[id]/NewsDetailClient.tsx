@@ -6,7 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { newsItems } from "@/lib/newsData";
 import Link from "next/link";
-import { collection, Timestamp, query, where, addDoc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  Timestamp,
+  query,
+  where,
+  addDoc,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "@/db/firebaseConfig";
 
 interface Comment {
@@ -44,7 +51,10 @@ export default function NewsDetailClient({ id }: { id: number }) {
         fetchedComments.push({
           id: doc.id,
           comment: data.comment,
-          date: data.date instanceof Timestamp ? data.date.toDate() : new Date(data.date),
+          date:
+            data.date instanceof Timestamp
+              ? data.date.toDate()
+              : new Date(data.date),
           rating: data.rating,
           userName: data.userName,
         });
@@ -65,12 +75,15 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
   const handleNext = () => {
     setIsLoading(true);
-    setCurrentIndex((prev) => (prev < newsItem!.imageUrls.length - 1 ? prev + 1 : prev));
+    setCurrentIndex((prev) =>
+      prev < newsItem!.imageUrls.length - 1 ? prev + 1 : prev
+    );
   };
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "") return;
+    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "")
+      return;
     await addDoc(collection(db, "comments"), {
       comment: newComment,
       date: Timestamp.fromDate(new Date()),
@@ -91,7 +104,10 @@ export default function NewsDetailClient({ id }: { id: number }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-4 px-4 space-y-8 max-w-6xl mx-auto">
       {/* Portada de la noticia */}
-      <div className="relative w-full overflow-hidden mb-4" style={{ aspectRatio: "1920/600" }}>
+      <div
+        className="relative w-full overflow-hidden mb-4"
+        style={{ aspectRatio: "1920/600" }}
+      >
         <Image
           src={newsItem.backgroundImage}
           alt={newsItem.title}
@@ -103,16 +119,24 @@ export default function NewsDetailClient({ id }: { id: number }) {
         />
       </div>
 
-      <h1 className="text-3xl font-bold mb-6 text-center sm:text-4xl">{newsItem.title}</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center sm:text-4xl">
+        {newsItem.title}
+      </h1>
 
       {/* Carousel and Image details */}
       <div className="w-full max-w-6xl mb-8 flex flex-col lg:flex-row lg:space-x-8 lg:items-start">
         {/* Carousel */}
         <div className="relative w-full lg:w-1/2 mb-8 lg:mb-0">
           <div className="overflow-hidden rounded-lg shadow-lg">
-            <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+            <div
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
               {newsItem.imageUrls.map((image, index) => (
-                <div key={index} className="w-full flex-shrink-0 relative aspect-square">
+                <div
+                  key={index}
+                  className="w-full flex-shrink-0 relative aspect-square"
+                >
                   {isLoading && currentIndex === index && (
                     <p className="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-500 font-semibold">
                       Cargando imagen...
@@ -152,34 +176,73 @@ export default function NewsDetailClient({ id }: { id: number }) {
         {/* Image details */}
         <div className="w-full lg:w-1/2 lg:sticky lg:top-4">
           <div className="flex flex-col h-full p-6 rounded-lg shadow-md border border-gray-300 dark:border-white">
-            <h2 className="text-xl font-semibold sm:text-2xl mb-4">{newsItem.imageUrls[currentIndex].title}</h2>
+            {/* Etiqueta numérica arriba del título */}
+            {newsItem && (
+              <div className="mb-2">
+                {/* Mostrar "Top" solo para el id 1 */}
+                {id === 1 && (
+                  <div className="bg-red-600 text-white px-2 py-1 rounded font-semibold text-center">
+                    Top {currentIndex + 1}
+                  </div>
+                )}
+                {/* Mostrar número simple para id 1 y 3 */}
+                {(id === 1 || id === 3) && (
+                  <div className="bg-red-600 text-white px-2 py-1 rounded font-semibold text-center">
+                    {currentIndex + 1}
+                  </div>
+                )}
+              </div>
+            )}
+            <h2 className="text-xl font-semibold sm:text-2xl mb-4">
+              {newsItem.imageUrls[currentIndex].title}
+            </h2>
             <p className="text-sm sm:text-base text-muted-foreground mb-6 flex-grow">
               {newsItem.imageUrls[currentIndex].description}
             </p>
-            <Button onClick={() => window.open(newsItem.imageUrls[currentIndex].malLink, "_blank")}>
+            <Button
+              onClick={() =>
+                window.open(newsItem.imageUrls[currentIndex].malLink, "_blank")
+              }
+            >
               Ver en MyAnimeList
             </Button>
           </div>
         </div>
       </div>
 
-      <span className="text-sm text-gray-500">Publicado el: {new Date(newsItem.publicationDate).toLocaleDateString()}</span>
-      <Link href="/"><Button>Volver a las Noticias</Button></Link>
+      <span className="text-sm text-gray-500">
+        Publicado el: {new Date(newsItem.publicationDate).toLocaleDateString()}
+      </span>
+      <Link href="/">
+        <Button>Volver a las Noticias</Button>
+      </Link>
 
       {/* Comments section */}
       <div className="w-full max-w-4xl">
-        <h2 className="text-lg font-semibold mb-2">Comentarios ({comments.length})</h2>
+        <h2 className="text-lg font-semibold mb-2">
+          Comentarios ({comments.length})
+        </h2>
         {comments.length > 0 && (
           <div className="flex items-center mb-4">
             <span className="text-lg font-bold mr-2">Promedio:</span>
             {[...Array(5)].map((_, index) => (
-              <Star key={index} className={index < averageStars ? "text-yellow-500" : "text-gray-300"} />
+              <Star
+                key={index}
+                className={
+                  index < averageStars ? "text-yellow-500" : "text-gray-300"
+                }
+              />
             ))}
-            <span className="ml-2 text-lg font-semibold">{averageStars.toFixed(1)} / 5</span>
+            <span className="ml-2 text-lg font-semibold">
+              {averageStars.toFixed(1)} / 5
+            </span>
           </div>
         )}
 
-        <form onSubmit={handleCommentSubmit} className="flex flex-col space-y-4">
+        <form
+          onSubmit={handleCommentSubmit}
+          className="flex flex-col space-y-4"
+        >
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
@@ -199,7 +262,11 @@ export default function NewsDetailClient({ id }: { id: number }) {
             {[1, 2, 3, 4, 5].map((star) => (
               <Star
                 key={star}
-                className={star <= userRating ? "text-yellow-500 cursor-pointer" : "text-gray-300 cursor-pointer"}
+                className={
+                  star <= userRating
+                    ? "text-yellow-500 cursor-pointer"
+                    : "text-gray-300 cursor-pointer"
+                }
                 onClick={() => setUserRating(star)}
               />
             ))}
@@ -208,7 +275,10 @@ export default function NewsDetailClient({ id }: { id: number }) {
         </form>
 
         {comments.map((comment) => (
-          <div key={comment.id} className="p-4 my-2 border border-gray-300 rounded-md">
+          <div
+            key={comment.id}
+            className="p-4 my-2 border border-gray-300 rounded-md"
+          >
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold">{comment.userName}</span>
               <span className="text-gray-500 text-sm">
