@@ -179,15 +179,13 @@ export default function NewsDetailClient({ id }: { id: number }) {
             {/* Etiqueta numérica arriba del título */}
             {newsItem && (
               <div className="mb-2">
-                {/* Mostrar "Top" solo para el id 1 */}
                 {id === 1 && (
-                  <div className="bg-red-600 text-white px-2 py-1 rounded font-semibold text-center">
+                  <div className="inline-block bg-red-600 text-white px-2 py-1 rounded font-semibold text-center text-sm lg:text-base">
                     Top {currentIndex + 1}
                   </div>
                 )}
-                {/* Mostrar número simple para id 1 y 3 */}
-                {(id === 1 || id === 3) && (
-                  <div className="bg-red-600 text-white px-2 py-1 rounded font-semibold text-center">
+                {(id === 2 || id === 3) && (
+                  <div className="inline-block bg-red-600 text-white px-2 py-1 rounded font-semibold text-center text-sm lg:text-base">
                     {currentIndex + 1}
                   </div>
                 )}
