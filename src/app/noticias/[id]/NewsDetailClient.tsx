@@ -125,7 +125,8 @@ export default function NewsDetailClient({ id }: { id: number }) {
           fill
           sizes="(min-width: 1920px) 1920px, 100vw"
           priority
-          className="object-cover object-center rounded-lg"
+          style={{ objectFit: "cover" }} // Ajusta la imagen sin recortar
+          className="rounded-lg"
         />
       </div>
 
@@ -138,11 +139,11 @@ export default function NewsDetailClient({ id }: { id: number }) {
         {/* Carousel */}
         <div className="relative w-full lg:w-1/2 mb-8 lg:mb-0">
           <div className="overflow-hidden rounded-lg shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-shadow duration-300 hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)]">
-          {loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-              <p>Cargando imagen...</p>
-            </div>
-          )}
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                <p>Cargando imagen...</p>
+              </div>
+            )}
             <div
               className="flex transition-transform duration-300 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -150,8 +151,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
               {newsItem.imageUrls.map((image, index) => (
                 <div
                   key={index}
-                  className="w-full flex-shrink-0 relative"
-                  style={{ aspectRatio: "4/4" }} // Hacer la imagen más "grande" cambiando la relación de aspecto
+                  className="w-full flex-shrink-0 relative aspect-square"
                 >
                   <Image
                     src={image.url}
@@ -160,8 +160,9 @@ export default function NewsDetailClient({ id }: { id: number }) {
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     className="rounded-lg object-contain"
                     priority={index === 0}
-                    onLoadingComplete={() => setLoading(false)} // Detiene el mensaje al completar la carga
-
+                    onLoadingComplete={() => setLoading(false)}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    quality={85}
                   />
                 </div>
               ))}

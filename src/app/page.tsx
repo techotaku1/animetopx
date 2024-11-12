@@ -40,7 +40,8 @@ export default function Home() {
               sizes="(min-width: 1920px) 1920px, 100vw"
               priority={index === 0}
               quality={85}
-              className="object-cover object-center"
+              className="object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
             />
           </div>
         ))}
