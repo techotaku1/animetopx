@@ -7,7 +7,6 @@ export const carouselData = [
     description: "portada principal de mi pagina web.",
     category: "Portada",
     imageUrl: "/PORTADA-PRINCIPAL.webp",  // Ruta de la imagen de la portada principal
-    alt: "Portada principal del sitio web de Anime",
     date: "N/A",  // No es relevante para la portada
     isCover: true,  // Indica que esta es la portada principal
   },
@@ -18,7 +17,6 @@ export const carouselData = [
     description: "Descubre las 5 calamidades del continente oscuro, un tema central de Hunter X Hunter.",
     category: "Portada",
     imageUrl: "/HUNTERXHUNTER/portada-hunter.webp",  // Ruta de la imagen de la portada principal
-    alt: "Portada principal del sitio web de Anime",
     date: "N/A",  // No es relevante para la portada
     isCover: true,  // Indica que esta es la portada principal
   },
@@ -29,7 +27,6 @@ export const carouselData = [
     description: "Conoce a los arzobispos del pecado en Re:Zero, una parte esencial de la trama.",
     category: "Portada",
     imageUrl: "/RE-ZERO/portada-rezero.webp",  // Ruta de la imagen de la portada principal
-    alt: "Portada principal del sitio web de Anime",
     date: "N/A",
     isCover: true,  // Indica que esta es la portada principal
   },
@@ -40,7 +37,6 @@ export const carouselData = [
     description: "Los mejores estrenos de anime para la temporada de otoño 2024.",
     category: "Portada",
     imageUrl: "/OTOÑO-2024/portada-otoño.webp",  // Ruta de la imagen de la portada principal
-    alt: "Portada principal del sitio web de Anime",
     date: "N/A",
     isCover: true,  // Indica que esta es la portada principal
   },
@@ -52,7 +48,6 @@ export const carouselData = [
     description: "Descubre las 5 calamidades del continente oscuro.",
     category: "Curiosidades",
     imageUrl: "/HUNTERXHUNTER/cover-hunter.webp",
-    alt: "El continente oscuro y sus calamidades en Hunter X Hunter",
     date: "8 noviembre 2024",
     isCover: false,  // No es portada, es una noticia
   },
@@ -60,10 +55,9 @@ export const carouselData = [
   {
     id: 2,  // ID único para la noticia 2
     title: "BRUJAS Y ARZOBISPOS EN RE:ZERO",
-    description: "Lista REAL de los arzobispos del pecado en Re:Zero...",
+    description: "Lista REAL de los arzobispos del pecado y sus respectivas brujas.",
     category: "Curiosidades",
     imageUrl: "/RE-ZERO/cover-rezero.webp",
-    alt: "Brujas y arzobispos en Re:Zero",
     date: "1 noviembre 2024",
     isCover: false,  // No es portada, es una noticia
   },
@@ -74,7 +68,6 @@ export const carouselData = [
     description: "Los Mejores ESTRENOS de la temporada de OTOÑO 2024.",
     category: "Otoño",
     imageUrl: "/OTOÑO-2024/cover-otoño.webp",
-    alt: "Top anime otoño 2024",
     date: "octubre 2024",
     isCover: false,  // No es portada, es una noticia
   },

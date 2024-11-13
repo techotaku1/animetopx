@@ -32,80 +32,42 @@ export const newsItems: NewsItem[] = [
       {
         url: "/OTOÑO-2024/ReZeroSeason3.webp",
         title: "Re:Zero Season 3",
-        description:
-          "Tercera temporada de Re:Zero kara Hajimeru Isekai Seikatsu.",
-        malLink:
-          "https://myanimelist.net/anime/54857/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_3rd_Season",
+        description: "La tercera temporada de Re:Zero kara Hajimeru Isekai Seikatsu sigue a Subaru Natsuki, quien enfrenta nuevas pruebas en un mundo alternativo, mientras desentraña más secretos sobre su capacidad de 'Regreso por Muerte'. La serie promete mantener su característico enfoque psicológico y emocional, con más personajes y dilemas que desafían las decisiones de Subaru.",
+        malLink: "https://myanimelist.net/anime/54857/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_3rd_Season"
       },
       {
         url: "/OTOÑO-2024/Dandadan.webp",
         title: "Dandadan",
-        description:
-          "Después de ser rechazada agresivamente, Momo Ayase se encuentra de mal humor cuando se topa con un niño que está siendo intimidado.",
-        malLink: "https://myanimelist.net/anime/57334/Dandadan?q=dan&cat=anime",
+        description: "Momo Ayase, una joven con habilidades psíquicas, se ve envuelta en un extraño mundo sobrenatural al encontrarse con un chico llamado Ken Takakura, mientras ambos luchan contra espíritus y entidades paranormales. La serie mezcla acción, comedia y elementos del terror, explorando la relación entre los protagonistas mientras enfrentan fuerzas más allá de su comprensión.",
+        malLink: "https://myanimelist.net/anime/57334/Dandadan?q=dan&cat=anime"
       },
       {
         url: "/OTOÑO-2024/Uzumaki.webp",
         title: "Uzumaki",
-        description:
-          "En la ciudad de Kurouzu-cho, Kirie Goshima vive una vida bastante normal con su familia...",
-        malLink:
-          "https://myanimelist.net/anime/40333/Uzumaki?q=uzumaki&cat=anime",
+        description: "Basada en el manga de Junji Ito, Uzumaki es una adaptación de terror psicológico que sigue la historia de Kirie Goshima, una joven que vive en una ciudad donde extrañas ocurrencias relacionadas con espirales comienzan a alterar la vida diaria de los habitantes. A medida que la ciudad se ve atrapada en esta espiral de locura, Kirie debe enfrentarse a lo inimaginable.",
+        malLink: "https://myanimelist.net/anime/40333/Uzumaki?q=uzumaki&cat=anime"
       },
       {
         url: "/OTOÑO-2024/BlueLock2vsU20Japan.webp",
         title: "BlueLock vs U-20 Japan",
-        description: "Segunda temporada de Blue Lock.",
-        malLink: "https://myanimelist.net/anime/54865/Blue_Lock_vs_U-20_Japan",
+        description: "La segunda temporada de Blue Lock sigue el desarrollo de los jugadores en el programa de entrenamiento de élite para crear al mejor delantero de fútbol. En esta nueva entrega, el equipo se enfrenta a Japón Sub-20 en una serie de desafíos que pondrán a prueba sus habilidades, tácticas y voluntad de ganar en el escenario internacional.",
+        malLink: "https://myanimelist.net/anime/54865/Blue_Lock_vs_U-20_Japan"
       },
       {
         url: "/OTOÑO-2024/AoNoHako.webp",
         title: "Ao no Hako",
-        description:
-          "Taiki Inomata, un estudiante de tercer año de secundaria, asiste a la Academia Eimei...",
-        malLink:
-          "https://myanimelist.net/anime/57181/Ao_no_Hako?q=ao%20no%20hako&cat=anime",
+        description: "Taiki Inomata, un talentoso jugador de voleibol de secundaria, se une a la Academia Eimei, donde enfrenta una competencia feroz en su camino hacia el éxito. La serie explora la dinámica del deporte, el esfuerzo y las relaciones humanas mientras Taiki busca su lugar entre los mejores jugadores.",
+        malLink: "https://myanimelist.net/anime/57181/Ao_no_Hako?q=ao%20no%20hako&cat=anime"
       },
       {
         url: "/OTOÑO-2024/DanMachiHoujouNoMegamiHenV.webp",
         title: "Danmachi: Houjou no Megami-hen V",
-        description:
-          "Quinta temporada de Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka.",
-        malLink:
-          "https://myanimelist.net/anime/57066/Dungeon_ni_Deai_wo_Motomeru_no_wa_Machigatteiru_Darou_ka_V__Houjou_no_Megami-hen?q=no%20megami%20hen&cat=anime",
-      },
-      {
-        url: "/OTOÑO-2024/DragonBallDaima.webp",
-        title: "Dragon Ball Daima",
-        description: "Nueva serie de Dragon Ball.",
-        malLink:
-          "https://myanimelist.net/anime/56894/Dragon_Ball_Daima?q=dragon%20ball%20daima&cat=anime",
-      },
-      {
-        url: "/OTOÑO-2024/SAOGunGaleOnline2.webp",
-        title: "SAO: Gun Gale Online II",
-        description:
-          "Segunda temporada de Sword Art Online Alternative: Gun Gale Online.",
-        malLink:
-          "https://myanimelist.net/anime/55994/Sword_Art_Online_Alternative__Gun_Gale_Online_II?q=gun%20gale&cat=anime",
-      },
-      {
-        url: "/OTOÑO-2024/ShangriLaFrontier2.webp",
-        title: "Shangri-La Frontier Season 2",
-        description: "Segunda temporada de Shangri-La Frontier",
-        malLink:
-          "https://myanimelist.net/anime/58572/Shangri-La_Frontier__Kusoge_Hunter_Kamige_ni_Idoman_to_su_2nd_Season",
-      },
-      {
-        url: "/OTOÑO-2024/NanatsuNoTaizaiMokushirokuNoYonkishi2.webp",
-        title: "Nanatsu no Taizai: Mokushiroku no Yonkishi Season 2",
-        description:
-          "Segunda temporada de Nanatsu no Taizai: Mokushiroku no Yonkishi.",
-        malLink:
-          "https://myanimelist.net/anime/58511/Nanatsu_no_Taizai__Mokushiroku_no_Yonkishi_2nd_Season?q=Mokushiroku%20no%20Yonkishi&cat=anime",
-      },
-    ],
+        description: "La quinta temporada de Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka lleva a los protagonistas a enfrentar nuevas amenazas en las profundidades del Dungeon. Bell Cranel continúa su viaje con nuevos aliados y enemigos mientras explora su destino en un mundo lleno de divinidades, monstruos y batallas épicas.",
+        malLink: "https://myanimelist.net/anime/57066/Dungeon_ni_Deai_wo_Motomeru_no_wa_Machigatteiru_Darou_ka_V__Houjou_no_Megami-hen?q=no%20megami%20hen&cat=anime"
+      }
+    ]
   },
+  
   {
     id: 2,
     title: "LAS BRUJAS Y SUS ARZOBISPOS",
