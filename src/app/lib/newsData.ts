@@ -64,6 +64,30 @@ export const newsItems: NewsItem[] = [
         title: "Danmachi: Houjou no Megami-hen V",
         description: "La quinta temporada de Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka lleva a los protagonistas a enfrentar nuevas amenazas en las profundidades del Dungeon. Bell Cranel continúa su viaje con nuevos aliados y enemigos mientras explora su destino en un mundo lleno de divinidades, monstruos y batallas épicas.",
         malLink: "https://myanimelist.net/anime/57066/Dungeon_ni_Deai_wo_Motomeru_no_wa_Machigatteiru_Darou_ka_V__Houjou_no_Megami-hen?q=no%20megami%20hen&cat=anime"
+      },
+      {
+        url: "/OTOÑO-2024/DragonBallDaima.webp",
+        title: "Dragon Ball Daima",
+        description: "Dragon Ball Daima es una nueva serie que expande el universo de Dragon Ball. La historia promete un enfoque fresco y nuevos personajes mientras se sigue la tradición de las aventuras épicas de Goku y sus amigos. Los fanáticos pueden esperar batallas espectaculares y nuevos giros en el universo que ha cautivado a millones.",
+        malLink: "https://myanimelist.net/anime/56894/Dragon_Ball_Daima?q=dragon%20ball%20daima&cat=anime"
+      },
+      {
+        url: "/OTOÑO-2024/SAOGunGaleOnline2.webp",
+        title: "SAO: Gun Gale Online II",
+        description: "La segunda temporada de Sword Art Online Alternative: Gun Gale Online continúa la historia de Karen Aijou, quien se adentra en el juego virtual de disparos para enfrentarse a nuevos desafíos. Esta temporada promete más acción, estrategias de combate y la evolución de los personajes en un ambiente futurista lleno de riesgos y adrenalina.",
+        malLink: "https://myanimelist.net/anime/55994/Sword_Art_Online_Alternative__Gun_Gale_Online_II?q=gun%20gale&cat=anime"
+      },
+      {
+        url: "/OTOÑO-2024/ShangriLaFrontier2.webp",
+        title: "Shangri-La Frontier Season 2",
+        description: "En la segunda temporada de Shangri-La Frontier, el protagonista, Rin, regresa al mundo virtual de Shangri-La, un juego de realidad virtual que es conocido por sus errores y glitches. En esta nueva entrega, Rin se enfrentará a nuevos y complejos desafíos mientras explora más de los secretos del juego y su relación con otros jugadores.",
+        malLink: "https://myanimelist.net/anime/58572/Shangri-La_Frontier__Kusoge_Hunter_Kamige_ni_Idoman_to_su_2nd_Season"
+      },
+      {
+        url: "/OTOÑO-2024/NanatsuNoTaizaiMokushirokuNoYonkishi2.webp",
+        title: "Nanatsu no Taizai: Mokushiroku no Yonkishi Season 2",
+        description: "La segunda temporada de Nanatsu no Taizai: Mokushiroku no Yonkishi continúa la saga de los Siete Pecados Capitales, quienes se enfrentan a nuevos enemigos y desvelan más secretos sobre su mundo. Esta entrega promete más batallas épicas y un mayor desarrollo de los personajes mientras se profundiza en la historia detrás de los Cuatro Caballeros del Apocalipsis.",
+        malLink: "https://myanimelist.net/anime/58511/Nanatsu_no_Taizai__Mokushiroku_no_Yonkishi_2nd_Season?q=Mokushiroku%20no%20Yonkishi&cat=anime"
       }
     ]
   },
