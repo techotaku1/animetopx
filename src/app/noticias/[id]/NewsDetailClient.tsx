@@ -135,7 +135,11 @@ export default function NewsDetailClient({ id }: { id: number }) {
               {newsItem.imageUrls.map((image, index) => (
                 <div
                   key={index}
-                  className="w-full flex-shrink-0 relative aspect-square"
+                  className={`w-full flex-shrink-0 relative ${
+                    newsItem.id === 1
+                      ? "aspect-[9/16] sm:aspect-[2/3] md:aspect-[9/16] lg:aspect-[9/16] sm:h-[60vh] lg:h-[80vh] h-auto border border-gray-300 rounded-lg" // Se agregó 'rounded-lg' al contenedor
+                      : "aspect-square border border-gray-300 rounded-lg" // Se agregó 'rounded-lg' aquí también
+                  }`}
                 >
                   {isLoading && currentIndex === index && (
                     <p className="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-500 font-semibold">
@@ -159,14 +163,14 @@ export default function NewsDetailClient({ id }: { id: number }) {
           </div>
           <Button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-transform duration-200 ease-out hover:scale-110 active:scale-90"
             aria-label="Previous"
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
           <Button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-transform duration-200 ease-out hover:scale-110 active:scale-90"
             aria-label="Next"
           >
             <ChevronRight className="h-6 w-6" />
@@ -220,6 +224,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
         <h2 className="text-lg font-semibold mb-2">
           Comentarios ({comments.length})
         </h2>
+
         {comments.length > 0 && (
           <div className="flex items-center mb-4">
             <span className="text-lg font-bold mr-2">Promedio:</span>
@@ -272,20 +277,40 @@ export default function NewsDetailClient({ id }: { id: number }) {
           <Button type="submit">Enviar Comentario</Button>
         </form>
 
-        {comments.map((comment) => (
-          <div
-            key={comment.id}
-            className="p-4 my-2 border border-gray-300 rounded-md"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-bold">{comment.userName}</span>
-              <span className="text-gray-500 text-sm">
-                {new Date(comment.date).toLocaleDateString()}
-              </span>
+        {/* Ordenamos los comentarios por fecha (de más reciente a más antiguo) */}
+        {comments
+          .sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          ) // Ordenar por fecha
+          .map((comment) => (
+            <div
+              key={comment.id}
+              className="p-4 my-2 border border-gray-300 rounded-md"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-bold">{comment.userName}</span>
+                <span className="text-gray-500 text-sm">
+                  {new Date(comment.date).toLocaleDateString()}
+                </span>
+              </div>
+
+              {/* Mostrar las estrellas del comentario */}
+              <div className="flex mb-2">
+                {[...Array(5)].map((_, index) => (
+                  <Star
+                    key={index}
+                    className={
+                      index < comment.rating
+                        ? "text-yellow-500"
+                        : "text-gray-300"
+                    }
+                  />
+                ))}
+              </div>
+
+              <p className="text-gray-600 mb-2">{comment.comment}</p>
             </div>
-            <p className="text-gray-600 mb-2">{comment.comment}</p>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
