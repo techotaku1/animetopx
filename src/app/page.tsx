@@ -61,7 +61,7 @@ export default function Home() {
                 onClick={() => setCurrentSlide(index)}
                 className={`w-4 h-4 rounded-full 
                   ${currentSlide === index ? "bg-red-500" : "bg-black"} 
-                  hover:bg-red-500 transition-all duration-300`}
+                   disabled={currentSlide === index} transition-all duration-300`}
                 aria-label={`Ir a la diapositiva ${index + 1}`} 
               ></button>
             ))}
