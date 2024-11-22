@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
@@ -26,38 +26,43 @@ export default function Home() {
     <div className="space-y-8">
       {/* Sección de Portada */}
       <Suspense fallback={<Loading />}>
-        <div
-          className="relative w-full overflow-hidden pb-12"
-          style={{ aspectRatio: "1920/600" }}
-        >
-          {portadaItems.map((item, index) => (
-            <div
-              key={item.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                index === currentSlide ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Image
-                src={item.imageUrl}
-                alt={item.title}
-                fill
-                sizes="(min-width: 1920px) 1920px, 100vw"
-                priority={index === 0}
-                quality={85}
-                style={{ objectFit: "cover" }} // Ajusta la imagen sin recortar
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            </div>
-          ))}
+        <div className="space-y-4">
+          {/* Contenedor del carrusel existente */}
+          <div
+            className="relative w-full"
+            style={{ aspectRatio: "1920/600" }}
+          >
+            {portadaItems.map((item, index) => (
+              <div
+                key={item.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  index === currentSlide ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <Image
+                  src={item.imageUrl}
+                  alt={item.title}
+                  fill
+                  sizes="(min-width: 1920px) 1920px, 100vw"
+                  priority={index === 0}
+                  quality={85}
+                  style={{ objectFit: "cover" }} // Ajusta la imagen sin recortar
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              </div>
+            ))}
+          </div>
+          
           {/* Navegación de puntos */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-3 mt-4">
             {portadaItems.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full 
-                  ${currentSlide === index ? "bg-white" : "bg-red-500"} 
-                  hover:bg-white transition-all duration-300`}
+                className={`w-4 h-4 rounded-full 
+                  ${currentSlide === index ? "bg-red-500" : "bg-black"} 
+                  hover:bg-red-500 transition-all duration-300`}
+                aria-label={`Ir a la diapositiva ${index + 1}`} 
               ></button>
             ))}
           </div>
@@ -88,3 +93,4 @@ export default function Home() {
     </div>
   );
 }
+
