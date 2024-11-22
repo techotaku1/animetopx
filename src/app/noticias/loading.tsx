@@ -1,9 +1,11 @@
-// app/noticias/loading.tsx
 export default function Loading() {
   return (
-    <div className="flex justify-center items-center space-x-4">
-      <div className="animate-spin w-8 h-8 border-4 border-t-4 border-blue-500 rounded-full"></div>
-      <span>Cargando...</span>
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+        <span className="text-lg font-semibold text-gray-700">Cargando...</span>
+      </div>
     </div>
   );
 }
+

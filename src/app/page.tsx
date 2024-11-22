@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
@@ -7,8 +7,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { carouselData } from "@/lib/carouselData"; // Importar los datos del carrusel
-import Loading from "@/loading";  // Ajusta la ruta si es necesario
-
+import Loading from "@/loading"; // Ajusta la ruta si es necesario
 
 export default function Home() {
   const portadaItems = carouselData.filter((item) => item.isCover);
@@ -28,7 +27,7 @@ export default function Home() {
       {/* Sección de Portada */}
       <Suspense fallback={<Loading />}>
         <div
-          className="relative w-full overflow-hidden"
+          className="relative w-full overflow-hidden pb-12"
           style={{ aspectRatio: "1920/600" }}
         >
           {portadaItems.map((item, index) => (
