@@ -1,28 +1,19 @@
-'use client'; // Asegúrate de que el componente sea cliente
+'use client';
 
-import { useState, useEffect } from 'react';
+import { use } from 'react';  // Importa el hook 'use'
 import Loading from '../loading';  // Importa el componente de carga
 import NewsDetailClient from './NewsDetailClient';  // Asegúrate de importar el componente de detalle de la noticia
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
-  const [id, setId] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true); // Estado para mostrar el loading
+  // Utiliza el hook 'use' para obtener los params asincrónicamente
+  const resolvedParams = use(params);  // Resuelve los params sin necesidad de un 'useEffect'
 
-  useEffect(() => {
-    const fetchId = async () => {
-      const resolvedParams = await params; // Desempaquetamos la promesa
-      if (resolvedParams?.id) {
-        setId(parseInt(resolvedParams.id, 10)); // Convertimos el id en número
-        setIsLoading(false);  // Detener el loading una vez que se obtiene el ID
-      }
-    };
-
-    fetchId();
-  }, [params]);
-
-  if (isLoading || id === null) {
-    return <Loading />;  // Usa el componente de carga mientras se obtiene el ID
+  // Si no existe el ID o está cargando, muestra el componente de carga
+  if (!resolvedParams?.id) {
+    return <Loading />;
   }
+
+  const id = parseInt(resolvedParams.id, 10); // Convierte el id en número
 
   return (
     <div>
