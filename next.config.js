@@ -1,9 +1,9 @@
-/** @type {import('next').NextConfig} */
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
-    // output: 'export',
-    // images: {
-    //   unoptimized: false, // Esto permite cargar imágenes sin optimización
-    // },
-  };
-  module.exports = nextConfig;
-  
+  reactStrictMode: true, // Ejemplo de configuración válida
+  swcMinify: true, // Si estás usando Next.js con SWC para minificación
+}
+
+module.exports = nextConfig;
