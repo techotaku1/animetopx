@@ -1,75 +1,32 @@
-import { newsItems } from "../../lib/newsData"; // Asegúrate de que esta ruta sea correcta
-import NewsDetailClient from "./NewsDetailClient";
-import Script from "next/script";
+'use client'; // Asegúrate de que el componente sea cliente
 
-// Genera parámetros estáticos para las rutas dinámicas
-export async function generateStaticParams() {
-  return newsItems.map((item) => ({
-    id: item.id.toString(),
-  }));
-}
+import { useState, useEffect } from 'react';
+import Loading from '../loading';  // Importa el componente de carga
+import NewsDetailClient from './NewsDetailClient';  // Asegúrate de importar el componente de detalle de la noticia
 
-// Componente principal que renderiza el cliente
-export default function NewsDetail({ params }: { params: { id: string } }) {
-  const id = parseInt(params.id, 10);
-  const newsItem = newsItems.find((item) => item.id === id);
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
+  const [id, setId] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // Estado para mostrar el loading
 
-  if (!newsItem) {
-    return <div>Noticia no encontrada</div>;
+  useEffect(() => {
+    const fetchId = async () => {
+      const resolvedParams = await params; // Desempaquetamos la promesa
+      if (resolvedParams?.id) {
+        setId(parseInt(resolvedParams.id, 10)); // Convertimos el id en número
+        setIsLoading(false);  // Detener el loading una vez que se obtiene el ID
+      }
+    };
+
+    fetchId();
+  }, [params]);
+
+  if (isLoading || id === null) {
+    return <Loading />;  // Usa el componente de carga mientras se obtiene el ID
   }
 
-  // Formato de fecha ISO para la propiedad "datePublished"
-  const publicationDate = new Date(newsItem.date).toISOString();
-
-  // Estructura JSON-LD para Google News
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": newsItem.title,
-    "datePublished": publicationDate,
-    "dateModified": publicationDate,
-    "author": {
-      "@type": "Organization",
-      "name": "AnimeTopX",
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "AnimeTopX",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://animetopx.vercel.app/logo.png", // Ruta al logo de la organización
-        "width": 60,
-        "height": 60,
-      },
-    },
-    "image": newsItem.imageUrls.map((image) => ({
-      "@type": "ImageObject",
-      "url": `https://animetopx.vercel.app${image.url}`,
-      "contentUrl": `https://animetopx.vercel.app${image.url}`,
-      "width": "800",
-      "height": "1200",
-      "caption": image.description,
-      "name": image.title,
-      "thumbnailUrl": `https://animetopx.vercel.app${image.url}`,
-    })),
-    "articleSection": newsItem.category,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://animetopx.vercel.app/noticias/${id}`,
-    },
-  };
-
   return (
-    <>
-      {/* Script JSON-LD */}
-      <Script
-        id={`json-ld-news-${id}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      {/* Detalles de la noticia */}
-      <NewsDetailClient id={id} />
-    </>
+    <div>
+      <NewsDetailClient id={id} />  {/* Pasa el ID a NewsDetailClient */}
+    </div>
   );
 }

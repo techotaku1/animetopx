@@ -25,18 +25,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const newsUrl = `${baseUrl}/noticias/${newsItem.id}`
     const lastModified = new Date(newsItem.date)
 
-    // Entrada principal de la noticia con todas las imágenes
+    // Entrada principal de la noticia con URLs de las imágenes
     return {
       url: newsUrl,
       lastModified,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
-      images: newsItem.imageUrls.map((image) => ({
-        loc: `${baseUrl}${image.url}`,  // Asegúrate de que la URL sea completa
-        title: image.title || 'Imagen sin título',  // Proveer un título por defecto
-        caption: image.description || 'Descripción no disponible',  // Proveer una descripción por defecto
-        alt: image.description || image.title || 'Imagen de noticia',  // Asignar un valor alternativo si no existe
-      })),
+      images: newsItem.imageUrls.map((image) => `${baseUrl}${image.url}`), // Solo URLs de las imágenes
     }
   })
 
