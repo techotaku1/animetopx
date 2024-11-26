@@ -8,14 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { newsItems } from "@/lib/newsData";
 import Link from "next/link";
-import {
-  collection,
-  Timestamp,
-  query,
-  where,
-  addDoc,
-  onSnapshot,
-} from "firebase/firestore";
+import { getDocs, addDoc, query, collection, where, Timestamp } from "firebase/firestore";
 import { db } from "@/db/firebaseConfig";
 
 interface Comment {
@@ -41,28 +34,27 @@ export default function NewsDetailClient({ id }: { id: number }) {
     setIsLoading(false); // Asegúrate de desactivar la carga inicial
   }, [newsItem]);
 
-  const fetchComments = useCallback(() => {
+  const fetchComments = useCallback(async () => {
     const commentsQuery = query(
       collection(db, "comments"),
       where("newsId", "==", id)
     );
-    onSnapshot(commentsQuery, (snapshot) => {
-      const fetchedComments: Comment[] = [];
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        fetchedComments.push({
-          id: doc.id,
-          comment: data.comment,
-          date:
-            data.date instanceof Timestamp
-              ? data.date.toDate()
-              : new Date(data.date),
-          rating: data.rating,
-          userName: data.userName,
-        });
+    const snapshot = await getDocs(commentsQuery); // Usamos getDocs para obtener datos de manera sincrónica
+    const fetchedComments: Comment[] = [];
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      fetchedComments.push({
+        id: doc.id,
+        comment: data.comment,
+        date:
+          data.date instanceof Timestamp
+            ? data.date.toDate()
+            : new Date(data.date),
+        rating: data.rating,
+        userName: data.userName,
       });
-      setComments(fetchedComments);
     });
+    setComments(fetchedComments);
   }, [id]);
 
   useEffect(() => {
