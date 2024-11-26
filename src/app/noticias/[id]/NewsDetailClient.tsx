@@ -2,13 +2,22 @@
 
 "use client";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { newsItems } from "@/lib/newsData";
 import Link from "next/link";
-import { getDocs, addDoc, query, collection, where, Timestamp } from "firebase/firestore";
+import {
+  getDocs,
+  addDoc,
+  query,
+  collection,
+  where,
+  Timestamp,
+} from "firebase/firestore";
 import { db } from "@/db/firebaseConfig";
 
 interface Comment {
@@ -76,8 +85,27 @@ export default function NewsDetailClient({ id }: { id: number }) {
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "")
-      return;
+    
+    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "") return;
+  
+    // Crear el nuevo comentario para agregarlo optimistamente
+    const newCommentData = {
+      id: Math.random().toString(), // Generamos un ID único temporal
+      comment: newComment,
+      date: new Date(),
+      rating: userRating,
+      userName: userName,
+    };
+  
+    // Actualizamos el estado de los comentarios con el nuevo comentario (optimistamente)
+    setComments((prevComments) => [newCommentData, ...prevComments]);
+  
+    // Limpiamos los campos de entrada
+    setNewComment("");
+    setUserRating(0);
+    setUserName("");
+  
+    // Enviar el comentario a Firebase
     await addDoc(collection(db, "comments"), {
       comment: newComment,
       date: Timestamp.fromDate(new Date()),
@@ -85,11 +113,17 @@ export default function NewsDetailClient({ id }: { id: number }) {
       rating: userRating,
       userName: userName,
     });
-    setNewComment("");
-    setUserRating(0);
-    setUserName("");
+  
+    // Recargamos los comentarios de Firebase después de agregar el nuevo
+    fetchComments();
+  
+    // Mostrar la notificación de éxito
+    toast.success("Comentario agregado con éxito!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+    });
   };
-
   if (!newsItem) return <p className="text-center">Noticia no encontrada</p>;
 
   const totalStars = comments.reduce((acc, comment) => acc + comment.rating, 0);
@@ -235,6 +269,7 @@ export default function NewsDetailClient({ id }: { id: number }) {
             </span>
           </div>
         )}
+        <ToastContainer />
 
         <form
           onSubmit={handleCommentSubmit}
