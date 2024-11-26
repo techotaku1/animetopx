@@ -1,23 +1,57 @@
-'use client';
+// page.tsx
+import { newsItems } from '@/lib/newsData';
+import NewsDetailClient from './NewsDetailClient';
+import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 
-import { use } from 'react';  // Importa el hook 'use'
-import Loading from '../loading';  // Importa el componente de carga
-import NewsDetailClient from './NewsDetailClient';  // Asegúrate de importar el componente de detalle de la noticia
+// Generar los parámetros estáticos para la ruta dinámica
+export async function generateStaticParams() {
+  return newsItems.map((news) => ({
+    id: news.id.toString(),
+  }));
+}
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
-  // Utiliza el hook 'use' para obtener los params asincrónicamente
-  const resolvedParams = use(params);  // Resuelve los params sin necesidad de un 'useEffect'
+// Función para generar los metadatos de la página de detalle
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const resolvedParams = await params; // Await the params to resolve it
+  const newsId = parseInt(resolvedParams.id, 10);
 
-  // Si no existe el ID o está cargando, muestra el componente de carga
-  if (!resolvedParams?.id) {
-    return <Loading />;
+  const newsItem = newsItems.find((item) => item.id === newsId);
+
+  if (!newsItem) {
+    return {
+      title: 'Noticia no encontrada',
+      description: 'La noticia que buscas no existe',
+    };
   }
 
-  const id = parseInt(resolvedParams.id, 10); // Convierte el id en número
+  return {
+    title: newsItem.title,
+    description: newsItem.content.substring(0, 160),
+    openGraph: {
+      title: newsItem.title,
+      description: newsItem.content.substring(0, 160),
+      images: [
+        {
+          url: newsItem.backgroundImage,
+          width: 1200,
+          height: 630,
+          alt: newsItem.title,
+        },
+      ],
+    },
+  };
+}
 
-  return (
-    <div>
-      <NewsDetailClient id={id} />  {/* Pasa el ID a NewsDetailClient */}
-    </div>
-  );
+// Función para el componente de la página de noticias
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params; // Await the params to resolve it
+  const newsId = parseInt(resolvedParams.id, 10);
+
+  const newsItem = newsItems.find((item) => item.id === newsId);
+  if (!newsItem) {
+    notFound();
+  }
+
+  return <NewsDetailClient id={newsId} />;
 }

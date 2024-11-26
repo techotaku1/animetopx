@@ -1,39 +1,31 @@
+// src/app/sitemap.ts
 import { MetadataRoute } from 'next'
-import { newsItems } from '../app/lib/newsData'
+import { newsItems } from './lib/newsData'
+
+export const dynamic = 'force-static';  // Fuerza la exportación estática
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://animetopx.vercel.app'
+  const newsUrls = newsItems.map((news) => ({
+    url: `https://animetopx.vercel.app/noticias/${news.id}`,
+    lastModified: new Date(news.publicationDate),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+    images: news.imageUrls.map((image) => `https://animetopx.vercel.app${image.url}`),  // Solo URLs
+  }))
 
-  // Rutas estáticas
-  const staticRoutes = [
+  return [
     {
-      url: baseUrl,
+      url: 'https://animetopx.vercel.app',
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: `${baseUrl}/noticias`,
+      url: 'https://animetopx.vercel.app/noticias',
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
-      priority: 0.9,
-    },
-  ]
-
-  // Rutas dinámicas de noticias con imágenes agrupadas
-  const newsRoutes = newsItems.map((newsItem) => {
-    const newsUrl = `${baseUrl}/noticias/${newsItem.id}`
-    const lastModified = new Date(newsItem.date)
-
-    // Entrada principal de la noticia con URLs de las imágenes
-    return {
-      url: newsUrl,
-      lastModified,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'daily',
       priority: 0.8,
-      images: newsItem.imageUrls.map((image) => `${baseUrl}${image.url}`), // Solo URLs de las imágenes
-    }
-  })
-
-  return [...staticRoutes, ...newsRoutes]
+    },
+    ...newsUrls,
+  ]
 }

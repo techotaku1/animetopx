@@ -1,9 +1,11 @@
-// next.config.js
-/**
- * @type {import('next').NextConfig}
- */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,  // Esta opción sigue siendo válida
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: true,
 }
 
-module.exports = nextConfig;
+module.exports = nextConfig
+

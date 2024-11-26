@@ -1,4 +1,4 @@
-// src/app/noticias/newsData.ts
+// src/app/lib/newsData.ts
 
 export interface ImageUrl {
   url: string;
