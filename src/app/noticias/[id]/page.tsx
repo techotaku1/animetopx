@@ -1,4 +1,3 @@
-// page.tsx
 import { newsItems } from '@/lib/newsData';
 import NewsDetailClient from './NewsDetailClient';
 import { notFound } from 'next/navigation';
@@ -26,6 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   }
 
   return {
+    metadataBase: new URL('https://animetopx.vercel.app'), // Agregar la URL base del sitio
     title: newsItem.title,
     description: newsItem.content.substring(0, 160),
     openGraph: {
