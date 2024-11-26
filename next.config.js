@@ -2,7 +2,7 @@
 module.exports = {
   output: 'export',
   images: {
-    unoptimized: true, // Deshabilitar optimización de imágenes
+    unoptimized: false, // Habilitar la optimización de imágenes
   },
   trailingSlash: true,
 };
