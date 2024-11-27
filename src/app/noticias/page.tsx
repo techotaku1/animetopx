@@ -12,7 +12,7 @@ const newsItems = [
     description:
       "Descubre las 5 calamidades del continente oscuro de HUNTER X HUNTER y lo que hace cada una de ellas.",
     category: "Curiosidades",
-    imageUrl: "/HUNTERXHUNTER/cover-hunter.webp",
+    imageUrl: "/HUNTERXHUNTER/coverhunter.webp",
     date: "8 noviembre 2024",
   }, 
   {
@@ -20,7 +20,7 @@ const newsItems = [
     title: "RE:ZERO BRUJAS Y ARZOBISPOS",
     description: "Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.",
     category: "Curiosidades",
-    imageUrl: "/RE-ZERO/cover-rezero.webp",
+    imageUrl: "/RE-ZERO/coverrezero.webp",
     date: "1 noviembre 2024",
   },
   {
@@ -28,7 +28,7 @@ const newsItems = [
     title: "TOP ANIME OTOÑO 2024",
     description: "Top estrenos de la temporada de OTOÑO 2024",
     category: "Otoño",
-    imageUrl: "/OTOÑO-2024/cover-otoño.webp",
+    imageUrl: "/OTOÑO-2024/coverotoño.webp",
     date: "octubre 2024",
   },
   // Puedes agregar más noticias aquí

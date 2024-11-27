@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
@@ -28,10 +28,7 @@ export default function Home() {
       <Suspense fallback={<Loading />}>
         <div className="space-y-4">
           {/* Contenedor del carrusel existente */}
-          <div
-            className="relative w-full"
-            style={{ aspectRatio: "1920/600" }}
-          >
+          <div className="relative w-full" style={{ aspectRatio: "1920/600" }}>
             {portadaItems.map((item, index) => (
               <div
                 key={item.id}
@@ -52,7 +49,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          
+
           {/* Navegación de puntos */}
           <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-3 mt-4">
             {portadaItems.map((_, index) => (
@@ -62,7 +59,7 @@ export default function Home() {
                 className={`w-4 h-4 rounded-full 
                   ${currentSlide === index ? "bg-red-500" : "bg-black"} 
                    disabled={currentSlide === index} transition-all duration-300`}
-                aria-label={`Ir a la diapositiva ${index + 1}`} 
+                aria-label={`Ir a la diapositiva ${index + 1}`}
               ></button>
             ))}
           </div>
@@ -93,4 +90,3 @@ export default function Home() {
     </div>
   );
 }
-
