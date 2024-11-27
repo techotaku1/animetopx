@@ -33,7 +33,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
             fill // Para que ocupe todo el contenedor
             style={{ objectFit: "contain" }} // Ajusta la imagen sin recortar
             className="rounded-t-lg" // Bordes redondeados
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px" // Tamaños de la imagen para diferentes pantallas
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
             priority
           />
         </div>

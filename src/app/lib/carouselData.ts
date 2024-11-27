@@ -1,4 +1,5 @@
-// En el archivo donde defines los datos (como `carouselData.ts` o cualquier otro archivo de datos)
+//src\app\lib\carouselData.ts
+
 export const carouselData = [
   // Portada 0
   {
@@ -6,7 +7,7 @@ export const carouselData = [
     title: "PORTADA PRINCIPAL",
     description: "portada principal de mi pagina web.",
     category: "Portada",
-    imageUrl: "/PORTADA-PRINCIPAL.webp",  // Ruta de la imagen de la portada principal
+    imageUrl: "/PORTADAPRINCIPAL.webp",  // Ruta de la imagen de la portada principal
     date: "N/A",  // No es relevante para la portada
     isCover: true,  // Indica que esta es la portada principal
   },
@@ -16,7 +17,7 @@ export const carouselData = [
     title: "EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES EN HUNTER X HUNTER",
     description: "Descubre las 5 calamidades del continente oscuro, un tema central de Hunter X Hunter.",
     category: "Portada",
-    imageUrl: "/HUNTERXHUNTER/portada-hunter.webp",  // Ruta de la imagen de la portada principal
+    imageUrl: "/HUNTERXHUNTER/portadahunter.webp",  // Ruta de la imagen de la portada principal
     date: "N/A",  // No es relevante para la portada
     isCover: true,  // Indica que esta es la portada principal
   },
@@ -26,7 +27,7 @@ export const carouselData = [
     title: "BRUJAS Y ARZOBISPOS EN RE:ZERO",
     description: "Conoce a los arzobispos del pecado en Re:Zero, una parte esencial de la trama.",
     category: "Portada",
-    imageUrl: "/RE-ZERO/portada-rezero.webp",  // Ruta de la imagen de la portada principal
+    imageUrl: "/RE-ZERO/portadarezero.webp",  // Ruta de la imagen de la portada principal
     date: "N/A",
     isCover: true,  // Indica que esta es la portada principal
   },
@@ -36,7 +37,7 @@ export const carouselData = [
     title: "TOP ANIME OTOÑO 2024",
     description: "Los mejores estrenos de anime para la temporada de otoño 2024.",
     category: "Portada",
-    imageUrl: "/OTOÑO-2024/portada-otoño.webp",  // Ruta de la imagen de la portada principal
+    imageUrl: "/OTOÑO-2024/portadaotoño.webp",  // Ruta de la imagen de la portada principal
     date: "N/A",
     isCover: true,  // Indica que esta es la portada principal
   },
@@ -47,7 +48,7 @@ export const carouselData = [
     title: "EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES EN HUNTER X HUNTER",
     description: "Descubre las 5 calamidades del continente oscuro.",
     category: "Curiosidades",
-    imageUrl: "/HUNTERXHUNTER/cover-hunter.webp",
+    imageUrl: "/HUNTERXHUNTER/coverhunter.webp",
     date: "8 noviembre 2024",
     isCover: false,  // No es portada, es una noticia
   },
@@ -57,7 +58,7 @@ export const carouselData = [
     title: "BRUJAS Y ARZOBISPOS EN RE:ZERO",
     description: "Lista REAL de los arzobispos del pecado y sus respectivas brujas.",
     category: "Curiosidades",
-    imageUrl: "/RE-ZERO/cover-rezero.webp",
+    imageUrl: "/RE-ZERO/coverrezero.webp",
     date: "1 noviembre 2024",
     isCover: false,  // No es portada, es una noticia
   },
@@ -67,7 +68,7 @@ export const carouselData = [
     title: "TOP ANIME OTOÑO 2024",
     description: "Los Mejores ESTRENOS de la temporada de OTOÑO 2024.",
     category: "Otoño",
-    imageUrl: "/OTOÑO-2024/cover-otoño.webp",
+    imageUrl: "/OTOÑO-2024/coverotoño.webp",
     date: "octubre 2024",
     isCover: false,  // No es portada, es una noticia
   },

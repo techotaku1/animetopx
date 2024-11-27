@@ -26,7 +26,7 @@ export const newsItems: NewsItem[] = [
     category: "Estrenos Otoño 2024",
     date: "2024-10-1",
     content: "Detalles sobre la temporada de otoño 2024",
-    backgroundImage: "/OTOÑO-2024/portada-otoño.webp",
+    backgroundImage: "/OTOÑO-2024/portadaotoño.webp",
     publicationDate: new Date("2024-10-1"),
     imageUrls: [
       {
@@ -98,7 +98,7 @@ export const newsItems: NewsItem[] = [
     category: "RE:ZERO",
     date: "2024-11-1",
     content: "Las brujas y sus arzobispos",
-    backgroundImage: "/RE-ZERO/portada-rezero.webp",
+    backgroundImage: "/RE-ZERO/portadarezero.webp",
     publicationDate: new Date("2024-11-1"),
     imageUrls: [
       {
@@ -165,7 +165,7 @@ export const newsItems: NewsItem[] = [
     category: "HUNTER X HUNTER",
     date: "2024-12-1",
     content: "Las 5 calamidades del continente oscuro",
-    backgroundImage: "/HUNTERXHUNTER/portada-hunter.webp",
+    backgroundImage: "/HUNTERXHUNTER/portadahunter.webp",
     publicationDate: new Date("2024-12-1"),
     imageUrls: [
       {
