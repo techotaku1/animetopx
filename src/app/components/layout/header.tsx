@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ModeToggle } from "@/components/mode-toggle";
 
 export function Header() {
   return (
@@ -23,7 +22,6 @@ export function Header() {
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">
-          <ModeToggle />
         </div>
       </div>
     </header>

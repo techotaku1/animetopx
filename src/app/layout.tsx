@@ -10,6 +10,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomProgressBar from "@/components/ProgressBar";
 import Script from "next/script";
 import { Shantell_Sans, Grandstander } from "next/font/google";
+import { Breadcrumbs } from './components/ui/breadcrumbs'
+
 
 const shantellSans = Shantell_Sans({
   subsets: ['latin'],
@@ -102,6 +104,7 @@ export default function RootLayout({
           <Header />
           <CustomProgressBar />
           <main className="flex-grow container mx-auto px-4 py-8">
+          <Breadcrumbs />
             {children}
             <Suspense fallback={null}>
               <NavigationEvents />
