@@ -1,8 +1,8 @@
-// app/noticias/page.tsx
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { NewsCard } from "@/components/news/news-card";
-
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Home, Newspaper } from "lucide-react";
 
 // Simulación de datos de noticias
 const newsItems = [
@@ -14,7 +14,7 @@ const newsItems = [
     category: "Curiosidades",
     imageUrl: "/HUNTERXHUNTER/coverhunter.webp",
     date: "8 noviembre 2024",
-  }, 
+  },
   {
     id: 2,
     title: "RE:ZERO BRUJAS Y ARZOBISPOS",
@@ -35,8 +35,17 @@ const newsItems = [
 ];
 
 export default function NoticiasPage() {
+  // Definición de los breadcrumbs
+  const breadcrumbItems = [
+    { href: "/", label: "Inicio", icon: Home },
+    { href: "/noticias", label: "Noticias", icon: Newspaper },
+  ];
+
   return (
     <div className="space-y-8">
+      {/* Breadcrumbs */}
+      <Breadcrumbs items={breadcrumbItems} />
+
       <section>
         <h1 className="text-4xl font-bold mb-4">Todas las Noticias de Anime</h1>
         <p className="text-xl text-muted-foreground mb-8">

@@ -49,7 +49,7 @@ export const carouselData = [
     description: "Descubre las 5 calamidades del continente oscuro.",
     category: "Curiosidades",
     imageUrl: "/HUNTERXHUNTER/coverhunter.webp",
-    date: "8 noviembre 2024",
+    date: "2024-11-08",
     isCover: false,  // No es portada, es una noticia
   },
   // Noticias 2
@@ -59,7 +59,7 @@ export const carouselData = [
     description: "Lista REAL de los arzobispos del pecado y sus respectivas brujas.",
     category: "Curiosidades",
     imageUrl: "/RE-ZERO/coverrezero.webp",
-    date: "1 noviembre 2024",
+    date: "2024-11-01",
     isCover: false,  // No es portada, es una noticia
   },
   // Noticias 1
@@ -69,7 +69,7 @@ export const carouselData = [
     description: "Los Mejores ESTRENOS de la temporada de OTOÑO 2024.",
     category: "Otoño",
     imageUrl: "/OTOÑO-2024/coverotoño.webp",
-    date: "octubre 2024",
+    date: "2024-10-01",
     isCover: false,  // No es portada, es una noticia
   },
 ];

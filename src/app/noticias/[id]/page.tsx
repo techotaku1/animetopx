@@ -1,22 +1,26 @@
-import { newsItems } from '@/lib/newsData';
-import NewsDetailClient from './NewsDetailClient';
-import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
+import { newsItems } from '@/lib/newsData'; // Importar datos de noticias
+import NewsDetailClient from './NewsDetailClient'; // Componente para mostrar los detalles de la noticia
+import { notFound } from 'next/navigation'; // Función de Next.js para manejar el error 404
+import { Metadata } from 'next'; // Importar tipo de Metadata
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'; // Componente para los breadcrumbs
+import { Home, Newspaper } from 'lucide-react'; // Iconos de Home y Newspaper para los breadcrumbs
 
-// Generar los parámetros estáticos para la ruta dinámica
+// Generación de parámetros estáticos para las rutas dinámicas
 export async function generateStaticParams() {
   return newsItems.map((news) => ({
-    id: news.id.toString(),
+    id: news.id.toString(), // Se mapea cada noticia a una ruta dinámica usando el ID
   }));
 }
 
-// Función para generar los metadatos de la página de detalle
+// Función para generar metadatos de la página de manera asíncrona
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const resolvedParams = await params; // Await the params to resolve it
-  const newsId = parseInt(resolvedParams.id, 10);
+  const { id } = await params; // Esperar a que el parámetro 'id' esté resuelto
 
-  const newsItem = newsItems.find((item) => item.id === newsId);
+  const newsId = parseInt(id, 10); // Convertir el ID de string a número
 
+  const newsItem = newsItems.find((item) => item.id === newsId); // Buscar la noticia por ID
+
+  // Si no se encuentra la noticia, se generan metadatos alternativos
   if (!newsItem) {
     return {
       title: 'Noticia no encontrada',
@@ -25,33 +29,51 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   }
 
   return {
-    metadataBase: new URL('https://animetopx.vercel.app'), // Agregar la URL base del sitio
-    title: newsItem.title,
-    description: newsItem.content.substring(0, 160),
+    metadataBase: new URL('https://animetopx.vercel.app'), // Definir la URL base para la página
+    title: newsItem.title, // Título de la noticia
+    description: newsItem.content.substring(0, 160), // Descripción corta para SEO
     openGraph: {
-      title: newsItem.title,
-      description: newsItem.content.substring(0, 160),
+      title: newsItem.title, // Título para Open Graph
+      description: newsItem.content.substring(0, 160), // Descripción para Open Graph
       images: [
         {
-          url: newsItem.backgroundImage,
+          url: newsItem.backgroundImage, // Imagen relacionada con la noticia
           width: 1200,
           height: 630,
-          alt: newsItem.title,
+          alt: newsItem.title, // Descripción alternativa para la imagen
         },
       ],
     },
   };
 }
 
-// Función para el componente de la página de noticias
+// Componente principal de la página
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params; // Await the params to resolve it
-  const newsId = parseInt(resolvedParams.id, 10);
+  const { id } = await params; // Esperar a que el parámetro 'id' esté disponible
 
-  const newsItem = newsItems.find((item) => item.id === newsId);
+  const newsId = parseInt(id, 10); // Convertir el ID a un número
+
+  const newsItem = newsItems.find((item) => item.id === newsId); // Buscar la noticia por ID
+
+  // Si no se encuentra la noticia, se redirige a la página de error 404
   if (!newsItem) {
     notFound();
   }
 
-  return <NewsDetailClient id={newsId} />;
+  // Definir los elementos del breadcrumb para facilitar la navegación
+  const breadcrumbItems = [
+    { href: '/', label: 'Inicio', icon: Home },
+    { href: '/noticias', label: 'Noticias', icon: Newspaper },
+    { href: `/noticias/${newsId}`, label: newsItem.title }, // Enlace de la noticia específica
+  ];
+
+  return (
+    <div className="container mx-auto py-1">
+      {/* Breadcrumbs para navegación */}
+      <Breadcrumbs items={breadcrumbItems} />
+
+      {/* Componente para mostrar los detalles de la noticia */}
+      <NewsDetailClient id={newsId} />
+    </div>
+  );
 }

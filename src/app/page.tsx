@@ -69,7 +69,7 @@ export default function Home() {
       {/* Sección de Noticias */}
       <section>
         <h1 className="text-4xl font-bold mb-4">Últimas Noticias de Anime</h1>
-        <p className="text-xl text-muted-foreground mb-8">
+        <p className="text-xl text-muted-foreground">
           Mantente al día con las últimas novedades del mundo del anime.
         </p>
       </section>
