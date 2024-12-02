@@ -12,7 +12,6 @@ import Script from "next/script";
 import { Shantell_Sans, Grandstander } from "next/font/google";
 
 
-
 const shantellSans = Shantell_Sans({
   subsets: ['latin'],
   display: 'swap',

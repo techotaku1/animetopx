@@ -1,16 +1,18 @@
-import type { NextConfig } from 'next';
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  output: 'export',
+const nextConfig = {
+  bundlePagesRouterDependencies: true,
+ reactStrictMode: true,
+  output: "export",
   trailingSlash: true,
-  assetPrefix: '/',
+  assetPrefix: "/",
   images: {
-    formats: ['image/webp'],
+    formats: ["image/webp"],
+    unoptimized: false, // Desactiva la optimización de imágenes temporalmente
   },
   experimental: {
     optimizeCss: true,
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
