@@ -3,9 +3,11 @@ import nextPlugin from '@next/eslint-plugin-next';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import importPlugin from 'eslint-plugin-import';
+import nextConfig from 'eslint-config-next/core-web-vitals';
 
 export default [
   js.configs.recommended,
+  nextConfig,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
@@ -35,28 +37,14 @@ export default [
       },
     },
     rules: {
-      // Next.js rules
-      '@next/next/no-html-link-for-pages': 'error',
-      '@next/next/no-img-element': 'error',
-      '@next/next/no-unwanted-polyfillio': 'error',
-
-      // React rules
-      'react/jsx-uses-react': 'error',
-      'react/jsx-uses-vars': 'error',
-      'react/prop-types': 'off', // Turn off prop-types as we use TypeScript
-      'react/react-in-jsx-scope': 'off', // Not needed in Next.js
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-
-      // Import rules
+      // Tus reglas personalizadas aquí
+      // Puedes mantener las reglas que ya tenías o ajustarlas según sea necesario
       'import/order': ['error', {
         'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
         'newlines-between': 'always',
         'alphabetize': { 'order': 'asc', 'caseInsensitive': true }
       }],
       'import/no-duplicates': 'error',
-
-      // General rules
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'prefer-const': 'error',
