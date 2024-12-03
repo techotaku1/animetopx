@@ -8,7 +8,7 @@ const nextConfig = {
   assetPrefix: "/",
   images: {
     formats: ["image/webp"],
-    unoptimized: true, // Desactiva la optimización de imágenes temporalmente
+    unoptimized: false, // Desactiva la optimización de imágenes temporalmente
   },
   experimental: {
     optimizeCss: true,

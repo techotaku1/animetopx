@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     siteName: "AnimeTopX",
     images: [
       {
-        url: "https://animetopx.vercel.app/PORTADA-PRINCIPAL.webp",
+        url: "https://animetopx.vercel.app/PORTADAPRINCIPAL.webp",
         width: 1200,
         height: 630,
       },
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "AnimeTopX",
     description:
       "Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime",
-    images: ["https://animetopx.vercel.app/PORTADA-PRINCIPAL.webp"],
+    images: ["https://animetopx.vercel.app/PORTADAPRINCIPAL.webp"],
   },
 };
 
