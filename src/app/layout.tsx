@@ -6,6 +6,7 @@ import {Metadata} from "next";
 import {Shantell_Sans, Grandstander} from "next/font/google";
 import Script from "next/script";
 import React, {Suspense} from "react";
+
 import {Footer} from "@/components/layout/footer";
 import {Header} from "@/components/layout/header";
 import {NavigationEvents} from "@/components/navigation-events";
@@ -60,19 +61,16 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html
-      lang="es"
       suppressHydrationWarning
       className={`${shantellSans.variable} ${grandstander.variable}`}
+      lang="es"
     >
       <head>
         <meta
-          name="google-site-verification"
           content="AGpNPOb2L1Z4p1pOdNGsInrVPMiVKBk020FAa0TxGV0"
+          name="google-site-verification"
         />
         <Script
-          id="json-ld"
-          type="application/ld+json"
-          strategy="afterInteractive" // Ejecuta después de que la página se haya cargado
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -88,10 +86,13 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
               },
             }),
           }}
+          id="json-ld"
+          strategy="afterInteractive" // Ejecuta después de que la página se haya cargado
+          type="application/ld+json"
         />
       </head>
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider enableSystem attribute="class" defaultTheme="system">
           <Header />
           <CustomProgressBar />
           <main className="container mx-auto flex-grow px-4 py-8">

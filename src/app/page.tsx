@@ -19,6 +19,7 @@ export default function Home() {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % portadaItems.length); // Ajustar a portadaItems
     }, 5000);
+
     return () => clearInterval(interval);
   }, [portadaItems.length]);
 
@@ -37,14 +38,14 @@ export default function Home() {
                 }`}
               >
                 <Image
-                  src={item.imageUrl}
-                  alt={item.title}
                   fill
-                  sizes="(min-width: 1920px) 1920px, 100vw"
+                  alt={item.title}
+                  loading={index === 0 ? "eager" : "lazy"}
                   priority={index === 0}
                   quality={85}
+                  sizes="(min-width: 1920px) 1920px, 100vw"
+                  src={item.imageUrl}
                   style={{objectFit: "cover"}} // Ajusta la imagen sin recortar
-                  loading={index === 0 ? "eager" : "lazy"}
                 />
               </div>
             ))}
@@ -55,10 +56,10 @@ export default function Home() {
             {portadaItems.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`h-4 w-4 rounded-full ${currentSlide === index ? "bg-red-500" : "bg-black"} disabled={currentSlide === index} transition-all duration-300`}
                 aria-label={`Ir a la diapositiva ${index + 1}`}
-              ></button>
+                className={`h-4 w-4 rounded-full ${currentSlide === index ? "bg-red-500" : "bg-black"} disabled={currentSlide === index} transition-all duration-300`}
+                onClick={() => setCurrentSlide(index)}
+              />
             ))}
           </div>
         </div>

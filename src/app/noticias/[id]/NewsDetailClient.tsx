@@ -5,11 +5,12 @@ import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, {useEffect, useState, useCallback} from "react";
 import Image from "next/image";
-import {Button} from "@/components/ui/button";
 import {Star, ChevronLeft, ChevronRight} from "lucide-react";
-import {newsItems} from "@/lib/newsData";
 import Link from "next/link";
 import {getDocs, addDoc, query, collection, where, Timestamp} from "firebase/firestore";
+
+import {newsItems} from "@/lib/newsData";
+import {Button} from "@/components/ui/button";
 import {db} from "@/db/firebaseConfig";
 
 interface Comment {
@@ -39,8 +40,10 @@ export default function NewsDetailClient({id}: {id: number}) {
     const commentsQuery = query(collection(db, "comments"), where("newsId", "==", id));
     const snapshot = await getDocs(commentsQuery); // Usamos getDocs para obtener datos de manera sincrónica
     const fetchedComments: Comment[] = [];
+
     snapshot.forEach((doc) => {
       const data = doc.data();
+
       fetchedComments.push({
         id: doc.id,
         comment: data.comment,
@@ -108,6 +111,7 @@ export default function NewsDetailClient({id}: {id: number}) {
       hideProgressBar: true,
     });
   };
+
   if (!newsItem) return <p className="text-center">Noticia no encontrada</p>;
 
   const totalStars = comments.reduce((acc, comment) => acc + comment.rating, 0);
@@ -118,13 +122,13 @@ export default function NewsDetailClient({id}: {id: number}) {
       {/* Portada de la noticia */}
       <div className="relative mb-4 w-full overflow-hidden" style={{aspectRatio: "1920/600"}}>
         <Image
-          src={newsItem.backgroundImage}
-          alt={newsItem.title}
           fill
-          sizes="(min-width: 1920px) 1920px, 100vw"
           priority
-          style={{objectFit: "cover"}}
+          alt={newsItem.title}
           className="rounded-lg"
+          sizes="(min-width: 1920px) 1920px, 100vw"
+          src={newsItem.backgroundImage}
+          style={{objectFit: "cover"}}
         />
       </div>
 
@@ -154,31 +158,31 @@ export default function NewsDetailClient({id}: {id: number}) {
                     </p>
                   )}
                   <Image
-                    src={image.url}
-                    alt={image.title || image.description}
                     fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    alt={image.title || image.description}
                     className="rounded-lg object-contain transition-opacity duration-300"
-                    onLoad={() => setIsLoading(false)}
-                    priority={index === 0}
                     loading={index === 0 ? "eager" : "lazy"}
+                    priority={index === 0}
                     quality={85}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    src={image.url}
+                    onLoad={() => setIsLoading(false)}
                   />
                 </div>
               ))}
             </div>
           </div>
           <Button
-            onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 transform rounded-full bg-primary p-3 text-primary-foreground transition-transform duration-200 ease-out hover:scale-110 hover:bg-primary/90 active:scale-90"
             aria-label="Previous"
+            className="absolute left-0 top-1/2 -translate-y-1/2 transform rounded-full bg-primary p-3 text-primary-foreground transition-transform duration-200 ease-out hover:scale-110 hover:bg-primary/90 active:scale-90"
+            onClick={handlePrev}
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
           <Button
-            onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 transform rounded-full bg-primary p-3 text-primary-foreground transition-transform duration-200 ease-out hover:scale-110 hover:bg-primary/90 active:scale-90"
             aria-label="Next"
+            className="absolute right-0 top-1/2 -translate-y-1/2 transform rounded-full bg-primary p-3 text-primary-foreground transition-transform duration-200 ease-out hover:scale-110 hover:bg-primary/90 active:scale-90"
+            onClick={handleNext}
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
@@ -240,21 +244,21 @@ export default function NewsDetailClient({id}: {id: number}) {
         )}
         <ToastContainer />
 
-        <form onSubmit={handleCommentSubmit} className="flex flex-col space-y-4">
+        <form className="flex flex-col space-y-4" onSubmit={handleCommentSubmit}>
           <textarea
+            required
+            className="rounded-md border border-gray-300 p-2"
+            placeholder="Deja un comentario"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Deja un comentario"
-            className="rounded-md border border-gray-300 p-2"
-            required
           />
           <input
+            required
+            className="rounded-md border border-gray-300 p-2"
+            placeholder="Tu nombre"
             type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
-            placeholder="Tu nombre"
-            className="rounded-md border border-gray-300 p-2"
-            required
           />
           <div className="flex items-center">
             {[1, 2, 3, 4, 5].map((star) => (

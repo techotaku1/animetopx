@@ -27,6 +27,7 @@ interface NewsItem {
 export function NewsCard({item}: {item: NewsItem}) {
   // Validar y formatear la fecha
   let timeAgo = "";
+
   try {
     const publishedDate = parseISO(item.date); // Convierte la fecha en formato ISO a un objeto Date
 
@@ -49,13 +50,13 @@ export function NewsCard({item}: {item: NewsItem}) {
       <CardHeader>
         <div className="relative h-64 w-full">
           <Image
-            src={item.imageUrl}
-            alt={item.title}
             fill
-            style={{objectFit: "contain"}}
+            priority
+            alt={item.title}
             className="rounded-t-lg"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
-            priority
+            src={item.imageUrl}
+            style={{objectFit: "contain"}}
           />
         </div>
       </CardHeader>
@@ -73,7 +74,7 @@ export function NewsCard({item}: {item: NewsItem}) {
           {/* Texto "Publicado" y fecha con "Hace X tiempo" alineados a la izquierda */}
           <div className="text-sm text-muted-foreground">
             <div>Publicado</div>
-            <time dateTime={item.date} className="text-sm text-muted-foreground">
+            <time className="text-sm text-muted-foreground" dateTime={item.date}>
               {timeAgo} {/* Mostrará algo como "Hace 3 días", "Hace 1 hora", etc. */}
             </time>
           </div>
@@ -85,7 +86,7 @@ export function NewsCard({item}: {item: NewsItem}) {
             <ArrowDown className="mb-1 h-6 w-6 animate-bounce text-primary" />{" "}
             {/* Reducimos el margen inferior */}
             <Button asChild className="flex items-center">
-              <Link href={`/noticias/${item.id}`} className="flex items-center">
+              <Link className="flex items-center" href={`/noticias/${item.id}`}>
                 Leer más
               </Link>
             </Button>

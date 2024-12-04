@@ -17,17 +17,17 @@ export function Footer() {
             <h3 className="mb-4 font-semibold">Enlaces Rápidos</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/noticias" className="text-muted-foreground hover:text-foreground">
+                <Link className="text-muted-foreground hover:text-foreground" href="/noticias">
                   Noticias
                 </Link>
               </li>
               <li>
-                <Link href="/reseñas" className="text-muted-foreground hover:text-foreground">
+                <Link className="text-muted-foreground hover:text-foreground" href="/reseñas">
                   Reseñas
                 </Link>
               </li>
               <li>
-                <Link href="/calendario" className="text-muted-foreground hover:text-foreground">
+                <Link className="text-muted-foreground hover:text-foreground" href="/calendario">
                   Calendario
                 </Link>
               </li>
@@ -41,34 +41,34 @@ export function Footer() {
             <h3 className="mb-4 font-semibold">Síguenos</h3>
             <div className="flex space-x-4">
               <Link
+                aria-label="Facebook"
+                className="text-muted-foreground hover:text-foreground"
                 href="https://www.facebook.com/techotaku1"
                 target="_blank"
-                className="text-muted-foreground hover:text-foreground"
-                aria-label="Facebook"
               >
                 <SiFacebook className="h-6 w-6" />
               </Link>
               <Link
+                aria-label="Instagram"
+                className="text-muted-foreground hover:text-foreground"
                 href="https://www.instagram.com/techotaku1"
                 target="_blank"
-                className="text-muted-foreground hover:text-foreground"
-                aria-label="Instagram"
               >
                 <SiInstagram className="h-6 w-6" />
               </Link>
               <Link
+                aria-label="TikTok"
+                className="text-muted-foreground hover:text-foreground"
                 href="https://www.tiktok.com/@techotaku1"
                 target="_blank"
-                className="text-muted-foreground hover:text-foreground"
-                aria-label="TikTok"
               >
                 <SiTiktok className="h-6 w-6" />
               </Link>
               <Link
+                aria-label="YouTube"
+                className="text-muted-foreground hover:text-foreground"
                 href="https://www.youtube.com/@techotaku1"
                 target="_blank"
-                className="text-muted-foreground hover:text-foreground"
-                aria-label="YouTube"
               >
                 <SiYoutube className="h-6 w-6" />
               </Link>

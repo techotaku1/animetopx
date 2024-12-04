@@ -1,7 +1,8 @@
 // eslint.config.mjs
-import {FlatCompat} from "@eslint/eslintrc";
 import path from "path";
 import {fileURLToPath} from "url";
+
+import {FlatCompat} from "@eslint/eslintrc";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import eslintPluginTailwindCSS from "eslint-plugin-tailwindcss";
 import eslintPluginReact from "eslint-plugin-react"; // Solo una vez aquí
@@ -25,6 +26,9 @@ export default [
   // Usar configuraciones previas (por ejemplo, eslint-config-prettier)
   ...compat.extends("eslint-config-prettier"),
 
+  {
+    ignores: [".next", "node_modules", "dist", "out"],
+  },
   // Configuración general
   {
     rules: {
