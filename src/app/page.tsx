@@ -1,12 +1,12 @@
 "use client";
 
-import { Suspense } from "react";
-import { Button } from "@/components/ui/button";
-import { NewsCard } from "@/components/news/news-card";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { carouselData } from "@/lib/carouselData"; // Importar los datos del carrusel
+import {Suspense, useState, useEffect} from "react";
+
+import {NewsCard} from "@/components/news/news-card";
+import {Button} from "@/components/ui/button";
+import {carouselData} from "@/lib/carouselData"; // Importar los datos del carrusel
 import Loading from "@/loading"; // Ajusta la ruta si es necesario
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
       <Suspense fallback={<Loading />}>
         <div className="space-y-4">
           {/* Contenedor del carrusel existente */}
-          <div className="relative w-full" style={{ aspectRatio: "1920/600" }}>
+          <div className="relative w-full" style={{aspectRatio: "1920/600"}}>
             {portadaItems.map((item, index) => (
               <div
                 key={item.id}
@@ -43,7 +43,7 @@ export default function Home() {
                   sizes="(min-width: 1920px) 1920px, 100vw"
                   priority={index === 0}
                   quality={85}
-                  style={{ objectFit: "cover" }} // Ajusta la imagen sin recortar
+                  style={{objectFit: "cover"}} // Ajusta la imagen sin recortar
                   loading={index === 0 ? "eager" : "lazy"}
                 />
               </div>
@@ -51,14 +51,12 @@ export default function Home() {
           </div>
 
           {/* Navegación de puntos */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-3 mt-4">
+          <div className="absolute left-1/2 mt-4 flex -translate-x-1/2 transform space-x-3">
             {portadaItems.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-4 h-4 rounded-full 
-                  ${currentSlide === index ? "bg-red-500" : "bg-black"} 
-                   disabled={currentSlide === index} transition-all duration-300`}
+                className={`h-4 w-4 rounded-full ${currentSlide === index ? "bg-red-500" : "bg-black"} disabled={currentSlide === index} transition-all duration-300`}
                 aria-label={`Ir a la diapositiva ${index + 1}`}
               ></button>
             ))}
@@ -68,7 +66,7 @@ export default function Home() {
 
       {/* Sección de Noticias */}
       <section>
-        <h1 className="text-4xl font-bold mb-4">Últimas Noticias de Anime</h1>
+        <h1 className="mb-4 text-4xl font-bold">Últimas Noticias de Anime</h1>
         <p className="text-xl text-muted-foreground">
           Mantente al día con las últimas novedades del mundo del anime.
         </p>

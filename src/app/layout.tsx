@@ -1,32 +1,29 @@
-import { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+//src\app\layout.tsx
 import "./globals.css"; // Asegúrate de que aquí tienes los estilos globales
-import { Analytics } from "@vercel/analytics/react";
-import { Suspense } from "react";
-import { NavigationEvents } from "@/components/navigation-events";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import CustomProgressBar from "@/components/ProgressBar";
+import {Analytics} from "@vercel/analytics/react";
+import {SpeedInsights} from "@vercel/speed-insights/next";
+import {Metadata} from "next";
+import {Shantell_Sans, Grandstander} from "next/font/google";
 import Script from "next/script";
-import { Shantell_Sans, Grandstander } from "next/font/google";
-
+import React, {Suspense} from "react";
+import {Footer} from "@/components/layout/footer";
+import {Header} from "@/components/layout/header";
+import {NavigationEvents} from "@/components/navigation-events";
+import CustomProgressBar from "@/components/ProgressBar";
+import {ThemeProvider} from "@/components/theme-provider";
 
 const shantellSans = Shantell_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-shantell-sans',
-    weight: ['700'],
-
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-shantell-sans",
+  weight: ["700"],
 });
 
 const grandstander = Grandstander({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-grandstander',
-  weight: ['400'],  
-
-  
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-grandstander",
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -60,11 +57,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html
       lang="es"
@@ -90,20 +83,18 @@ export default function RootLayout({
                 "Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime",
               potentialAction: {
                 "@type": "SearchAction",
-                target:
-                  "https://animetopx.vercel.app/search?q={search_term_string}",
+                target: "https://animetopx.vercel.app/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),
           }}
         />
       </head>
-      <body className="font-sans min-h-screen flex flex-col bg-background text-foreground">
+      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <CustomProgressBar />
-          <main className="flex-grow container mx-auto px-4 py-8">
-          
+          <main className="container mx-auto flex-grow px-4 py-8">
             {children}
             <Suspense fallback={null}>
               <NavigationEvents />

@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
+import {Home, Newspaper} from "lucide-react";
 import Link from "next/link";
-import { NewsCard } from "@/components/news/news-card";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Home, Newspaper } from "lucide-react";
+
+import {NewsCard} from "@/components/news/news-card";
+import {Breadcrumbs} from "@/components/ui/breadcrumbs";
+import {Button} from "@/components/ui/button";
 
 // Simulación de datos de noticias
 const newsItems = [
@@ -37,8 +38,8 @@ const newsItems = [
 export default function NoticiasPage() {
   // Definición de los breadcrumbs
   const breadcrumbItems = [
-    { href: "/", label: "Inicio", icon: Home },
-    { href: "/noticias", label: "Noticias", icon: Newspaper },
+    {href: "/", label: "Inicio", icon: Home},
+    {href: "/noticias", label: "Noticias", icon: Newspaper},
   ];
 
   return (
@@ -47,8 +48,8 @@ export default function NoticiasPage() {
       <Breadcrumbs items={breadcrumbItems} />
 
       <section>
-        <h1 className="text-4xl font-bold mb-4">Todas las Noticias de Anime</h1>
-        <p className="text-xl text-muted-foreground mb-8">
+        <h1 className="mb-4 text-4xl font-bold">Todas las Noticias de Anime</h1>
+        <p className="mb-8 text-xl text-muted-foreground">
           Aquí encontrarás todas las noticias relacionadas con el mundo del anime.
         </p>
       </section>

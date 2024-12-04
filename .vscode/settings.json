@@ -1,8 +1,10 @@
 {
-    "editor.formatOnSave": false,
-    "typescript.tsdk": "node_modules\\typescript\\lib",
-    "typescript.enablePromptUseWorkspaceTsdk": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "always"
-    }
-  }
+  "eslint.quiet": false,
+  "eslint.alwaysShowStatus": true,
+  "eslint.run": "onSave",
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.formatOnSave": false
+}

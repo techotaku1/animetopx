@@ -1,9 +1,11 @@
-import { newsItems } from '@/lib/newsData'; // Importar datos de noticias
-import NewsDetailClient from './NewsDetailClient'; // Componente para mostrar los detalles de la noticia
-import { notFound } from 'next/navigation'; // Función de Next.js para manejar el error 404
-import { Metadata } from 'next'; // Importar tipo de Metadata
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'; // Componente para los breadcrumbs
-import { Home, Newspaper } from 'lucide-react'; // Iconos de Home y Newspaper para los breadcrumbs
+import {Home, Newspaper} from "lucide-react"; // Iconos de Home y Newspaper para los breadcrumbs
+import {Metadata} from "next"; // Importar tipo de Metadata
+import {notFound} from "next/navigation"; // Función de Next.js para manejar el error 404
+
+import NewsDetailClient from "./NewsDetailClient"; // Componente para mostrar los detalles de la noticia
+
+import {Breadcrumbs} from "@/components/ui/breadcrumbs"; // Componente para los breadcrumbs
+import {newsItems} from "@/lib/newsData"; // Importar datos de noticias
 
 // Generación de parámetros estáticos para las rutas dinámicas
 export async function generateStaticParams() {
@@ -13,8 +15,12 @@ export async function generateStaticParams() {
 }
 
 // Función para generar metadatos de la página de manera asíncrona
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const { id } = await params; // Esperar a que el parámetro 'id' esté resuelto
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{id: string}>;
+}): Promise<Metadata> {
+  const {id} = await params; // Esperar a que el parámetro 'id' esté resuelto
 
   const newsId = parseInt(id, 10); // Convertir el ID de string a número
 
@@ -23,13 +29,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   // Si no se encuentra la noticia, se generan metadatos alternativos
   if (!newsItem) {
     return {
-      title: 'Noticia no encontrada',
-      description: 'La noticia que buscas no existe',
+      title: "Noticia no encontrada",
+      description: "La noticia que buscas no existe",
     };
   }
 
   return {
-    metadataBase: new URL('https://animetopx.vercel.app'), // Definir la URL base para la página
+    metadataBase: new URL("https://animetopx.vercel.app"), // Definir la URL base para la página
     title: newsItem.title, // Título de la noticia
     description: newsItem.content.substring(0, 160), // Descripción corta para SEO
     openGraph: {
@@ -48,8 +54,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 // Componente principal de la página
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params; // Esperar a que el parámetro 'id' esté disponible
+export default async function Page({params}: {params: Promise<{id: string}>}) {
+  const {id} = await params; // Esperar a que el parámetro 'id' esté disponible
 
   const newsId = parseInt(id, 10); // Convertir el ID a un número
 
@@ -62,9 +68,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   // Definir los elementos del breadcrumb para facilitar la navegación
   const breadcrumbItems = [
-    { href: '/', label: 'Inicio', icon: Home },
-    { href: '/noticias', label: 'Noticias', icon: Newspaper },
-    { href: `/noticias/${newsId}`, label: newsItem.title }, // Enlace de la noticia específica
+    {href: "/", label: "Inicio", icon: Home},
+    {href: "/noticias", label: "Noticias", icon: Newspaper},
+    {href: `/noticias/${newsId}`, label: newsItem.title}, // Enlace de la noticia específica
   ];
 
   return (

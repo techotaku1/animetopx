@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { ChevronRight, Home, type LucideIcon } from 'lucide-react'
+import {ChevronRight, type LucideIcon} from "lucide-react";
+import Link from "next/link";
 
 interface BreadcrumbItem {
   href: string;
@@ -11,7 +11,7 @@ interface BreadcrumbsProps {
   items: BreadcrumbItem[];
 }
 
-export function Breadcrumbs({ items }: BreadcrumbsProps) {
+export function Breadcrumbs({items}: BreadcrumbsProps) {
   if (items.length === 0) {
     return null;
   }
@@ -20,27 +20,26 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
     <nav aria-label="Breadcrumb" className="mb-4">
       <ol className="flex items-center space-x-2 text-sm text-gray-500">
         {items.map((item, index) => {
-          const isLast = index === items.length - 1
+          const isLast = index === items.length - 1;
 
           return (
             <li key={item.href} className="flex items-center">
-              {index > 0 && <ChevronRight className="w-4 h-4 mx-1" />}
+              {index > 0 && <ChevronRight className="mx-1 h-4 w-4" />}
               {isLast ? (
                 <span className="font-medium text-gray-900" aria-current="page">
-                  {item.icon && <item.icon className="w-4 h-4 mr-2 inline" />}
+                  {item.icon && <item.icon className="mr-2 inline h-4 w-4" />}
                   {item.label}
                 </span>
               ) : (
                 <Link href={item.href} className="flex items-center hover:text-gray-700">
-                  {item.icon && <item.icon className="w-4 h-4 mr-2" />}
+                  {item.icon && <item.icon className="mr-2 h-4 w-4" />}
                   {item.label}
                 </Link>
               )}
             </li>
-          )
+          );
         })}
       </ol>
     </nav>
-  )
+  );
 }
-

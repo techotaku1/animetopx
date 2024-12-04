@@ -1,15 +1,15 @@
 // src/app/robots.ts
-import { MetadataRoute } from 'next'
+import {MetadataRoute} from "next";
 
-export const dynamic = 'force-static';  // Fuerza la exportación estática
+export const dynamic = "force-static"; // Fuerza la exportación estática
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/private/',
+      userAgent: "*",
+      allow: "/",
+      disallow: "/private/",
     },
-    sitemap: 'https://animetopx.vercel.app/sitemap.xml',
-  }
+    sitemap: "https://animetopx.vercel.app/sitemap.xml",
+  };
 }

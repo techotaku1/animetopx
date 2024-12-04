@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
+import Link from "next/link";
+import {useRouter} from "next/navigation";
+import React from "react";
+import {Button} from "@/components/ui/button";
 
 export default function NotFound() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
       <div className="mb-8">
         <svg
-          className="w-40 h-40 text-primary"
+          className="h-40 w-40 text-primary"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -26,8 +26,10 @@ export default function NotFound() {
           />
         </svg>
       </div>
-      <h1 className="text-4xl font-bold mb-4">404 - Página no encontrada</h1>
-      <p className="text-xl mb-8">Lo sentimos, la página que estás buscando no existe o no está disponible en este momento.</p>
+      <h1 className="mb-4 text-4xl font-bold">404 - Página no encontrada</h1>
+      <p className="mb-8 text-xl">
+        Lo sentimos, la página que estás buscando no existe o no está disponible en este momento.
+      </p>
       <div className="space-x-4">
         <Button onClick={() => router.back()} variant="outline">
           Volver atrás
@@ -37,5 +39,5 @@ export default function NotFound() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

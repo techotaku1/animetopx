@@ -1,14 +1,14 @@
 // app/components/navigation-events.tsx
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import {usePathname} from "next/navigation";
+import {useEffect} from "react";
 
 export function NavigationEvents() {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log('Current Pathname:', pathname);
+    console.log("Current Pathname:", pathname);
     // Lógica adicional basada en el pathname
   }, [pathname]);
 

@@ -9,7 +9,7 @@
     p,
     .description,
     li {
-      font-family: var(--font-grandstander); 
+      font-family: var(--font-grandstander);
     }
 
     --background: 0 0% 100%;
