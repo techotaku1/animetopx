@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({children}: {children: React.ReactNode}): React.JSX.Element {
   return (
     <html
       suppressHydrationWarning

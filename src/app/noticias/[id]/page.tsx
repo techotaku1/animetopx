@@ -8,7 +8,7 @@ import {Breadcrumbs} from "@/components/ui/breadcrumbs"; // Componente para los 
 import {newsItems} from "@/lib/newsData"; // Importar datos de noticias
 
 // Generación de parámetros estáticos para las rutas dinámicas
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{id: string}[]> {
   return newsItems.map((news) => ({
     id: news.id.toString(), // Se mapea cada noticia a una ruta dinámica usando el ID
   }));
@@ -54,7 +54,11 @@ export async function generateMetadata({
 }
 
 // Componente principal de la página
-export default async function Page({params}: {params: Promise<{id: string}>}) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{id: string}>;
+}): Promise<JSX.Element> {
   const {id} = await params; // Esperar a que el parámetro 'id' esté disponible
 
   const newsId = parseInt(id, 10); // Convertir el ID a un número

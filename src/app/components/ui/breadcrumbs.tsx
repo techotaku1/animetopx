@@ -11,7 +11,7 @@ interface BreadcrumbsProps {
   items: BreadcrumbItem[];
 }
 
-export function Breadcrumbs({items}: BreadcrumbsProps) {
+export function Breadcrumbs({items}: BreadcrumbsProps): JSX.Element | null {
   if (items.length === 0) {
     return null;
   }

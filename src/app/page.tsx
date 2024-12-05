@@ -9,7 +9,8 @@ import {Button} from "@/components/ui/button";
 import {carouselData} from "@/lib/carouselData"; // Importar los datos del carrusel
 import Loading from "@/loading"; // Ajusta la ruta si es necesario
 
-export default function Home() {
+// Especificamos explícitamente el tipo de retorno JSX.Element
+export default function Home(): JSX.Element {
   const portadaItems = carouselData.filter((item) => item.isCover);
   const newsItems = carouselData.filter((item) => !item.isCover);
 
@@ -20,7 +21,7 @@ export default function Home() {
       setCurrentSlide((prev) => (prev + 1) % portadaItems.length); // Ajustar a portadaItems
     }, 5000);
 
-    return () => clearInterval(interval);
+    return (): void => clearInterval(interval); // Tipo de retorno explícito
   }, [portadaItems.length]);
 
   return (
@@ -57,7 +58,9 @@ export default function Home() {
               <button
                 key={index}
                 aria-label={`Ir a la diapositiva ${index + 1}`}
-                className={`h-4 w-4 rounded-full ${currentSlide === index ? "bg-red-500" : "bg-black"} disabled={currentSlide === index} transition-all duration-300`}
+                className={`h-4 w-4 rounded-full ${
+                  currentSlide === index ? "bg-red-500" : "bg-black"
+                } disabled={currentSlide === index} transition-all duration-300`}
                 onClick={() => setCurrentSlide(index)}
               />
             ))}

@@ -1,180 +1,225 @@
-// eslint.config.mjs
-import path from "path";
-import {fileURLToPath} from "url";
-
-import {FlatCompat} from "@eslint/eslintrc";
-import eslintPluginPrettier from "eslint-plugin-prettier";
-import eslintPluginTailwindCSS from "eslint-plugin-tailwindcss";
-import eslintPluginReact from "eslint-plugin-react"; // Solo una vez aquí
-import typescriptEslintParser from "@typescript-eslint/parser";
-import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
 import globals from "globals";
-import eslintPluginReactHooks from "eslint-plugin-react-hooks";
-import eslintPluginImport from "eslint-plugin-import";
-import eslintPluginJsxA11y from "eslint-plugin-jsx-a11y";
-import {fixupPluginRules} from "@eslint/compat";
+import jsdoc from "eslint-plugin-jsdoc";
+import eslintConfigPrettier from "eslint-config-prettier";
+import eslintPluginSvelte from "eslint-plugin-svelte";
+import js from "@eslint/js";
+import tsParser from "@typescript-eslint/parser";
+import tsEslint from "typescript-eslint";
+import reactRecommended from "eslint-plugin-react/configs/recommended.js";
+import svelteParser from "svelte-eslint-parser";
+import pluginImportX from "eslint-plugin-import-x";
+import { includeIgnoreFile } from "@eslint/compat";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import eslintPluginPrettier from "eslint-plugin-prettier";
+import eslintPluginImport from "eslint-plugin-import"; // Only import the plugin
 
-// Para mimetizar variables de CommonJS (si estás usando ES Modules)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const gitignorePath = path.resolve(__dirname, ".gitignore");
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname, // Asegúrate de que la baseDirectory esté configurada correctamente
-});
-
-export default [
-  // Usar configuraciones previas (por ejemplo, eslint-config-prettier)
-  ...compat.extends("eslint-config-prettier"),
-
+export default tsEslint.config(
+  js.configs.recommended,
+  ...tsEslint.configs.recommended,
+  eslintConfigPrettier,
   {
-    ignores: [".next", "node_modules", "dist", "out"],
-  },
-  // Configuración general
-  {
-    rules: {
-      "padding-line-between-statements": [
-        "warn",
-        {blankLine: "always", prev: "*", next: ["return", "export"]},
-        {blankLine: "always", prev: ["const", "let", "var"], next: "*"},
-        {blankLine: "any", prev: ["const", "let", "var"], next: ["const", "let", "var"]},
-      ],
-      "no-console": "warn",
-    },
-  },
-
-  // Configuración React
-  {
-    plugins: {
-      react: fixupPluginRules(eslintPluginReact), // Se mantiene aquí
-      "react-hooks": fixupPluginRules(eslintPluginReactHooks),
-      "jsx-a11y": fixupPluginRules(eslintPluginJsxA11y),
-    },
+    name: "React",
+    files: ["**/*.{ts,tsx,jsx}"],
+    ...reactRecommended,
     languageOptions: {
+      ...reactRecommended.languageOptions,
+      globals: {
+        ...globals.serviceworker,
+        ...globals.browser,
+      },
+      parser: tsParser,  // Moved parser to languageOptions
+    },
+  },
+  {
+    name: "TypeScript",
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parser: tsEslint.parser, // Moved parser to languageOptions
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
+        project: ["./tsconfig.json"],  // Point to the tsconfig.json at the root of the project
       },
       globals: {
         ...globals.browser,
-        ...globals.serviceworker,
+        ...globals.node,
       },
     },
     settings: {
       react: {
-        version: "detect",
+        version: "18",
       },
     },
     rules: {
-      ...eslintPluginReact.configs.recommended.rules,
-      ...eslintPluginJsxA11y.configs.recommended.rules,
-      ...eslintPluginReactHooks.configs.recommended.rules,
-      "react/prop-types": "off",
-      "react/jsx-uses-react": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/self-closing-comp": "warn",
-      "react/jsx-sort-props": [
-        "warn",
+      "prefer-const": ["error", { destructuring: "all" }],
+      "no-empty": ["error", { allowEmptyCatch: true }],
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/ban-ts-comment": "warn",
+      "@typescript-eslint/no-empty-object-type": [
+        "error",
         {
-          callbacksLast: true,
-          shorthandFirst: true,
-          noSortAlphabetically: false,
-          reservedFirst: true,
+          allowInterfaces: "with-single-extends",
         },
       ],
-      "jsx-a11y/no-static-element-interactions": "off",
-      "jsx-a11y/click-events-have-key-events": "off",
-    },
-  },
-
-  // Configuración TypeScript
-  {
-    files: ["**/*.ts", "**/*.tsx"],
-    languageOptions: {
-      parser: typescriptEslintParser,
-      parserOptions: {
-        ecmaVersion: 2020,
-        sourceType: "module",
-        ecmaFeatures: {
-          jsx: true,
+      "@typescript-eslint/explicit-function-return-type": "warn", 
+      "@typescript-eslint/method-signature-style": "warn", 
+      "@typescript-eslint/naming-convention": [
+        "warn", 
+        { "selector": "variable", "format": ["camelCase", "PascalCase", "snake_case"] }  // Updated rule to allow other formats, including PascalCase
+      ],
+      "@typescript-eslint/no-non-null-assertion": "warn", 
+      "@typescript-eslint/restrict-template-expressions": "warn",
+      "@typescript-eslint/strict-boolean-expressions": "warn", 
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          args: "all",
+          argsIgnorePattern: "^_",
+          caughtErrors: "all",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
         },
-      },
+      ],
+      "react/prop-types": "off",
+      "react/no-unescaped-entities": "off",
+      "import-x/no-duplicates": "warn", // Added the rule to avoid duplicate imports
+      "import/order": [
+        "warn",
+        {
+          groups: [
+            ["builtin", "external"],
+            ["internal", "sibling", "parent"],
+            ["index"],
+          ],
+          "newlines-between": "always",
+        },
+      ], // Added rule for import order
+      "react/react-in-jsx-scope": "off", // Disable the rule
     },
     plugins: {
-      "@typescript-eslint": typescriptEslintPlugin,
-      prettier: eslintPluginPrettier,
-      tailwindcss: eslintPluginTailwindCSS,
-      // No es necesario agregar `react` nuevamente aquí
+      "import-x": pluginImportX,
+      "import": eslintPluginImport, // Just "import", not "eslintPluginImport"
+    },
+  },
+  {
+    name: "JSDoc",
+    files: ["packages/{core,sveltekit}/*.ts"],
+    ignores: ["**/*.d.ts"],
+    languageOptions: {
+      parser: tsEslint.parser,
+    },
+    plugins: {
+      jsdoc,
     },
     rules: {
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/ban-ts-comment": "warn",
-      "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/no-shadow": "off",
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/require-await": "off",
-      "@typescript-eslint/no-floating-promises": "off",
-      "@typescript-eslint/no-confusing-void-expression": "off",
-      "@typescript-eslint/no-unused-vars": [
+      "jsdoc/tag-lines": "warn", 
+      "jsdoc/require-param": "warn", 
+      "jsdoc/require-returns": "warn", 
+      "jsdoc/require-jsdoc": [
         "warn",
         {
-          args: "after-used",
-          ignoreRestSiblings: false,
-          argsIgnorePattern: "^_.*?$",
+          publicOnly: true,
+          enableFixer: false,
         },
       ],
-      "prettier/prettier": [
+      "jsdoc/no-multi-asterisks": [
         "warn",
+        {
+          allowWhitespace: true,
+        },
+      ],
+    },
+  },
+  {
+    name: "SvelteKit",
+    files: ["**/*.svelte"],
+    ...eslintPluginSvelte.configs["flat/recommended"].rules,
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      ecmaVersion: 2020,
+      sourceType: "module",
+      parser: svelteParser,
+      parserOptions: {
+        parser: tsParser,
+        extraFileExtensions: [".svelte"],
+      },
+    },
+  },
+  {
+    name: "Global Ignores",
+    ignores: [
+      ...includeIgnoreFile(gitignorePath).ignores,
+      "**/.*", // dotfiles aren't ignored by default in FlatConfig
+      ".*", // dotfiles aren't ignored by default in FlatConfig
+      ".eslintrc.js",
+      ".cache-loader",
+      ".DS_Store",
+      ".pnpm-debug.log",
+      ".turbo",
+      ".vscode/generated*",
+      "/_work",
+      "/actions-runner",
+      "node_modules",
+      "patches",
+      "pnpm-lock.yaml",
+      ".github/actions/issue-validator/index.mjs",
+      "**/*.cjs",
+      "**/*.js",
+      "**/*.d.ts",
+      "**/*.d.ts.map",
+      ".svelte-kit",
+      ".next",
+      ".nuxt",
+      "build",
+      "static",
+      "coverage",
+      "dist",
+      "packages/core/src/providers/provider-types.ts",
+      "packages/core/src/lib/pages/styles.ts",
+      "packages/frameworks-sveltekit/package",
+      "packages/frameworks-sveltekit/vite.config.{js,ts}.timestamp-*",
+      ".branches",
+      "db.sqlite",
+      "dev.db",
+      "dynamodblocal-bin",
+      "firebase-debug.log",
+      "firestore-debug.log",
+      "migrations",
+      "test.schema.gql",
+      "apps",
+      "packages/**/*test*",
+      "docs/**",
+    ],
+  },
+  {
+    name: "Prettier",
+    files: ["**/*.{ts,tsx,jsx,js,svelte}"],
+    rules: {
+      "prettier/prettier": [
+        "error",
         {
           printWidth: 100,
           trailingComma: "all",
           tabWidth: 2,
           semi: true,
-          singleQuote: false, // Permite comillas simples o dobles
+          singleQuote: false,
           bracketSpacing: false,
           arrowParens: "always",
           endOfLine: "auto",
           plugins: ["prettier-plugin-tailwindcss"],
         },
       ],
-      "tailwindcss/classnames-order": "warn",
-      "tailwindcss/no-custom-classname": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/jsx-filename-extension": ["warn", {extensions: [".tsx"]}],
     },
-  },
-
-  // Configuración de importaciones
-  {
     plugins: {
-      import: fixupPluginRules(eslintPluginImport),
+      prettier: eslintPluginPrettier,
     },
-    rules: {
-      "import/no-default-export": "off",
-      "import/order": [
-        "warn",
-        {
-          groups: [
-            "type",
-            "builtin",
-            "object",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-          ],
-          pathGroups: [
-            {
-              pattern: "~/**",
-              group: "external",
-              position: "after",
-            },
-          ],
-          "newlines-between": "always",
-        },
-      ],
-    },
-  },
-];
+  }
+);

@@ -12,7 +12,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-
     "incremental": true,
     "plugins": [
       {
@@ -28,8 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "next.config.ts",
-    "eslint.config.mjs"
+    "eslint.config.mjs",  // Si es necesario incluir
+    "tailwind.config.ts"  // Si tienes configuraciones específicas de Tailwind
   ],
   "exclude": ["node_modules"]
 }

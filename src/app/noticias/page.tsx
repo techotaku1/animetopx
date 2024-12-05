@@ -35,7 +35,7 @@ const newsItems = [
   // Puedes agregar más noticias aquí
 ];
 
-export default function NoticiasPage() {
+export default function NoticiasPage(): JSX.Element {
   // Definición de los breadcrumbs
   const breadcrumbItems = [
     {href: "/", label: "Inicio", icon: Home},

@@ -24,7 +24,7 @@ interface NewsItem {
   date: string;
 }
 
-export function NewsCard({item}: {item: NewsItem}) {
+export function NewsCard({item}: {item: NewsItem}): JSX.Element {
   // Validar y formatear la fecha
   let timeAgo = "";
 
@@ -74,7 +74,7 @@ export function NewsCard({item}: {item: NewsItem}) {
           {/* Texto "Publicado" y fecha con "Hace X tiempo" alineados a la izquierda */}
           <div className="text-sm text-muted-foreground">
             <div>Publicado</div>
-            <time className="text-sm text-muted-foreground" dateTime={item.date}>
+            <time className="pr-8 text-sm text-muted-foreground" dateTime={item.date}>
               {timeAgo} {/* Mostrará algo como "Hace 3 días", "Hace 1 hora", etc. */}
             </time>
           </div>

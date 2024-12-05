@@ -3,7 +3,7 @@
 
 import {AppProgressBar as ProgressBar} from "next-nprogress-bar";
 
-const CustomProgressBar = () => {
+const CustomProgressBar = function (): JSX.Element {
   return (
     <ProgressBar
       shallowRouting // Ruteo superficial
