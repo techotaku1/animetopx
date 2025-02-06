@@ -1,34 +1,46 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ESNext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler", // Esta opción debe ser un solo valor, no una matriz
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
+    "incremental": true,
+    "baseUrl": ".", // Asegúrate de que esto esté configurado correctamente
     "paths": {
-      "@/*": ["./src/app/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
+    "**/*.js",
+    "**/*.mjs",
     "**/*.tsx",
+    "next-env.d.ts",
     ".next/types/**/*.ts",
-    "eslint.config.mjs",  // Si es necesario incluir
-    "tailwind.config.ts"  // Si tienes configuraciones específicas de Tailwind
+    ".prettierrc.mjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist"
+  ]
 }

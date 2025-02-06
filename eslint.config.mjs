@@ -1,227 +1,116 @@
-//eslint.config.mjs
+import { FlatCompat } from '@eslint/eslintrc';
 
-import globals from "globals";
-import jsdoc from "eslint-plugin-jsdoc";
-import eslintConfigPrettier from "eslint-config-prettier";
-import eslintPluginSvelte from "eslint-plugin-svelte";
-import js from "@eslint/js";
-import tsParser from "@typescript-eslint/parser";
-import tsEslint from "typescript-eslint";
-import reactRecommended from "eslint-plugin-react/configs/recommended.js";
-import svelteParser from "svelte-eslint-parser";
-import pluginImportX from "eslint-plugin-import-x";
-import { includeIgnoreFile } from "@eslint/compat";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import eslintPluginPrettier from "eslint-plugin-prettier";
-import eslintPluginImport from "eslint-plugin-import"; // Only import the plugin
+const compat = new FlatCompat({
+    baseDirectory: import.meta.dirname,
+});
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const gitignorePath = path.resolve(__dirname, ".gitignore");
+const eslintConfig = [
+    {
+        ignores: [
+            '**/node_modules/**',
+            '.next/**',
+            'out/**',
+            'public/**',
+            '**/*.d.ts',
+            'src/components/estudiantes/ui/**',
+            'src/components/admin/ui/**',
+            'src/components/educadores/ui/**',
+        ],
+    },
+    ...compat.config({
+        extends: [
+            'next/core-web-vitals',
+            'next/typescript',
+            'plugin:@next/next/recommended',
+            'plugin:@typescript-eslint/recommended',
+            'plugin:@typescript-eslint/recommended-type-checked',
+            'plugin:@typescript-eslint/stylistic-type-checked',
+            'plugin:import/recommended',
+            'plugin:import/typescript',
+            'prettier',
+        ],
+        parser: '@typescript-eslint/parser',
+        parserOptions: {
+            project: './tsconfig.json',
+            tsconfigRootDir: import.meta.dirname,
+        },
+        plugins: ['@typescript-eslint', 'import'],
+        rules: {
+            '@typescript-eslint/consistent-type-definitions': 'warn',
+            '@typescript-eslint/consistent-type-imports': [
+                'warn',
+                {
+                    prefer: 'type-imports',
+                    fixStyle: 'inline-type-imports',
+                },
+            ],
+            '@typescript-eslint/no-unused-vars': [
+                'warn',
+                {
+                    argsIgnorePattern: '^_',
+                },
+            ],
+            '@typescript-eslint/require-await': 'warn',
+            '@typescript-eslint/no-misused-promises': [
+                'warn',
+                {
+                    checksVoidReturn: {
+                        arguments: false,
+                        attributes: false,
+                    },
+                },
+            ],
+            '@typescript-eslint/no-floating-promises': 'warn',
+            '@next/next/google-font-display': 'warn',
+            '@next/next/no-img-element': 'warn',
+            '@next/next/no-html-link-for-pages': 'warn',
+            'import/order': [
+                'warn',
+                {
+                    groups: ['builtin', 'external', 'internal', ['parent', 'sibling']],
+                    pathGroups: [
+                        {
+                            pattern: 'react',
+                            group: 'external',
+                            position: 'before',
+                        },
+                        {
+                            pattern: '@/components/**',
+                            group: 'internal',
+                            position: 'after',
+                        },
+                    ],
+                    pathGroupsExcludedImportTypes: ['react'],
+                    alphabetize: {
+                        order: 'asc',
+                        caseInsensitive: true,
+                    },
+                },
+            ],
+            'react/react-in-jsx-scope': 'off',
+            'import/no-unresolved': 'warn',
+            'import/newline-after-import': 'off',
+        },
+        settings: {
+            'import/resolver': {
+                alias: {
+                    map: [['~', './src']],
+                    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                },
+                typescript: {
+                    alwaysTryTypes: true,
+                    project: './tsconfig.json',
+                },
+            },
+            react: {
+                version: 'detect',
+            },
+            next: {
+                rootDir: './',
+            },
+            files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
+        },
+    }),
+];
 
-export default tsEslint.config(
-  js.configs.recommended,
-  ...tsEslint.configs.recommended,
-  eslintConfigPrettier,
-  {
-    name: "React",
-    files: ["**/*.{ts,tsx,jsx}"],
-    ...reactRecommended,
-    languageOptions: {
-      ...reactRecommended.languageOptions,
-      globals: {
-        ...globals.serviceworker,
-        ...globals.browser,
-      },
-      parser: tsParser,  // Moved parser to languageOptions
-    },
-  },
-  {
-    name: "TypeScript",
-    files: ["**/*.ts", "**/*.tsx"],
-    languageOptions: {
-      parser: tsEslint.parser, // Moved parser to languageOptions
-      parserOptions: {
-        project: ["./tsconfig.json"],  // Point to the tsconfig.json at the root of the project
-      },
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-    },
-    settings: {
-      react: {
-        version: "18",
-      },
-    },
-    rules: {
-      "prefer-const": ["error", { destructuring: "all" }],
-      "no-empty": ["error", { allowEmptyCatch: true }],
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/ban-ts-comment": "warn",
-      "@typescript-eslint/no-empty-object-type": [
-        "error",
-        {
-          allowInterfaces: "with-single-extends",
-        },
-      ],
-      "@typescript-eslint/explicit-function-return-type": "warn", 
-      "@typescript-eslint/method-signature-style": "warn", 
-      "@typescript-eslint/naming-convention": [
-        "warn", 
-        { "selector": "variable", "format": ["camelCase", "PascalCase", "snake_case"] }  // Updated rule to allow other formats, including PascalCase
-      ],
-      "@typescript-eslint/no-non-null-assertion": "warn", 
-      "@typescript-eslint/restrict-template-expressions": "warn",
-      "@typescript-eslint/strict-boolean-expressions": "warn", 
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          args: "all",
-          argsIgnorePattern: "^_",
-          caughtErrors: "all",
-          caughtErrorsIgnorePattern: "^_",
-          destructuredArrayIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          ignoreRestSiblings: true,
-        },
-      ],
-      "react/prop-types": "off",
-      "react/no-unescaped-entities": "off",
-      "import-x/no-duplicates": "warn", // Added the rule to avoid duplicate imports
-      "import/order": [
-        "warn",
-        {
-          groups: [
-            ["builtin", "external"],
-            ["internal", "sibling", "parent"],
-            ["index"],
-          ],
-          "newlines-between": "always",
-        },
-      ], // Added rule for import order
-      "react/react-in-jsx-scope": "off", // Disable the rule
-    },
-    plugins: {
-      "import-x": pluginImportX,
-      "import": eslintPluginImport, // Just "import", not "eslintPluginImport"
-    },
-  },
-  {
-    name: "JSDoc",
-    files: ["packages/{core,sveltekit}/*.ts"],
-    ignores: ["**/*.d.ts"],
-    languageOptions: {
-      parser: tsEslint.parser,
-    },
-    plugins: {
-      jsdoc,
-    },
-    rules: {
-      "jsdoc/tag-lines": "warn", 
-      "jsdoc/require-param": "warn", 
-      "jsdoc/require-returns": "warn", 
-      "jsdoc/require-jsdoc": [
-        "warn",
-        {
-          publicOnly: true,
-          enableFixer: false,
-        },
-      ],
-      "jsdoc/no-multi-asterisks": [
-        "warn",
-        {
-          allowWhitespace: true,
-        },
-      ],
-    },
-  },
-  {
-    name: "SvelteKit",
-    files: ["**/*.svelte"],
-    ...eslintPluginSvelte.configs["flat/recommended"].rules,
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-      ecmaVersion: 2020,
-      sourceType: "module",
-      parser: svelteParser,
-      parserOptions: {
-        parser: tsParser,
-        extraFileExtensions: [".svelte"],
-      },
-    },
-  },
-  {
-    name: "Global Ignores",
-    ignores: [
-      ...includeIgnoreFile(gitignorePath).ignores,
-      "**/.*", // dotfiles aren't ignored by default in FlatConfig
-      ".*", // dotfiles aren't ignored by default in FlatConfig
-      ".eslintrc.js",
-      ".cache-loader",
-      ".DS_Store",
-      ".pnpm-debug.log",
-      ".turbo",
-      ".vscode/generated*",
-      "/_work",
-      "/actions-runner",
-      "node_modules",
-      "patches",
-      "pnpm-lock.yaml",
-      ".github/actions/issue-validator/index.mjs",
-      "**/*.cjs",
-      "**/*.js",
-      "**/*.d.ts",
-      "**/*.d.ts.map",
-      ".svelte-kit",
-      ".next",
-      ".nuxt",
-      "build",
-      "static",
-      "coverage",
-      "dist",
-      "packages/core/src/providers/provider-types.ts",
-      "packages/core/src/lib/pages/styles.ts",
-      "packages/frameworks-sveltekit/package",
-      "packages/frameworks-sveltekit/vite.config.{js,ts}.timestamp-*",
-      ".branches",
-      "db.sqlite",
-      "dev.db",
-      "dynamodblocal-bin",
-      "firebase-debug.log",
-      "firestore-debug.log",
-      "migrations",
-      "test.schema.gql",
-      "apps",
-      "packages/**/*test*",
-      "docs/**",
-    ],
-  },
-  {
-    name: "Prettier",
-    files: ["**/*.{ts,tsx,jsx,js,svelte}"],
-    rules: {
-      "prettier/prettier": [
-        "error",
-        {
-          printWidth: 100,
-          trailingComma: "all",
-          tabWidth: 2,
-          semi: true,
-          singleQuote: false,
-          bracketSpacing: false,
-          arrowParens: "always",
-          endOfLine: "auto",
-          plugins: ["prettier-plugin-tailwindcss"],
-        },
-      ],
-    },
-    plugins: {
-      prettier: eslintPluginPrettier,
-    },
-  }
-);
+export default eslintConfig;
