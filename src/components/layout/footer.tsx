@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { SiFacebook, SiInstagram, SiTiktok, SiYoutube } from 'react-icons/si'; // Usando react-icons como alternativa
 
-export function Footer(): JSX.Element {
+export function Footer() {
 	return (
 		<footer className="bg-muted border-t">
 			<div className="container mx-auto px-4 py-8">
