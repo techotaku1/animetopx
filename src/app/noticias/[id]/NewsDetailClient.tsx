@@ -183,7 +183,7 @@ export default function NewsDetailClient({
 				{comments.length > 0 && (
 					<div className="mb-4 flex items-center">
 						<span className="mr-2 text-lg font-bold">Promedio:</span>
-						{[...Array(5)].map((_, index) => (
+						{[...Array<number>(5)].map((_, index) => (
 							<Star
 								key={index}
 								className={
@@ -247,7 +247,7 @@ export default function NewsDetailClient({
 								</span>
 							</div>
 							<div className="mb-2 flex">
-								{[...Array(5)].map((_, index) => (
+								{[...Array<number>(5)].map((_, index) => (
 									<Star
 										key={index}
 										className={

@@ -1,5 +1,5 @@
 // src/app/sitemap.ts
-import { MetadataRoute } from 'next';
+import { type MetadataRoute } from 'next';
 
 import { newsItems } from '../lib/newsData';
 

@@ -9,6 +9,10 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+    button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
   }
 
   p,
@@ -16,7 +20,7 @@
   li {
     font-family: var(--font-grandstander);
   }
-  h1, h2, h3, .title {
+  h1, h2, h3, span,.title {
     font-family: var(--font-shantell-sans), sans-serif;
   }
 }
