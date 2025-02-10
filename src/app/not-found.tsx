@@ -6,7 +6,7 @@ import React from 'react';
 
 import { Button } from '@/components/ui/button';
 
-export default function NotFound(): JSX.Element {
+export default function NotFound() {
 	const router = useRouter();
 
 	return (
