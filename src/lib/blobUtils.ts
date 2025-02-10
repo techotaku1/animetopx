@@ -1,4 +1,4 @@
-import blobUrls from '../../blob-urls.json';
+import blobUrls from '../../blobUrls.json';
 
 export function getBlobUrl(localPath: string): string {
   // Normaliza la ruta para manejar correctamente las barras invertidas

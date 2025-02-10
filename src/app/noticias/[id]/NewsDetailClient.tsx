@@ -3,9 +3,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState, useCallback } from 'react';
-import Image from 'next/image';
-import { Star } from 'lucide-react';
-import Link from 'next/link';
 import {
 	getDocs,
 	addDoc,
@@ -14,11 +11,15 @@ import {
 	where,
 	Timestamp,
 } from 'firebase/firestore';
+import { Star, Home, Newspaper } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { newsItems } from '@/lib/newsData';
-import { Button } from '@/components/ui/button';
 import { db } from '@/db/firebaseConfig';
+import { newsItems } from '@/lib/newsData';
 import { ImageCarousel } from '@/components/layout/ImageCarousel';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { Button } from '@/components/ui/button';
 
 interface Comment {
 	id: string;
@@ -111,6 +112,12 @@ export default function NewsDetailClient({
 				comments.length
 			: 0;
 
+	const breadcrumbItems = [
+		{ href: '/', label: 'Inicio', icon: Home },
+		{ href: '/noticias', label: 'Noticias', icon: Newspaper },
+		{ href: `/noticias/${id}`, label: newsItem.title }, // Enlace de la noticia específica
+	];
+
 	return (
 		<div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center space-y-8 px-4 py-4">
 			<div
@@ -125,6 +132,11 @@ export default function NewsDetailClient({
 					sizes="(min-width: 1920px) 1920px, 100vw"
 					src={newsItem.backgroundImage}
 				/>
+			</div>
+
+			{/* Breadcrumbs para navegación */}
+			<div className="flex w-full justify-start">
+				<Breadcrumbs items={breadcrumbItems} />
 			</div>
 
 			<h1 className="mb-6 text-center text-3xl font-bold sm:text-4xl">
@@ -146,9 +158,9 @@ export default function NewsDetailClient({
 
 				<div className="w-full lg:sticky lg:top-4 lg:w-1/2">
 					<div className="flex h-full flex-col rounded-lg border border-gray-300 p-6 shadow-md dark:border-white">
-						{id <= 3 && (
+						{id <= 4 && (
 							<div className="mb-2 inline-block rounded-sm bg-red-600 px-2 py-1 text-center text-sm font-semibold text-white lg:text-base">
-								{id === 1 ? `Top ${currentIndex + 1}` : currentIndex + 1}
+								Top {currentIndex + 1}
 							</div>
 						)}
 						<h2 className="mb-4 text-xl font-semibold sm:text-2xl">

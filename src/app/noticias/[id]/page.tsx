@@ -1,10 +1,8 @@
 import { type JSX } from 'react'; // Importar el namespace JSX de React
-import { Home, Newspaper } from 'lucide-react'; // Iconos de Home y Newspaper para los breadcrumbs
 import { type Metadata } from 'next'; // Importar tipo de Metadata
 import { notFound } from 'next/navigation'; // Función de Next.js para manejar el error 404
 
 import { newsItems } from '@/lib/newsData'; // Importar datos de noticias
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'; // Componente para los breadcrumbs
 import NewsDetailClient from './NewsDetailClient'; // Componente para mostrar los detalles de la noticia
 
 // Generación de parámetros estáticos para las rutas dinámicas
@@ -70,18 +68,8 @@ export default async function Page({
 		notFound();
 	}
 
-	// Definir los elementos del breadcrumb para facilitar la navegación
-	const breadcrumbItems = [
-		{ href: '/', label: 'Inicio', icon: Home },
-		{ href: '/noticias', label: 'Noticias', icon: Newspaper },
-		{ href: `/noticias/${newsId}`, label: newsItem.title }, // Enlace de la noticia específica
-	];
-
 	return (
 		<div className="container mx-auto py-1">
-			{/* Breadcrumbs para navegación */}
-			<Breadcrumbs items={breadcrumbItems} />
-
 			{/* Componente para mostrar los detalles de la noticia */}
 			<NewsDetailClient id={newsId} />
 		</div>

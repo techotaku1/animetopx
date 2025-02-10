@@ -95,7 +95,7 @@ export default function RootLayout({
 					type="application/ld+json"
 				/>
 			</head>
-			<body className="bg-background text-foreground flex min-h-screen flex-col font-sans">
+			<body className="bg-background text-foreground flex min-h-screen flex-col">
 				<ThemeProvider enableSystem attribute="class" defaultTheme="system">
 					<Header />
 					<CustomProgressBar />

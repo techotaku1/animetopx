@@ -10,6 +10,15 @@ import { getBlobUrl } from '@/lib/blobUtils';
 // Simulación de datos de noticias
 const newsItems = [
   {
+    id: 4,
+    title: 'NUEVAS AVENTURAS EN INVIERNO 2025',
+    description:
+      'Descubre las nuevas aventuras que nos esperan en la temporada de Invierno 2025.',
+    category: 'Invierno',
+    imageUrl: getBlobUrl('INVIERNO-2025/coverinvierno2025.webp'),
+    date: 'enero 2025',
+  },
+  {
     id: 3,
     title: 'EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES DE HUNTER X HUNTER',
     description:

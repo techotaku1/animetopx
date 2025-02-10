@@ -7,6 +7,7 @@ export interface ImageUrl {
 	title: string;
 	description: string;
 	malLink?: string;
+	aspectRatio?: string; // Add aspectRatio property
 }
 
 export interface NewsItem {
@@ -38,6 +39,7 @@ export const newsItems: NewsItem[] = [
 					"La tercera temporada de Re:Zero kara Hajimeru Isekai Seikatsu sigue a Subaru Natsuki, quien enfrenta nuevas pruebas en un mundo alternativo, mientras desentraña más secretos sobre su capacidad de 'Regreso por Muerte'. La serie promete mantener su característico enfoque psicológico y emocional, con más personajes y dilemas que desafían las decisiones de Subaru.",
 				malLink:
 					'https://myanimelist.net/anime/54857/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_3rd_Season',
+				aspectRatio: '9/16', // Add aspectRatio
 			},
 			{
 				url: getBlobUrl('OTOÑO-2024/Dandadan.webp'),
@@ -45,6 +47,7 @@ export const newsItems: NewsItem[] = [
 				description:
 					'Momo Ayase, una joven con habilidades psíquicas, se ve envuelta en un extraño mundo sobrenatural al encontrarse con un chico llamado Ken Takakura, mientras ambos luchan contra espíritus y entidades paranormales. La serie mezcla acción, comedia y elementos del terror, explorando la relación entre los protagonistas mientras enfrentan fuerzas más allá de su comprensión.',
 				malLink: 'https://myanimelist.net/anime/57334/Dandadan?q=dan&cat=anime',
+				aspectRatio: '9/16', // Add aspectRatio
 			},
 			{
 				url: getBlobUrl('OTOÑO-2024/Uzumaki.webp'),
