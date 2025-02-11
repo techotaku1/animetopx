@@ -236,7 +236,7 @@ export const newsItems: NewsItem[] = [
 		category: 'Estrenos Invierno 2025',
 		date: '2025-02-10',
 		content: 'Detalles sobre la temporada de invierno 2025',
-		backgroundImage: getBlobUrl('INVIERNO-2025/portadainvierno.webp'),
+		backgroundImage: getBlobUrl('INVIERNO-2025/portadainvierno2025.webp'),
 		publicationDate: new Date('2025-02-10'),
 		imageUrls: [
 			{
@@ -247,14 +247,14 @@ export const newsItems: NewsItem[] = [
 				description:
 					'Una historia romántica sobre un chico que se casa con la chica más odiada de su clase.',
 				malLink:
-					'https://myanimelist.net/anime/12345/Class_no_Daikirai_na_Joshi_to_Kekkon_suru_Koto_ni_Natta',
+					'https://myanimelist.net/anime/59135/Class_no_Daikirai_na_Joshi_to_Kekkon_suru_Koto_ni_Natta',
 			},
 			{
 				url: getBlobUrl('INVIERNO-2025/Dr._Stone_Science_Future.webp'),
 				title: 'Dr. Stone: Science Future',
 				description:
 					'La continuación de las aventuras científicas en un mundo post-apocalíptico.',
-				malLink: 'https://myanimelist.net/anime/12346/Dr_Stone_Science_Future',
+				malLink: 'https://myanimelist.net/anime/57592/Dr_Stone__Science_Future',
 			},
 			{
 				url: getBlobUrl(
@@ -265,14 +265,14 @@ export const newsItems: NewsItem[] = [
 				description:
 					'Una recepcionista de gremio decide derrotar a los jefes por su cuenta para evitar horas extras.',
 				malLink:
-					'https://myanimelist.net/anime/12347/Guild_no_Uketsukejou_desu_ga_Zangyou_wa_Iya_nanode_Boss_wo_Solo_Toubatsu_Shiyou_to_Omoimasu',
+					'https://myanimelist.net/anime/55997/Guild_no_Uketsukejou_desu_ga_Zangyou_wa_Iya_nanode_Boss_wo_Solo_Toubatsu_Shiyou_to_Omoimasu',
 			},
 			{
 				url: getBlobUrl('INVIERNO-2025/Honey_Lemon_Soda.webp'),
 				title: 'Honey Lemon Soda',
 				description:
 					'Una dulce historia de amor entre una chica tímida y un chico popular.',
-				malLink: 'https://myanimelist.net/anime/12348/Honey_Lemon_Soda',
+				malLink: 'https://myanimelist.net/anime/58271/Honey_Lemon_Soda',
 			},
 			{
 				url: getBlobUrl(
@@ -283,7 +283,7 @@ export const newsItems: NewsItem[] = [
 				description:
 					'La segunda temporada de la comedia romántica sobre un chico con 100 novias.',
 				malLink:
-					'https://myanimelist.net/anime/12349/Kimi_no_Koto_ga_Daidaidaidaidaisuki_na_100-nin_no_Kanojo_Season_2',
+					'https://myanimelist.net/anime/57616/Kimi_no_Koto_ga_Daidaidaidaidaisuki_na_100-nin_no_Kanojo_2nd_Season',
 			},
 			{
 				url: getBlobUrl('INVIERNO-2025/Kusuriya_no_Hitorigoto_Season_2.webp'),
@@ -291,21 +291,21 @@ export const newsItems: NewsItem[] = [
 				description:
 					'La segunda temporada de la historia de una farmacéutica en la corte imperial.',
 				malLink:
-					'https://myanimelist.net/anime/12350/Kusuriya_no_Hitorigoto_Season_2',
+					'https://myanimelist.net/anime/58514/Kusuriya_no_Hitorigoto_2nd_Season',
 			},
 			{
 				url: getBlobUrl('INVIERNO-2025/Sakamoto_Days.webp'),
 				title: 'Sakamoto Days',
 				description:
 					'Las aventuras de un ex-asesino que ahora lleva una vida tranquila como tendero.',
-				malLink: 'https://myanimelist.net/anime/12351/Sakamoto_Days',
+				malLink: 'https://myanimelist.net/anime/58939/Sakamoto_Days',
 			},
 			{
 				url: getBlobUrl('INVIERNO-2025/Solo_Leveling_Season_2.webp'),
 				title: 'Solo Leveling Season 2',
 				description:
 					'La segunda temporada de la popular serie de acción y fantasía.',
-				malLink: 'https://myanimelist.net/anime/12352/Solo_Leveling_Season_2',
+				malLink: 'https://myanimelist.net/anime/58567/Ore_dake_Level_Up_na_Ken_Season_2__Arise_from_the_Shadow',
 			},
 			{
 				url: getBlobUrl(
@@ -315,14 +315,14 @@ export const newsItems: NewsItem[] = [
 				description:
 					'La segunda temporada de la historia de un matrimonio feliz.',
 				malLink:
-					'https://myanimelist.net/anime/12353/Watashi_no_Shiawase_na_Kekkon_Season_2',
+					'https://myanimelist.net/anime/56701/Watashi_no_Shiawase_na_Kekkon_2nd_Season',
 			},
 			{
 				url: getBlobUrl('INVIERNO-2025/Zenshuu.png'),
 				title: 'Zenshuu',
 				description:
 					'Una serie sobre la búsqueda de la perfección en las artes marciales.',
-				malLink: 'https://myanimelist.net/anime/12354/Zenshuu',
+				malLink: 'https://myanimelist.net/anime/58502/Zenshuu',
 			},
 		],
 	},
