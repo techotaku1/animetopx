@@ -36,11 +36,11 @@ export const metadata: Metadata = {
 		title: 'AnimeTopX',
 		description:
 			'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-		url: 'https://animetopx.vercel.app',
+		url: 'https://animetopx.com',
 		siteName: 'AnimeTopX',
 		images: [
 			{
-				url: 'https://animetopx.vercel.app/PORTADAPRINCIPAL.webp',
+				url: 'https://animetopx.com/PORTADAPRINCIPAL.webp',
 				width: 1200,
 				height: 630,
 			},
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 		title: 'AnimeTopX',
 		description:
 			'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-		images: ['https://animetopx.vercel.app/PORTADAPRINCIPAL.webp'],
+		images: ['https://animetopx.com/PORTADAPRINCIPAL.webp'],
 	},
 };
 
@@ -70,7 +70,7 @@ export default function RootLayout({
 		>
 			<head>
 				<meta
-					content="AGpNPOb2L1Z4p1pOdNGsInrVPMiVKBk020FAa0TxGV0"
+					content="tH_p7MCykvg5SmC6GyS_vdZkBAf8dYSqgRnAL6j88Wc"
 					name="google-site-verification"
 				/>
 				<Script
@@ -79,7 +79,7 @@ export default function RootLayout({
 							'@context': 'https://schema.org',
 							'@type': 'WebSite',
 							name: 'AnimeTopX',
-							url: 'https://animetopx.vercel.app',
+							url: 'https://animetopx.com',
 							description:
 								'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
 							potentialAction: {

@@ -75,7 +75,7 @@ async function main() {
 
   try {
     let existingFiles: Record<string, string> = {};
-    const blobUrlsPath = 'blob-urls.json';
+    const blobUrlsPath = 'blobUrls.json';
 
     if (existsSync(blobUrlsPath)) {
       const existingContent: string = readFileSync(blobUrlsPath, 'utf-8');
@@ -86,7 +86,7 @@ async function main() {
     const allUploadedFiles = { ...existingFiles, ...newUploadedFiles };
 
     writeFileSync(blobUrlsPath, JSON.stringify(allUploadedFiles, null, 2));
-    console.log('URLs guardadas en blob-urls.json');
+    console.log('URLs guardadas en blobUrls.json');
   } catch (error) {
     console.error('Error durante la carga:', error);
   }

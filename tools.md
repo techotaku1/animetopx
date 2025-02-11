@@ -1,3 +1,10 @@
+GITHUB RECONECTARSE A OTROS REPOSITORIOS:
+
+- `git remote remove origin` // Desconectarte del repo actual
+- `git remote add origin https://github.com/techotaku1/animetopx.git` // Conectarte a este repo
+- `git remote add origin https://github.com/artiefy/artiefy.git` // Conectarte a este repo
+- `git remote -v` // Verificar a que repo estas conectado
+----------------------------------------------------------------------
 Uptash o Neon usan Serveless
 
 Un servicio serverless como Upstash o Neon es una plataforma que proporciona bases de datos y otros servicios sin que el usuario tenga que gestionar servidores. En lugar de aprovisionar y mantener instancias manualmente, estos servicios escalan automáticamente y cobran solo por el uso real.

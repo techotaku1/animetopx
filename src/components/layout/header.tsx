@@ -1,13 +1,10 @@
 import { type JSX } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getBlobUrl } from '@/lib/blobUtils';
 
 export function Header(): JSX.Element {
-	const logoUrl = getBlobUrl('favicon.ico');
-
 	return (
-		<header className="bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-40 w-full border-b backdrop-blur-sm">
+		<header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40 w-full border-b backdrop-blur">
 			<div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
 				<div className="flex gap-6 md:gap-10">
 					<Link className="flex items-center space-x-2" href="/">
@@ -15,7 +12,7 @@ export function Header(): JSX.Element {
 							alt="AnimeTopX Logo"
 							height={80}
 							sizes="(max-width: 768px) 80px, 160px"
-							src={logoUrl}
+							src="/logo.png"
 							width={80}
 						/>
 						<span className="font-bold">AnimeTopX</span>

@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
 			allow: '/',
 			disallow: '/private/',
 		},
-		sitemap: 'https://animetopx.vercel.app/sitemap.xml',
+		sitemap: 'https://animetopx.com/sitemap.xml',
 	};
 }

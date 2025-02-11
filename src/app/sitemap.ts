@@ -7,24 +7,24 @@ export const dynamic = 'force-static'; // Fuerza la exportación estática
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const newsUrls = newsItems.map((news) => ({
-		url: `https://animetopx.vercel.app/noticias/${news.id}`,
+		url: `https://animetopx.com/noticias/${news.id}`,
 		lastModified: new Date(news.publicationDate),
 		changeFrequency: 'weekly' as const,
 		priority: 0.7,
 		images: news.imageUrls.map(
-			(image) => `https://animetopx.vercel.app${image.url}`
+			(image) => `https://animetopx.com${image.url}`
 		), // Solo URLs
 	}));
 
 	return [
 		{
-			url: 'https://animetopx.vercel.app',
+			url: 'https://animetopx.com',
 			lastModified: new Date(),
 			changeFrequency: 'daily',
 			priority: 1,
 		},
 		{
-			url: 'https://animetopx.vercel.app/noticias',
+			url: 'https://animetopx.com/noticias',
 			lastModified: new Date(),
 			changeFrequency: 'daily',
 			priority: 0.8,

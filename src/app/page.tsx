@@ -10,80 +10,139 @@ import { Button } from '@/components/ui/button';
 import Loading from './loading';
 
 export default function Home(): JSX.Element {
-  const portadaItems = carouselData.filter((item) => item.isCover);
-  const newsItems = carouselData.filter((item) => !item.isCover);
+	const portadaItems = carouselData.filter((item) => item.isCover);
+	const newsItems = carouselData.filter((item) => !item.isCover);
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+	const sortedNewsItems = newsItems.sort(
+		(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+	);
+	const latestNewsItem = sortedNewsItems.find((item) => item.id === 4);
+	const otherNewsItems = sortedNewsItems.filter((item) => item.id !== 4);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % portadaItems.length);
-    }, 5000);
+	const [currentSlide, setCurrentSlide] = useState(0);
 
-    return (): void => clearInterval(interval);
-  }, [portadaItems.length]);
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentSlide((prev) => (prev + 1) % portadaItems.length);
+		}, 5000);
 
-  return (
-    <div className="space-y-8">
-      <Suspense fallback={<Loading />}>
-        <div className="space-y-4">
-          <div className="relative w-full" style={{ aspectRatio: '1920/600' }}>
-            {portadaItems.map((item, index) => (
-              <div
-                key={item.id}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                  index === currentSlide ? 'opacity-100' : 'opacity-0'
-                }`}
-              >
-                <Image
-                  fill
-                  alt={item.title}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  priority={index === 0}
-                  quality={85}
-                  sizes="(min-width: 1920px) 1920px, 100vw"
-                  src={item.imageUrl}
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-            ))}
-          </div>
+		return (): void => clearInterval(interval);
+	}, [portadaItems.length]);
 
-          <div className="absolute left-1/2 mt-4 flex -translate-x-1/2 transform space-x-3">
-            {portadaItems.map((_, index) => (
-              <button
-                key={index}
-                aria-label={`Ir a la diapositiva ${index + 1}`}
-                className={`h-4 w-4 rounded-full ${
-                  currentSlide === index ? 'bg-red-500' : 'bg-black'
-                } disabled={currentSlide === index} transition-all duration-300`}
-                onClick={() => setCurrentSlide(index)}
-              />
-            ))}
-          </div>
-        </div>
-      </Suspense>
+	return (
+		<div className="space-y-8">
+			<Suspense fallback={<Loading />}>
+				<div className="space-y-4">
+					<div className="relative w-full" style={{ aspectRatio: '1920/600' }}>
+						{portadaItems.map((item, index) => (
+							<div
+								key={item.id}
+								className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+									index === currentSlide ? 'opacity-100' : 'opacity-0'
+								}`}
+							>
+								<Image
+									fill
+									alt={item.title}
+									loading={index === 0 ? 'eager' : 'lazy'}
+									priority={index === 0}
+									quality={85}
+									sizes="(min-width: 1920px) 1920px, 100vw"
+									src={item.imageUrl}
+									style={{ objectFit: 'cover' }}
+								/>
+							</div>
+						))}
+					</div>
 
-      <section>
-        <h1 className="mb-4 text-4xl font-bold">Últimas Noticias de Anime</h1>
-        <p className="text-muted-foreground text-xl">
-          Mantente al día con las últimas novedades del mundo del anime.
-        </p>
-      </section>
+					<div className="absolute left-1/2 mt-4 flex -translate-x-1/2 transform space-x-3">
+						{portadaItems.map((_, index) => (
+							<button
+								key={index}
+								aria-label={`Ir a la diapositiva ${index + 1}`}
+								className={`h-4 w-4 rounded-full ${
+									currentSlide === index ? 'bg-red-500' : 'bg-black'
+								} disabled={currentSlide === index} transition-all duration-300`}
+								onClick={() => setCurrentSlide(index)}
+							/>
+						))}
+					</div>
+				</div>
+			</Suspense>
 
-      <Suspense fallback={<Loading />}>
-        <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {newsItems.map((item) => (
-            <NewsCard key={item.id} item={item} />
-          ))}
-        </section>
-      </Suspense>
+			<section>
+				<h1 className="mb-4 text-4xl font-bold">Últimas Noticias de Anime</h1>
+				<p className="text-muted-foreground text-xl">
+					Mantente al día con las últimas novedades del mundo del anime.
+				</p>
+			</section>
 
-      <section className="text-center">
-        <Button asChild size="lg">
-          <Link href="/noticias">Ver todas las noticias</Link>
-        </Button>
-      </section>
-    </div>
-  );
+			<Suspense fallback={<Loading />}>
+				<section className="space-y-6">
+					<div className="relative flex flex-col items-center">
+						<div className="animate-blink absolute left-[20%] top-1/2 -translate-y-1/2 transform text-2xl font-bold text-yellow-500">
+							Nueva Noticia
+							<span className="animate-bounce-left">➡️</span>
+						</div>
+						{latestNewsItem && <NewsCard item={latestNewsItem} />}
+						<div className="animate-blink absolute right-[20%] top-1/2 -translate-y-1/2 transform text-2xl font-bold text-blue-500">
+							<span className="animate-bounce-right">⬅️</span>
+							Nueva Noticia
+						</div>
+					</div>
+					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+						{otherNewsItems.map((item) => (
+							<NewsCard key={item.id} item={item} />
+						))}
+					</div>
+				</section>
+			</Suspense>
+
+			<section className="text-center">
+				<Button asChild size="lg">
+					<Link href="/noticias">Ver todas las noticias</Link>
+				</Button>
+			</section>
+		</div>
+	);
 }
+
+// Add the following CSS to your global styles or a relevant CSS file
+<style jsx global>{`
+	@keyframes blink {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0;
+		}
+	}
+	.animate-blink {
+		animation: blink 1s infinite;
+	}
+	@keyframes bounce-left {
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+		50% {
+			transform: translateX(-10px);
+		}
+	}
+	@keyframes bounce-right {
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+		50% {
+			transform: translateX(10px);
+		}
+	}
+	.animate-bounce-left {
+		animation: bounce-left 1s infinite;
+	}
+	.animate-bounce-right {
+		animation: bounce-right 1s infinite;
+	}
+`}</style>;

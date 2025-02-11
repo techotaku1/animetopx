@@ -46,7 +46,7 @@ export const carouselData = [
 		description:
 			'Los mejores estrenos de anime para la temporada de invierno 2025.',
 		category: 'Portada',
-		imageUrl: getBlobUrl('INVIERNO-2025/portadainvierno.webp'),
+		imageUrl: getBlobUrl('INVIERNO-2025/portadainvierno2025.webp'),
 		date: 'N/A',
 		isCover: true,
 	},
