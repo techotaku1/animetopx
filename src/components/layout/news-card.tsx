@@ -73,7 +73,7 @@ export function NewsCard({ item }: { item: NewsItem }): JSX.Element {
           </div>
           <div className="flex flex-col items-center space-y-1">
             <ArrowDown className="text-primary h-6 w-6 animate-bounce" />
-            <Button asChild className="flex items-center hover:bg-primary hover:text-primary-foreground">
+            <Button asChild className="flex items-center">
               <Link className="flex items-center" href={`/noticias/${item.id}`}>
                 Leer más
               </Link>
