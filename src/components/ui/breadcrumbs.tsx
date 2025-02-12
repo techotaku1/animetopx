@@ -1,6 +1,6 @@
+import React, { type JSX } from 'react';
 import { ChevronRight, type LucideIcon } from 'lucide-react';
 import Link from 'next/link';
-import React, { type JSX } from 'react';
 
 interface BreadcrumbItem {
 	href: string;

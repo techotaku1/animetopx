@@ -1,7 +1,6 @@
 import { type JSX } from 'react'; // Importar el namespace JSX de React
 import { type Metadata } from 'next'; // Importar tipo de Metadata
 import { notFound } from 'next/navigation'; // Función de Next.js para manejar el error 404
-
 import { newsItems } from '@/lib/newsData'; // Importar datos de noticias
 import NewsDetailClient from './NewsDetailClient'; // Componente para mostrar los detalles de la noticia
 

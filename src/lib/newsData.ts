@@ -305,7 +305,8 @@ export const newsItems: NewsItem[] = [
 				title: 'Solo Leveling Season 2',
 				description:
 					'La segunda temporada de la popular serie de acción y fantasía.',
-				malLink: 'https://myanimelist.net/anime/58567/Ore_dake_Level_Up_na_Ken_Season_2__Arise_from_the_Shadow',
+				malLink:
+					'https://myanimelist.net/anime/58567/Ore_dake_Level_Up_na_Ken_Season_2__Arise_from_the_Shadow',
 			},
 			{
 				url: getBlobUrl(

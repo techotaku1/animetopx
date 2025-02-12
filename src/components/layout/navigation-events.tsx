@@ -1,8 +1,8 @@
 // app/components/navigation-events.tsx
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function NavigationEvents(): null {
 	const pathname = usePathname();

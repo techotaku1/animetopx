@@ -7,7 +7,7 @@
 	},
 	"eslint.rules.customizations": [
 		{ "rule": "import/order", "severity": "off" },
-		{"rule": "no-unused-vars","severity": "warn" }
+		{ "rule": "no-unused-vars", "severity": "warn" }
 	],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[javascript]": {
