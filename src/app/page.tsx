@@ -49,6 +49,8 @@ export default function Home(): JSX.Element {
 									sizes="(min-width: 1920px) 1920px, 100vw"
 									src={item.imageUrl}
 									style={{ objectFit: 'cover' }}
+									placeholder="blur"
+									blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAAXNSR0IArs4c6QAAALBJREFUGFcBpQBa/wE4U3P/OiImABoJ6gAjPBQAGRIYANzJ5QDg9QgAsbDKAAFxkLH/IvLIAO7I2QAxVlkA0tbsABoD9QAHAfMAyAInAAGFqrn/KLG7AAw/8wDw/AsABgcHAOXz9gAc6P8A9REsAAHFmJn/8u79ANrm5QD6Dw0AOSUQANLszADcy/kAIStJAAHIrLj/1r/VAMPe7gBTTDIA8PD/AN0M5QDcxNUAOTNOAHSjRron3jjAAAAAAElFTkSuQmCC"
 								/>
 							</div>
 						))}
@@ -83,7 +85,11 @@ export default function Home(): JSX.Element {
 							Nueva Noticia
 							<span className="animate-bounce-left">➡️</span>
 						</div>
-						{latestNewsItem && <NewsCard item={latestNewsItem} />}
+						{latestNewsItem && (
+							<div className="w-full sm:w-1/2 lg:w-1/3">
+								<NewsCard item={latestNewsItem} />
+							</div>
+						)}
 						<div className="animate-blink absolute right-[20%] top-1/2 -translate-y-1/2 transform text-2xl font-bold text-blue-500">
 							<span className="animate-bounce-right">⬅️</span>
 							Nueva Noticia

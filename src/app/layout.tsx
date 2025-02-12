@@ -27,34 +27,37 @@ const grandstander = Grandstander({
 });
 
 export const metadata: Metadata = {
-	title: 'AnimeTopX',
-	description:
-		'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-	keywords:
-		'anime, noticias, manga, japón, otaku, top animes, animes verano, animes primavera, animes otoño, animes invierno',
-	openGraph: {
-		title: 'AnimeTopX',
-		description:
-			'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-		url: 'https://animetopx.com',
-		siteName: 'AnimeTopX',
-		images: [
-			{
-				url: 'https://animetopx.com/PORTADAPRINCIPAL.webp',
-				width: 1200,
-				height: 630,
-			},
-		],
-		locale: 'es_ES',
-		type: 'website',
-	},
-	twitter: {
-		card: 'summary_large_image',
-		title: 'AnimeTopX',
-		description:
-			'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-		images: ['https://animetopx.com/PORTADAPRINCIPAL.webp'],
-	},
+  title: 'AnimeTopX',
+  description:
+    'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
+  keywords:
+    'anime, noticias, manga, japón, otaku, top animes, animes verano, animes primavera, animes otoño, animes invierno',
+  openGraph: {
+    title: 'AnimeTopX',
+    description:
+      'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
+    url: 'https://animetopx.com',
+    siteName: 'AnimeTopX',
+    images: [
+      {
+        url: 'https://animetopx.com/PORTADAPRINCIPAL.webp',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'es_ES',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AnimeTopX',
+    description:
+      'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
+    images: ['https://animetopx.com/PORTADAPRINCIPAL.webp'],
+  },
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({

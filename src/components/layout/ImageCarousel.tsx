@@ -46,10 +46,11 @@ export function ImageCarousel({
 								alt={image.title || image.description}
 								className="rounded-lg object-contain"
 								loading={index === 0 ? 'eager' : 'lazy'}
-								priority={index === 0}
 								quality={90}
 								sizes="100vw"
 								src={image.url}
+                placeholder='blur'
+                blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAALCAYAAABCm8wlAAAAAXNSR0IArs4c6QAAAV5JREFUKFMFwT1PGmEAwPH/0ztANJigQC9qjW+DURNcdCK0urnbwdikez+HQ7cu/QDVLg7GmBh1MEYTlPCmOaABThEa8Y1TSyAF7QE+/f3E3XVeOlRJ1SzD1Tn3F0W8M0G8vgHqG2lELn8uKxkdpXaPS33FMG4wCyaB2fd07D8gSpm4rMa3eEzlSFedLCx95Pcvg/63HlpCQ8QOD6TtJY/b5aWcjtIxGaDtrOFu9tBYNRCJ2InsEqDU7rBK/7DPeWnZS9QqFsUTBXFzlZXZ00v6XQI9nGT+8ycqRg7TeUskbCL0aEJWMln+JmM0HSras4IypOGeeMf37Qgiun8mj7595UNgGpumooYMLs0/+IKdrBd7ELs/9mQ5tEnxyY5i68Lf2+RBLzC+ssgtI4iUHpPdb1o0kwVSO8dYnk54sfB/WWZwbBixtvZTTo324fG4qTcs2o06NocDbWSIVvuV/5F0nYOxy2bQAAAAAElFTkSuQmCC'
 							/>
 						</div>
 					))}
@@ -57,14 +58,14 @@ export function ImageCarousel({
 			</div>
 			<Button
 				aria-label="Previous"
-				className="bg-primary text-primary-foreground hover:bg-primary/90 absolute left-0 top-1/2 -translate-y-1/2 transform rounded-full p-3 transition-transform duration-200 ease-out hover:scale-110 active:scale-90"
+				className="ml-4 bg-primary text-primary-foreground hover:bg-black/70 absolute left-0 top-1/2 -translate-y-1/2 transform rounded-full p-3 transition-transform duration-200 ease-out hover:scale-110 active:scale-90"
 				onClick={onPrev}
 			>
 				<ChevronLeft className="h-6 w-6" />
 			</Button>
 			<Button
 				aria-label="Next"
-				className="bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 top-1/2 -translate-y-1/2 transform rounded-full p-3 transition-transform duration-200 ease-out hover:scale-110 active:scale-90"
+				className="mr-4 bg-primary text-primary-foreground hover:bg-black/70 absolute right-0 top-1/2 -translate-y-1/2 transform rounded-full p-3 transition-transform duration-200 ease-out hover:scale-110 active:scale-90"
 				onClick={onNext}
 			>
 				<ChevronRight className="h-6 w-6" />
