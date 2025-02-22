@@ -240,14 +240,27 @@ export const newsItems: NewsItem[] = [
 		publicationDate: new Date('2025-02-10'),
 		imageUrls: [
 			{
-				url: getBlobUrl(
-					'INVIERNO-2025/Class_no_Daikirai_na_Joshi_to_Kekkon_suru_Koto_ni_Natta.webp'
-				),
-				title: 'Class no Daikirai na Joshi to Kekkon suru Koto ni Natta',
+				url: getBlobUrl('INVIERNO-2025/Solo_Leveling_Season_2.webp'),
+				title: 'Solo Leveling Season 2',
 				description:
-					'Una historia romántica sobre un chico que se casa con la chica más odiada de su clase.',
+					'La segunda temporada de la popular serie de acción y fantasía.',
 				malLink:
-					'https://myanimelist.net/anime/59135/Class_no_Daikirai_na_Joshi_to_Kekkon_suru_Koto_ni_Natta',
+					'https://myanimelist.net/anime/58567/Ore_dake_Level_Up_na_Ken_Season_2__Arise_from_the_Shadow',
+			},
+			{
+				url: getBlobUrl('INVIERNO-2025/Sakamoto_Days.webp'),
+				title: 'Sakamoto Days',
+				description:
+					'Las aventuras de un ex-asesino que ahora lleva una vida tranquila como tendero.',
+				malLink: 'https://myanimelist.net/anime/58939/Sakamoto_Days',
+			},
+			{
+				url: getBlobUrl('INVIERNO-2025/Kusuriya_no_Hitorigoto_Season_2.webp'),
+				title: 'Kusuriya no Hitorigoto Season 2',
+				description:
+					'La segunda temporada de la historia de una farmacéutica en la corte imperial.',
+				malLink:
+					'https://myanimelist.net/anime/58514/Kusuriya_no_Hitorigoto_2nd_Season',
 			},
 			{
 				url: getBlobUrl('INVIERNO-2025/Dr._Stone_Science_Future.webp'),
@@ -258,21 +271,13 @@ export const newsItems: NewsItem[] = [
 			},
 			{
 				url: getBlobUrl(
-					'INVIERNO-2025/Guild_no_Uketsukejou_desu_ga_Zangyou_wa_Iya_nanode_Boss_wo_Solo_Toubatsu_Shiyou_to_Omoimasu.webp'
+					'INVIERNO-2025/Watashi_no_Shiawase_na_Kekkon_Season_2.png'
 				),
-				title:
-					'Guild no Uketsukejou desu ga, Zangyou wa Iya nanode Boss wo Solo Toubatsu Shiyou to Omoimasu',
+				title: 'Watashi no Shiawase na Kekkon Season 2',
 				description:
-					'Una recepcionista de gremio decide derrotar a los jefes por su cuenta para evitar horas extras.',
+					'La segunda temporada de la historia de un matrimonio feliz.',
 				malLink:
-					'https://myanimelist.net/anime/55997/Guild_no_Uketsukejou_desu_ga_Zangyou_wa_Iya_nanode_Boss_wo_Solo_Toubatsu_Shiyou_to_Omoimasu',
-			},
-			{
-				url: getBlobUrl('INVIERNO-2025/Honey_Lemon_Soda.webp'),
-				title: 'Honey Lemon Soda',
-				description:
-					'Una dulce historia de amor entre una chica tímida y un chico popular.',
-				malLink: 'https://myanimelist.net/anime/58271/Honey_Lemon_Soda',
+					'https://myanimelist.net/anime/56701/Watashi_no_Shiawase_na_Kekkon_2nd_Season',
 			},
 			{
 				url: getBlobUrl(
@@ -286,37 +291,14 @@ export const newsItems: NewsItem[] = [
 					'https://myanimelist.net/anime/57616/Kimi_no_Koto_ga_Daidaidaidaidaisuki_na_100-nin_no_Kanojo_2nd_Season',
 			},
 			{
-				url: getBlobUrl('INVIERNO-2025/Kusuriya_no_Hitorigoto_Season_2.webp'),
-				title: 'Kusuriya no Hitorigoto Season 2',
-				description:
-					'La segunda temporada de la historia de una farmacéutica en la corte imperial.',
-				malLink:
-					'https://myanimelist.net/anime/58514/Kusuriya_no_Hitorigoto_2nd_Season',
-			},
-			{
-				url: getBlobUrl('INVIERNO-2025/Sakamoto_Days.webp'),
-				title: 'Sakamoto Days',
-				description:
-					'Las aventuras de un ex-asesino que ahora lleva una vida tranquila como tendero.',
-				malLink: 'https://myanimelist.net/anime/58939/Sakamoto_Days',
-			},
-			{
-				url: getBlobUrl('INVIERNO-2025/Solo_Leveling_Season_2.webp'),
-				title: 'Solo Leveling Season 2',
-				description:
-					'La segunda temporada de la popular serie de acción y fantasía.',
-				malLink:
-					'https://myanimelist.net/anime/58567/Ore_dake_Level_Up_na_Ken_Season_2__Arise_from_the_Shadow',
-			},
-			{
 				url: getBlobUrl(
-					'INVIERNO-2025/Watashi_no_Shiawase_na_Kekkon_Season_2.png'
+					'INVIERNO-2025/Class_no_Daikirai_na_Joshi_to_Kekkon_suru_Koto_ni_Natta.webp'
 				),
-				title: 'Watashi no Shiawase na Kekkon Season 2',
+				title: 'Class no Daikirai na Joshi to Kekkon suru Koto ni Natta',
 				description:
-					'La segunda temporada de la historia de un matrimonio feliz.',
+					'Una historia romántica sobre un chico que se casa con la chica más odiada de su clase.',
 				malLink:
-					'https://myanimelist.net/anime/56701/Watashi_no_Shiawase_na_Kekkon_2nd_Season',
+					'https://myanimelist.net/anime/59135/Class_no_Daikirai_na_Joshi_to_Kekkon_suru_Koto_ni_Natta',
 			},
 			{
 				url: getBlobUrl('INVIERNO-2025/Zenshuu.png'),
@@ -324,6 +306,24 @@ export const newsItems: NewsItem[] = [
 				description:
 					'Una serie sobre la búsqueda de la perfección en las artes marciales.',
 				malLink: 'https://myanimelist.net/anime/58502/Zenshuu',
+			},
+			{
+				url: getBlobUrl('INVIERNO-2025/Honey_Lemon_Soda.webp'),
+				title: 'Honey Lemon Soda',
+				description:
+					'Una dulce historia de amor entre una chica tímida y un chico popular.',
+				malLink: 'https://myanimelist.net/anime/58271/Honey_Lemon_Soda',
+			},
+			{
+				url: getBlobUrl(
+					'INVIERNO-2025/Guild_no_Uketsukejou_desu_ga_Zangyou_wa_Iya_nanode_Boss_wo_Solo_Toubatsu_Shiyou_to_Omoimasu.webp'
+				),
+				title:
+					'Guild no Uketsukejou desu ga, Zangyou wa Iya nanode Boss wo Solo Toubatsu Shiyou to Omoimasu',
+				description:
+					'Una recepcionista de gremio decide derrotar a los jefes por su cuenta para evitar horas extras.',
+				malLink:
+					'https://myanimelist.net/anime/55997/Guild_no_Uketsukejou_desu_ga_Zangyou_wa_Iya_nanode_Boss_wo_Solo_Toubatsu_Shiyou_to_Omoimasu',
 			},
 		],
 	},

@@ -52,5 +52,6 @@
 	"tailwindCSS.lint.invalidVariant": "warning",
 	"tailwindCSS.lint.invalidConfigPath": "warning",
 	"tailwindCSS.lint.cssConflict": "warning",
-	"tailwindCSS.lint.recommendedVariantOrder": "warning"
+	"tailwindCSS.lint.recommendedVariantOrder": "warning",
+	"typescript.tsdk": "./node_modules/typescript/lib"
 }
