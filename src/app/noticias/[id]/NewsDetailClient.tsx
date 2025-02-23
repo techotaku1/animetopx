@@ -1,20 +1,11 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
-import {
-	getDocs,
-	addDoc,
-	query,
-	collection,
-	where,
-	Timestamp,
-} from 'firebase/firestore';
 import { Star, Home, Newspaper } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { db } from '@/db/firebaseConfig';
 import { newsItems } from '@/lib/newsData';
 import { ImageCarousel } from '@/components/layout/ImageCarousel';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
@@ -24,6 +15,13 @@ interface Comment {
 	id: string;
 	comment: string;
 	date: Date;
+	rating: number;
+	userName: string;
+}
+
+interface NewCommentData {
+	comment: string;
+	newsId: string;
 	rating: number;
 	userName: string;
 }
@@ -40,77 +38,96 @@ export default function NewsDetailClient({
 	const [userRating, setUserRating] = useState<number>(0);
 	const [userName, setUserName] = useState<string>('');
 
-  const fetchComments = useCallback(async () => {
-    if (!id) return;
-    const commentsQuery = query(collection(db, "comments"), where("newsId", "==", id));
-    const snapshot = await getDocs(commentsQuery);
-    const fetchedComments: Comment[] = snapshot.docs.map((doc) => {
-      const data = doc.data();
+	const fetchComments = useCallback(async () => {
+		if (!id) return;
+		const response = await fetch(`/api/comment?newsId=${id}`);
+		if (!response.ok) {
+			console.error('Error fetching comments:', response.statusText);
+			return;
+		}
+		const fetchedComments = (await response.json()) as Comment[];
+		setComments(
+			fetchedComments.map((comment) => ({
+				...comment,
+				date: new Date(comment.date),
+			}))
+		);
+	}, [id]);
 
-      return {
-        id: doc.id,
-		comment: data.comment as string,
-		date: data.date instanceof Timestamp ? data.date.toDate() : new Date(data.date as string | number),
-		rating: data.rating as number,
-		userName: data.userName as string,
-      };
-    });
+	useEffect(() => {
+		fetchComments().catch((error) => {
+			console.error('Error fetching comments:', error);
+		});
+	}, [fetchComments]);
 
-    setComments(fetchedComments);
-  }, [id]);
+	const handleCommentSubmit = async (e: React.FormEvent): Promise<void> => {
+		e.preventDefault();
+		if (newComment.trim() === '' || userRating === 0 || userName.trim() === '')
+			return;
 
-  useEffect(() => {
-	fetchComments().catch((error) => {
-	  console.error("Error fetching comments:", error);
-	});
-  }, [fetchComments]);
+		const newCommentData: NewCommentData = {
+			comment: newComment,
+			newsId: id.toString(),
+			rating: userRating,
+			userName: userName,
+		};
 
-  const handleCommentSubmit = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "") return;
+		try {
+			const response = await fetch('/api/comment', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(newCommentData),
+			});
 
-    const newCommentData = {
-      id: Math.random().toString(),
-      comment: newComment,
-      date: new Date(),
-      rating: userRating,
-      userName: userName,
-    };
+			if (!response.ok) {
+				const errorText = await response.text();
+				console.error('Error submitting comment:', errorText);
+				toast.error(`Error submitting comment: ${errorText}`, {
+					position: 'top-right',
+					autoClose: 3000,
+					hideProgressBar: true,
+				});
+				return;
+			}
 
-    setComments((prevComments) => [newCommentData, ...prevComments]);
-    setNewComment("");
-    setUserRating(0);
-    setUserName("");
+			setNewComment('');
+			setUserRating(0);
+			setUserName('');
 
-    await addDoc(collection(db, "comments"), {
-      comment: newComment,
-      date: Timestamp.fromDate(new Date()),
-      newsId: id,
-      rating: userRating,
-      userName: userName,
-    });
+			fetchComments().catch((error) => {
+				console.error('Error fetching comments:', error);
+			});
+			toast.success('Comentario agregado con éxito!', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : String(error);
+			console.error('Error submitting comment:', errorMessage);
+			toast.error(`Error submitting comment: ${errorMessage}`, {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+		}
+	};
 
-	fetchComments().catch((error) => {
-	  console.error("Error fetching comments:", error);
-	});
-    toast.success("Comentario agregado con éxito!", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-    });
-  };
+	if (!newsItem) return <p className="text-center">Noticia no encontrada</p>;
 
-  if (!newsItem) return <p className="text-center">Noticia no encontrada</p>;
-
-  const averageStars =
-    comments.length > 0
-      ? comments.reduce((acc, comment) => acc + comment.rating, 0) / comments.length
-      : 0;
+	const averageStars =
+		comments.length > 0
+			? comments.reduce((acc, comment) => acc + comment.rating, 0) /
+				comments.length
+			: 0;
 
 	const breadcrumbItems = [
 		{ href: '/', label: 'Inicio', icon: Home },
 		{ href: '/noticias', label: 'Noticias', icon: Newspaper },
-		{ href: `/noticias/${id}`, label: newsItem.title }, // Enlace de la noticia específica
+		{ href: `/noticias/${id}`, label: newsItem.title },
 	];
 
 	return (
@@ -250,7 +267,7 @@ export default function NewsDetailClient({
 							<div className="mb-2 flex items-center justify-between">
 								<span className="font-bold">{comment.userName}</span>
 								<span className="text-sm text-gray-500">
-									{comment.date.toLocaleDateString()}
+									{new Date(comment.date).toLocaleDateString()}
 								</span>
 							</div>
 							<div className="mb-2 flex">
