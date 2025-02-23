@@ -131,9 +131,9 @@ export default function NewsDetailClient({
 	];
 
 	return (
-		<div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center space-y-8 px-4 py-4">
+		<div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center">
 			<div
-				className="relative mb-4 w-full overflow-hidden"
+				className="relative w-full overflow-hidden"
 				style={{ aspectRatio: '1920/600' }}
 			>
 				<Image
@@ -147,7 +147,7 @@ export default function NewsDetailClient({
 			</div>
 
 			{/* Breadcrumbs para navegación */}
-			<div className="flex w-full justify-start">
+			<div className="flex w-full justify-start mt-7">
 				<Breadcrumbs items={breadcrumbItems} />
 			</div>
 
@@ -171,7 +171,7 @@ export default function NewsDetailClient({
 				<div className="w-full lg:sticky lg:top-4 lg:w-1/2">
 					<div className="flex h-full flex-col rounded-lg border border-gray-300 p-6 shadow-md dark:border-white">
 						{id <= 4 && (
-							<div className="mb-2 inline-block rounded-sm bg-red-600 px-2 py-1 text-center text-sm font-semibold text-white lg:text-base">
+							<div className="mb-2 inline-block rounded-sm bg-red-600 py-1 text-center text-sm font-semibold text-white lg:text-base">
 								Top {currentIndex + 1}
 							</div>
 						)}
