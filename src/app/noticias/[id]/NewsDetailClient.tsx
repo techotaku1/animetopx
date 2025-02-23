@@ -40,72 +40,81 @@ export default function NewsDetailClient({
 	const [userRating, setUserRating] = useState<number>(0);
 	const [userName, setUserName] = useState<string>('');
 
-  const fetchComments = useCallback(async () => {
-    if (!id) return;
-    const commentsQuery = query(collection(db, "comments"), where("newsId", "==", id));
-    const snapshot = await getDocs(commentsQuery);
-    const fetchedComments: Comment[] = snapshot.docs.map((doc) => {
-      const data = doc.data();
+	const fetchComments = useCallback(async () => {
+		if (!id) return;
+		const commentsQuery = query(
+			collection(db, 'comments'),
+			where('newsId', '==', id)
+		);
+		const snapshot = await getDocs(commentsQuery);
+		const fetchedComments: Comment[] = snapshot.docs.map((doc) => {
+			const data = doc.data();
 
-      return {
-        id: doc.id,
-		comment: data.comment as string,
-		date: data.date instanceof Timestamp ? data.date.toDate() : new Date(data.date as string | number),
-		rating: data.rating as number,
-		userName: data.userName as string,
-      };
-    });
+			return {
+				id: doc.id,
+				comment: data.comment as string,
+				date:
+					data.date instanceof Timestamp
+						? data.date.toDate()
+						: new Date(data.date as string | number),
+				rating: data.rating as number,
+				userName: data.userName as string,
+			};
+		});
 
-    setComments(fetchedComments);
-  }, [id]);
+		setComments(fetchedComments);
+	}, [id]);
 
-  useEffect(() => {
-	fetchComments().catch((error) => {
-	  console.error("Error fetching comments:", error);
-	});
-  }, [fetchComments]);
+	useEffect(() => {
+		fetchComments().catch((error) => {
+			console.error('Error fetching comments:', error);
+		});
+	}, [fetchComments]);
 
-  const handleCommentSubmit = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-    if (newComment.trim() === "" || userRating === 0 || userName.trim() === "") return;
+	const handleCommentSubmit = async (e: React.FormEvent): Promise<void> => {
+		e.preventDefault();
+		if (newComment.trim() === '' || userRating === 0 || userName.trim() === '')
+			return;
 
-    const newCommentData = {
-      id: Math.random().toString(),
-      comment: newComment,
-      date: new Date(),
-      rating: userRating,
-      userName: userName,
-    };
+		const newCommentData = {
+			id: Math.random().toString(),
+			comment: newComment,
+			date: new Date(),
+			rating: userRating,
+			userName: userName,
+			newsId: id, // Asegúrate de incluir el campo newsId
+		};
 
-    setComments((prevComments) => [newCommentData, ...prevComments]);
-    setNewComment("");
-    setUserRating(0);
-    setUserName("");
+		setComments((prevComments) => [newCommentData, ...prevComments]);
+		setNewComment('');
+		setUserRating(0);
+		setUserName('');
 
-    await addDoc(collection(db, "comments"), {
-      comment: newComment,
-      date: Timestamp.fromDate(new Date()),
-      newsId: id,
-      rating: userRating,
-      userName: userName,
-    });
+		await addDoc(collection(db, 'comments'), {
+			comment: newComment,
+			date: Timestamp.fromDate(new Date()),
+			newsId: id, // Asegúrate de incluir el campo newsId
+			rating: userRating,
+			userName: userName,
+		});
 
-	fetchComments().catch((error) => {
-	  console.error("Error fetching comments:", error);
-	});
-    toast.success("Comentario agregado con éxito!", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-    });
-  };
+		fetchComments().catch((error) => {
+			console.error('Error fetching comments:', error);
+		});
+		toast.success('Comentario agregado con éxito!', {
+			position: 'top-right',
+			autoClose: 3000,
+			hideProgressBar: true,
+		});
+	};
 
-  if (!newsItem) return <p className="text-center">Noticia no encontrada</p>;
+	if (!newsItem) return <p className="text-center">Noticia no encontrada</p>;
 
-  const averageStars =
-    comments.length > 0
-      ? comments.reduce((acc, comment) => acc + comment.rating, 0) / comments.length
-      : 0;
+	const averageStars =
+		comments.length > 0
+			? comments.reduce((acc, comment) => acc + comment.rating, 0) /
+				comments.length
+			: 0;
 
 	const breadcrumbItems = [
 		{ href: '/', label: 'Inicio', icon: Home },
