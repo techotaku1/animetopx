@@ -2,5 +2,6 @@
 	"framework": "nextjs",
 	"ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
 	"installCommand": "npm install",
+	"buildCommand": "npm run build",
 	"public": true
 }
