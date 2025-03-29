@@ -10,8 +10,7 @@ import {
   type FirestoreDataConverter,
   type QueryDocumentSnapshot,
   type WithFieldValue,
-  type SnapshotOptions,
-  type Firestore
+  type SnapshotOptions
 } from 'firebase/firestore';
 
 import { db } from '@/db/firebaseConfig';
@@ -61,7 +60,7 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json({ error: 'newsId is required' }, { status: 400 });
 	}
 
-	const commentsRef = collection(db as Firestore, 'comments').withConverter(commentConverter);
+	const commentsRef = collection(db, 'comments').withConverter(commentConverter);
 	const commentsQuery = query(
 		commentsRef,
 		where('newsId', '==', newsId)
@@ -91,11 +90,11 @@ export async function POST(req: NextRequest) {
 		const newComment: Comment = {
 			comment,
 			date: Timestamp.fromDate(new Date()),
-			newsId: String(newsId),
+			newsId,
 			rating,
 			userName,
 		};
-		const commentsRef = collection(db as Firestore, 'comments').withConverter(commentConverter);
+		const commentsRef = collection(db, 'comments').withConverter(commentConverter);
 		await addDoc(commentsRef, newComment);
 		return NextResponse.json(newComment, { status: 201 });
 	} catch (error) {
