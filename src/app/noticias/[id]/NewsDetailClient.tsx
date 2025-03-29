@@ -1,15 +1,19 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
-import { Star, Home, Newspaper } from 'lucide-react';
+
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { Star, Home, Newspaper } from 'lucide-react';
 import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
-import { newsItems } from '@/lib/newsData';
 import { ImageCarousel } from '@/components/layout/ImageCarousel';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
+
+import { newsItems } from '@/lib/newsData';
 
 interface Comment {
 	id: string;

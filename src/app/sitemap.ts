@@ -1,5 +1,6 @@
 // src/app/sitemap.ts
 import { type MetadataRoute } from 'next';
+
 import { newsItems } from '../lib/newsData';
 
 export const dynamic = 'force-static'; // Fuerza la exportación estática

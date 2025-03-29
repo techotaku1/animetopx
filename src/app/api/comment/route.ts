@@ -1,12 +1,16 @@
-import {
-	collection,
-	addDoc,
-	getDocs,
-	query,
-	where,
-	Timestamp,
-} from 'firebase/firestore';
 import { type NextRequest, NextResponse } from 'next/server';
+
+import { 
+  addDoc, 
+  collection, 
+  getDocs, 
+  query, 
+  where, 
+  Timestamp, 
+  type CollectionReference,
+  type Firestore
+} from 'firebase/firestore';
+
 import { db } from '@/db/firebaseConfig';
 
 interface Comment {
@@ -26,13 +30,14 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json({ error: 'newsId is required' }, { status: 400 });
 	}
 
+	const commentsRef = collection(db as Firestore, 'comments') as CollectionReference<Comment>;
 	const commentsQuery = query(
-		collection(db, 'comments'),
+		commentsRef,
 		where('newsId', '==', newsId)
 	);
 	const snapshot = await getDocs(commentsQuery);
 	const comments = snapshot.docs.map((doc) => {
-		const data = doc.data() as Comment;
+		const data = doc.data();
 		return {
 			id: doc.id,
 			...data,
@@ -59,7 +64,8 @@ export async function POST(req: NextRequest) {
 			rating,
 			userName,
 		};
-		await addDoc(collection(db, 'comments'), newComment);
+		const commentsRef = collection(db as Firestore, 'comments') as CollectionReference<Comment>;
+		await addDoc(commentsRef, newComment);
 		return NextResponse.json(newComment, { status: 201 });
 	} catch (error) {
 		const errorMessage = error instanceof Error ? error.message : String(error);

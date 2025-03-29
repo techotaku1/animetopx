@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { SiFacebook, SiInstagram, SiTiktok, SiYoutube } from 'react-icons/si'; // Usando react-icons como alternativa
 
 export function Footer() {

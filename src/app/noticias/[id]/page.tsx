@@ -1,4 +1,5 @@
 import { newsItems } from '@/lib/newsData';
+
 import NewsDetailClient from './NewsDetailClient';
 
 export function generateStaticParams() {

@@ -1,11 +1,14 @@
 import { type JSX } from 'react';
-import { Home, Newspaper } from 'lucide-react';
+
 import Link from 'next/link';
 
-import { getBlobUrl } from '@/lib/blobUtils';
+import { Home, Newspaper } from 'lucide-react';
+
 import { NewsCard } from '@/components/layout/news-card';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
+
+import { getBlobUrl } from '@/lib/blobUtils';
 
 // Simulación de datos de noticias
 const newsItems = [

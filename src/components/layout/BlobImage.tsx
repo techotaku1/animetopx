@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import { getBlobUrl } from '@/lib/blobUtils';
 
 interface BlobImageProps {

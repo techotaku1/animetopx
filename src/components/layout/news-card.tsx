@@ -1,9 +1,12 @@
 import { type JSX } from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { ArrowDown } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
