@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, type Firestore } from 'firebase/firestore';
 
 // Configuración de Firebase usando variables de entorno
 const firebaseConfig = {
@@ -13,6 +13,6 @@ const firebaseConfig = {
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db: Firestore = getFirestore(app);
 
 export { db };

@@ -6,7 +6,7 @@ import {
   getDocs, 
   query, 
   where, 
-  Timestamp, 
+  Timestamp,
   type CollectionReference,
   type Firestore
 } from 'firebase/firestore';
