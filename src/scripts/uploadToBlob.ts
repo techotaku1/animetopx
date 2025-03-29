@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { writeFileSync, readFileSync, existsSync } from 'fs';
 import { readdir, stat } from 'fs/promises';
 import path from 'path';
@@ -26,6 +25,13 @@ const CLOUDINARY_CLOUD_NAME = envVariables.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 const CLOUDINARY_API_KEY = envVariables.NEXT_PUBLIC_CLOUDINARY_API_KEY;
 const CLOUDINARY_API_SECRET = envVariables.CLOUDINARY_API_SECRET;
 
+interface CloudinaryResponse {
+    secure_url: string;
+    error?: {
+        message: string;
+    };
+}
+
 async function uploadFile(
 	filePath: string,
 	relativePath: string
@@ -46,7 +52,7 @@ async function uploadFile(
 			}
 		);
 
-		const result = await uploadResponse.json();
+		const result = (await uploadResponse.json()) as CloudinaryResponse;
 
 		if (result.error) {
 			throw new Error(result.error.message);
@@ -113,7 +119,7 @@ async function main() {
 
 		if (existsSync(blobUrlsPath)) {
 			const existingFilesContent = readFileSync(blobUrlsPath, 'utf-8');
-			existingFiles = JSON.parse(existingFilesContent);
+			existingFiles = JSON.parse(existingFilesContent) as Record<string, string>;
 		}
 
 		const uploadedFiles = await uploadDirectory(publicDir);
