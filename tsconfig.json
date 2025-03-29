@@ -1,36 +1,63 @@
 {
-	"compilerOptions": {
-		"lib": ["dom", "dom.iterable", "ESNext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"target": "ES2022",
-		"module": "ESNext",
-		"moduleResolution": "bundler", // Esta opción debe ser un solo valor, no una matriz
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"plugins": [
-			{
-				"name": "next"
-			}
-		],
-		"incremental": true,
-		"baseUrl": ".", // Asegúrate de que esto esté configurado correctamente
-		"paths": {
-			"@/*": ["./src/*"]
-		}
-	},
-	"include": [
-		"**/*.ts",
-		"**/*.js",
-		"**/*.mjs",
-		"**/*.tsx",
-		"next-env.d.ts",
-		".next/types/**/*.ts",
-		".prettierrc.mjs"
-	],
-	"exclude": ["node_modules", ".next", "dist"]
+  "compilerOptions": {
+    // Runtime options
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "preserve",
+
+    // Type Checking
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    
+    // Module Resolution
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "isolatedModules": true,
+
+    // Output options  
+    "noEmit": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    // Advanced
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // Actualizar types para incluir todas las dependencias necesarias
+    "types": [
+      "node",
+      "react",
+      "react-dom",
+      "next"
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*",
+    ".*/**/*",
+    "./**/.*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "build",
+    ".vercel"
+  ]
 }

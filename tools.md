@@ -51,9 +51,27 @@ max-2xl @media (width < 96rem) { ... }
 
 Para mejorar el rendimiento de tu proyecto y limpiar archivos innecesarios, puedes seguir estos pasos:
 
-- `rm -rf node_modules package-lock.json .next` // Remover carpetas cache
-- `npm cache clean --force` // Limpiar la caché de npm
-- `npm i` // Reinstalar las dependencias:
+chmod +x clean.sh //Dale permisos de ejecución (solo la primera vez)
+./clean.sh //Ejecutar el archivo de limpieza automatica
+
+- `rm -rf node_modules package-lock.json .next`
+- `npm cache clean --force`
+- `rm -rf .turbo`
+- `rm -rf next-env.d.ts`
+- `rm -rf tsconfig.tsbuildinfo`
+- `rm -rf .tsbuildinfo`
+- `rm -rf .eslintcache`
+
+---
+
+Algunas opciones del CLI de npm para optimizar o reaprar tus librerias
+
+- `npm dedupe` //Reducir la duplicación en el árbol de paquetes
+- `npm doctor` //Comprueba el estado de tu entorno npm
+- `npm prune` //Eliminar paquetes extraños
+- `npm ci` //# Para CI/CD y despliegues
+- `npm cache verify` //
+- `npm install -g npm@11.2.0` //actualizar ultima version del npm
 
 ---
 
@@ -67,16 +85,15 @@ Para mejorar el rendimiento de tu proyecto y limpiar archivos innecesarios, pued
 6. `npm install typescript --save-dev`: Instala TypeScript localmente en el proyecto como una dependencia de desarrollo.
 7. `npx tsc`: Ejecuta el compilador TypeScript localmente.
 8. `tsc`: Ejecuta el compilador TypeScript globalmente.
-9. `npm install -D eslint-config-next@latest`: Actualizar ESLint en Next
-10. `npm install next@latest react@latest react-dom@latest`: Actualizar Next
-11. `npm install --save-dev eslint @eslint/eslintrc @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-import eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-simple-import-sort eslint-plugin-unicorn eslint-plugin-svelte eslint-plugin-playwright eslint-plugin-prettier eslint-plugin-next` : Dependencias para que funcione el archivo eslint.config.mjs
+9. `npm install next@latest react@latest react-dom@latest`: Actualizar Next
+10. `npm install --save-dev eslint @eslint/eslintrc @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-import eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-simple-import-sort eslint-config-next @types/next @types/react` : Dependencias para que funcione el archivo eslint.config.mjs
+11. `npx eslint --debug .` : Debugear Eslint para cuando no quiera detectar errores
 
 ---
 
 Tecnologias Que Se Usan:
 
-- Next.js 15, App Router, Clerk, Tailwind CSS, Shadcn/UI, Drizzle ORM,
-  PostgreSQL, Neon, Vercel, TypeScript, AWS S3, Upstash.
+- Next.js 15, App Router, Clerk, Tailwind CSS, Shadcn/UI, Drizzle ORM, PostgreSQL, Neon, Vercel, TypeScript, AWS S3, Upstash.
 
 ---
 
@@ -89,7 +106,7 @@ CORREO SOPORTE:
 Colores del manual de marca:
 
 ```css
-#3AF4EF #00BDD8 #01142B
+#3AF4EF #00BDD8 #01142B #2ecc71
 
 #01142B -background //variable de tailwindcss
 #3AF4EF -primary //variable de tailwindcss
@@ -124,6 +141,8 @@ Tutorial UPDATE DEPENDENCIES:
 13. `npx @clerk/upgrade --from=core-1` // Instala la última versión de Clerk para Next.js 1
 14. `npx @clerk/upgrade -g` // Instala la última versión de Clerk para Next.js 2
 15. `npm install drizzle-orm@latest` // Instala la última versión de Drizzle ORM
+16. `npx @next/codemod@canary upgrade latest` // Ayuda a actualizar tu código para que sea compatible con la última versión de Next.js
+17. `npm i next@latest react@latest react-dom@latest eslint-config-next@latest` // Este comando instala las últimas versiones estables de los paquetes core necesarios para Next.js
 
 ---
 
@@ -151,6 +170,21 @@ Tutorial de Comandos Para El Fomateo Eslint, Prettier y Typescript:
 4. `npm run format:write`: Formatea automáticamente el código del proyecto usando Prettier.
 5. `npm run typecheck`: Ejecuta el verificador de tipos de TypeScript sin generar archivos de salida.
 6. `npm run build`: Ejecuta el verificador de despliegue
-7. `npm audit fix`: Repara algunas fallas del servicio de paquetes de npm
+7. `npm audit fix --force`: Repara algunas fallas del servicio de paquetes de npm
+
+---
+
+Tutorial Para analisar tus dependecias :
+
+1. `npm install -g depcheck`
+2. `npm install -g depcheck typescript`
+3. `depcheck --ignores="@types/*,next,react,react-dom,typescript,@clerk/nextjs,react-icons" --parsers="*.ts:typescript,*.tsx:typescript"`
+
+---
+
+Limpia la caché de VS Code:
+
+Borra los datos en:
+Windows: `C:\Users\TU_USUARIO\AppData\Roaming\Code`
 
 ---

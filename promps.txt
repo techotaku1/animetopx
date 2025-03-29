@@ -1,14 +1,20 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import tseslintPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import globals from 'globals';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const compat = new FlatCompat({
-	baseDirectory: import.meta.dirname,
+	baseDirectory: __dirname,
 	recommendedConfig: js.configs.recommended,
 });
 
+/** @type {import('eslint').Linter.Config[]} */
 const eslintConfig = [
 	// 🔹 Ignorar archivos innecesarios
 	{
@@ -45,10 +51,6 @@ const eslintConfig = [
 				...globals.es2022,
 			},
 		},
-		linterOptions: {
-			reportUnusedDisableDirectives: false, // Change this to false
-			noInlineConfig: false,
-		},
 		plugins: {
 			'@typescript-eslint': tseslintPlugin,
 		},
@@ -70,23 +72,20 @@ const eslintConfig = [
 	},
 
 	// 🔹 Configuración de Next.js, TypeScript e Importaciones
-	...compat.config({
-		extends: [
-			'eslint:recommended',
-			'next/core-web-vitals',
-			'next/typescript',
-      'eslint:recommended', 
-      'next',
-			'plugin:@next/next/recommended',
-			'plugin:@typescript-eslint/recommended',
-			'plugin:@typescript-eslint/recommended-type-checked',
-			'plugin:@typescript-eslint/stylistic-type-checked',
-			'plugin:import/recommended',
-			'plugin:drizzle/recommended',
-			'prettier',
-		],
+	...compat.extends([
+		'next/core-web-vitals',
+		'next/typescript',
+		'plugin:@next/next/recommended',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:@typescript-eslint/recommended-type-checked',
+		'plugin:@typescript-eslint/stylistic-type-checked',
+		'plugin:import/recommended',
+		'plugin:drizzle/recommended',
+		'prettier',
+	]),
 
-   // Mantener todas tus reglas personalizadas
+	// Mantener todas tus reglas personalizadas
+	{
 		rules: {
 			// ⚠️ **Advertencias de Código**
 			'no-console': 'off',
@@ -251,7 +250,9 @@ const eslintConfig = [
 			react: { version: 'detect' },
 			next: { rootDir: process.cwd() },
 		},
-	}),
+	},
 ];
 
 export default eslintConfig;
+
+--------------------------------------------------------------
