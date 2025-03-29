@@ -16,9 +16,9 @@
     "noUnusedParameters": true,
     
     // Module Resolution
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "~/*": ["./src/*"]
+      "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "allowJs": true,

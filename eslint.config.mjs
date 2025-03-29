@@ -20,10 +20,7 @@ const eslintConfig = [
 			'dist/**',
 			'**/*.d.ts',
 			'.vercel/**',
-			'src/components/estudiantes/ui/**',
-			'src/components/educadores/ui/**',
-			'src/components/admin/ui/**',
-			'src/components/super-admin/ui/**',
+      'src/components/ui/**'
 		],
 	},
 
