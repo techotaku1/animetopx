@@ -1,13 +1,11 @@
 'use client';
 
-import { type FC } from 'react';
-
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
 import { Button } from '@/components/ui/button';
 
-const NotFound: FC = () => {
+export default function NotFound() {
 	const router = useRouter();
 
 	return (
@@ -44,5 +42,3 @@ const NotFound: FC = () => {
 		</div>
 	);
 }
-
-export default NotFound;

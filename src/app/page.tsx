@@ -1,15 +1,11 @@
 'use client';
 
 import { Suspense, useState, useEffect, type JSX } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { carouselData } from '@/lib/carouselData';
 import { NewsCard } from '@/components/layout/news-card';
 import { Button } from '@/components/ui/button';
-
-import { carouselData } from '@/lib/carouselData';
-
 import Loading from './loading';
 
 export default function Home(): JSX.Element {

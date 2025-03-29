@@ -1,14 +1,11 @@
 //src\app\layout.tsx
 import './globals.css'; // Asegúrate de que aquí tienes los estilos globales
 import React, { Suspense } from 'react';
-
-import { Shantell_Sans, Grandstander } from 'next/font/google';
-import Script from 'next/script';
-
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { type Metadata } from 'next';
-
+import { Shantell_Sans, Grandstander } from 'next/font/google';
+import Script from 'next/script';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { NavigationEvents } from '@/components/layout/navigation-events';

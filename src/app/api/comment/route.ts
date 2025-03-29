@@ -7,7 +7,10 @@ import {
   query, 
   where, 
   Timestamp,
-  type CollectionReference,
+  type FirestoreDataConverter,
+  type QueryDocumentSnapshot,
+  type WithFieldValue,
+  type SnapshotOptions,
   type Firestore
 } from 'firebase/firestore';
 
@@ -21,6 +24,34 @@ interface Comment {
 	userName: string;
 }
 
+const commentConverter: FirestoreDataConverter<Comment> = {
+  toFirestore: (comment: WithFieldValue<Comment>) => {
+    return {
+      comment: comment.comment,
+      date: comment.date,
+      newsId: comment.newsId,
+      rating: comment.rating,
+      userName: comment.userName,
+    };
+  },
+  fromFirestore: (
+    snapshot: QueryDocumentSnapshot,
+    options?: SnapshotOptions
+  ): Comment => {
+    const data = snapshot.data(options ?? {});
+    if (!data?.comment || !data?.date || !data?.newsId || !data?.rating || !data?.userName) {
+      throw new Error('Invalid comment data');
+    }
+    return {
+      comment: String(data.comment),
+      date: data.date as Timestamp,
+      newsId: String(data.newsId),
+      rating: Number(data.rating),
+      userName: String(data.userName),
+    };
+  },
+};
+
 export const revalidate = 60;
 
 export async function GET(req: NextRequest) {
@@ -30,7 +61,7 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json({ error: 'newsId is required' }, { status: 400 });
 	}
 
-	const commentsRef = collection(db as Firestore, 'comments') as CollectionReference<Comment>;
+	const commentsRef = collection(db as Firestore, 'comments').withConverter(commentConverter);
 	const commentsQuery = query(
 		commentsRef,
 		where('newsId', '==', newsId)
@@ -64,7 +95,7 @@ export async function POST(req: NextRequest) {
 			rating,
 			userName,
 		};
-		const commentsRef = collection(db as Firestore, 'comments') as CollectionReference<Comment>;
+		const commentsRef = collection(db as Firestore, 'comments').withConverter(commentConverter);
 		await addDoc(commentsRef, newComment);
 		return NextResponse.json(newComment, { status: 201 });
 	} catch (error) {
