@@ -61,6 +61,8 @@ chmod +x clean.sh //Dale permisos de ejecución (solo la primera vez)
 - `rm -rf tsconfig.tsbuildinfo`
 - `rm -rf .tsbuildinfo`
 - `rm -rf .eslintcache`
+- `npm cache verify`
+- `rm -rf node_modules/.cache`
 
 ---
 
@@ -70,8 +72,7 @@ Algunas opciones del CLI de npm para optimizar o reaprar tus librerias
 - `npm doctor` //Comprueba el estado de tu entorno npm
 - `npm prune` //Eliminar paquetes extraños
 - `npm ci` //# Para CI/CD y despliegues
-- `npm cache verify` //
-- `npm install -g npm@11.2.0` //actualizar ultima version del npm
+- `npm install -g npm@latest` //actualizar ultima version del npm
 
 ---
 
@@ -86,7 +87,7 @@ Algunas opciones del CLI de npm para optimizar o reaprar tus librerias
 7. `npx tsc`: Ejecuta el compilador TypeScript localmente.
 8. `tsc`: Ejecuta el compilador TypeScript globalmente.
 9. `npm install next@latest react@latest react-dom@latest`: Actualizar Next
-10. `npm install --save-dev eslint @eslint/eslintrc @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-import eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-simple-import-sort eslint-config-next @types/next @types/react` : Dependencias para que funcione el archivo eslint.config.mjs
+10. `npm install --save-dev eslint @eslint/eslintrc @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-import eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-simple-import-sort eslint-config-next @types/next @types/react @eslint/js typescript-eslint` : Dependencias para que funcione el archivo eslint.config.mjs
 11. `npx eslint --debug .` : Debugear Eslint para cuando no quiera detectar errores
 
 ---
@@ -174,7 +175,7 @@ Tutorial de Comandos Para El Fomateo Eslint, Prettier y Typescript:
 
 ---
 
-Tutorial Para analisar tus dependecias :
+Tutorial Para analizar tus dependecias :
 
 1. `npm install -g depcheck`
 2. `npm install -g depcheck typescript`

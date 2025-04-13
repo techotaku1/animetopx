@@ -13,25 +13,29 @@
 	},
 	"editor.linkedEditing": true,
 	"editor.stickyScroll.enabled": true,
-
 	// File Configuration
 	"files.autoSave": "afterDelay",
 	"files.associations": {
 		"*.css": "tailwindcss",
-		"*.env": "dotenv",
-		"*.env.*": "dotenv",
-		".env": "dotenv",
-		".env.development": "dotenv",
-		".env.production": "dotenv",
-		".env.local": "dotenv",
-		".env.example": "dotenv"
+		"*.env": "env",
+		"*.tsx": "typescriptreact",
+		"*.ts": "typescript",
+		"*.mjs": "javascript",
+		"*.js": "javascript",
+		"*.json": "json",
+		"*.svg": "svg", // Changed from "html" to "svg"
+		"*.xml": "html",
+		"*.config.mjs": "javascript",
+		"*.config.js": "javascript",
+		"*.config.ts": "typescript",
+		"*.md": "markdown",
+		"*.mdx": "mdx"
 	},
 	"files.watcherExclude": {
 		"/node_modules/": true,
 		"/dist/": true,
 		"/.git/": true
 	},
-
 	// Language-specific Formatters
 	"[javascript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -45,20 +49,36 @@
 	"[typescriptreact]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-	"[dotenv]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
 	"[env]": {
+		"editor.defaultFormatter": "IronGeek.vscode-env"
+	},
+	"[dotenv]": {
+		"editor.defaultFormatter": "IronGeek.vscode-env"
+	},
+	"[.env]": {
+		"editor.defaultFormatter": "IronGeek.vscode-env"
+	},
+	"[json]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-
+	"[svg]": {
+		"editor.defaultFormatter": "jock.svg",
+		"editor.formatOnSave": true,
+		"editor.formatOnType": true
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+	"[xml]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true,
+		"editor.formatOnType": true
+	},
 	// TypeScript Configuration
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"typescript.tsserver.maxTsServerMemory": 4096,
-	"typescript.tsserver.watchOptions": {
-		"fallbackPolling": "dynamicPriorityPolling"
-	},
+	"typescript.tsserver.maxTsServerMemory": 8192,
 
 	// ESLint Configuration
 	"eslint.validate": [
@@ -67,18 +87,25 @@
 		"typescript",
 		"typescriptreact"
 	],
-	"eslint.workingDirectories": ["./"],
-	"eslint.useFlatConfig": true,
-	"eslint.run": "onType",
-  "eslint.enable": true,
-	"eslint.nodePath": "./node_modules",
-	"eslint.debug": false,
-	"eslint.rules.customizations": [
-		{ "rule": "import/order", "severity": "off" },
-		{ "rule": "no-unused-vars", "severity": "warn" },
-		{ "rule": "@typescript-eslint/no-unused-vars", "severity": "off" }
-	],
 
+	"eslint.rules.customizations": [
+		{
+			"rule": "import/named",
+			"severity": "off"
+		},
+		{
+			"rule": "import/order",
+			"severity": "off"
+		},
+		{
+			"rule": "no-unused-vars",
+			"severity": "warn"
+		},
+		{
+			"rule": "@typescript-eslint/no-unused-vars",
+			"severity": "off"
+		}
+	],
 	// Tailwind CSS Configuration
 	"tailwindCSS.includeLanguages": {
 		"typescript": "javascript",
@@ -101,12 +128,10 @@
 	"tailwindCSS.showPixelEquivalents": true,
 	"tailwindCSS.colorDecorators": true,
 	"tailwindCSS.lint.recommendedVariantOrder": "warning",
-
 	// CSS Validation
 	"css.validate": false,
 	"scss.validate": false,
 	"less.validate": false,
-
 	// Search and Performance
 	"search.exclude": {
 		"/node_modules": true,
@@ -114,9 +139,7 @@
 		"/.git": true
 	},
 	"javascript.suggest.completeFunctionCalls": true,
-
-	// Git Integration
-	"git.enableSmartCommit": true,
-	"git.confirmSync": false,
-  "git.autofetch": true,
+	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
+	"svg.preview.background": "editor",
+	"workbench.colorTheme": "GitHub Dark Default"
 }

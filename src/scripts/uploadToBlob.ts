@@ -1,4 +1,5 @@
-import { writeFileSync, readFileSync, existsSync } from 'fs';
+import { createHash } from 'crypto';
+import { writeFileSync, readFileSync, existsSync, statSync } from 'fs';
 import { readdir, stat } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -21,15 +22,22 @@ const envVariables = envFileContent.split('\n').reduce(
 	{} as Record<string, string>
 );
 
-const CLOUDINARY_CLOUD_NAME = envVariables.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-const CLOUDINARY_API_KEY = envVariables.NEXT_PUBLIC_CLOUDINARY_API_KEY;
-const CLOUDINARY_API_SECRET = envVariables.CLOUDINARY_API_SECRET;
+// Extract credentials from CLOUDINARY_URL
+const cloudinaryUrl = envVariables.CLOUDINARY_URL;
+const [credentials, cloudName] = cloudinaryUrl
+	.replace('cloudinary://', '')
+	.split('@');
+const [apiKey, apiSecret] = credentials.split(':');
+
+const CLOUDINARY_CLOUD_NAME = cloudName;
+const CLOUDINARY_API_KEY = apiKey;
+const CLOUDINARY_API_SECRET = apiSecret;
 
 interface CloudinaryResponse {
-    secure_url: string;
-    error?: {
-        message: string;
-    };
+	secure_url: string;
+	error?: {
+		message: string;
+	};
 }
 
 async function uploadFile(
@@ -38,28 +46,76 @@ async function uploadFile(
 ): Promise<string> {
 	try {
 		const fileBuffer = readFileSync(filePath);
-		const blob = new Blob([fileBuffer]);
+		const stats = statSync(filePath);
+		const fileSizeInMB = stats.size / (1024 * 1024);
 
-		const formData = new FormData();
-		formData.append('file', blob, relativePath); // Use relativePath instead of just the filename
-		formData.append('upload_preset', 'ml_default');
+		// Si el archivo es mayor a 10MB, comprímelo
+		if (fileSizeInMB > 10) {
+			console.log(
+				`Comprimiendo archivo grande: ${filePath} (${fileSizeInMB.toFixed(2)}MB)`
+			);
 
-		const uploadResponse = await fetch(
-			`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,
-			{
-				method: 'POST',
-				body: formData,
+			const sharp = (await import('sharp')).default;
+			const compressed = await sharp(fileBuffer)
+				.webp({ quality: 80 })
+				.toBuffer();
+
+			const blob = new Blob([compressed]);
+			const timestamp = Math.round(new Date().getTime() / 1000);
+			const signature = generateSignature(timestamp);
+
+			const formData = new FormData();
+			formData.append('file', blob, relativePath);
+			formData.append('api_key', CLOUDINARY_API_KEY);
+			formData.append('timestamp', timestamp.toString());
+			formData.append('signature', signature);
+			// No necesitamos upload_preset cuando usamos firma
+
+			const uploadResponse = await fetch(
+				`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,
+				{
+					method: 'POST',
+					body: formData,
+				}
+			);
+
+			const result = (await uploadResponse.json()) as CloudinaryResponse;
+
+			if (result.error) {
+				throw new Error(result.error.message);
 			}
-		);
 
-		const result = (await uploadResponse.json()) as CloudinaryResponse;
+			console.log(`Subido: ${result.secure_url}`);
+			return result.secure_url;
+		} else {
+			const blob = new Blob([fileBuffer]);
+			const timestamp = Math.round(new Date().getTime() / 1000);
+			const signature = generateSignature(timestamp);
 
-		if (result.error) {
-			throw new Error(result.error.message);
+			const formData = new FormData();
+			formData.append('file', blob, relativePath);
+			formData.append('api_key', CLOUDINARY_API_KEY);
+			formData.append('timestamp', timestamp.toString());
+			formData.append('signature', signature);
+			// No necesitamos upload_preset cuando usamos firma
+
+			const uploadResponse = await fetch(
+				`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,
+				{
+					method: 'POST',
+					body: formData,
+				}
+			);
+
+			const result = (await uploadResponse.json()) as CloudinaryResponse;
+
+			if (result.error) {
+				throw new Error(result.error.message);
+			}
+
+			console.log(`Subido: ${result.secure_url}`);
+			return result.secure_url;
 		}
-
-		console.log(`Subido: ${result.secure_url}`);
-		return result.secure_url;
 	} catch (error: unknown) {
 		if (
 			error instanceof Error &&
@@ -73,6 +129,12 @@ async function uploadFile(
 		}
 		return '';
 	}
+}
+
+// Añadir esta función para generar la firma
+function generateSignature(timestamp: number): string {
+	const stringToSign = `timestamp=${timestamp}${CLOUDINARY_API_SECRET}`;
+	return createHash('sha1').update(stringToSign).digest('hex');
 }
 
 async function* walkDirectory(dir: string): AsyncGenerator<string> {
@@ -119,7 +181,10 @@ async function main() {
 
 		if (existsSync(blobUrlsPath)) {
 			const existingFilesContent = readFileSync(blobUrlsPath, 'utf-8');
-			existingFiles = JSON.parse(existingFilesContent) as Record<string, string>;
+			existingFiles = JSON.parse(existingFilesContent) as Record<
+				string,
+				string
+			>;
 		}
 
 		const uploadedFiles = await uploadDirectory(publicDir);

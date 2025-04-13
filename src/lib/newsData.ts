@@ -327,4 +327,92 @@ export const newsItems: NewsItem[] = [
 			},
 		],
 	},
+	{
+		id: 5,
+		title: 'ANIMES PRIMAVERA 2025',
+		category: 'Estrenos Primavera 2025',
+		date: '2025-04-1',
+		content: 'Detalles sobre la temporada de primavera 2025',
+		backgroundImage: getBlobUrl('PRIMAVERA-2025/portadaprimavera2025.webp'),
+		publicationDate: new Date('2025-04-1'),
+		imageUrls: [
+			{
+				url: getBlobUrl('PRIMAVERA-2025/Fire_Force_Season_3.webp'),
+				title: 'Fire Force Season 3',
+				description:
+					'La tercera temporada del anime de acción y fantasía sobre bomberos con poderes especiales.',
+				malLink:
+					'https://myanimelist.net/anime/53994/Enen_no_Shouboutai_Season_3',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/Lazarus.webp'),
+				title: 'Lazarus',
+				description:
+					'Una nueva serie original sobre seres inmortales en un mundo post-apocalíptico.',
+				malLink: 'https://myanimelist.net/anime/55853/Lazarus',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/Wind_Breaker_Season_2.webp'),
+				title: 'Wind Breaker Season 2',
+				description:
+					'La continuación de la historia de pandillas callejeras y peleas escolares.',
+				malLink: 'https://myanimelist.net/anime/57406/Wind_Breaker_2nd_Season',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/The_Beginning_After_the_End.webp'),
+				title: 'The Beginning After the End',
+				description:
+					'Adaptación del popular webtoon sobre reencarnación y magia.',
+				malLink:
+					'https://myanimelist.net/anime/57815/The_Beginning_After_the_End',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/Boku_no_Hero_Academia_Vigilantes.webp'),
+				title: 'Boku no Hero Academia Vigilantes',
+				description:
+					'Serie spin-off centrada en los vigilantes del universo de My Hero Academia.',
+				malLink:
+					'https://myanimelist.net/anime/57601/Boku_no_Hero_Academia__Vigilantes',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/Haite_Kudasai_Takamine_san.webp'),
+				title: 'Haite Kudasai, Takamine-san',
+				description:
+					'Una comedia romántica sobre una estudiante con un secreto peculiar.',
+				malLink:
+					'https://myanimelist.net/anime/57439/Haite_Kudasai_Takamine-san',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/Witch_Watch.webp'),
+				title: 'Witch Watch',
+				description:
+					'Una historia mágica sobre una bruja y su familiar humano.',
+				malLink: 'https://myanimelist.net/anime/57491/Witch_Watch',
+			},
+			{
+				url: getBlobUrl(
+					'PRIMAVERA-2025/Can_a_Boy_Girl_Friendship_Survive.webp'
+				),
+				title: 'Can a Boy-Girl Friendship Survive?',
+				description:
+					'Una comedia romántica sobre la amistad entre chicos y chicas.',
+				malLink: 'https://myanimelist.net/anime/57432/Otoko-Onna_Tomodachi',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/Kowloon_Generic_Romance.webp'),
+				title: 'Kowloon Generic Romance',
+				description:
+					'Un romance ambientado en la misteriosa ciudad amurallada de Kowloon.',
+				malLink: 'https://myanimelist.net/anime/57408/Kowloon_Generic_Romance',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/Aharen_san_wa_Hakarenai_Season_2.webp'),
+				title: 'Aharen-san wa Hakarenai Season 2',
+				description:
+					'La segunda temporada de la comedia escolar sobre una chica con problemas de proximidad.',
+				malLink:
+					'https://myanimelist.net/anime/57397/Aharen-san_wa_Hakarenai_2nd_Season',
+			},
+		],
+	},
 ];
