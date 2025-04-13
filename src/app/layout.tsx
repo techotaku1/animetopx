@@ -12,8 +12,8 @@ import { type Metadata } from 'next';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { NavigationEvents } from '@/components/layout/navigation-events';
-import CustomProgressBar from '@/components/layout/ProgressBar';
-import { ThemeProvider } from '@/components/layout/theme-provider';
+
+import Providers from './providers';
 
 const shantellSans = Shantell_Sans({
 	subsets: ['latin'],
@@ -30,37 +30,37 @@ const grandstander = Grandstander({
 });
 
 export const metadata: Metadata = {
-  title: 'AnimeTopX',
-  description:
-    'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-  keywords:
-    'anime, noticias, manga, japón, otaku, top animes, animes verano, animes primavera, animes otoño, animes invierno',
-  openGraph: {
-    title: 'AnimeTopX',
-    description:
-      'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-    url: 'https://animetopx.com',
-    siteName: 'AnimeTopX',
-    images: [
-      {
-        url: 'https://animetopx.com/PORTADAPRINCIPAL.webp',
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: 'es_ES',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'AnimeTopX',
-    description:
-      'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-    images: ['https://animetopx.com/PORTADAPRINCIPAL.webp'],
-  },
-  icons: {
-    icon: '/favicon.ico',
-  },
+	title: 'AnimeTopX',
+	description:
+		'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
+	keywords:
+		'anime, noticias, manga, japón, otaku, top animes, animes verano, animes primavera, animes otoño, animes invierno, Fire Force Season 3, Lazarus, Wind Breaker Season 2, The Beginning After the End, Boku no Hero Academia Vigilantes, Solo Leveling Season 2, Sakamoto Days, Kusuriya no Hitorigoto Season 2, Dr. Stone Science Future, temporada invierno 2025, temporada primavera 2025, estrenos anime 2025',
+	openGraph: {
+		title: 'AnimeTopX',
+		description:
+			'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
+		url: 'https://animetopx.com',
+		siteName: 'AnimeTopX',
+		images: [
+			{
+				url: 'https://animetopx.com/PORTADAPRINCIPAL.webp',
+				width: 1200,
+				height: 630,
+			},
+		],
+		locale: 'es_ES',
+		type: 'website',
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'AnimeTopX',
+		description:
+			'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
+		images: ['https://animetopx.com/PORTADAPRINCIPAL.webp'],
+	},
+	icons: {
+		icon: '/favicon.ico',
+	},
 };
 
 export default function RootLayout({
@@ -98,9 +98,8 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className="bg-background text-foreground flex min-h-screen flex-col">
-				<ThemeProvider enableSystem attribute="class" defaultTheme="system">
+				<Providers>
 					<Header />
-					<CustomProgressBar />
 					<main className="container mx-auto grow px-4 py-8">
 						{children}
 						<Suspense fallback={null}>
@@ -110,7 +109,7 @@ export default function RootLayout({
 						<SpeedInsights />
 					</main>
 					<Footer />
-				</ThemeProvider>
+				</Providers>
 			</body>
 		</html>
 	);

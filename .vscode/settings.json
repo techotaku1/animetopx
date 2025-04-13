@@ -23,8 +23,9 @@
 		"*.mjs": "javascript",
 		"*.js": "javascript",
 		"*.json": "json",
-		"*.svg": "svg", // Changed from "html" to "svg"
+		"*.svg": "svg",
 		"*.xml": "html",
+		"*.html": "html",
 		"*.config.mjs": "javascript",
 		"*.config.js": "javascript",
 		"*.config.ts": "typescript",
@@ -128,16 +129,14 @@
 	"tailwindCSS.showPixelEquivalents": true,
 	"tailwindCSS.colorDecorators": true,
 	"tailwindCSS.lint.recommendedVariantOrder": "warning",
-	// CSS Validation
-	"css.validate": false,
-	"scss.validate": false,
-	"less.validate": false,
+
 	// Search and Performance
 	"search.exclude": {
 		"/node_modules": true,
 		"/dist": true,
 		"/.git": true
 	},
+
 	"javascript.suggest.completeFunctionCalls": true,
 	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
 	"svg.preview.background": "editor",

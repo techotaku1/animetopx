@@ -31,7 +31,7 @@ const eslintConfig = [
 	{
 		files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
 		languageOptions: {
-			ecmaVersion: 2022,
+			ecmaVersion: 'latest',
 			sourceType: 'module',
 			parser: tsParser,
 			parserOptions: {
