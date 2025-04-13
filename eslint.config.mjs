@@ -20,7 +20,10 @@ const eslintConfig = [
 			'dist/**',
 			'**/*.d.ts',
 			'.vercel/**',
-      'src/components/ui/**'
+			'src/components/estudiantes/ui/**',
+			'src/components/educadores/ui/**',
+			'src/components/admin/ui/**',
+			'src/components/super-admin/ui/**',
 		],
 	},
 
@@ -72,8 +75,6 @@ const eslintConfig = [
 			'eslint:recommended',
 			'next/core-web-vitals',
 			'next/typescript',
-      'eslint:recommended', 
-      'next',
 			'plugin:@next/next/recommended',
 			'plugin:@typescript-eslint/recommended',
 			'plugin:@typescript-eslint/recommended-type-checked',
@@ -82,8 +83,6 @@ const eslintConfig = [
 			'plugin:drizzle/recommended',
 			'prettier',
 		],
-
-   // Mantener todas tus reglas personalizadas
 		rules: {
 			// ⚠️ **Advertencias de Código**
 			'no-console': 'off',
@@ -173,66 +172,6 @@ const eslintConfig = [
 			'import/no-unresolved': 'warn',
 			'import/no-duplicates': 'warn',
 			'import/newline-after-import': 'warn',
-
-			// Nuevas reglas importantes de Next.js repo
-
-			// 🔹 JavaScript Best Practices
-			'array-callback-return': 'error',
-			'default-case': ['error', { commentPattern: '^no default$' }],
-			eqeqeq: ['error', 'smart'],
-			'no-array-constructor': 'error',
-			'no-caller': 'error',
-			'no-eval': 'error',
-			'no-extend-native': 'error',
-			'no-extra-bind': 'error',
-			'no-implied-eval': 'error',
-			'no-iterator': 'error',
-			'no-lone-blocks': 'error',
-			'no-new-wrappers': 'error',
-			'no-throw-literal': 'error',
-			'no-useless-computed-key': 'error',
-			'no-useless-rename': [
-				'error',
-				{
-					ignoreDestructuring: false,
-					ignoreImport: false,
-					ignoreExport: false,
-				},
-			],
-
-			// 🔹 React Específicas
-			'react/forbid-foreign-prop-types': ['error', { allowInPropTypes: true }],
-			'react/jsx-no-comment-textnodes': 'error',
-			'react/jsx-no-duplicate-props': 'error',
-			'react/no-danger-with-children': 'error',
-			'react/no-deprecated': 'error',
-			'react/no-direct-mutation-state': 'error',
-			'react/no-is-mounted': 'error',
-			'react/no-typos': 'error',
-			'react/require-render-return': 'error',
-			'react/style-prop-object': 'error',
-
-			// 🔹 TypeScript Específicas
-			'@typescript-eslint/no-redeclare': [
-				'error',
-				{ builtinGlobals: false, ignoreDeclarationMerge: true },
-			],
-			'@typescript-eslint/prefer-as-const': 'error',
-			'@typescript-eslint/no-this-alias': 'error',
-
-			// 🔹 Import/Export
-			'import/no-anonymous-default-export': [
-				'error',
-				{
-					allowArrowFunction: false,
-					allowAnonymousClass: false,
-					allowAnonymousFunction: false,
-					allowArray: true,
-					allowCallExpression: true,
-					allowLiteral: true,
-					allowObject: true,
-				},
-			],
 		},
 		settings: {
 			'import/resolver': {

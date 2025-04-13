@@ -24,214 +24,95 @@ export interface NewsItem {
 // Datos de ejemplo
 export const newsItems: NewsItem[] = [
 	{
-		id: 1,
-		title: 'TEMPORADA OTOÑO 2024',
-		category: 'Estrenos Otoño 2024',
-		date: '2024-10-1',
-		content: 'Detalles sobre la temporada de otoño 2024',
-		backgroundImage: getBlobUrl('OTOÑO-2024/portadaotoño.webp'),
-		publicationDate: new Date('2024-10-1'),
+		id: 5, // ID de Primavera 2025
+		title: 'ANIMES PRIMAVERA 2025',
+		category: 'Estrenos Primavera 2025',
+		date: '2025-04-1',
+		content: 'Detalles sobre la temporada de primavera 2025',
+		backgroundImage: getBlobUrl('PRIMAVERA-2025/portadaprimavera2025.webp'),
+		publicationDate: new Date('2025-04-1'),
 		imageUrls: [
 			{
-				url: getBlobUrl('OTOÑO-2024/ReZeroSeason3.webp'),
-				title: 'Re:Zero Season 3',
+				url: getBlobUrl('PRIMAVERA-2025/Fire_Force_Season_3.webp'),
+				title: 'Fire Force Season 3',
 				description:
-					"La tercera temporada de Re:Zero kara Hajimeru Isekai Seikatsu sigue a Subaru Natsuki, quien enfrenta nuevas pruebas en un mundo alternativo, mientras desentraña más secretos sobre su capacidad de 'Regreso por Muerte'. La serie promete mantener su característico enfoque psicológico y emocional, con más personajes y dilemas que desafían las decisiones de Subaru.",
+					'La tercera temporada del anime de acción y fantasía sobre bomberos con poderes especiales.',
 				malLink:
-					'https://myanimelist.net/anime/54857/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_3rd_Season',
-				aspectRatio: '9/16', // Add aspectRatio
+					'https://myanimelist.net/anime/53994/Enen_no_Shouboutai_Season_3',
 			},
 			{
-				url: getBlobUrl('OTOÑO-2024/Dandadan.webp'),
-				title: 'Dandadan',
+				url: getBlobUrl('PRIMAVERA-2025/Lazarus.webp'),
+				title: 'Lazarus',
 				description:
-					'Momo Ayase, una joven con habilidades psíquicas, se ve envuelta en un extraño mundo sobrenatural al encontrarse con un chico llamado Ken Takakura, mientras ambos luchan contra espíritus y entidades paranormales. La serie mezcla acción, comedia y elementos del terror, explorando la relación entre los protagonistas mientras enfrentan fuerzas más allá de su comprensión.',
-				malLink: 'https://myanimelist.net/anime/57334/Dandadan?q=dan&cat=anime',
-				aspectRatio: '9/16', // Add aspectRatio
+					'Una nueva serie original sobre seres inmortales en un mundo post-apocalíptico.',
+				malLink: 'https://myanimelist.net/anime/55853/Lazarus',
 			},
 			{
-				url: getBlobUrl('OTOÑO-2024/Uzumaki.webp'),
-				title: 'Uzumaki',
+				url: getBlobUrl('PRIMAVERA-2025/Wind_Breaker_Season_2.webp'),
+				title: 'Wind Breaker Season 2',
 				description:
-					'Basada en el manga de Junji Ito, Uzumaki es una adaptación de terror psicológico que sigue la historia de Kirie Goshima, una joven que vive en una ciudad donde extrañas ocurrencias relacionadas con espirales comienzan a alterar la vida diaria de los habitantes. A medida que la ciudad se ve atrapada en esta espiral de locura, Kirie debe enfrentarse a lo inimaginable.',
+					'La continuación de la historia de pandillas callejeras y peleas escolares.',
+				malLink: 'https://myanimelist.net/anime/57406/Wind_Breaker_2nd_Season',
+			},
+			{
+				url: getBlobUrl('PRIMAVERA-2025/The_Beginning_After_the_End.webp'),
+				title: 'The Beginning After the End',
+				description:
+					'Adaptación del popular webtoon sobre reencarnación y magia.',
 				malLink:
-					'https://myanimelist.net/anime/40333/Uzumaki?q=uzumaki&cat=anime',
+					'https://myanimelist.net/anime/57815/The_Beginning_After_the_End',
 			},
 			{
-				url: getBlobUrl('OTOÑO-2024/BlueLock2vsU20Japan.webp'),
-				title: 'BlueLock vs U-20 Japan',
+				url: getBlobUrl('PRIMAVERA-2025/Boku_no_Hero_Academia_Vigilantes.webp'),
+				title: 'Boku no Hero Academia Vigilantes',
 				description:
-					'La segunda temporada de Blue Lock sigue el desarrollo de los jugadores en el programa de entrenamiento de élite para crear al mejor delantero de fútbol. En esta nueva entrega, el equipo se enfrenta a Japón Sub-20 en una serie de desafíos que pondrán a prueba sus habilidades, tácticas y voluntad de ganar en el escenario internacional.',
-				malLink: 'https://myanimelist.net/anime/54865/Blue_Lock_vs_U-20_Japan',
-			},
-			{
-				url: getBlobUrl('OTOÑO-2024/AoNoHako.webp'),
-				title: 'Ao no Hako',
-				description:
-					'Taiki Inomata, un talentoso jugador de voleibol de secundaria, se une a la Academia Eimei, donde enfrenta una competencia feroz en su camino hacia el éxito. La serie explora la dinámica del deporte, el esfuerzo y las relaciones humanas mientras Taiki busca su lugar entre los mejores jugadores.',
+					'Serie spin-off centrada en los vigilantes del universo de My Hero Academia.',
 				malLink:
-					'https://myanimelist.net/anime/57181/Ao_no_Hako?q=ao%20no%20hako&cat=anime',
+					'https://myanimelist.net/anime/57601/Boku_no_Hero_Academia__Vigilantes',
 			},
 			{
-				url: getBlobUrl('OTOÑO-2024/DanMachiHoujouNoMegamiHenV.webp'),
-				title: 'Danmachi: Houjou no Megami-hen V',
+				url: getBlobUrl('PRIMAVERA-2025/Haite_Kudasai,_Takamine-san.webp'),
+				title: 'Haite Kudasai, Takamine-san',
 				description:
-					'La quinta temporada de Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka lleva a los protagonistas a enfrentar nuevas amenazas en las profundidades del Dungeon. Bell Cranel continúa su viaje con nuevos aliados y enemigos mientras explora su destino en un mundo lleno de divinidades, monstruos y batallas épicas.',
+					'Una comedia romántica sobre una estudiante con un secreto peculiar.',
 				malLink:
-					'https://myanimelist.net/anime/57066/Dungeon_ni_Deai_wo_Motomeru_no_wa_Machigatteiru_Darou_ka_V__Houjou_no_Megami-hen?q=no%20megami%20hen&cat=anime',
+					'https://myanimelist.net/anime/57439/Haite_Kudasai_Takamine-san',
 			},
 			{
-				url: getBlobUrl('OTOÑO-2024/DragonBallDaima.webp'),
-				title: 'Dragon Ball Daima',
+				url: getBlobUrl('PRIMAVERA-2025/Witch_Watch.webp'),
+				title: 'Witch Watch',
 				description:
-					'Dragon Ball Daima es una nueva serie que expande el universo de Dragon Ball. La historia promete un enfoque fresco y nuevos personajes mientras se sigue la tradición de las aventuras épicas de Goku y sus amigos. Los fanáticos pueden esperar batallas espectaculares y nuevos giros en el universo que ha cautivado a millones.',
-				malLink:
-					'https://myanimelist.net/anime/56894/Dragon_Ball_Daima?q=dragon%20ball%20daima&cat=anime',
-			},
-			{
-				url: getBlobUrl('OTOÑO-2024/SAOGunGaleOnline2.webp'),
-				title: 'SAO: Gun Gale Online II',
-				description:
-					'La segunda temporada de Sword Art Online Alternative: Gun Gale Online continúa la historia de Karen Aijou, quien se adentra en el juego virtual de disparos para enfrentarse a nuevos desafíos. Esta temporada promete más acción, estrategias de combate y la evolución de los personajes en un ambiente futurista lleno de riesgos y adrenalina.',
-				malLink:
-					'https://myanimelist.net/anime/55994/Sword_Art_Online_Alternative__Gun_Gale_Online_II?q=gun%20gale&cat=anime',
-			},
-			{
-				url: getBlobUrl('OTOÑO-2024/ShangriLaFrontier2.webp'),
-				title: 'Shangri-La Frontier Season 2',
-				description:
-					'En la segunda temporada de Shangri-La Frontier, el protagonista, Rin, regresa al mundo virtual de Shangri-La, un juego de realidad virtual que es conocido por sus errores y glitches. En esta nueva entrega, Rin se enfrentará a nuevos y complejos desafíos mientras explora más de los secretos del juego y su relación con otros jugadores.',
-				malLink:
-					'https://myanimelist.net/anime/58572/Shangri-La_Frontier__Kusoge_Hunter_Kamige_ni_Idoman_to_su_2nd_Season',
+					'Una historia mágica sobre una bruja y su familiar humano.',
+				malLink: 'https://myanimelist.net/anime/57491/Witch_Watch',
 			},
 			{
 				url: getBlobUrl(
-					'OTOÑO-2024/NanatsuNoTaizaiMokushirokuNoYonkishi2.webp'
+					'PRIMAVERA-2025/Can_a_Boy-Girl_Friendship_Survive.webp'
 				),
-				title: 'Nanatsu no Taizai: Mokushiroku no Yonkishi Season 2',
+				title: 'Can a Boy-Girl Friendship Survive?',
 				description:
-					'La segunda temporada de Nanatsu no Taizai: Mokushiroku no Yonkishi continúa la saga de los Siete Pecados Capitales, quienes se enfrentan a nuevos enemigos y desvelan más secretos sobre su mundo. Esta entrega promete más batallas épicas y un mayor desarrollo de los personajes mientras se profundiza en la historia detrás de los Cuatro Caballeros del Apocalipsis.',
-				malLink:
-					'https://myanimelist.net/anime/58511/Nanatsu_no_Taizai__Mokushiroku_no_Yonkishi_2nd_Season?q=Mokushiroku%20no%20Yonkishi&cat=anime',
-			},
-		],
-	},
-
-	{
-		id: 2,
-		title: 'LAS BRUJAS Y SUS ARZOBISPOS',
-		category: 'RE:ZERO',
-		date: '2024-11-1',
-		content: 'Las brujas y sus arzobispos',
-		backgroundImage: getBlobUrl('RE-ZERO/portadarezero.webp'),
-		publicationDate: new Date('2024-11-1'),
-		imageUrls: [
-			{
-				url: getBlobUrl('RE-ZERO/PEREZA.webp'),
-				title: 'Pecado De La Pereza (Sekhmet - Petelgeuse Romanee)',
-				description:
-					'Este poder otorga una fuerza invisible y descomunal que puede ser usada a distancia, y permite que el portador de Pereza manipule a otros como extensiones de sí mismo. Es una fuerza implacable y brutal que se impone sobre la voluntad ajena.',
-				malLink:
-					'https://myanimelist.net/character/149519/Sekhmet?q=Sekhmet%20&cat=character',
+					'Una comedia romántica sobre la amistad entre chicos y chicas.',
+				malLink: 'https://myanimelist.net/anime/57432/Otoko-Onna_Tomodachi',
 			},
 			{
-				url: getBlobUrl('RE-ZERO/CODICIA.webp'),
-				title: 'Pecado De La Codicia (Echidna - Regulus Corneas)',
+				url: getBlobUrl('PRIMAVERA-2025/Kowloon_Generic_Romance.webp'),
+				title: 'Kowloon Generic Romance',
 				description:
-					'La codicia permite al portador adueñarse de la experiencia o vida de otros, anulando su independencia y dominando cada aspecto de su existencia.',
-				malLink:
-					'https://myanimelist.net/character/145877/Echidna?q=echidna&cat=character',
+					'Un romance ambientado en la misteriosa ciudad amurallada de Kowloon.',
+				malLink: 'https://myanimelist.net/anime/57408/Kowloon_Generic_Romance',
 			},
 			{
-				url: getBlobUrl('RE-ZERO/GULA.webp'),
-				title: 'Pecado De La Gula (Daphne - Ley Batenkaitos)',
+				url: getBlobUrl('PRIMAVERA-2025/Aharen-san_wa_Hakarenai_Season_2.webp'),
+				title: 'Aharen-san wa Hakarenai Season 2',
 				description:
-					'El portador de Gula tiene la habilidad de devorar la esencia de otros, consumiendo sus recuerdos, identidad y existencia misma.',
+					'La segunda temporada de la comedia escolar sobre una chica con problemas de proximidad.',
 				malLink:
-					'https://myanimelist.net/character/147409/Daphne?q=Daphne&cat=character',
-			},
-			{
-				url: getBlobUrl('RE-ZERO/LUJURIA.webp'),
-				title: 'Pecado De La Lujuria (Carmilla - Capella Emerada)',
-				description:
-					'Lujuria otorga el poder de manipular y distorsionar el cuerpo de otros.',
-				malLink:
-					'https://myanimelist.net/character/149021/Carmilla?q=Carmilla%20luju&cat=character',
-			},
-			{
-				url: getBlobUrl('RE-ZERO/IRA.webp'),
-				title: 'Pecado De La Ira (Minerva - Sirius)',
-				description:
-					'Ira otorga la habilidad de sanar heridas y restaurar la vitalidad de otros, aunque también puede manifestarse de formas destructivas.',
-				malLink:
-					'https://myanimelist.net/character/147408/Minerva?q=Minerva&cat=character',
-			},
-			{
-				url: getBlobUrl('RE-ZERO/ENVIDIA.webp'),
-				title: 'Pecado De La Envidia (Satella - ?)',
-				description:
-					'El poder de la Envidia permite al portador manipular sombras que consumen todo a su paso.',
-				malLink:
-					'https://myanimelist.net/character/144319/Satella?q=satella&cat=character',
-			},
-			{
-				url: getBlobUrl('RE-ZERO/ORGULLO.webp'),
-				title: 'Pecado Del Orgullo (Typhon - ?)',
-				description:
-					'Orgullo permite al portador ejercer una influencia total sobre aquellos que considera inferiores.',
-				malLink:
-					'https://myanimelist.net/character/147407/Typhon?q=Typhon&cat=character',
+					'https://myanimelist.net/anime/57397/Aharen-san_wa_Hakarenai_2nd_Season',
 			},
 		],
 	},
 	{
-		id: 3,
-		title: '5 CALAMIDADES DEL CONTINENTE OSCURO',
-		category: 'HUNTER X HUNTER',
-		date: '2024-12-1',
-		content: 'Las 5 calamidades del continente oscuro',
-		backgroundImage: getBlobUrl('HUNTERXHUNTER/portadahunter.webp'),
-		publicationDate: new Date('2024-12-1'),
-		imageUrls: [
-			{
-				url: getBlobUrl('HUNTERXHUNTER/calamidad-pap.webp'),
-				title: 'PAP',
-				description:
-					'Es una bestia carnívora que se alimenta de humanos. Se encuentra en una cadena montañosa en el Continente Oscuro. Su existencia representa una amenaza constante para los viajeros que se adentran en esa región​.',
-				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
-			},
-			{
-				url: getBlobUrl('HUNTERXHUNTER/calamidad-ai.webp'),
-				title: 'AI',
-				description:
-					'Una forma de vida gaseosa con apéndices extendidos que parece influir en el comportamiento de otros seres. Promueve conductas autodestructivas, causando que los individuos bajo su influencia actúen de manera peligrosa.',
-				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
-			},
-			{
-				url: getBlobUrl('HUNTERXHUNTER/calamidad-brion.webp'),
-				title: 'BRION',
-				description:
-					'Un ser misterioso que posee una apariencia humanoide con una enorme esfera como cabeza. Se encuentra en un laberinto dentro de unas antiguas ruinas en el norte del Lago Mobius. Brion es conocido por ser un ser y un arma a la vez​.',
-				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
-			},
-			{
-				url: getBlobUrl('HUNTERXHUNTER/calamidad-hellbell.webp'),
-				title: 'HELLBELL',
-				description:
-					'Una serpiente peligrosa que habita en los pantanos del sur del Continente Oscuro. Su presencia tiene la capacidad de infectar a las personas con un deseo homicida, convirtiéndola en una amenaza psicológica y física.',
-				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
-			},
-			{
-				url: getBlobUrl('HUNTERXHUNTER/calamidad-zobae.webp'),
-				title: 'ZOBAE',
-				description:
-					'Conocida como la enfermedad inmortal, Zobae es una enfermedad extremadamente peligrosa que afecta a quienes la contraen, causando que su piel se vuelva oscura y llevando a la muerte a la mayoría de las víctimas. Se encuentra en el sureste del Continente Oscuro.',
-				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
-			},
-		],
-	},
-	{
-		id: 4,
+		id: 4, // ID de Invierno 2025
 		title: 'ANIMES INVIERNO 2025',
 		category: 'Estrenos Invierno 2025',
 		date: '2025-02-10',
@@ -328,90 +209,208 @@ export const newsItems: NewsItem[] = [
 		],
 	},
 	{
-		id: 5,
-		title: 'ANIMES PRIMAVERA 2025',
-		category: 'Estrenos Primavera 2025',
-		date: '2025-04-1',
-		content: 'Detalles sobre la temporada de primavera 2025',
-		backgroundImage: getBlobUrl('PRIMAVERA-2025/portadaprimavera2025.webp'),
-		publicationDate: new Date('2025-04-1'),
+		id: 3, // ID de Hunter x Hunter
+		title: '5 CALAMIDADES DEL CONTINENTE OSCURO',
+		category: 'HUNTER X HUNTER',
+		date: '2024-12-1',
+		content: 'Las 5 calamidades del continente oscuro',
+		backgroundImage: getBlobUrl('HUNTERXHUNTER/portadahunter.webp'),
+		publicationDate: new Date('2024-12-1'),
 		imageUrls: [
 			{
-				url: getBlobUrl('PRIMAVERA-2025/Fire_Force_Season_3.webp'),
-				title: 'Fire Force Season 3',
+				url: getBlobUrl('HUNTERXHUNTER/calamidad-pap.webp'),
+				title: 'PAP',
 				description:
-					'La tercera temporada del anime de acción y fantasía sobre bomberos con poderes especiales.',
+					'Es una bestia carnívora que se alimenta de humanos. Se encuentra en una cadena montañosa en el Continente Oscuro. Su existencia representa una amenaza constante para los viajeros que se adentran en esa región​.',
+				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
+			},
+			{
+				url: getBlobUrl('HUNTERXHUNTER/calamidad-ai.webp'),
+				title: 'AI',
+				description:
+					'Una forma de vida gaseosa con apéndices extendidos que parece influir en el comportamiento de otros seres. Promueve conductas autodestructivas, causando que los individuos bajo su influencia actúen de manera peligrosa.',
+				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
+			},
+			{
+				url: getBlobUrl('HUNTERXHUNTER/calamidad-brion.webp'),
+				title: 'BRION',
+				description:
+					'Un ser misterioso que posee una apariencia humanoide con una enorme esfera como cabeza. Se encuentra en un laberinto dentro de unas antiguas ruinas en el norte del Lago Mobius. Brion es conocido por ser un ser y un arma a la vez​.',
+				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
+			},
+			{
+				url: getBlobUrl('HUNTERXHUNTER/calamidad-hellbell.webp'),
+				title: 'HELLBELL',
+				description:
+					'Una serpiente peligrosa que habita en los pantanos del sur del Continente Oscuro. Su presencia tiene la capacidad de infectar a las personas con un deseo homicida, convirtiéndola en una amenaza psicológica y física.',
+				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
+			},
+			{
+				url: getBlobUrl('HUNTERXHUNTER/calamidad-zobae.webp'),
+				title: 'ZOBAE',
+				description:
+					'Conocida como la enfermedad inmortal, Zobae es una enfermedad extremadamente peligrosa que afecta a quienes la contraen, causando que su piel se vuelva oscura y llevando a la muerte a la mayoría de las víctimas. Se encuentra en el sureste del Continente Oscuro.',
+				malLink: 'https://myanimelist.net/manga/26/Hunter_x_Hunter',
+			},
+		],
+	},
+	{
+		id: 2, // ID de Re:Zero
+		title: 'LAS BRUJAS Y SUS ARZOBISPOS',
+		category: 'RE:ZERO',
+		date: '2024-11-1',
+		content: 'Las brujas y sus arzobispos',
+		backgroundImage: getBlobUrl('RE-ZERO/portadarezero.webp'),
+		publicationDate: new Date('2024-11-1'),
+		imageUrls: [
+			{
+				url: getBlobUrl('RE-ZERO/PEREZA.webp'),
+				title: 'Pecado De La Pereza (Sekhmet - Petelgeuse Romanee)',
+				description:
+					'Este poder otorga una fuerza invisible y descomunal que puede ser usada a distancia, y permite que el portador de Pereza manipule a otros como extensiones de sí mismo. Es una fuerza implacable y brutal que se impone sobre la voluntad ajena.',
 				malLink:
-					'https://myanimelist.net/anime/53994/Enen_no_Shouboutai_Season_3',
+					'https://myanimelist.net/character/149519/Sekhmet?q=Sekhmet%20&cat=character',
 			},
 			{
-				url: getBlobUrl('PRIMAVERA-2025/Lazarus.webp'),
-				title: 'Lazarus',
+				url: getBlobUrl('RE-ZERO/CODICIA.webp'),
+				title: 'Pecado De La Codicia (Echidna - Regulus Corneas)',
 				description:
-					'Una nueva serie original sobre seres inmortales en un mundo post-apocalíptico.',
-				malLink: 'https://myanimelist.net/anime/55853/Lazarus',
-			},
-			{
-				url: getBlobUrl('PRIMAVERA-2025/Wind_Breaker_Season_2.webp'),
-				title: 'Wind Breaker Season 2',
-				description:
-					'La continuación de la historia de pandillas callejeras y peleas escolares.',
-				malLink: 'https://myanimelist.net/anime/57406/Wind_Breaker_2nd_Season',
-			},
-			{
-				url: getBlobUrl('PRIMAVERA-2025/The_Beginning_After_the_End.webp'),
-				title: 'The Beginning After the End',
-				description:
-					'Adaptación del popular webtoon sobre reencarnación y magia.',
+					'La codicia permite al portador adueñarse de la experiencia o vida de otros, anulando su independencia y dominando cada aspecto de su existencia.',
 				malLink:
-					'https://myanimelist.net/anime/57815/The_Beginning_After_the_End',
+					'https://myanimelist.net/character/145877/Echidna?q=echidna&cat=character',
 			},
 			{
-				url: getBlobUrl('PRIMAVERA-2025/Boku_no_Hero_Academia_Vigilantes.webp'),
-				title: 'Boku no Hero Academia Vigilantes',
+				url: getBlobUrl('RE-ZERO/GULA.webp'),
+				title: 'Pecado De La Gula (Daphne - Ley Batenkaitos)',
 				description:
-					'Serie spin-off centrada en los vigilantes del universo de My Hero Academia.',
+					'El portador de Gula tiene la habilidad de devorar la esencia de otros, consumiendo sus recuerdos, identidad y existencia misma.',
 				malLink:
-					'https://myanimelist.net/anime/57601/Boku_no_Hero_Academia__Vigilantes',
+					'https://myanimelist.net/character/147409/Daphne?q=Daphne&cat=character',
 			},
 			{
-				url: getBlobUrl('PRIMAVERA-2025/Haite_Kudasai_Takamine_san.webp'),
-				title: 'Haite Kudasai, Takamine-san',
+				url: getBlobUrl('RE-ZERO/LUJURIA.webp'),
+				title: 'Pecado De La Lujuria (Carmilla - Capella Emerada)',
 				description:
-					'Una comedia romántica sobre una estudiante con un secreto peculiar.',
+					'Lujuria otorga el poder de manipular y distorsionar el cuerpo de otros.',
 				malLink:
-					'https://myanimelist.net/anime/57439/Haite_Kudasai_Takamine-san',
+					'https://myanimelist.net/character/149021/Carmilla?q=Carmilla%20luju&cat=character',
 			},
 			{
-				url: getBlobUrl('PRIMAVERA-2025/Witch_Watch.webp'),
-				title: 'Witch Watch',
+				url: getBlobUrl('RE-ZERO/IRA.webp'),
+				title: 'Pecado De La Ira (Minerva - Sirius)',
 				description:
-					'Una historia mágica sobre una bruja y su familiar humano.',
-				malLink: 'https://myanimelist.net/anime/57491/Witch_Watch',
+					'Ira otorga la habilidad de sanar heridas y restaurar la vitalidad de otros, aunque también puede manifestarse de formas destructivas.',
+				malLink:
+					'https://myanimelist.net/character/147408/Minerva?q=Minerva&cat=character',
+			},
+			{
+				url: getBlobUrl('RE-ZERO/ENVIDIA.webp'),
+				title: 'Pecado De La Envidia (Satella - ?)',
+				description:
+					'El poder de la Envidia permite al portador manipular sombras que consumen todo a su paso.',
+				malLink:
+					'https://myanimelist.net/character/144319/Satella?q=satella&cat=character',
+			},
+			{
+				url: getBlobUrl('RE-ZERO/ORGULLO.webp'),
+				title: 'Pecado Del Orgullo (Typhon - ?)',
+				description:
+					'Orgullo permite al portador ejercer una influencia total sobre aquellos que considera inferiores.',
+				malLink:
+					'https://myanimelist.net/character/147407/Typhon?q=Typhon&cat=character',
+			},
+		],
+	},
+	{
+		id: 1, // ID de Otoño 2024
+		title: 'TEMPORADA OTOÑO 2024',
+		category: 'Estrenos Otoño 2024',
+		date: '2024-10-1',
+		content: 'Detalles sobre la temporada de otoño 2024',
+		backgroundImage: getBlobUrl('OTOÑO-2024/portadaotoño.webp'),
+		publicationDate: new Date('2024-10-1'),
+		imageUrls: [
+			{
+				url: getBlobUrl('OTOÑO-2024/ReZeroSeason3.webp'),
+				title: 'Re:Zero Season 3',
+				description:
+					"La tercera temporada de Re:Zero kara Hajimeru Isekai Seikatsu sigue a Subaru Natsuki, quien enfrenta nuevas pruebas en un mundo alternativo, mientras desentraña más secretos sobre su capacidad de 'Regreso por Muerte'. La serie promete mantener su característico enfoque psicológico y emocional, con más personajes y dilemas que desafían las decisiones de Subaru.",
+				malLink:
+					'https://myanimelist.net/anime/54857/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_3rd_Season',
+				aspectRatio: '9/16', // Add aspectRatio
+			},
+			{
+				url: getBlobUrl('OTOÑO-2024/Dandadan.webp'),
+				title: 'Dandadan',
+				description:
+					'Momo Ayase, una joven con habilidades psíquicas, se ve envuelta en un extraño mundo sobrenatural al encontrarse con un chico llamado Ken Takakura, mientras ambos luchan contra espíritus y entidades paranormales. La serie mezcla acción, comedia y elementos del terror, explorando la relación entre los protagonistas mientras enfrentan fuerzas más allá de su comprensión.',
+				malLink: 'https://myanimelist.net/anime/57334/Dandadan?q=dan&cat=anime',
+				aspectRatio: '9/16', // Add aspectRatio
+			},
+			{
+				url: getBlobUrl('OTOÑO-2024/Uzumaki.webp'),
+				title: 'Uzumaki',
+				description:
+					'Basada en el manga de Junji Ito, Uzumaki es una adaptación de terror psicológico que sigue la historia de Kirie Goshima, una joven que vive en una ciudad donde extrañas ocurrencias relacionadas con espirales comienzan a alterar la vida diaria de los habitantes. A medida que la ciudad se ve atrapada en esta espiral de locura, Kirie debe enfrentarse a lo inimaginable.',
+				malLink:
+					'https://myanimelist.net/anime/40333/Uzumaki?q=uzumaki&cat=anime',
+			},
+			{
+				url: getBlobUrl('OTOÑO-2024/BlueLock2vsU20Japan.webp'),
+				title: 'BlueLock vs U-20 Japan',
+				description:
+					'La segunda temporada de Blue Lock sigue el desarrollo de los jugadores en el programa de entrenamiento de élite para crear al mejor delantero de fútbol. En esta nueva entrega, el equipo se enfrenta a Japón Sub-20 en una serie de desafíos que pondrán a prueba sus habilidades, tácticas y voluntad de ganar en el escenario internacional.',
+				malLink: 'https://myanimelist.net/anime/54865/Blue_Lock_vs_U-20_Japan',
+			},
+			{
+				url: getBlobUrl('OTOÑO-2024/AoNoHako.webp'),
+				title: 'Ao no Hako',
+				description:
+					'Taiki Inomata, un talentoso jugador de voleibol de secundaria, se une a la Academia Eimei, donde enfrenta una competencia feroz en su camino hacia el éxito. La serie explora la dinámica del deporte, el esfuerzo y las relaciones humanas mientras Taiki busca su lugar entre los mejores jugadores.',
+				malLink:
+					'https://myanimelist.net/anime/57181/Ao_no_Hako?q=ao%20no%20hako&cat=anime',
+			},
+			{
+				url: getBlobUrl('OTOÑO-2024/DanMachiHoujouNoMegamiHenV.webp'),
+				title: 'Danmachi: Houjou no Megami-hen V',
+				description:
+					'La quinta temporada de Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka lleva a los protagonistas a enfrentar nuevas amenazas en las profundidades del Dungeon. Bell Cranel continúa su viaje con nuevos aliados y enemigos mientras explora su destino en un mundo lleno de divinidades, monstruos y batallas épicas.',
+				malLink:
+					'https://myanimelist.net/anime/57066/Dungeon_ni_Deai_wo_Motomeru_no_wa_Machigatteiru_Darou_ka_V__Houjou_no_Megami-hen?q=no%20megami%20hen&cat=anime',
+			},
+			{
+				url: getBlobUrl('OTOÑO-2024/DragonBallDaima.webp'),
+				title: 'Dragon Ball Daima',
+				description:
+					'Dragon Ball Daima es una nueva serie que expande el universo de Dragon Ball. La historia promete un enfoque fresco y nuevos personajes mientras se sigue la tradición de las aventuras épicas de Goku y sus amigos. Los fanáticos pueden esperar batallas espectaculares y nuevos giros en el universo que ha cautivado a millones.',
+				malLink:
+					'https://myanimelist.net/anime/56894/Dragon_Ball_Daima?q=dragon%20ball%20daima&cat=anime',
+			},
+			{
+				url: getBlobUrl('OTOÑO-2024/SAOGunGaleOnline2.webp'),
+				title: 'SAO: Gun Gale Online II',
+				description:
+					'La segunda temporada de Sword Art Online Alternative: Gun Gale Online continúa la historia de Karen Aijou, quien se adentra en el juego virtual de disparos para enfrentarse a nuevos desafíos. Esta temporada promete más acción, estrategias de combate y la evolución de los personajes en un ambiente futurista lleno de riesgos y adrenalina.',
+				malLink:
+					'https://myanimelist.net/anime/55994/Sword_Art_Online_Alternative__Gun_Gale_Online_II?q=gun%20gale&cat=anime',
+			},
+			{
+				url: getBlobUrl('OTOÑO-2024/ShangriLaFrontier2.webp'),
+				title: 'Shangri-La Frontier Season 2',
+				description:
+					'En la segunda temporada de Shangri-La Frontier, el protagonista, Rin, regresa al mundo virtual de Shangri-La, un juego de realidad virtual que es conocido por sus errores y glitches. En esta nueva entrega, Rin se enfrentará a nuevos y complejos desafíos mientras explora más de los secretos del juego y su relación con otros jugadores.',
+				malLink:
+					'https://myanimelist.net/anime/58572/Shangri-La_Frontier__Kusoge_Hunter_Kamige_ni_Idoman_to_su_2nd_Season',
 			},
 			{
 				url: getBlobUrl(
-					'PRIMAVERA-2025/Can_a_Boy_Girl_Friendship_Survive.webp'
+					'OTOÑO-2024/NanatsuNoTaizaiMokushirokuNoYonkishi2.webp'
 				),
-				title: 'Can a Boy-Girl Friendship Survive?',
+				title: 'Nanatsu no Taizai: Mokushiroku no Yonkishi Season 2',
 				description:
-					'Una comedia romántica sobre la amistad entre chicos y chicas.',
-				malLink: 'https://myanimelist.net/anime/57432/Otoko-Onna_Tomodachi',
-			},
-			{
-				url: getBlobUrl('PRIMAVERA-2025/Kowloon_Generic_Romance.webp'),
-				title: 'Kowloon Generic Romance',
-				description:
-					'Un romance ambientado en la misteriosa ciudad amurallada de Kowloon.',
-				malLink: 'https://myanimelist.net/anime/57408/Kowloon_Generic_Romance',
-			},
-			{
-				url: getBlobUrl('PRIMAVERA-2025/Aharen_san_wa_Hakarenai_Season_2.webp'),
-				title: 'Aharen-san wa Hakarenai Season 2',
-				description:
-					'La segunda temporada de la comedia escolar sobre una chica con problemas de proximidad.',
+					'La segunda temporada de Nanatsu no Taizai: Mokushiroku no Yonkishi continúa la saga de los Siete Pecados Capitales, quienes se enfrentan a nuevos enemigos y desvelan más secretos sobre su mundo. Esta entrega promete más batallas épicas y un mayor desarrollo de los personajes mientras se profundiza en la historia detrás de los Cuatro Caballeros del Apocalipsis.',
 				malLink:
-					'https://myanimelist.net/anime/57397/Aharen-san_wa_Hakarenai_2nd_Season',
+					'https://myanimelist.net/anime/58511/Nanatsu_no_Taizai__Mokushiroku_no_Yonkishi_2nd_Season?q=Mokushiroku%20no%20Yonkishi&cat=anime',
 			},
 		],
 	},

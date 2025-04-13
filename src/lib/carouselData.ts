@@ -102,7 +102,7 @@ export const carouselData = [
 		title: 'TOP ANIMES PRIMAVERA 2025',
 		description: 'Los Mejores ESTRENOS de la temporada de PRIMAVERA 2025.',
 		category: 'Primavera',
-		imageUrl: getBlobUrl('PRIMAVERA-2025/coverprimavera2025.webp'),
+		imageUrl: getBlobUrl('PRIMAVERA-2025/CoverPrimavera2025.webp'), // Cambiar a minúsculas
 		date: '2025-04-01',
 		isCover: false,
 	},
