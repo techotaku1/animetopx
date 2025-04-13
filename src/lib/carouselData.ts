@@ -17,7 +17,7 @@ export const carouselData = [
 			'Descubre las 5 calamidades del continente oscuro, un tema central de Hunter X Hunter.',
 		category: 'Portada',
 		imageUrl: getBlobUrl('HUNTERXHUNTER/portadahunter.webp'),
-		date: 'N/A',
+		date: '2024-11-08',
 		isCover: true,
 	},
 	{
@@ -27,7 +27,7 @@ export const carouselData = [
 			'Conoce a los arzobispos del pecado en Re:Zero, una parte esencial de la trama.',
 		category: 'Portada',
 		imageUrl: getBlobUrl('RE-ZERO/portadarezero.webp'),
-		date: 'N/A',
+		date: '2024-11-01',
 		isCover: true,
 	},
 	{
@@ -37,7 +37,7 @@ export const carouselData = [
 			'Los mejores estrenos de anime para la temporada de otoño 2024.',
 		category: 'Portada',
 		imageUrl: getBlobUrl('OTOÑO-2024/portadaotoño.webp'),
-		date: 'N/A',
+		date: '2024-10-01',
 		isCover: true,
 	},
 	{
@@ -47,7 +47,7 @@ export const carouselData = [
 			'Los mejores estrenos de anime para la temporada de invierno 2025.',
 		category: 'Portada',
 		imageUrl: getBlobUrl('INVIERNO-2025/portadainvierno2025.webp'),
-		date: 'N/A',
+		date: '2025-02-10',
 		isCover: true,
 	},
 	{
@@ -57,7 +57,7 @@ export const carouselData = [
 			'Los mejores estrenos de anime para la temporada de primavera 2025.',
 		category: 'Portada',
 		imageUrl: getBlobUrl('PRIMAVERA-2025/portadaprimavera2025.webp'),
-		date: 'N/A',
+		date: '2025-04-12',
 		isCover: true,
 	},
 	{
@@ -103,7 +103,7 @@ export const carouselData = [
 		description: 'Los Mejores ESTRENOS de la temporada de PRIMAVERA 2025.',
 		category: 'Primavera',
 		imageUrl: getBlobUrl('PRIMAVERA-2025/CoverPrimavera2025.webp'), // Cambiar a minúsculas
-		date: '2025-04-01',
+		date: '2025-04-12',
 		isCover: false,
 	},
 ];

@@ -13,13 +13,22 @@ import { getBlobUrl } from '@/lib/blobUtils';
 // Simulación de datos de noticias
 const newsItems = [
 	{
+		id: 5,
+		title: 'NUEVAS AVENTURAS EN PRIMAVERA 2025',
+		description:
+			'Descubre las nuevas aventuras que nos esperan en la temporada de Primavera 2025.',
+		category: 'Primavera',
+		imageUrl: getBlobUrl('PRIMAVERA-2025/CoverPrimavera2025.webp'),
+		date: '2025-04-12',
+	},
+	{
 		id: 4,
 		title: 'NUEVAS AVENTURAS EN INVIERNO 2025',
 		description:
 			'Descubre las nuevas aventuras que nos esperan en la temporada de Invierno 2025.',
 		category: 'Invierno',
 		imageUrl: getBlobUrl('INVIERNO-2025/coverinvierno2025.webp'),
-		date: 'enero 2025',
+		date: '2025-02-10',
 	},
 	{
 		id: 3,
@@ -28,7 +37,7 @@ const newsItems = [
 			'Descubre las 5 calamidades del continente oscuro de HUNTER X HUNTER y lo que hace cada una de ellas.',
 		category: 'Curiosidades',
 		imageUrl: getBlobUrl('HUNTERXHUNTER/coverhunter.webp'),
-		date: '8 noviembre 2024',
+		date: '2024-11-08',
 	},
 	{
 		id: 2,
@@ -37,7 +46,7 @@ const newsItems = [
 			'Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.',
 		category: 'Curiosidades',
 		imageUrl: getBlobUrl('RE-ZERO/coverrezero.webp'),
-		date: '1 noviembre 2024',
+		date: '2024-11-01',
 	},
 	{
 		id: 1,
@@ -45,7 +54,7 @@ const newsItems = [
 		description: 'Top estrenos de la temporada de OTOÑO 2024',
 		category: 'Otoño',
 		imageUrl: getBlobUrl('OTOÑO-2024/coverotoño.webp'),
-		date: 'octubre 2024',
+		date: '2024-10-01',
 	},
 	// Puedes agregar más noticias aquí
 ];

@@ -27,7 +27,7 @@ export const newsItems: NewsItem[] = [
 		id: 5, // ID de Primavera 2025
 		title: 'ANIMES PRIMAVERA 2025',
 		category: 'Estrenos Primavera 2025',
-		date: '2025-04-1',
+		date: '2025-04-12',
 		content: 'Detalles sobre la temporada de primavera 2025',
 		backgroundImage: getBlobUrl('PRIMAVERA-2025/portadaprimavera2025.webp'),
 		publicationDate: new Date('2025-04-1'),
@@ -38,21 +38,21 @@ export const newsItems: NewsItem[] = [
 				description:
 					'La tercera temporada del anime de acción y fantasía sobre bomberos con poderes especiales.',
 				malLink:
-					'https://myanimelist.net/anime/53994/Enen_no_Shouboutai_Season_3',
+					'https://myanimelist.net/anime/51818/Enen_no_Shouboutai__San_no_Shou',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/Lazarus.webp'),
 				title: 'Lazarus',
 				description:
 					'Una nueva serie original sobre seres inmortales en un mundo post-apocalíptico.',
-				malLink: 'https://myanimelist.net/anime/55853/Lazarus',
+				malLink: 'https://myanimelist.net/anime/56038/Lazarus',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/Wind_Breaker_Season_2.webp'),
 				title: 'Wind Breaker Season 2',
 				description:
 					'La continuación de la historia de pandillas callejeras y peleas escolares.',
-				malLink: 'https://myanimelist.net/anime/57406/Wind_Breaker_2nd_Season',
+				malLink: 'https://myanimelist.net/anime/59160/Wind_Breaker_Season_2',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/The_Beginning_After_the_End.webp'),
@@ -60,7 +60,7 @@ export const newsItems: NewsItem[] = [
 				description:
 					'Adaptación del popular webtoon sobre reencarnación y magia.',
 				malLink:
-					'https://myanimelist.net/anime/57815/The_Beginning_After_the_End',
+					'https://myanimelist.net/anime/60146/Saikyou_no_Ousama_Nidome_no_Jinsei_wa_Nani_wo_Suru',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/Boku_no_Hero_Academia_Vigilantes.webp'),
@@ -68,7 +68,7 @@ export const newsItems: NewsItem[] = [
 				description:
 					'Serie spin-off centrada en los vigilantes del universo de My Hero Academia.',
 				malLink:
-					'https://myanimelist.net/anime/57601/Boku_no_Hero_Academia__Vigilantes',
+					'https://myanimelist.net/anime/60593/Vigilante__Boku_no_Hero_Academia_Illegals',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/Haite_Kudasai,_Takamine-san.webp'),
@@ -76,14 +76,14 @@ export const newsItems: NewsItem[] = [
 				description:
 					'Una comedia romántica sobre una estudiante con un secreto peculiar.',
 				malLink:
-					'https://myanimelist.net/anime/57439/Haite_Kudasai_Takamine-san',
+					'https://myanimelist.net/anime/59457/Haite_Kudasai_Takamine-san',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/Witch_Watch.webp'),
 				title: 'Witch Watch',
 				description:
 					'Una historia mágica sobre una bruja y su familiar humano.',
-				malLink: 'https://myanimelist.net/anime/57491/Witch_Watch',
+				malLink: 'https://myanimelist.net/anime/59597/Witch_Watch',
 			},
 			{
 				url: getBlobUrl(
@@ -92,14 +92,14 @@ export const newsItems: NewsItem[] = [
 				title: 'Can a Boy-Girl Friendship Survive?',
 				description:
 					'Una comedia romántica sobre la amistad entre chicos y chicas.',
-				malLink: 'https://myanimelist.net/anime/57432/Otoko-Onna_Tomodachi',
+				malLink: 'https://myanimelist.net/anime/52709/Danjo_no_Yuujou_wa_Seiritsu_suru_Iya_Shinai',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/Kowloon_Generic_Romance.webp'),
 				title: 'Kowloon Generic Romance',
 				description:
 					'Un romance ambientado en la misteriosa ciudad amurallada de Kowloon.',
-				malLink: 'https://myanimelist.net/anime/57408/Kowloon_Generic_Romance',
+				malLink: 'https://myanimelist.net/anime/60083/Kowloon_Generic_Romance',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/Aharen-san_wa_Hakarenai_Season_2.webp'),
@@ -107,7 +107,7 @@ export const newsItems: NewsItem[] = [
 				description:
 					'La segunda temporada de la comedia escolar sobre una chica con problemas de proximidad.',
 				malLink:
-					'https://myanimelist.net/anime/57397/Aharen-san_wa_Hakarenai_2nd_Season',
+					'https://myanimelist.net/anime/59466/Aharen-san_wa_Hakarenai_Season_2',
 			},
 		],
 	},
