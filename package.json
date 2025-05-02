@@ -10,7 +10,7 @@
 		"db:migrate": "drizzle-kit migrate",
 		"db:push": "drizzle-kit push",
 		"db:studio": "drizzle-kit studio",
-		"dev": "next dev --turbo",
+		"dev": "next dev --turbopack",
 		"lint": "set NODE_OPTIONS=--max-old-space-size=8192 && next lint",
 		"lint:fix": "set NODE_OPTIONS=--max-old-space-size=8192 && next lint --fix",
 		"start": "next start",

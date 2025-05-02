@@ -60,12 +60,12 @@ export default function Home(): JSX.Element {
 						))}
 					</div>
 
-					<div className="absolute left-1/2 mt-4 flex -translate-x-1/2 transform space-x-3">
+					<div className="flex justify-center space-x-2 sm:absolute sm:left-1/2 sm:mt-4 sm:-translate-x-1/2 sm:transform sm:space-x-3">
 						{portadaItems.map((_, index) => (
 							<button
 								key={index}
 								aria-label={`Ir a la diapositiva ${index + 1}`}
-								className={`h-4 w-4 rounded-full ${
+								className={`h-2 w-2 rounded-full sm:h-4 sm:w-4 ${
 									currentSlide === index ? 'bg-red-500' : 'bg-black'
 								} disabled={currentSlide === index} transition-all duration-300`}
 								onClick={() => setCurrentSlide(index)}
@@ -75,7 +75,7 @@ export default function Home(): JSX.Element {
 				</div>
 			</Suspense>
 
-			<section>
+			<section className="mt-8 sm:mt-12 md:mt-16">
 				<h1 className="mb-4 text-4xl font-bold">Últimas Noticias de Anime</h1>
 				<p className="text-muted-foreground text-xl">
 					Mantente al día con las últimas novedades del mundo del anime.
@@ -85,19 +85,28 @@ export default function Home(): JSX.Element {
 			<Suspense fallback={<Loading />}>
 				<section className="space-y-6">
 					<div className="relative flex flex-col items-center">
-						<div className="animate-blink absolute left-[20%] top-1/2 -translate-y-1/2 transform text-2xl font-bold text-yellow-500">
-							Nueva Noticia
-							<span className="animate-bounce-left">➡️</span>
-						</div>
 						{latestNewsItem && (
-							<div className="w-full sm:w-1/2 lg:w-1/3">
-								<NewsCard item={latestNewsItem} />
-							</div>
+							<>
+								<div className="relative w-full sm:w-1/2 lg:w-1/3">
+									{/* Side texts - only visible on larger screens */}
+									<div className="animate-blink absolute left-[-200px] top-1/2 hidden -translate-y-1/2 transform text-2xl font-bold text-yellow-500 sm:block">
+										Nueva Noticia
+										<span className="animate-bounce-left ml-2">➡️</span>
+									</div>
+									<div className="animate-blink absolute right-[-200px] top-1/2 hidden -translate-y-1/2 transform text-2xl font-bold text-blue-500 sm:block">
+										<span className="animate-bounce-right mr-2">⬅️</span>
+										Nueva Noticia
+									</div>
+
+									<NewsCard item={latestNewsItem} />
+								</div>
+								{/* Mobile version - only visible on small screens */}
+								<div className="animate-blink mt-2 block text-center text-xl font-bold text-yellow-500 sm:hidden">
+									Nueva Noticia
+									<span className="ml-2 animate-bounce">⬆️</span>
+								</div>
+							</>
 						)}
-						<div className="animate-blink absolute right-[20%] top-1/2 -translate-y-1/2 transform text-2xl font-bold text-blue-500">
-							<span className="animate-bounce-right">⬅️</span>
-							Nueva Noticia
-						</div>
 					</div>
 					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 						{otherNewsItems.map((item) => (
