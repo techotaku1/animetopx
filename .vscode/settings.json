@@ -75,10 +75,9 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsserver.maxTsServerMemory": 8192,
-  
   // ESLint Configuration
-  "eslint.runtime": "c/Users/ADMIN/AppData/Roaming/fnm/node-versions/v22.15.0/installation/node",
-  "eslint.nodePath": "c/Users/ADMIN/AppData/Roaming/fnm/node-versions/v22.15.0/installation/node",
+  "eslint.runtime": "C:/Users/ADMIN/AppData/Roaming/fnm/node-versions/v22.15.0/installation/node",
+  "eslint.nodePath": "C:/Users/ADMIN/AppData/Roaming/fnm/node-versions/v22.15.0/installation/node",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
