@@ -82,7 +82,7 @@
 	"typescript.tsserver.maxTsServerMemory": 8192,
 
 	// ESLint Configuration
-	"eslint.runtime": "C:/Users/ADMIN/AppData/Local/fnm_multishells/16644_1744509860026/node",
+	"eslint.runtime": "c/Users/ADMIN/AppData/Roaming/fnm/node-versions/v22.15.0/installation/node",
 	"eslint.validate": [
 		"javascript",
 		"javascriptreact",
