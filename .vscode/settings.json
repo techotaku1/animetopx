@@ -1,145 +1,138 @@
 {
-	// Editor Configuration
-	"editor.formatOnSave": true,
-	"editor.formatOnSaveMode": "file",
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"editor.quickSuggestions": {
-		"strings": "on"
-	},
-	"editor.codeActionsOnSave": {
-		"source.fixAll": "explicit",
-		"source.fixAll.eslint": "explicit",
-		"source.organizeImports": "never"
-	},
-	"editor.linkedEditing": true,
-	"editor.stickyScroll.enabled": true,
-	// File Configuration
-	"files.autoSave": "afterDelay",
-	"files.associations": {
-		"*.css": "tailwindcss",
-		"*.env": "env",
-		"*.tsx": "typescriptreact",
-		"*.ts": "typescript",
-		"*.mjs": "javascript",
-		"*.js": "javascript",
-		"*.json": "json",
-		"*.svg": "svg",
-		"*.xml": "html",
-		"*.html": "html",
-		"*.config.mjs": "javascript",
-		"*.config.js": "javascript",
-		"*.config.ts": "typescript",
-		"*.md": "markdown",
-		"*.mdx": "mdx"
-	},
-	"files.watcherExclude": {
-		"/node_modules/": true,
-		"/dist/": true,
-		"/.git/": true
-	},
-	// Language-specific Formatters
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[javascriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[env]": {
-		"editor.defaultFormatter": "IronGeek.vscode-env"
-	},
-	"[dotenv]": {
-		"editor.defaultFormatter": "IronGeek.vscode-env"
-	},
-	"[.env]": {
-		"editor.defaultFormatter": "IronGeek.vscode-env"
-	},
-	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[svg]": {
-		"editor.defaultFormatter": "jock.svg",
-		"editor.formatOnSave": true,
-		"editor.formatOnType": true
-	},
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true
-	},
-	"[xml]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true,
-		"editor.formatOnType": true
-	},
-	// TypeScript Configuration
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"typescript.tsserver.maxTsServerMemory": 8192,
-
-	// ESLint Configuration
-	"eslint.runtime": "c/Users/ADMIN/AppData/Roaming/fnm/node-versions/v22.15.0/installation/node",
-	"eslint.validate": [
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact"
-	],
-
-	"eslint.rules.customizations": [
-		{
-			"rule": "import/named",
-			"severity": "off"
-		},
-		{
-			"rule": "import/order",
-			"severity": "off"
-		},
-		{
-			"rule": "no-unused-vars",
-			"severity": "warn"
-		},
-		{
-			"rule": "@typescript-eslint/no-unused-vars",
-			"severity": "off"
-		}
-	],
-	// Tailwind CSS Configuration
-	"tailwindCSS.includeLanguages": {
-		"typescript": "javascript",
-		"typescriptreact": "javascript",
-		"html": "html",
-		"css": "css"
-	},
-	"tailwindCSS.emmetCompletions": true,
-	"tailwindCSS.classAttributes": [
-		"class",
-		"className",
-		"ngClass",
-		"class:list",
-		"classList"
-	],
-	"tailwindCSS.suggestions": true,
-	"tailwindCSS.hovers": true,
-	"tailwindCSS.codeActions": true,
-	"tailwindCSS.validate": true,
-	"tailwindCSS.showPixelEquivalents": true,
-	"tailwindCSS.colorDecorators": true,
-	"tailwindCSS.lint.recommendedVariantOrder": "warning",
-
-	// Search and Performance
-	"search.exclude": {
-		"/node_modules": true,
-		"/dist": true,
-		"/.git": true
-	},
-
-	"javascript.suggest.completeFunctionCalls": true,
-	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
-	"svg.preview.background": "editor",
-	"workbench.colorTheme": "GitHub Dark Default"
+  // Editor Configuration
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "editor.linkedEditing": true,
+  "editor.stickyScroll.enabled": true,
+  // File Configuration
+  "files.autoSave": "afterDelay",
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.env": "env",
+    "*.tsx": "typescriptreact",
+    "*.ts": "typescript",
+    "*.mjs": "javascript",
+    "*.js": "javascript",
+    "*.json": "json",
+    "*.svg": "svg",
+    "*.xml": "html",
+    "*.html": "html",
+    "*.config.mjs": "javascript",
+    "*.config.js": "javascript",
+    "*.config.ts": "typescript",
+    "*.md": "markdown",
+    "*.mdx": "mdx",
+    "*.lock": "json",
+    "*.sh": "shellscript",
+    "*.bash": "shell"
+  },
+  "files.watcherExclude": {
+    "/node_modules/": true,
+    "/dist/": true,
+    "/.git/": true
+  },
+  // Language-specific Formatters
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[env]": {
+    "editor.defaultFormatter": "IronGeek.vscode-env"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  // TypeScript Configuration
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  
+  // ESLint Configuration
+  "eslint.runtime": "c/Users/ADMIN/AppData/Roaming/fnm/node-versions/v22.15.0/installation/node",
+  "eslint.nodePath": "c/Users/ADMIN/AppData/Roaming/fnm/node-versions/v22.15.0/installation/node",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.rules.customizations": [
+    {
+      "rule": "import/named",
+      "severity": "off"
+    },
+    {
+      "rule": "import/order",
+      "severity": "off"
+    },
+    {
+      "rule": "no-unused-vars",
+      "severity": "warn"
+    },
+    {
+      "rule": "@typescript-eslint/no-unused-vars",
+      "severity": "off"
+    }
+  ],
+  // Tailwind CSS Configuration
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript",
+    "html": "html",
+    "css": "css"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "class:list",
+    "classList"
+  ],
+  "tailwindCSS.suggestions": true,
+  "tailwindCSS.hovers": true,
+  "tailwindCSS.codeActions": true,
+  "tailwindCSS.validate": true,
+  "tailwindCSS.showPixelEquivalents": true,
+  "tailwindCSS.colorDecorators": true,
+  "tailwindCSS.lint.recommendedVariantOrder": "warning",
+  // Search and Performance
+  "search.exclude": {
+    "/node_modules": true,
+    "/dist": true,
+    "/.git": true
+  },
+  "javascript.suggest.completeFunctionCalls": true,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "svg.preview.background": "editor",
+  "workbench.colorTheme": "GitHub Dark Default",
 }
