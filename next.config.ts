@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
+import type { NextConfig } from 'next';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
 	reactStrictMode: true,
 	images: {
 		dangerouslyAllowSVG: true,
@@ -11,15 +9,7 @@ const nextConfig = {
 		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 		minimumCacheTTL: 60,
 		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'res.cloudinary.com',
-				port: '',
-				pathname: '/**',
-			},
-		],
-		unoptimized: true, // Disable Image Optimization API
+		remotePatterns: [new URL('https://res.cloudinary.com/**')],
 	},
 	turbopack: {
 		rules: {

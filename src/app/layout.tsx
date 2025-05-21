@@ -87,7 +87,7 @@ export default function RootLayout({
 							potentialAction: {
 								'@type': 'SearchAction',
 								target:
-									'https://animetopx.vercel.app/search?q={search_term_string}',
+									'https://animetopx.com/search?q={search_term_string}',
 								'query-input': 'required name=search_term_string',
 							},
 						}),
