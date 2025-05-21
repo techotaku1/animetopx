@@ -1,110 +1,128 @@
-@import url('https://fonts.googleapis.com/css2?family=Grandstander&family=Shantell+Sans&display=swap');
 @import 'tailwindcss';
 
 @custom-variant hover (&:hover);
 
 @media (hover: hover) {
-  .hover\:underline:hover {
-    text-decoration: underline;
-  }
+	.hover\:underline:hover {
+		text-decoration: underline;
+	}
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-  
-  button:not(:disabled),
-  [role='button']:not(:disabled) {
-    cursor: pointer;
-  }
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
 
-  p,
-  .description,
-  li {
-    font-family: var(--font-grandstander);
-  }
-  h1,
-  h2,
-  h3,
-  span,
-  .title {
-    font-family: var(--font-shantell-sans), sans-serif;
-  }
+	button:not(:disabled),
+	[role='button']:not(:disabled) {
+		cursor: pointer;
+	}
+
+	p,
+	.description,
+	li {
+		font-family: var(--font-grandstander);
+	}
+	h1,
+	h2,
+	h3,
+	span,
+	.title {
+		font-family: var(--font-shantell-sans), sans-serif;
+	}
+
+	/* Update Link and Button components to use Shantell Sans with bold weight */
+	a[href],
+	Link,
+	.link,
+	button,
+	.button,
+	[role='button'],
+	[class*='Button'] {
+		font-family: var(--font-grandstander);
+	}
 }
 
 @keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
 }
 
 @keyframes bounce-left {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-10px);
-  }
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: translateX(-10px);
+	}
 }
 
 @keyframes bounce-right {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(10px);
-  }
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: translateX(10px);
+	}
 }
 
 .animate-blink {
-  animation: blink 1s infinite;
+	animation: blink 1s infinite;
 }
 
 .animate-bounce-left {
-  animation: bounce-left 1s infinite;
+	animation: bounce-left 1s infinite;
 }
 
 .animate-bounce-right {
-  animation: bounce-right 1s infinite;
+	animation: bounce-right 1s infinite;
 }
 
 /* 🎨 Definir colores base con `--color-*` */
 @theme {
-  /* 🌞 Modo Claro */
-  --color-background: hsl(0, 0%, 100%);
-  --color-foreground: hsl(222.2, 84%, 4.9%);
-  --color-card: hsl(0, 0%, 100%);
-  --color-card-foreground: hsl(222.2, 84%, 4.9%);
-  --color-popover: hsl(0, 0%, 100%);
-  --color-popover-foreground: hsl(222.2, 84%, 4.9%);
-  --color-primary: hsl(222.2, 47.4%, 11.2%);
-  --color-primary-foreground: hsl(210, 40%, 98%);
-  --color-secondary: hsl(210, 40%, 96.1%);
-  --color-secondary-foreground: hsl(222.2, 47.4%, 11.2%);
-  --color-muted: hsl(210, 40%, 96.1%);
-  --color-muted-foreground: hsl(215.4, 16.3%, 46.9%);
-  --color-accent: hsl(210, 40%, 96.1%);
-  --color-accent-foreground: hsl(222.2, 47.4%, 11.2%);
-  --color-destructive: hsl(0, 84.2%, 60.2%);
-  --color-destructive-foreground: hsl(210, 40%, 98%);
-  --color-border: hsl(214.3, 31.8%, 91.4%);
-  --color-input: hsl(214.3, 31.8%, 91.4%);
-  --color-ring: hsl(222.2, 84%, 4.9%);
-  --color-radius: 0.5rem;
+	/* 🌞 Modo Claro */
+	--color-background: hsl(0, 0%, 100%);
+	--color-foreground: hsl(222.2, 84%, 4.9%);
+	--color-card: hsl(0, 0%, 100%);
+	--color-card-foreground: hsl(222.2, 84%, 4.9%);
+	--color-popover: hsl(0, 0%, 100%);
+	--color-popover-foreground: hsl(222.2, 84%, 4.9%);
+	--color-primary: hsl(222.2, 47.4%, 11.2%);
+	--color-primary-foreground: hsl(210, 40%, 98%);
+	--color-secondary: hsl(210, 40%, 96.1%);
+	--color-secondary-foreground: hsl(222.2, 47.4%, 11.2%);
+	--color-muted: hsl(210, 40%, 96.1%);
+	--color-muted-foreground: hsl(215.4, 16.3%, 46.9%);
+	--color-accent: hsl(210, 40%, 96.1%);
+	--color-accent-foreground: hsl(222.2, 47.4%, 11.2%);
+	--color-destructive: hsl(0, 84.2%, 60.2%);
+	--color-destructive-foreground: hsl(210, 40%, 98%);
+	--color-border: hsl(214.3, 31.8%, 91.4%);
+	--color-input: hsl(214.3, 31.8%, 91.4%);
+	--color-ring: hsl(222.2, 84%, 4.9%);
+	--color-radius: 0.5rem;
 
-  --font-grandstander: 'Grandstander', cursive;
-  --font-shantell-sans: 'Shantell Sans', sans-serif;
+	--font-grandstander: 'Grandstander', cursive;
+	--font-shantell-sans: 'Shantell Sans', sans-serif;
+}
+
+/* Core Theme for Components */
+@theme inline {
+	/* Fonts */
+	--font-sans: var(--font-shantell-sans);
+	--font-serif: var(--font-grandstander);
+	--font-mono: ui-monospace, monospace;
 }

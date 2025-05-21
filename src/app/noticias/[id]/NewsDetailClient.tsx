@@ -175,7 +175,7 @@ export default function NewsDetailClient({
 				<div className="w-full lg:sticky lg:top-4 lg:w-1/2">
 					<div className="flex h-full flex-col rounded-lg border border-gray-300 p-6 shadow-md dark:border-white">
 						{id <= 5 && (
-							<div className="mb-2 inline-block rounded-sm bg-red-600 py-1 text-center text-sm font-semibold text-white lg:text-base">
+							<div className="font-sans mb-2 inline-block rounded-sm bg-red-600 py-1 text-center text-sm font-semibold text-white lg:text-base">
 								Top {currentIndex + 1}
 							</div>
 						)}
@@ -189,6 +189,7 @@ export default function NewsDetailClient({
 							onClick={() =>
 								window.open(newsItem.imageUrls[currentIndex].malLink, '_blank')
 							}
+              className="font-bold"
 						>
 							Ver en MyAnimeList
 						</Button>

@@ -89,11 +89,11 @@ export default function Home(): JSX.Element {
 							<>
 								<div className="relative w-full sm:w-1/2 lg:w-1/3">
 									{/* Side texts - only visible on larger screens */}
-									<div className="animate-blink absolute left-[-200px] top-1/2 hidden -translate-y-1/2 transform text-2xl font-bold text-yellow-500 sm:block">
+									<div className="animate-blink absolute left-[-215px] top-1/2 hidden -translate-y-1/2 transform text-2xl font-bold text-yellow-500 sm:block">
 										Nueva Noticia
 										<span className="animate-bounce-left ml-2">➡️</span>
 									</div>
-									<div className="animate-blink absolute right-[-200px] top-1/2 hidden -translate-y-1/2 transform text-2xl font-bold text-blue-500 sm:block">
+									<div className="animate-blink absolute right-[-215px] top-1/2 hidden -translate-y-1/2 transform text-2xl font-bold text-blue-500 sm:block">
 										<span className="animate-bounce-right mr-2">⬅️</span>
 										Nueva Noticia
 									</div>

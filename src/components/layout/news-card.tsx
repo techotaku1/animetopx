@@ -66,7 +66,7 @@ export function NewsCard({ item }: { item: NewsItem }): JSX.Element {
       <CardFooter className="flex items-center justify-between">
         <div className="flex w-full items-center justify-between">
           <div className="mt-8 ext-muted-foreground text-sm">
-            <div>Publicado</div>
+            <div className='font-bold'>Publicado</div>
             <time
               className="text-muted-foreground pr-8 text-sm"
               dateTime={item.date}
@@ -76,8 +76,8 @@ export function NewsCard({ item }: { item: NewsItem }): JSX.Element {
           </div>
           <div className="flex flex-col items-center space-y-1">
             <ArrowDown className="text-primary h-6 w-6 animate-bounce" />
-            <Button asChild className="flex items-center">
-              <Link className="flex items-center" href={`/noticias/${item.id}`}>
+            <Button asChild className="font-extrabold flex items-center">
+              <Link className=" flex items-center" href={`/noticias/${item.id}`}>
                 Leer más
               </Link>
             </Button>

@@ -19,14 +19,14 @@ const shantellSans = Shantell_Sans({
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--font-shantell-sans',
-	weight: ['700'],
+	weight: ['400', '500', '600', '700', '800'],
 });
 
 const grandstander = Grandstander({
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--font-grandstander',
-	weight: ['400'],
+	weight: ['400', '500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
@@ -86,8 +86,7 @@ export default function RootLayout({
 								'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
 							potentialAction: {
 								'@type': 'SearchAction',
-								target:
-									'https://animetopx.com/search?q={search_term_string}',
+								target: 'https://animetopx.com/search?q={search_term_string}',
 								'query-input': 'required name=search_term_string',
 							},
 						}),

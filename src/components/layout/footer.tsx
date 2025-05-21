@@ -8,7 +8,7 @@ export function Footer() {
 			<div className="container mx-auto px-4 py-8">
 				<div className="grid grid-cols-2 gap-8 md:grid-cols-4">
 					<div>
-						<h3 className="mb-4">Sobre Nosotros</h3>
+						<h3 className="mb-4 font-semibold">Sobre Nosotros</h3>
 						<p className="text-muted-foreground text-sm">
 							AnimeTopX es tu fuente confiable para las últimas noticias y
 							actualizaciones del mundo del anime.
@@ -44,7 +44,7 @@ export function Footer() {
 						</ul>
 					</div>
 					<div>
-						<h3 className="mb-4">Contacto</h3>
+						<h3 className="mb-4 font-semibold">Contacto</h3>
 						<p className="text-muted-foreground text-sm">
 							Email: jsdg1818@gmail.com
 						</p>
