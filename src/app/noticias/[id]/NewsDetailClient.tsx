@@ -134,6 +134,15 @@ export default function NewsDetailClient({
 		{ href: `/noticias/${id}`, label: newsItem.title },
 	];
 
+	// Nueva función para formatear la fecha como dd/mm/yyyy con ceros a la izquierda
+	function formatDate(date: Date): string {
+		const d = new Date(date);
+		const day = String(d.getDate()).padStart(2, '0');
+		const month = String(d.getMonth() + 1).padStart(2, '0');
+		const year = d.getFullYear();
+		return `${day}/${month}/${year}`;
+	}
+
 	return (
 		<div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center">
 			<div
@@ -198,7 +207,7 @@ export default function NewsDetailClient({
 			</div>
 
 			<span className="text-sm text-gray-500">
-				Publicado el: {new Date(newsItem.publicationDate).toLocaleDateString()}
+				Publicado el: {formatDate(newsItem.publicationDate)}
 			</span>
 			<Link href="/">
 				<Button>Volver a las Noticias</Button>

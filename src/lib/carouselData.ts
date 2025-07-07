@@ -121,7 +121,7 @@ export const carouselData = [
 		title: 'TOP ANIMES VERANO 2025',
 		description: 'Los Mejores ESTRENOS de la temporada de VERANO 2025.',
 		category: 'Verano',
-		imageUrl: getBlobUrl('VERANO-2025/coververano2025.webp'),
+		imageUrl: getBlobUrl('VERANO-2025/CoverVerano2025.webp'),
 		date: '2025-07-10',
 		isCover: false,
 	},
