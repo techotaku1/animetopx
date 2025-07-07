@@ -32,7 +32,7 @@ export const carouselData = [
 	},
 	{
 		id: 1,
-		title: 'TOP ANIME OTOÑO 2024',
+		title: 'TOP 10 ANIMES OTOÑO 2024',
 		description:
 			'Los mejores estrenos de anime para la temporada de otoño 2024.',
 		category: 'Portada',
@@ -42,7 +42,7 @@ export const carouselData = [
 	},
 	{
 		id: 4,
-		title: 'TOP ANIMES INVIERNO 2025',
+		title: 'TOP 10 ANIMES INVIERNO 2025',
 		description:
 			'Los mejores estrenos de anime para la temporada de invierno 2025.',
 		category: 'Portada',
@@ -52,7 +52,7 @@ export const carouselData = [
 	},
 	{
 		id: 5,
-		title: 'TOP ANIMES PRIMAVERA 2025',
+		title: 'TOP 10 ANIMES PRIMAVERA 2025',
 		description:
 			'Los mejores estrenos de anime para la temporada de primavera 2025.',
 		category: 'Portada',
@@ -62,7 +62,7 @@ export const carouselData = [
 	},
 	{
 		id: 6,
-		title: 'TOP ANIMES VERANO 2025',
+		title: 'TOP 10 ANIMES VERANO 2025',
 		description:
 			'Los mejores estrenos de anime para la temporada de verano 2025.',
 		category: 'Portada',
@@ -91,7 +91,7 @@ export const carouselData = [
 	},
 	{
 		id: 1,
-		title: 'TOP ANIME OTOÑO 2024',
+		title: 'TOP 10 ANIMES OTOÑO 2024',
 		description: 'Los Mejores ESTRENOS de la temporada de OTOÑO 2024.',
 		category: 'Otoño',
 		imageUrl: getBlobUrl('OTOÑO-2024/coverotoño.webp'),
@@ -100,7 +100,7 @@ export const carouselData = [
 	},
 	{
 		id: 4,
-		title: 'TOP ANIMES INVIERNO 2025',
+		title: 'TOP 10 ANIMES INVIERNO 2025',
 		description: 'Los Mejores ESTRENOS de la temporada de INVIERNO 2025.',
 		category: 'Invierno',
 		imageUrl: getBlobUrl('INVIERNO-2025/coverinvierno2025.webp'),
@@ -109,7 +109,7 @@ export const carouselData = [
 	},
 	{
 		id: 5,
-		title: 'TOP ANIMES PRIMAVERA 2025',
+		title: 'TOP 10 ANIMES PRIMAVERA 2025',
 		description: 'Los Mejores ESTRENOS de la temporada de PRIMAVERA 2025.',
 		category: 'Primavera',
 		imageUrl: getBlobUrl('PRIMAVERA-2025/CoverPrimavera2025.webp'), // Cambiar a minúsculas
@@ -118,7 +118,7 @@ export const carouselData = [
 	},
 	{
 		id: 6,
-		title: 'TOP ANIMES VERANO 2025',
+		title: 'TOP 10 ANIMES VERANO 2025',
 		description: 'Los Mejores ESTRENOS de la temporada de VERANO 2025.',
 		category: 'Verano',
 		imageUrl: getBlobUrl('VERANO-2025/CoverVerano2025.webp'),

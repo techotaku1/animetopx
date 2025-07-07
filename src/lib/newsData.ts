@@ -25,7 +25,7 @@ export interface NewsItem {
 export const newsItems: NewsItem[] = [
 	{
 		id: 5, // ID de Primavera 2025
-		title: 'ANIMES PRIMAVERA 2025',
+		title: 'TOP 10 ANIMES PRIMAVERA 2025',
 		category: 'Estrenos Primavera 2025',
 		date: '2025-04-12',
 		content: 'Detalles sobre la temporada de primavera 2025',
@@ -114,7 +114,7 @@ export const newsItems: NewsItem[] = [
 	},
 	{
 		id: 4, // ID de Invierno 2025
-		title: 'ANIMES INVIERNO 2025',
+		title: 'TOP 10 ANIMES INVIERNO 2025',
 		category: 'Estrenos Invierno 2025',
 		date: '2025-02-10',
 		content: 'Detalles sobre la temporada de invierno 2025',
@@ -324,7 +324,7 @@ export const newsItems: NewsItem[] = [
 	},
 	{
 		id: 1, // ID de Otoño 2024
-		title: 'TEMPORADA OTOÑO 2024',
+		title: 'TOP 10 ANIMES OTOÑO 2024',
 		category: 'Estrenos Otoño 2024',
 		date: '2024-10-1',
 		content: 'Detalles sobre la temporada de otoño 2024',
@@ -417,7 +417,7 @@ export const newsItems: NewsItem[] = [
 	},
 	{
 		id: 6,
-		title: 'ANIMES VERANO 2025',
+		title: 'TOP 10 ANIMES VERANO 2025',
 		category: 'Estrenos Verano 2025',
 		date: '2025-07-07T00:56:00-05:00', // Fecha y hora exacta de publicación (Bogotá)
 		content: 'Top 10 animes más esperados de la temporada de verano 2025',
