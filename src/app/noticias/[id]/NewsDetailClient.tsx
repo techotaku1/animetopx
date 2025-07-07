@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Home, Newspaper, Star } from 'lucide-react';
+import { FaPlay } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { ImageCarousel } from '@/components/layout/ImageCarousel';
@@ -198,9 +199,10 @@ export default function NewsDetailClient({
 							onClick={() =>
 								window.open(newsItem.imageUrls[currentIndex].malLink, '_blank')
 							}
-							className="font-bold"
+							className="flex items-center gap-2 font-bold"
 						>
-							Ver en MyAnimeList
+							<FaPlay />
+							Ver Serie TV
 						</Button>
 					</div>
 				</div>

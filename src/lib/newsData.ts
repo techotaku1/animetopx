@@ -429,26 +429,26 @@ export const newsItems: NewsItem[] = [
 				title: 'Sono Bisque Doll Season 2',
 				description: 'Segunda temporada de Sono Bisque Doll wa Koi wo Suru.',
 				malLink:
-					'https://myanimelist.net/anime/52991/Sono_Bisque_Doll_wa_Koi_wo_Suru_2nd_Season',
+					'https://www.crunchyroll.com/es/series/GQWH0M9N8/my-dress-up-darling',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/2-DandadanSeason2.jpg'),
 				title: 'Dandadan Season 2',
 				description: 'Segunda temporada de Dandadan.',
-				malLink: 'https://myanimelist.net/anime/57334/Dandadan',
+				malLink: 'https://www.crunchyroll.com/es/series/GG5H5XQ0D/dan-da-dan',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/3-KaijuNo.8Season2.jpg'),
 				title: 'Kaiju No. 8 Season 2',
 				description: 'Segunda temporada de Kaijuu 8-gou.',
-				malLink: 'https://myanimelist.net/anime/50399/Kaijuu_8-gou',
+				malLink: 'https://www.crunchyroll.com/es/series/GG5H5XQ7D/kaiju-no-8',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/4-YofukashinoUtaSeason2.jpg'),
 				title: 'Yofukashi no Uta Season 2',
 				description: 'Segunda temporada de Yofukashi no Uta.',
 				malLink:
-					'https://myanimelist.net/anime/52991/Yofukashi_no_Uta_2nd_Season',
+					'https://www.netflix.com/co/title/81621036',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/5-KaoruHanawaRintoSaku.jpg'),
@@ -456,7 +456,7 @@ export const newsItems: NewsItem[] = [
 				description:
 					'A pesar de estar adyacentes, la Escuela Secundaria Pública de Chidori y la Academia Privada Kikyo, solo para chicas, parecen vivir en mundos diferentes.',
 				malLink:
-					'https://myanimelist.net/anime/54741/Kaoru_Hana_wa_Rin_to_Saku',
+					'https://www.netflix.com/co/title/82024665',
 			},
 			{
 				url: getBlobUrl(
@@ -466,34 +466,34 @@ export const newsItems: NewsItem[] = [
 				description:
 					'Secuela de Seishun Buta Yarou wa Randoseru Girl no Yume wo Minai.',
 				malLink:
-					'https://myanimelist.net/anime/54714/Seishun_Buta_Yarou_wa_Santa_Claus_no_Yume_wo_Minai',
+					'https://www.crunchyroll.com/es/series/GYW4MG9G6/rascal-does-not-dream-of-bunny-girl-senpai',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/7-SakamotoDaysPart2.jpg'),
 				title: 'Sakamoto Days Part 2',
 				description: 'Segunda parte de Sakamoto Days.',
-				malLink: 'https://myanimelist.net/anime/58939/Sakamoto_Days',
+				malLink: 'https://www.netflix.com/co/title/81663325',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/8-TatenoYuushanoNariagariSeason4.jpg'),
 				title: 'Tate no Yuusha no Nariagari Season 4',
 				description: 'Cuarta temporada de Tate no Yuusha no Nariagari.',
 				malLink:
-					'https://myanimelist.net/anime/50847/Tate_no_Yuusha_no_Nariagari_Season_4',
+					'https://www.crunchyroll.com/es/series/G6W4QKX0R/the-rising-of-the-shield-hero',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/9-Gachiakuta.jpg'),
 				title: 'Gachiakuta',
 				description:
 					'Viviendo en los barrios bajos de un pueblo adinerado, Rudo y su padre adoptivo, Regto, intentan coexistir con el resto de los habitantes, pero Rudo desprecia el despilfarro de la clase alta.',
-				malLink: 'https://myanimelist.net/anime/56101/Gachiakuta',
+				malLink: 'https://www.crunchyroll.com/es/series/GP5HJ84P7/gachiakuta',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/10-HikarugaShindaNatsu.jpg'),
 				title: 'Hikaru ga Shinda Natsu',
 				description:
 					'Los mejores amigos Yoshiki y Hikaru han estado unidos como una lapa durante la mayor parte de sus vidas. Viviendo en un pequeño pueblo y siendo los únicos hijos de su edad, los dos chicos encuentran consuelo en la compañía mutua.',
-				malLink: 'https://myanimelist.net/anime/54740/Hikaru_ga_Shinda_Natsu',
+				malLink: 'https://www.netflix.com/co/title/81948057',
 			},
 		],
 	},
