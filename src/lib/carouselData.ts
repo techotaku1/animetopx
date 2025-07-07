@@ -66,7 +66,7 @@ export const carouselData = [
 		description:
 			'Los mejores estrenos de anime para la temporada de verano 2025.',
 		category: 'Portada',
-		imageUrl: getBlobUrl('VERANO-2025/portadaverano2025.webp'),
+		imageUrl: getBlobUrl('VERANO-2025/PortadaVerano2025.webp'),
 		date: '2025-07-10',
 		isCover: true,
 	},
