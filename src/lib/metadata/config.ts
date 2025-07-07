@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 const sharedOpenGraph = {
 	images: [
 		{
-			url: `/PORTADAPRINCIPAL.webp`,
+			url: 'https://animetopx.com/PORTADAPRINCIPAL.webp',
 			width: 1200,
 			height: 630,
 			alt: 'Descubre los mejores animes y noticias en AnimeTopX',
@@ -50,7 +50,7 @@ const defaultMetadata: Metadata = {
 		siteName: 'AnimeTopX',
 		images: [
 			{
-				url: '/PORTADAPRINCIPAL.webp',
+				url: 'https://animetopx.com/PORTADAPRINCIPAL.webp',
 				width: 1200,
 				height: 630,
 			},
