@@ -70,7 +70,6 @@ Algunas opciones del CLI de npm para optimizar o reaprar tus librerias
 
 - `npm dedupe` //Reducir la duplicación en el árbol de paquetes
 - `npm doctor` //Comprueba el estado de tu entorno npm
-- `npm prune` //Eliminar paquetes extraños
 - `npm ci` //# Para CI/CD y despliegues
 - `npm install -g npm@latest` //actualizar ultima version del npm
 
@@ -87,14 +86,15 @@ Algunas opciones del CLI de npm para optimizar o reaprar tus librerias
 7. `npx tsc`: Ejecuta el compilador TypeScript localmente.
 8. `tsc`: Ejecuta el compilador TypeScript globalmente.
 9. `npm install next@latest react@latest react-dom@latest`: Actualizar Next
-10. `npm install --save-dev eslint @eslint/eslintrc @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-import eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-simple-import-sort eslint-config-next @types/next @types/react @eslint/js typescript-eslint` : Dependencias para que funcione el archivo eslint.config.mjs
+10. `npm install --save-dev eslint @eslint/eslintrc typescript-eslint @eslint/js eslint-plugin-import eslint-config-prettier @types/react @eslint/js @types/node eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-simple-import-sort globals dotenv @next/eslint-plugin-next`: Dependencias para que funcione el archivo eslint.config.mjs
 11. `npx eslint --debug .` : Debugear Eslint para cuando no quiera detectar errores
+12. `npm install eslint --save-dev`: Instala TypeScript localmente en el proyecto como una dependencia de desarrollo.
 
 ---
 
 Tecnologias Que Se Usan:
 
-- Next.js 15, App Router, Clerk, Tailwind CSS, Shadcn/UI, Drizzle ORM, PostgreSQL, Neon, Vercel, TypeScript, AWS S3, Upstash.
+- Next.js 15, App Router, Clerk, Tailwind CSS, Shadcn/UI, Drizzle ORM, PostgreSQL, Neon, Vercel, TypeScript, AWS S3, Upstash
 
 ---
 
@@ -138,7 +138,7 @@ Tutorial UPDATE DEPENDENCIES:
 10. `npm install -g [nombre-del-paquete]@latest` // Instala la última versión de un paquete global específico
 
 11. `npm install tailwindcss @tailwindcss/postcss postcss` // Instala las últimas versiones de TailwindCSS 4.0
-12. `npx @tailwindcss/upgrade@next` // Migrar tailwindcss 3 or 4
+12. `npm install tailwindcss@latest @tailwindcss/cli@latest` // Actualizar TailwindCss 4
 13. `npx @clerk/upgrade --from=core-1` // Instala la última versión de Clerk para Next.js 1
 14. `npx @clerk/upgrade -g` // Instala la última versión de Clerk para Next.js 2
 15. `npm install drizzle-orm@latest` // Instala la última versión de Drizzle ORM
@@ -192,6 +192,16 @@ Windows: `C:\Users\TU_USUARIO\AppData\Roaming\Code`
 
 Instalar dependencias globales en una sola :
 
-`npm install -g npm-check-updates@latest npm@latest eslint@latest typescript@latest`
+`npm install -g npm-check-updates@latest npm@latest eslint@latest typescript@latest`,
+
+'npm install -g npm@11.4.2'
 
 ---
+
+Verificar la Ruta de NODE y fnm :
+
+1. `which node` : ruta de node con fnm
+2. `fnm install --lts` : instalar la ultima version stable de node
+3. `fnm use (version)` : elegir la version de node que quieres usar
+4. `fnm alias (version) default` : configurar la version predeterminada de nose
+5. `eval "$(fnm env)"` : Proteger tu entorno

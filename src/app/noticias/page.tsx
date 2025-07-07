@@ -7,11 +7,18 @@ import { Home, Newspaper } from 'lucide-react';
 import { NewsCard } from '@/components/layout/news-card';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
-
 import { getBlobUrl } from '@/lib/blobUtils';
 
 // Simulación de datos de noticias
 const newsItems = [
+	{
+		id: 6,
+		title: 'TOP ANIME VERANO 2025',
+		description: 'Top estrenos de la temporada de VERANO 2025',
+		category: 'Verano',
+		imageUrl: getBlobUrl('VERANO-2025/CoverVerano2025.webp'),
+		date: '2025-07-10',
+	},
 	{
 		id: 5,
 		title: 'NUEVAS AVENTURAS EN PRIMAVERA 2025',

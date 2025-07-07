@@ -48,7 +48,7 @@ export function ImageCarousel({
 								alt={image.title || image.description}
 								className="rounded-lg object-contain"
 								loading={index === 0 ? 'eager' : 'lazy'}
-								quality={90}
+								quality={100}
 								sizes="100vw"
 								src={image.url}
                 placeholder='blur'

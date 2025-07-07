@@ -18,6 +18,8 @@
   "files.associations": {
     "*.css": "tailwindcss",
     "*.env": "env",
+    "*.env.production": "env",
+    "*.jsx": "javascriptreact",
     "*.tsx": "typescriptreact",
     "*.ts": "typescript",
     "*.mjs": "javascript",
@@ -56,6 +58,9 @@
   "[env]": {
     "editor.defaultFormatter": "IronGeek.vscode-env"
   },
+  "[env.production]": {
+    "editor.defaultFormatter": "IronGeek.vscode-env"
+  },
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
@@ -76,8 +81,7 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsserver.maxTsServerMemory": 8192,
   // ESLint Configuration
-  "eslint.runtime": "C:/Users/ADMIN/AppData/Local/fnm_multishells/3632_1747785072565/node",
-  "eslint.nodePath": "C:/Users/ADMIN/AppData/Local/fnm_multishells/3632_1747785072565/node",
+  "eslint.runtime": "C:/Users/Usuario/AppData/Local/fnm_multishells/5168_1751241710861/node",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -90,36 +94,24 @@
       "severity": "off"
     },
     {
-      "rule": "import/order",
-      "severity": "off"
-    },
-    {
       "rule": "no-unused-vars",
-      "severity": "warn"
+      "severity": "off"
+    },
+     {
+      "rule": "simple-import-sort/imports",
+      "severity": "off"
     },
     {
-      "rule": "@typescript-eslint/no-unused-vars",
+      "rule": "simple-import-sort/exports",
       "severity": "off"
-    }
+    },
   ],
   // Tailwind CSS Configuration
   "tailwindCSS.includeLanguages": {
     "typescript": "javascript",
-    "typescriptreact": "javascript",
-    "html": "html",
-    "css": "css"
+    "typescriptreact": "javascript"
   },
-  "tailwindCSS.emmetCompletions": true,
-  "tailwindCSS.classAttributes": [
-    "class",
-    "className",
-    "ngClass",
-    "class:list",
-    "classList"
-  ],
-  "tailwindCSS.suggestions": true,
-  "tailwindCSS.hovers": true,
-  "tailwindCSS.codeActions": true,
+  "css.validate": false,
   "tailwindCSS.validate": true,
   "tailwindCSS.showPixelEquivalents": true,
   "tailwindCSS.colorDecorators": true,

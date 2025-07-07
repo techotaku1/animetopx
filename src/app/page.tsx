@@ -1,13 +1,12 @@
 'use client';
 
-import { Suspense, useState, useEffect, type JSX } from 'react';
+import { type JSX, Suspense, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { NewsCard } from '@/components/layout/news-card';
 import { Button } from '@/components/ui/button';
-
 import { carouselData } from '@/lib/carouselData';
 
 import Loading from './loading';
@@ -19,8 +18,10 @@ export default function Home(): JSX.Element {
 	const sortedNewsItems = newsItems.sort(
 		(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 	);
-	const latestNewsItem = sortedNewsItems.find((item) => item.id === 5); // Cambiado de 4 a 5
-	const otherNewsItems = sortedNewsItems.filter((item) => item.id !== 5); // Cambiado de 4 a 5
+	const latestNewsItem =
+		sortedNewsItems.find((item) => item.id === 6) ||
+		sortedNewsItems.find((item) => item.id === 5); // Ahora busca primero la de verano 2025
+	const otherNewsItems = sortedNewsItems.filter((item) => item.id !== 6); // Excluye la de verano 2025
 
 	const [currentSlide, setCurrentSlide] = useState(0);
 

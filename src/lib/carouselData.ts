@@ -61,6 +61,16 @@ export const carouselData = [
 		isCover: true,
 	},
 	{
+		id: 6,
+		title: 'TOP ANIMES VERANO 2025',
+		description:
+			'Los mejores estrenos de anime para la temporada de verano 2025.',
+		category: 'Portada',
+		imageUrl: getBlobUrl('VERANO-2025/portadaverano2025.webp'),
+		date: '2025-07-10',
+		isCover: true,
+	},
+	{
 		id: 3,
 		title: 'EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES EN HUNTER X HUNTER',
 		description: 'Descubre las 5 calamidades del continente oscuro.',
@@ -104,6 +114,15 @@ export const carouselData = [
 		category: 'Primavera',
 		imageUrl: getBlobUrl('PRIMAVERA-2025/CoverPrimavera2025.webp'), // Cambiar a minúsculas
 		date: '2025-04-12',
+		isCover: false,
+	},
+	{
+		id: 6,
+		title: 'TOP ANIMES VERANO 2025',
+		description: 'Los Mejores ESTRENOS de la temporada de VERANO 2025.',
+		category: 'Verano',
+		imageUrl: getBlobUrl('VERANO-2025/coververano2025.webp'),
+		date: '2025-07-10',
 		isCover: false,
 	},
 ];

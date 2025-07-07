@@ -1,193 +1,233 @@
-import { FlatCompat } from '@eslint/eslintrc';
+// @ts-check
+
+import eslintPluginNext from '@next/eslint-plugin-next';
+
 import js from '@eslint/js';
-import tseslintPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import prettier from 'eslint-config-prettier';
+import drizzlePlugin from 'eslint-plugin-drizzle';
+import importPlugin from 'eslint-plugin-import';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-const compat = new FlatCompat({
-	baseDirectory: import.meta.dirname,
-	recommendedConfig: js.configs.recommended,
-});
+export default [
+  js.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
 
-const eslintConfig = [
-	// 🔹 Ignorar archivos innecesarios
-	{
-		ignores: [
-			'**/node_modules/**',
-			'.next/**',
-			'out/**',
-			'public/**',
-			'dist/**',
-			'**/*.d.ts',
-			'.vercel/**',
-			'src/components/estudiantes/ui/**',
-			'src/components/educadores/ui/**',
-			'src/components/admin/ui/**',
-			'src/components/super-admin/ui/**',
-		],
-	},
+  {
+    ignores: [
+      '**/node_modules/**',
+      '.next/**',
+      'out/**',
+      'public/**',
+      'dist/**',
+      'build/**',
+      '**/*.d.ts',
+      '.vercel/**',
+      'coverage/**',
+      '.turbo/**',
+      'src/components/estudiantes/ui/**',
+      'src/components/educadores/ui/**',
+      'src/components/admin/ui/**',
+      'src/components/super-admin/ui/**',
+    ],
+  },
 
-	// 🔹 Configuración para archivos JS/TS
-	{
-		files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
-		languageOptions: {
-			ecmaVersion: 'latest',
-			sourceType: 'module',
-			parser: tsParser,
-			parserOptions: {
-				project: './tsconfig.json',
-				tsconfigRootDir: process.cwd(),
-				ecmaFeatures: { jsx: true },
-			},
-			globals: {
-				...globals.browser,
-				...globals.node,
-				...globals.es2022,
-			},
-		},
-		linterOptions: {
-			reportUnusedDisableDirectives: false, // Change this to false
-			noInlineConfig: false,
-		},
-		plugins: {
-			'@typescript-eslint': tseslintPlugin,
-		},
-		rules: {
-			'no-unused-vars': 'off',
-			'@typescript-eslint/no-unused-vars': [
-				'warn', // Change to warn instead of error
-				{
-					args: 'all',
-					argsIgnorePattern: '^_',
-					caughtErrors: 'all',
-					caughtErrorsIgnorePattern: '^_',
-					destructuredArrayIgnorePattern: '^_',
-					varsIgnorePattern: '^_',
-					ignoreRestSiblings: true,
-				},
-			],
-		},
-	},
+  {
+    files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.es2020,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+      react: reactPlugin,
+      'react-hooks': reactHooks,
+      'simple-import-sort': simpleImportSort,
+      '@next/next': eslintPluginNext,
+      import: importPlugin,
+      drizzle: drizzlePlugin, // <-- Agrega el plugin Drizzle aquí
+    },
+    settings: {
+      react: {
+        version: 'detect',
+        runtime: 'automatic',
+      },
+      next: {
+        rootDir: './',
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
+        node: true,
+      },
+    },
+    rules: {
+      // ===== TYPESCRIPT RULES =====
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+      '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
+      '@typescript-eslint/no-misused-promises': [
+        'warn',
+        {
+          checksVoidReturn: {
+            arguments: false,
+            attributes: false,
+          },
+        },
+      ],
+      '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/no-unsafe-call': 'error',
+      '@typescript-eslint/no-unsafe-member-access': 'error',
+      '@typescript-eslint/no-unsafe-return': 'error',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/prefer-optional-chain': 'warn',
+      '@typescript-eslint/no-unnecessary-condition': 'off',
 
-	// 🔹 Configuración de Next.js, TypeScript e Importaciones
-	...compat.config({
-		extends: [
-			'eslint:recommended',
-			'next/core-web-vitals',
-			'next/typescript',
-			'plugin:@next/next/recommended',
-			'plugin:@typescript-eslint/recommended',
-			'plugin:@typescript-eslint/recommended-type-checked',
-			'plugin:@typescript-eslint/stylistic-type-checked',
-			'plugin:import/recommended',
-			'plugin:drizzle/recommended',
-			'prettier',
-		],
-		rules: {
-			// ⚠️ **Advertencias de Código**
-			'no-console': 'off',
-			'no-unused-vars': 'off',
-			'@typescript-eslint/no-unused-vars': [
-				'warn', // Make sure this is also warn here
-				{
-					args: 'all',
-					argsIgnorePattern: '^_',
-					caughtErrors: 'all',
-					caughtErrorsIgnorePattern: '^_',
-					destructuredArrayIgnorePattern: '^_',
-					varsIgnorePattern: '^_',
-					ignoreRestSiblings: true,
-				},
-			],
-			'@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
-			'@typescript-eslint/consistent-type-imports': [
-				'warn',
-				{ prefer: 'type-imports', fixStyle: 'inline-type-imports' },
-			],
-			'@typescript-eslint/require-await': 'warn',
-			'@typescript-eslint/no-misused-promises': [
-				'warn',
-				{ checksVoidReturn: { arguments: false, attributes: false } },
-			],
-			'@typescript-eslint/no-floating-promises': 'warn',
+      // ===== REACT RULES =====
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+      'react/prop-types': 'off',
+      'react/jsx-closing-bracket-location': ['warn', 'line-aligned'],
+      'react/jsx-fragments': ['warn', 'syntax'],
+      'react/no-invalid-html-attribute': 'warn',
+      'react/self-closing-comp': ['warn', { component: true, html: true }],
+      'react/jsx-key': 'error',
+      'react/no-unescaped-entities': 'warn',
 
-			// 🚨 **Errores Críticos**
-			'@typescript-eslint/no-unsafe-assignment': 'error',
-			'@typescript-eslint/no-unsafe-call': 'error',
-			'@typescript-eslint/no-unsafe-member-access': 'error',
-			'@typescript-eslint/no-unsafe-return': 'error',
-			'@typescript-eslint/no-explicit-any': 'error',
-			'no-unused-expressions': 'error',
-			'no-duplicate-imports': 'error',
+      // ===== REACT HOOKS RULES =====
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': [
+        'warn',
+        {
+          additionalHooks:
+            '(useQuery|useMutation|useInfiniteQuery|useSuspenseQuery)',
+        },
+      ],
 
-			// 🔹 **Next.js y React**
-			'react/react-in-jsx-scope': 'off',
-			'react/self-closing-comp': [
-				'warn',
-				{
-					component: true,
-					html: true,
-				},
-			],
+      // ===== NEXT.JS 15 SPECIFIC RULES =====
+      '@next/next/google-font-display': 'error',
+      '@next/next/no-img-element': 'error',
+      '@next/next/no-html-link-for-pages': 'error',
+      '@next/next/no-head-element': 'error',
+      '@next/next/no-page-custom-font': 'warn',
+      '@next/next/no-unwanted-polyfillio': 'error',
 
-			// 🔹 **Drizzle ORM**
-			'drizzle/enforce-delete-with-where': [
-				'warn',
-				{ drizzleObjectName: ['db', 'ctx.db'] },
-			],
-			'drizzle/enforce-update-with-where': [
-				'warn',
-				{ drizzleObjectName: ['db', 'ctx.db'] },
-			],
+      // ===== GENERAL RULES =====
+      'no-unused-expressions': 'error',
+      'no-duplicate-imports': 'error',
+      'no-console': 'off',
+      'prefer-const': 'warn',
+      'no-var': 'error',
 
-			// 🔹 **Orden de Imports**
-			'import/order': [
-				'warn',
-				{
-					'newlines-between': 'always',
-					groups: [
-						['builtin', 'external'],
-						'internal',
-						['parent', 'sibling', 'index'],
-						'type',
-					],
-					pathGroups: [
-						{ pattern: 'react', group: 'external', position: 'before' },
-						{ pattern: 'next/**', group: 'external', position: 'before' },
-						{
-							pattern: '@/components/**',
-							group: 'internal',
-							position: 'after',
-						},
-						{ pattern: '@/lib/**', group: 'internal', position: 'after' },
-						{ pattern: '@/styles/**', group: 'internal', position: 'after' },
-					],
-					pathGroupsExcludedImportTypes: ['react'],
-					alphabetize: {
-						order: 'asc',
-						caseInsensitive: true,
-					},
-				},
-			],
-			'import/no-unresolved': 'warn',
-			'import/no-duplicates': 'warn',
-			'import/newline-after-import': 'warn',
-		},
-		settings: {
-			'import/resolver': {
-				alias: {
-					map: [['@', './src']],
-					extensions: ['.js', '.jsx', '.ts', '.tsx'],
-				},
-				typescript: {
-					alwaysTryTypes: true,
-					project: './tsconfig.json',
-				},
-			},
-			react: { version: 'detect' },
-			next: { rootDir: process.cwd() },
-		},
-	}),
+      // ===== IMPORT SORTING RULES (AUTO-ORGANIZE) =====
+      'simple-import-sort/imports': [
+        'warn',
+        {
+          groups: [
+            // React and Next.js imports first
+            ['^react$', '^react/'],
+            ['^next', '^@next'],
+
+            // External packages
+            ['^@?\\w'],
+
+            // Internal imports with aliases
+            ['^@/', '^~/'],
+
+            // Parent imports
+            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+
+            // Same-folder imports
+            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+
+            // Type imports (should be last)
+            ['^.+\\u0000$'],
+
+            // Style imports (CSS, SCSS, etc.)
+            ['^.+\\.s?css$'],
+          ],
+        },
+      ],
+      'simple-import-sort/exports': 'warn',
+
+      // Additional import rules for better organization
+      'import/newline-after-import': 'error',
+      'import/no-duplicates': 'off',
+      'import/first': 'error',
+
+      // ===== DRIZZLE RULES =====
+      'drizzle/enforce-delete-with-where': [
+        'error',
+        {
+          drizzleObjectName: ['db'],
+        },
+      ],
+      'drizzle/enforce-update-with-where': [
+        'error',
+        {
+          drizzleObjectName: ['db'],
+        },
+      ],
+    },
+  },
+
+  // Disable type-checked rules for JS files
+  {
+    files: ['**/*.js', '**/*.mjs'],
+    ...tseslint.configs.disableTypeChecked,
+  },
+
+  // Configuration for test files
+  {
+    files: ['**/*.test.{js,jsx,ts,tsx}', '**/*.spec.{js,jsx,ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off'
+        },
+  },
+
+  // Configuration for config files
+  {
+    files: [
+      '*.config.{js,ts,mjs}',
+      'tailwind.config.{js,ts}',
+      'next.config.{js,ts,mjs}',
+    ],
+    rules: {
+      '@typescript-eslint/no-var-requires': 'off',
+      'import/no-anonymous-default-export': 'off',
+    },
+  },
+  prettier,
 ];
-
-export default eslintConfig;

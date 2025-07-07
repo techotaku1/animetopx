@@ -1,19 +1,19 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Star, Home, Newspaper } from 'lucide-react';
-import { ToastContainer, toast } from 'react-toastify';
+import { Home, Newspaper, Star } from 'lucide-react';
+import { toast, ToastContainer } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css';
 import { ImageCarousel } from '@/components/layout/ImageCarousel';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
-
 import { newsItems } from '@/lib/newsData';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Comment {
 	id: string;
@@ -151,7 +151,7 @@ export default function NewsDetailClient({
 			</div>
 
 			{/* Breadcrumbs para navegación */}
-			<div className="flex w-full justify-start mt-7">
+			<div className="mt-7 flex w-full justify-start">
 				<Breadcrumbs items={breadcrumbItems} />
 			</div>
 
@@ -174,8 +174,8 @@ export default function NewsDetailClient({
 
 				<div className="w-full lg:sticky lg:top-4 lg:w-1/2">
 					<div className="flex h-full flex-col rounded-lg border border-gray-300 p-6 shadow-md dark:border-white">
-						{id <= 5 && (
-							<div className="font-sans mb-2 inline-block rounded-sm bg-red-600 py-1 text-center text-sm font-semibold text-white lg:text-base">
+						{id <= 6 && (
+							<div className="mb-2 inline-block rounded-sm bg-red-600 py-1 text-center font-sans text-sm font-semibold text-white lg:text-base">
 								Top {currentIndex + 1}
 							</div>
 						)}
@@ -189,7 +189,7 @@ export default function NewsDetailClient({
 							onClick={() =>
 								window.open(newsItem.imageUrls[currentIndex].malLink, '_blank')
 							}
-              className="font-bold"
+							className="font-bold"
 						>
 							Ver en MyAnimeList
 						</Button>

@@ -92,7 +92,8 @@ export const newsItems: NewsItem[] = [
 				title: 'Can a Boy-Girl Friendship Survive?',
 				description:
 					'Una comedia romántica sobre la amistad entre chicos y chicas.',
-				malLink: 'https://myanimelist.net/anime/52709/Danjo_no_Yuujou_wa_Seiritsu_suru_Iya_Shinai',
+				malLink:
+					'https://myanimelist.net/anime/52709/Danjo_no_Yuujou_wa_Seiritsu_suru_Iya_Shinai',
 			},
 			{
 				url: getBlobUrl('PRIMAVERA-2025/Kowloon_Generic_Romance.webp'),
@@ -374,7 +375,7 @@ export const newsItems: NewsItem[] = [
 				url: getBlobUrl('OTOÑO-2024/DanMachiHoujouNoMegamiHenV.webp'),
 				title: 'Danmachi: Houjou no Megami-hen V',
 				description:
-					'La quinta temporada de Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka lleva a los protagonistas a enfrentar nuevas amenazas en las profundidades del Dungeon. Bell Cranel continúa su viaje con nuevos aliados y enemigos mientras explora su destino en un mundo lleno de divinidades, monstruos y batallas épicas.',
+					'La quinta temporada de Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka lleva a los protagonistas a enfrentar nuevas amenazas en las profundidades del Dungeon. Bell Cranel continúa su viaje with nuevos aliados y enemigos mientras explora su destino en un mundo lleno de divinidades, monstruos y batallas épicas.',
 				malLink:
 					'https://myanimelist.net/anime/57066/Dungeon_ni_Deai_wo_Motomeru_no_wa_Machigatteiru_Darou_ka_V__Houjou_no_Megami-hen?q=no%20megami%20hen&cat=anime',
 			},
@@ -411,6 +412,88 @@ export const newsItems: NewsItem[] = [
 					'La segunda temporada de Nanatsu no Taizai: Mokushiroku no Yonkishi continúa la saga de los Siete Pecados Capitales, quienes se enfrentan a nuevos enemigos y desvelan más secretos sobre su mundo. Esta entrega promete más batallas épicas y un mayor desarrollo de los personajes mientras se profundiza en la historia detrás de los Cuatro Caballeros del Apocalipsis.',
 				malLink:
 					'https://myanimelist.net/anime/58511/Nanatsu_no_Taizai__Mokushiroku_no_Yonkishi_2nd_Season?q=Mokushiroku%20no%20Yonkishi&cat=anime',
+			},
+		],
+	},
+	{
+		id: 6,
+		title: 'ANIMES VERANO 2025',
+		category: 'Estrenos Verano 2025',
+		date: '2025-07-10',
+		content: 'Top 10 animes más esperados de la temporada de verano 2025',
+		backgroundImage: getBlobUrl('VERANO-2025/portadaverano2025.jpg'),
+		publicationDate: new Date('2025-07-10'),
+		imageUrls: [
+			{
+				url: getBlobUrl('VERANO-2025/1-SonoBisqueDollSeason2.jpg'),
+				title: 'Sono Bisque Doll Season 2',
+				description: 'Segunda temporada de Sono Bisque Doll wa Koi wo Suru.',
+				malLink:
+					'https://myanimelist.net/anime/52991/Sono_Bisque_Doll_wa_Koi_wo_Suru_2nd_Season',
+			},
+			{
+				url: getBlobUrl('VERANO-2025/2-DandadanSeason2.jpg'),
+				title: 'Dandadan Season 2',
+				description: 'Segunda temporada de Dandadan.',
+				malLink: 'https://myanimelist.net/anime/57334/Dandadan',
+			},
+			{
+				url: getBlobUrl('VERANO-2025/3-KaijuNo.8Season2.jpg'),
+				title: 'Kaiju No. 8 Season 2',
+				description: 'Segunda temporada de Kaijuu 8-gou.',
+				malLink: 'https://myanimelist.net/anime/50399/Kaijuu_8-gou',
+			},
+			{
+				url: getBlobUrl('VERANO-2025/4-YofukashinoUtaSeason2.jpg'),
+				title: 'Yofukashi no Uta Season 2',
+				description: 'Segunda temporada de Yofukashi no Uta.',
+				malLink:
+					'https://myanimelist.net/anime/52991/Yofukashi_no_Uta_2nd_Season',
+			},
+			{
+				url: getBlobUrl('VERANO-2025/5-KaoruHanawaRintoSaku.jpg'),
+				title: 'Kaoru Hana wa Rin to Saku',
+				description:
+					'A pesar de estar adyacentes, la Escuela Secundaria Pública de Chidori y la Academia Privada Kikyo, solo para chicas, parecen vivir en mundos diferentes.',
+				malLink:
+					'https://myanimelist.net/anime/54741/Kaoru_Hana_wa_Rin_to_Saku',
+			},
+			{
+				url: getBlobUrl(
+					'VERANO-2025/6-SeishunButaYarouwaSantaClausnoYumewoMinai.jpg'
+				),
+				title: 'Seishun Buta Yarou wa Santa Claus no Yume wo Minai',
+				description:
+					'Secuela de Seishun Buta Yarou wa Randoseru Girl no Yume wo Minai.',
+				malLink:
+					'https://myanimelist.net/anime/54714/Seishun_Buta_Yarou_wa_Santa_Claus_no_Yume_wo_Minai',
+			},
+			{
+				url: getBlobUrl('VERANO-2025/7-SakamotoDaysPart2.jpg'),
+				title: 'Sakamoto Days Part 2',
+				description: 'Segunda parte de Sakamoto Days.',
+				malLink: 'https://myanimelist.net/anime/58939/Sakamoto_Days',
+			},
+			{
+				url: getBlobUrl('VERANO-2025/8-TatenoYuushanoNariagariSeason4.jpg'),
+				title: 'Tate no Yuusha no Nariagari Season 4',
+				description: 'Cuarta temporada de Tate no Yuusha no Nariagari.',
+				malLink:
+					'https://myanimelist.net/anime/50847/Tate_no_Yuusha_no_Nariagari_Season_4',
+			},
+			{
+				url: getBlobUrl('VERANO-2025/9-Gachiakuta.jpg'),
+				title: 'Gachiakuta',
+				description:
+					'Viviendo en los barrios bajos de un pueblo adinerado, Rudo y su padre adoptivo, Regto, intentan coexistir con el resto de los habitantes, pero Rudo desprecia el despilfarro de la clase alta.',
+				malLink: 'https://myanimelist.net/anime/56101/Gachiakuta',
+			},
+			{
+				url: getBlobUrl('VERANO-2025/10-HikarugaShindaNatsu.jpg'),
+				title: 'Hikaru ga Shinda Natsu',
+				description:
+					'Los mejores amigos Yoshiki y Hikaru han estado unidos como una lapa durante la mayor parte de sus vidas. Viviendo en un pequeño pueblo y siendo los únicos hijos de su edad, los dos chicos encuentran consuelo en la compañía mutua.',
+				malLink: 'https://myanimelist.net/anime/54740/Hikaru_ga_Shinda_Natsu',
 			},
 		],
 	},

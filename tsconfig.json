@@ -1,48 +1,56 @@
 {
-	"compilerOptions": {
-		"target": "ES2022",
-		"lib": ["dom", "dom.iterable", "ESNext"],
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"jsx": "preserve",
-
-		"strict": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"]
-		},
-		"resolveJsonModule": true,
-		"allowJs": true,
-		"isolatedModules": true,
-
-		"noEmit": true,
-		"incremental": true,
-		"tsBuildInfoFile": "./.tsbuildinfo",
-
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
-		"plugins": [
-			{
-				"name": "next"
-			}
-		],
-		"types": ["node", "react", "react-dom", "next"]
-	},
-	"include": [
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Next.js",
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
     "**/*",
-		".*/**/*",
-		"./**/.*",
-		"video.d.ts",
-		"next-env.d.ts",
-		".next/types/**/*.ts"
-	],
-	"exclude": ["node_modules", ".next", "build", ".vercel"]
+    ".*/**/*",
+    "./**/.*",
+    "next-env.d.ts",
+    "next-video.config.js",
+    "video.d.ts",
+    ".next/types/**/*.ts",
+    "src/types/**/*.ts",
+    "src/types/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "build",
+    "dist",
+    ".vercel",
+    "coverage"
+  ]
 }
