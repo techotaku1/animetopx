@@ -176,7 +176,13 @@ export default function Home(): JSX.Element {
 					</div>
 					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 						{otherNewsItems.map((item) => (
-							<NewsCard key={item.id} item={item} />
+							<NewsCard
+								key={item.id}
+								item={{
+									...item,
+									relativeTime: getRelativeTime(item.date),
+								}}
+							/>
 						))}
 					</div>
 				</section>

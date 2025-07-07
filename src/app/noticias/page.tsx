@@ -73,6 +73,61 @@ export default function NoticiasPage(): JSX.Element {
 		{ href: '/noticias', label: 'Noticias', icon: Newspaper },
 	];
 
+	// Función para mostrar tiempo relativo en español
+	function getRelativeTime(dateString: string) {
+		const now = new Date();
+		const date = new Date(dateString);
+
+		const nowMidnight = new Date(
+			now.getFullYear(),
+			now.getMonth(),
+			now.getDate()
+		);
+		const dateMidnight = new Date(
+			date.getFullYear(),
+			date.getMonth(),
+			date.getDate()
+		);
+
+		const diffTime = nowMidnight.getTime() - dateMidnight.getTime();
+		const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+		if (diffDays === 0) {
+			return 'Publicado hoy';
+		}
+		if (diffDays === 1) {
+			return 'Publicado ayer';
+		}
+
+		if (diffDays > 60) {
+			const nowY = now.getFullYear();
+			const nowM = now.getMonth();
+			const dateY = date.getFullYear();
+			const dateM = date.getMonth();
+			let diffMonths = (nowY - dateY) * 12 + (nowM - dateM);
+
+			if (now.getDate() < date.getDate()) {
+				diffMonths -= 1;
+			}
+
+			if (diffMonths <= 0) {
+				return 'Publicado hoy';
+			}
+			if (diffMonths === 1) {
+				return 'Publicado hace 1 mes';
+			}
+			if (diffMonths < 12) {
+				return `Publicado hace ${diffMonths} meses`;
+			}
+			return 'Publicado hace más de un año';
+		}
+		if (diffDays > 1) {
+			return `Publicado hace ${diffDays} días`;
+		}
+
+		return 'Publicado hoy';
+	}
+
 	return (
 		<div className="space-y-8">
 			{/* Breadcrumbs */}
@@ -88,7 +143,13 @@ export default function NoticiasPage(): JSX.Element {
 
 			<section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 				{newsItems.map((item) => (
-					<NewsCard key={item.id} item={item} />
+					<NewsCard
+						key={item.id}
+						item={{
+							...item,
+							relativeTime: getRelativeTime(item.date),
+						}}
+					/>
 				))}
 			</section>
 			<section className="text-center">
