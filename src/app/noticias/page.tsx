@@ -17,7 +17,7 @@ const newsItems = [
 		description: 'Top estrenos de la temporada de VERANO 2025',
 		category: 'Verano',
 		imageUrl: getBlobUrl('VERANO-2025/CoverVerano2025.webp'),
-		date: '2025-07-10',
+		date: '2025-07-07T00:56:00-05:00', // Fecha y hora exacta de publicación (Bogotá)
 	},
 	{
 		id: 5,

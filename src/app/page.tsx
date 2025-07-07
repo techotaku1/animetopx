@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
 		(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 	);
 	const latestNewsItem =
-		sortedNewsItems.find((item) => item.id === 6) ||
+		sortedNewsItems.find((item) => item.id === 6) ??
 		sortedNewsItems.find((item) => item.id === 5); // Ahora busca primero la de verano 2025
 	const otherNewsItems = sortedNewsItems.filter((item) => item.id !== 6); // Excluye la de verano 2025
 
@@ -32,6 +32,64 @@ export default function Home(): JSX.Element {
 
 		return (): void => clearInterval(interval);
 	}, [portadaItems.length]);
+
+	// Nueva función para mostrar tiempo relativo en español
+	function getRelativeTime(dateString: string) {
+		const now = new Date();
+		const date = new Date(dateString);
+
+		// Normaliza ambas fechas a medianoche local
+		const nowMidnight = new Date(
+			now.getFullYear(),
+			now.getMonth(),
+			now.getDate()
+		);
+		const dateMidnight = new Date(
+			date.getFullYear(),
+			date.getMonth(),
+			date.getDate()
+		);
+
+		const diffTime = nowMidnight.getTime() - dateMidnight.getTime();
+		const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+		if (diffDays === 0) {
+			return 'Publicado hoy';
+		}
+		if (diffDays === 1) {
+			return 'Publicado ayer';
+		}
+
+		// Si han pasado más de 60 días, mostrar en meses
+		if (diffDays > 60) {
+			const nowY = now.getFullYear();
+			const nowM = now.getMonth();
+			const dateY = date.getFullYear();
+			const dateM = date.getMonth();
+			let diffMonths = (nowY - dateY) * 12 + (nowM - dateM);
+
+			// Ajuste: si el día actual es menor que el día de la fecha, restar un mes
+			if (now.getDate() < date.getDate()) {
+				diffMonths -= 1;
+			}
+
+			if (diffMonths <= 0) {
+				return 'Publicado hoy';
+			}
+			if (diffMonths === 1) {
+				return 'Publicado hace 1 mes';
+			}
+			if (diffMonths < 12) {
+				return `Publicado hace ${diffMonths} meses`;
+			}
+			return 'Publicado hace más de un año';
+		}
+		if (diffDays > 1) {
+			return `Publicado hace ${diffDays} días`;
+		}
+
+		return 'Publicado hoy';
+	}
 
 	return (
 		<div className="space-y-8">
@@ -99,7 +157,14 @@ export default function Home(): JSX.Element {
 										Nueva Noticia
 									</div>
 
-									<NewsCard item={latestNewsItem} />
+									<NewsCard
+										item={{
+											...latestNewsItem,
+											// Añade una propiedad extra para mostrar el tiempo relativo
+											relativeTime: getRelativeTime(latestNewsItem.date),
+										}}
+									/>
+									{/* Elimina la línea de fecha absoluta aquí */}
 								</div>
 								{/* Mobile version - only visible on small screens */}
 								<div className="animate-blink mt-2 block text-center text-xl font-bold text-yellow-500 sm:hidden">

@@ -419,10 +419,10 @@ export const newsItems: NewsItem[] = [
 		id: 6,
 		title: 'ANIMES VERANO 2025',
 		category: 'Estrenos Verano 2025',
-		date: '2025-07-10',
+		date: '2025-07-07T00:56:00-05:00', // Fecha y hora exacta de publicación (Bogotá)
 		content: 'Top 10 animes más esperados de la temporada de verano 2025',
 		backgroundImage: getBlobUrl('VERANO-2025/portadaverano2025.jpg'),
-		publicationDate: new Date('2025-07-10'),
+		publicationDate: new Date('2025-07-07T00:56:00-05:00'), // Fecha y hora exacta de publicación (Bogotá)
 		imageUrls: [
 			{
 				url: getBlobUrl('VERANO-2025/1-SonoBisqueDollSeason2.jpg'),
