@@ -1,19 +1,23 @@
-import './globals.css';
-
 import React, { Suspense } from 'react';
 
-import { Shantell_Sans, Grandstander } from 'next/font/google';
+import { Grandstander, Shantell_Sans } from 'next/font/google';
 import Script from 'next/script';
 
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { type Metadata } from 'next';
 
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { NavigationEvents } from '@/components/layout/navigation-events';
+import { getMetadataForRoute } from '@/lib/metadata/config';
+import {
+	getWebPagesSchema,
+	getWebsiteSchema,
+} from '@/lib/metadata/structured-data';
 
 import Providers from './providers';
+
+import './globals.css';
 
 const shantellSans = Shantell_Sans({
 	subsets: ['latin'],
@@ -29,45 +33,20 @@ const grandstander = Grandstander({
 	weight: ['400', '500', '600', '700', '800', '900'],
 });
 
-export const metadata: Metadata = {
-	title: 'AnimeTopX',
-	description:
-		'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-	keywords:
-		'anime, noticias, manga, japón, otaku, top animes, animes verano, animes primavera, animes otoño, animes invierno, Fire Force Season 3, Lazarus, Wind Breaker Season 2, The Beginning After the End, Boku no Hero Academia Vigilantes, Solo Leveling Season 2, Sakamoto Days, Kusuriya no Hitorigoto Season 2, Dr. Stone Science Future, temporada invierno 2025, temporada primavera 2025, estrenos anime 2025',
-	openGraph: {
-		title: 'AnimeTopX',
-		description:
-			'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-		url: 'https://animetopx.com',
-		siteName: 'AnimeTopX',
-		images: [
-			{
-				url: 'https://animetopx.com/PORTADAPRINCIPAL.webp',
-				width: 1200,
-				height: 630,
-			},
-		],
-		locale: 'es_ES',
-		type: 'website',
-	},
-	twitter: {
-		card: 'summary_large_image',
-		title: 'AnimeTopX',
-		description:
-			'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-		images: ['https://animetopx.com/PORTADAPRINCIPAL.webp'],
-	},
-	icons: {
-		icon: '/favicon.ico',
-	},
-};
+export async function generateMetadata() {
+	return await getMetadataForRoute();
+}
 
 export default function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }): React.JSX.Element {
+	const jsonLd = {
+		'@context': 'https://schema.org',
+		'@graph': [getWebsiteSchema(), ...getWebPagesSchema()],
+	};
+
 	return (
 		<html
 			suppressHydrationWarning
@@ -94,6 +73,12 @@ export default function RootLayout({
 					id="json-ld"
 					strategy="afterInteractive" // Ejecuta después de que la página se haya cargado
 					type="application/ld+json"
+				/>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(jsonLd, null, 2),
+					}}
 				/>
 			</head>
 			<body className="bg-background text-foreground flex min-h-screen flex-col">
