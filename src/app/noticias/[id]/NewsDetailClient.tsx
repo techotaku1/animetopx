@@ -200,7 +200,7 @@ export default function NewsDetailClient({
 							onClick={() =>
 								window.open(newsItem.imageUrls[currentIndex].malLink, '_blank')
 							}
-							className="flex items-center px-4 py-2 font-bold"
+							className="flex items-center px-4 py-[0.7rem] font-bold"
 						>
 							<span className="flex items-center">
 								<FaPlay className="mr-2" />
@@ -216,7 +216,7 @@ export default function NewsDetailClient({
 					Publicado el: {formatDate(newsItem.publicationDate)}
 				</span>
 				<Link href="/">
-					<Button className="flex items-center gap-2 px-4 py-2">
+					<Button className="flex items-center gap-2 px-4 py-[0.7rem]">
 						<ReturnIcon className="h-5 w-5 fill-white" aria-hidden="true" />
 						<span className="flex-1 text-center">Volver a las Noticias</span>
 					</Button>
