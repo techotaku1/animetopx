@@ -13,7 +13,7 @@ import { getBlobUrl } from '@/lib/blobUtils';
 const newsItems = [
 	{
 		id: 6,
-		title: 'TOP ANIME VERANO 2025',
+		title: 'TOP 10 ANIMES VERANO 2025',
 		description: 'Top estrenos de la temporada de VERANO 2025',
 		category: 'Verano',
 		imageUrl: getBlobUrl('VERANO-2025/CoverVerano2025.webp'),
@@ -21,47 +21,47 @@ const newsItems = [
 	},
 	{
 		id: 5,
-		title: 'NUEVAS AVENTURAS EN PRIMAVERA 2025',
+		title: 'TOP 10 ANIMES PRIMAVERA 2025',
 		description:
 			'Descubre las nuevas aventuras que nos esperan en la temporada de Primavera 2025.',
 		category: 'Primavera',
 		imageUrl: getBlobUrl('PRIMAVERA-2025/CoverPrimavera2025.webp'),
-		date: '2025-04-12',
+		date: '2025-04-12T00:56:00-05:00',
 	},
 	{
 		id: 4,
-		title: 'NUEVAS AVENTURAS EN INVIERNO 2025',
+		title: 'TOP 10 ANIMES INVIERNO 2025',
 		description:
 			'Descubre las nuevas aventuras que nos esperan en la temporada de Invierno 2025.',
 		category: 'Invierno',
 		imageUrl: getBlobUrl('INVIERNO-2025/coverinvierno2025.webp'),
-		date: '2025-02-10',
+		date: '2025-02-10T00:56:00-05:00',
 	},
 	{
 		id: 3,
-		title: 'EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES DE HUNTER X HUNTER',
+		title: 'EL CONTINENTE OSCURO Y SUS 5 CALAMIDADES EN HUNTER X HUNTER',
 		description:
 			'Descubre las 5 calamidades del continente oscuro de HUNTER X HUNTER y lo que hace cada una de ellas.',
 		category: 'Curiosidades',
 		imageUrl: getBlobUrl('HUNTERXHUNTER/coverhunter.webp'),
-		date: '2024-11-08',
+		date: '2024-11-08T00:56:00-05:00',
 	},
 	{
 		id: 2,
-		title: 'RE:ZERO BRUJAS Y ARZOBISPOS',
+		title: 'BRUJAS Y ARZOBISPOS EN RE:ZERO',
 		description:
 			'Lista REAL de los arzobispos del pecado en Re:Zero, y sus respectivas brujas.',
 		category: 'Curiosidades',
 		imageUrl: getBlobUrl('RE-ZERO/coverrezero.webp'),
-		date: '2024-11-01',
+		date: '2024-11-01T00:56:00-05:00',
 	},
 	{
 		id: 1,
-		title: 'TOP ANIME OTOÑO 2024',
+		title: 'TOP 10 ANIMES OTOÑO 2024',
 		description: 'Top estrenos de la temporada de OTOÑO 2024',
 		category: 'Otoño',
 		imageUrl: getBlobUrl('OTOÑO-2024/coverotoño.webp'),
-		date: '2024-10-01',
+		date: '2024-10-01T00:56:00-05:00',
 	},
 	// Puedes agregar más noticias aquí
 ];

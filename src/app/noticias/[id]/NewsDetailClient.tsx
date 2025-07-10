@@ -211,7 +211,7 @@ export default function NewsDetailClient({
 				</div>
 			</div>
 
-			<div className="sm:-mt-2 mb-2 -mt-4 flex w-full flex-col items-center">
+			<div className="-mt-4 mb-2 flex w-full flex-col items-center sm:-mt-2">
 				<span className="text-sm text-gray-500">
 					Publicado el: {formatDate(newsItem.publicationDate)}
 				</span>

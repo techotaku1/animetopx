@@ -15,7 +15,7 @@ export function Header(): JSX.Element {
 							sizes="(max-width: 768px) 80px, 160px"
 							src="/logo.png"
 							width={80}
-              priority
+							priority
 						/>
 						<span className="font-bold">AnimeTopX</span>
 					</Link>

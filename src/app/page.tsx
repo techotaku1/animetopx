@@ -33,12 +33,11 @@ export default function Home(): JSX.Element {
 		return (): void => clearInterval(interval);
 	}, [portadaItems.length]);
 
-	// Nueva función para mostrar tiempo relativo en español
+	// Función para mostrar tiempo relativo en español
 	function getRelativeTime(dateString: string) {
 		const now = new Date();
 		const date = new Date(dateString);
 
-		// Normaliza ambas fechas a medianoche local
 		const nowMidnight = new Date(
 			now.getFullYear(),
 			now.getMonth(),
@@ -60,7 +59,6 @@ export default function Home(): JSX.Element {
 			return 'Publicado ayer';
 		}
 
-		// Si han pasado más de 60 días, mostrar en meses
 		if (diffDays > 60) {
 			const nowY = now.getFullYear();
 			const nowM = now.getMonth();
@@ -68,7 +66,6 @@ export default function Home(): JSX.Element {
 			const dateM = date.getMonth();
 			let diffMonths = (nowY - dateY) * 12 + (nowM - dateM);
 
-			// Ajuste: si el día actual es menor que el día de la fecha, restar un mes
 			if (now.getDate() < date.getDate()) {
 				diffMonths -= 1;
 			}

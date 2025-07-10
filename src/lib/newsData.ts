@@ -447,16 +447,14 @@ export const newsItems: NewsItem[] = [
 				url: getBlobUrl('VERANO-2025/4-YofukashinoUtaSeason2.jpg'),
 				title: 'Yofukashi no Uta Season 2',
 				description: 'Segunda temporada de Yofukashi no Uta.',
-				malLink:
-					'https://www.netflix.com/co/title/81621036',
+				malLink: 'https://www.netflix.com/co/title/81621036',
 			},
 			{
 				url: getBlobUrl('VERANO-2025/5-KaoruHanawaRintoSaku.jpg'),
 				title: 'Kaoru Hana wa Rin to Saku',
 				description:
 					'A pesar de estar adyacentes, la Escuela Secundaria Pública de Chidori y la Academia Privada Kikyo, solo para chicas, parecen vivir en mundos diferentes.',
-				malLink:
-					'https://www.netflix.com/co/title/82024665',
+				malLink: 'https://www.netflix.com/co/title/82024665',
 			},
 			{
 				url: getBlobUrl(

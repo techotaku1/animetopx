@@ -3,8 +3,6 @@ import { type JSX } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { formatDistanceToNow, parseISO } from 'date-fns';
-import { es } from 'date-fns/locale';
 import { ArrowDown } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -33,32 +31,58 @@ interface NewsCardProps {
 function getRelativeTime(dateString: string) {
 	const now = new Date();
 	const date = new Date(dateString);
-	const diff = (now.getTime() - date.getTime()) / 1000; // en segundos
 
-	if (diff < 60) return 'hace unos segundos';
-	if (diff < 3600) return `hace ${Math.floor(diff / 60)} minutos`;
-	if (diff < 86400) return `hace ${Math.floor(diff / 3600)} horas`;
-	if (diff < 172800) return 'hace 1 día';
-	return `hace ${Math.floor(diff / 86400)} días`;
+	const nowMidnight = new Date(
+		now.getFullYear(),
+		now.getMonth(),
+		now.getDate()
+	);
+	const dateMidnight = new Date(
+		date.getFullYear(),
+		date.getMonth(),
+		date.getDate()
+	);
+
+	const diffTime = nowMidnight.getTime() - dateMidnight.getTime();
+	const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+	if (diffDays === 0) {
+		return 'Publicado hoy';
+	}
+	if (diffDays === 1) {
+		return 'Publicado ayer';
+	}
+
+	if (diffDays > 60) {
+		const nowY = now.getFullYear();
+		const nowM = now.getMonth();
+		const dateY = date.getFullYear();
+		const dateM = date.getMonth();
+		let diffMonths = (nowY - dateY) * 12 + (nowM - dateM);
+
+		if (now.getDate() < date.getDate()) {
+			diffMonths -= 1;
+		}
+
+		if (diffMonths <= 0) {
+			return 'Publicado hoy';
+		}
+		if (diffMonths === 1) {
+			return 'Publicado hace 1 mes';
+		}
+		if (diffMonths < 12) {
+			return `Publicado hace ${diffMonths} meses`;
+		}
+		return 'Publicado hace más de un año';
+	}
+	if (diffDays > 1) {
+		return `Publicado hace ${diffDays} días`;
+	}
+
+	return 'Publicado hoy';
 }
 
 export function NewsCard({ item }: NewsCardProps): JSX.Element {
-	let timeAgo = '';
-
-	try {
-		const publishedDate = parseISO(item.date);
-		if (isNaN(publishedDate.getTime())) {
-			throw new Error('Fecha inválida');
-		}
-
-		timeAgo = formatDistanceToNow(publishedDate, {
-			addSuffix: true,
-			locale: es,
-		});
-	} catch {
-		timeAgo = 'Fecha no disponible';
-	}
-
 	return (
 		<Card className="flex flex-col p-8">
 			<CardHeader>
