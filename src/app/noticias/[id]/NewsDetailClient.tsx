@@ -12,7 +12,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import { ImageCarousel } from '@/components/layout/ImageCarousel';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
-import ReturnIcon from '@/icons/return.svg';
 import { newsItems } from '@/lib/newsData';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -217,7 +216,6 @@ export default function NewsDetailClient({
 				</span>
 				<Link href="/">
 					<Button className="flex items-center gap-2 px-4 py-[0.7rem]">
-						<ReturnIcon className="h-5 w-5 fill-white" aria-hidden="true" />
 						<span className="flex-1 text-center">Volver a las Noticias</span>
 					</Button>
 				</Link>
