@@ -54,30 +54,11 @@ export default function RootLayout({
 			lang="es"
 		>
 			<head>
+				<link rel="canonical" href="https://animetopx.com/" />
 				<Script
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify({
-							'@context': 'https://schema.org',
-							'@type': 'WebSite',
-							name: 'AnimeTopX',
-							url: 'https://animetopx.com',
-							description:
-								'Tu fuente confiable para las últimas noticias y actualizaciones del mundo del anime',
-							potentialAction: {
-								'@type': 'SearchAction',
-								target: 'https://animetopx.com/search?q={search_term_string}',
-								'query-input': 'required name=search_term_string',
-							},
-						}),
-					}}
-					id="json-ld"
-					strategy="afterInteractive" // Ejecuta después de que la página se haya cargado
-					type="application/ld+json"
-				/>
-				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
-						__html: JSON.stringify(jsonLd, null, 2),
+						__html: JSON.stringify(jsonLd, null, 2).replace(/</g, '\\u003c'),
 					}}
 				/>
 			</head>
