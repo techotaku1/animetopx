@@ -8,7 +8,7 @@ export const getWebsiteSchema = () => ({
 	description:
 		'Descubre los mejores animes, tops y noticias de la temporada en AnimeTopX.',
 	publisher: {
-		'@type': 'Organization',
+		'@type': 'NewsMediaOrganization',
 		name: 'AnimeTopX',
 		logo: {
 			'@type': 'ImageObject',
@@ -19,6 +19,7 @@ export const getWebsiteSchema = () => ({
 			'https://twitter.com/animetopx',
 			'https://instagram.com/animetopx',
 		],
+		email: 'jsdg1818@gmail.com',
 	},
 	mainEntity: {
 		'@type': 'WebSite',
