@@ -24,7 +24,6 @@ export const getWebsiteSchema = () => ({
 		'@type': 'WebSite',
 		name: 'AnimeTopX',
 		description: 'Noticias y tops de anime actualizados.',
-		email: 'contacto@animetopx.com',
 	},
 });
 

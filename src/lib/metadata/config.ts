@@ -25,6 +25,16 @@ export async function getCurrentPath() {
 	return pathname;
 }
 
+export async function getPathnameHeaders() {
+	const headersList = await headers();
+	const pathname =
+		headersList.get('x-invoke-path') ??
+		headersList.get('x-original-url') ??
+		headersList.get('x-pathname') ??
+		'/';
+	return pathname;
+}
+
 const defaultMetadata: Metadata = {
 	title: {
 		template: '%s | AnimeTopX',
