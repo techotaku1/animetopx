@@ -10,7 +10,14 @@ import { FaPlay } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { ImageCarousel } from '@/components/layout/ImageCarousel';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
 import { newsItems } from '@/lib/newsData';
 
@@ -21,7 +28,9 @@ interface Comment {
 	comment: string;
 	date: Date;
 	rating: number;
-	userName: string;
+	userName: string; // email
+	likes?: number;
+	likedBy?: string[]; // array de emails
 }
 
 interface NewCommentData {
@@ -41,7 +50,16 @@ export default function NewsDetailClient({
 	const [comments, setComments] = useState<Comment[]>([]);
 	const [newComment, setNewComment] = useState<string>('');
 	const [userRating, setUserRating] = useState<number>(0);
-	const [userName, setUserName] = useState<string>('');
+	const [userCommentEmail, setUserCommentEmail] = useState<string>('');
+	const [userLikeEmail, setUserLikeEmail] = useState<string>('');
+	const [commentEmailVerified, setCommentEmailVerified] =
+		useState<boolean>(false);
+	const [likeEmailVerified, setLikeEmailVerified] = useState<boolean>(false);
+	const [commentVerificationCode, setCommentVerificationCode] = useState('');
+	const [likeVerificationCode, setLikeVerificationCode] = useState('');
+	const [commentCodeSent, setCommentCodeSent] = useState(false);
+	const [likeCodeSent, setLikeCodeSent] = useState(false);
+	const [likeLoading, setLikeLoading] = useState<string | null>(null); // id del comentario que está procesando like
 
 	const fetchComments = useCallback(async () => {
 		if (!id) return;
@@ -60,21 +78,127 @@ export default function NewsDetailClient({
 	}, [id]);
 
 	useEffect(() => {
-		fetchComments().catch((error) => {
-			console.error('Error fetching comments:', error);
+		fetchComments().catch((_error) => {
+			console.error('Error fetching comments:', _error);
 		});
 	}, [fetchComments]);
 
+	useEffect(() => {
+		const savedCommentEmail = localStorage.getItem('userCommentEmail');
+		const savedLikeEmail = localStorage.getItem('userLikeEmail');
+		const commentVerified =
+			localStorage.getItem('commentEmailVerified') === 'true';
+		const likeVerified = localStorage.getItem('likeEmailVerified') === 'true';
+		if (savedCommentEmail) setUserCommentEmail(savedCommentEmail);
+		if (savedLikeEmail) setUserLikeEmail(savedLikeEmail);
+		setCommentEmailVerified(commentVerified);
+		setLikeEmailVerified(likeVerified);
+	}, []);
+
+	const validateEmail = (email: string) => {
+		// Validación básica de email
+		return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+	};
+
+	const sendVerificationCode = async (
+		email: string,
+		type: 'comment' | 'like'
+	) => {
+		if (!validateEmail(email)) {
+			toast.error('Ingresa un correo válido.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+			return;
+		}
+		const res = await fetch('/api/verify-email', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email }),
+		});
+		if (res.ok) {
+			toast.success('Código enviado al correo.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+			if (type === 'comment') setCommentCodeSent(true);
+			else setLikeCodeSent(true);
+		} else {
+			toast.error('Error enviando código.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+		}
+	};
+
+	const verifyCode = async (
+		email: string,
+		code: string,
+		type: 'comment' | 'like'
+	) => {
+		const res = await fetch('/api/verify-email', {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email, code }),
+		});
+		if (res.ok) {
+			toast.success('Correo verificado.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+			if (type === 'comment') {
+				setCommentEmailVerified(true);
+				localStorage.setItem('userCommentEmail', email);
+				localStorage.setItem('commentEmailVerified', 'true');
+			} else {
+				setLikeEmailVerified(true);
+				localStorage.setItem('userLikeEmail', email);
+				localStorage.setItem('likeEmailVerified', 'true');
+			}
+		} else {
+			toast.error('Código incorrecto.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+		}
+	};
+
 	const handleCommentSubmit = async (e: React.FormEvent): Promise<void> => {
 		e.preventDefault();
-		if (newComment.trim() === '' || userRating === 0 || userName.trim() === '')
+		if (userRating === 0) {
+			toast.error(
+				'Faltan las estrellas. Por favor selecciona una calificación.',
+				{
+					position: 'top-right',
+					autoClose: 3000,
+					hideProgressBar: true,
+				}
+			);
 			return;
-
+		}
+		if (
+			newComment.trim() === '' ||
+			userCommentEmail.trim() === '' ||
+			!validateEmail(userCommentEmail.trim()) ||
+			!commentEmailVerified
+		) {
+			toast.error('Debes verificar tu correo antes de comentar.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+			return;
+		}
 		const newCommentData: NewCommentData = {
 			comment: newComment,
 			newsId: id.toString(),
 			rating: userRating,
-			userName: userName,
+			userName: userCommentEmail,
 		};
 
 		try {
@@ -99,19 +223,21 @@ export default function NewsDetailClient({
 
 			setNewComment('');
 			setUserRating(0);
-			setUserName('');
+			setUserCommentEmail('');
 
-			fetchComments().catch((error) => {
-				console.error('Error fetching comments:', error);
+			localStorage.setItem('userEmail', userCommentEmail.trim());
+
+			fetchComments().catch((_error) => {
+				console.error('Error fetching comments:', _error);
 			});
 			toast.success('Comentario agregado con éxito!', {
 				position: 'top-right',
 				autoClose: 3000,
 				hideProgressBar: true,
 			});
-		} catch (error) {
+		} catch (_error) {
 			const errorMessage =
-				error instanceof Error ? error.message : String(error);
+				_error instanceof Error ? _error.message : String(_error);
 			console.error('Error submitting comment:', errorMessage);
 			toast.error(`Error submitting comment: ${errorMessage}`, {
 				position: 'top-right',
@@ -121,19 +247,93 @@ export default function NewsDetailClient({
 		}
 	};
 
+	const handleLike = async (commentId: string) => {
+		if (!validateEmail(userLikeEmail.trim()) || !likeEmailVerified) {
+			toast.error('Debes verificar tu correo antes de dar like.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+			return;
+		}
+		localStorage.setItem('userLikeEmail', userLikeEmail.trim());
+		setLikeLoading(commentId);
+		try {
+			const response = await fetch('/api/comment/like', {
+				method: 'PATCH',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					commentId,
+					userEmail: userLikeEmail.trim(),
+				}),
+			});
+			if (!response.ok) {
+				const errorText = await response.text();
+				toast.error(`Error al dar like: ${errorText}`, {
+					position: 'top-right',
+					autoClose: 3000,
+					hideProgressBar: true,
+				});
+			} else {
+				await fetchComments();
+			}
+		} catch (_error) {
+			toast.error('Error al dar like.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+		}
+		setLikeLoading(null);
+	};
+
+	const handleDeleteComment = async (commentId: string) => {
+		if (!userCommentEmail || !commentEmailVerified) {
+			toast.error('Debes verificar tu correo para eliminar tu comentario.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+			return;
+		}
+		try {
+			const response = await fetch('/api/comment', {
+				method: 'DELETE',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ commentId, userEmail: userCommentEmail }),
+			});
+			if (!response.ok) {
+				const errorText = await response.text();
+				toast.error(`Error al eliminar comentario: ${errorText}`, {
+					position: 'top-right',
+					autoClose: 3000,
+					hideProgressBar: true,
+				});
+				return;
+			}
+			toast.success('Comentario eliminado.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+			await fetchComments();
+		} catch (_error) {
+			toast.error('Error al eliminar comentario.', {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: true,
+			});
+		}
+	};
+
 	if (!newsItem) return <p className="text-center">Noticia no encontrada</p>;
 
-	const averageStars =
-		comments.length > 0
-			? comments.reduce((acc, comment) => acc + comment.rating, 0) /
-				comments.length
-			: 0;
-
-	const breadcrumbItems = [
-		{ href: '/', label: 'Inicio', icon: Home },
-		{ href: '/noticias', label: 'Noticias', icon: Newspaper },
-		{ href: `/noticias/${id}`, label: newsItem.title },
-	];
+	// Elimina o renombra la variable si no la usas
+	// const averageStars =
+	// 	comments.length > 0
+	// 		? comments.reduce((acc, comment) => acc + comment.rating, 0) /
+	// 			comments.length
+	// 		: 0;
 
 	// Nueva función para formatear la fecha como dd/mm/yyyy con ceros a la izquierda
 	function formatDate(date: Date): string {
@@ -143,6 +343,23 @@ export default function NewsDetailClient({
 		const year = d.getFullYear();
 		return `${day}/${month}/${year}`;
 	}
+
+	// Encuentra el comentario con más likes
+	const maxLikes = Math.max(...comments.map((c) => c.likes ?? 0), 0);
+	const winnerCommentId = comments.find((c) => (c.likes ?? 0) === maxLikes)?.id;
+
+	// Calcula el promedio general de estrellas
+	const averageStars =
+		comments.length > 0
+			? comments.reduce((acc, comment) => acc + comment.rating, 0) /
+				comments.length
+			: 0;
+
+	// Ordena: primero el de más estrellas, luego por fecha descendente
+	const sortedComments = [...comments].sort((a, b) => {
+		if (b.rating !== a.rating) return b.rating - a.rating;
+		return b.date.getTime() - a.date.getTime();
+	});
 
 	return (
 		<div className="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center">
@@ -162,7 +379,27 @@ export default function NewsDetailClient({
 
 			{/* Breadcrumbs para navegación */}
 			<div className="mt-7 flex w-full justify-start">
-				<Breadcrumbs items={breadcrumbItems} />
+				<Breadcrumb>
+					<BreadcrumbList>
+						<BreadcrumbItem>
+							<Home className="mr-1 inline-block size-4 align-text-bottom" />
+							<BreadcrumbLink asChild>
+								<Link href="/">Inicio</Link>
+							</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>
+							<Newspaper className="mr-1 inline-block size-4 align-text-bottom" />
+							<BreadcrumbLink asChild>
+								<Link href="/noticias">Noticias</Link>
+							</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>
+							<BreadcrumbPage>{newsItem.title}</BreadcrumbPage>
+						</BreadcrumbItem>
+					</BreadcrumbList>
+				</Breadcrumb>
 			</div>
 
 			<h1 className="mb-6 text-center text-3xl font-bold sm:text-4xl">
@@ -225,15 +462,19 @@ export default function NewsDetailClient({
 				<h2 className="mb-2 text-lg font-semibold">
 					Comentarios ({comments.length})
 				</h2>
+				<ToastContainer />
 
+				{/* Promedio general de estrellas */}
 				{comments.length > 0 && (
 					<div className="mb-4 flex items-center">
-						<span className="mr-2 text-lg font-bold">Promedio:</span>
+						<span className="mr-2 text-lg font-bold">Promedio general:</span>
 						{[...Array<number>(5)].map((_, index) => (
 							<Star
 								key={index}
 								className={
-									index < averageStars ? 'text-yellow-500' : 'text-gray-300'
+									index < Math.round(averageStars)
+										? 'text-yellow-500'
+										: 'text-gray-300'
 								}
 							/>
 						))}
@@ -242,8 +483,8 @@ export default function NewsDetailClient({
 						</span>
 					</div>
 				)}
-				<ToastContainer />
 
+				{/* Formulario de comentario con verificación */}
 				<form
 					className="flex flex-col space-y-4"
 					onSubmit={handleCommentSubmit}
@@ -258,11 +499,50 @@ export default function NewsDetailClient({
 					<input
 						required
 						className="rounded-md border border-gray-300 p-2"
-						placeholder="Tu nombre"
-						type="text"
-						value={userName}
-						onChange={(e) => setUserName(e.target.value)}
+						placeholder="Correo para comentar"
+						type="email"
+						value={userCommentEmail}
+						onChange={(e) => {
+							setUserCommentEmail(e.target.value);
+							setCommentEmailVerified(false);
+							localStorage.removeItem('commentEmailVerified');
+						}}
+						disabled={commentEmailVerified}
 					/>
+					{!commentEmailVerified && (
+						<div className="flex items-center gap-2">
+							<Button
+								type="button"
+								onClick={() =>
+									sendVerificationCode(userCommentEmail, 'comment')
+								}
+							>
+								Enviar código
+							</Button>
+							{commentCodeSent && (
+								<>
+									<input
+										className="rounded-md border border-gray-300 p-2"
+										placeholder="Código recibido"
+										value={commentVerificationCode}
+										onChange={(e) => setCommentVerificationCode(e.target.value)}
+									/>
+									<Button
+										type="button"
+										onClick={() =>
+											verifyCode(
+												userCommentEmail,
+												commentVerificationCode,
+												'comment'
+											)
+										}
+									>
+										Verificar
+									</Button>
+								</>
+							)}
+						</div>
+					)}
 					<div className="flex items-center">
 						{[1, 2, 3, 4, 5].map((star) => (
 							<Star
@@ -276,15 +556,69 @@ export default function NewsDetailClient({
 							/>
 						))}
 					</div>
-					<Button type="submit">Enviar Comentario</Button>
+					<Button type="submit" disabled={!commentEmailVerified}>
+						Enviar Comentario
+					</Button>
 				</form>
 
-				{comments
-					.sort((a, b) => b.date.getTime() - a.date.getTime())
-					.map((comment) => (
+				{/* Input de correo para dar like con verificación */}
+				<div className="my-4 flex flex-col gap-2">
+					<input
+						required
+						className="rounded-md border border-gray-300 p-2"
+						placeholder="Correo para dar like"
+						type="email"
+						value={userLikeEmail}
+						onChange={(e) => {
+							setUserLikeEmail(e.target.value);
+							setLikeEmailVerified(false);
+							localStorage.removeItem('likeEmailVerified');
+						}}
+						disabled={likeEmailVerified}
+					/>
+					{!likeEmailVerified && (
+						<div className="flex items-center gap-2">
+							<Button
+								type="button"
+								onClick={() => sendVerificationCode(userLikeEmail, 'like')}
+							>
+								Enviar código
+							</Button>
+							{likeCodeSent && (
+								<>
+									<input
+										className="rounded-md border border-gray-300 p-2"
+										placeholder="Código recibido"
+										value={likeVerificationCode}
+										onChange={(e) => setLikeVerificationCode(e.target.value)}
+									/>
+									<Button
+										type="button"
+										onClick={() =>
+											verifyCode(userLikeEmail, likeVerificationCode, 'like')
+										}
+									>
+										Verificar
+									</Button>
+								</>
+							)}
+						</div>
+					)}
+				</div>
+
+				{sortedComments.map((comment) => {
+					const alreadyLiked = comment.likedBy?.includes(userLikeEmail.trim());
+					const isOwner =
+						comment.userName.trim().toLowerCase() ===
+							userCommentEmail.trim().toLowerCase() && commentEmailVerified;
+					return (
 						<div
 							key={comment.id}
-							className="my-2 rounded-md border border-gray-300 p-4"
+							className={`my-2 rounded-md border border-gray-300 p-4 ${
+								comment.id === winnerCommentId && maxLikes > 0
+									? 'border-2 border-yellow-400 bg-yellow-50'
+									: ''
+							}`}
 						>
 							<div className="mb-2 flex items-center justify-between">
 								<span className="font-bold">{comment.userName}</span>
@@ -292,7 +626,9 @@ export default function NewsDetailClient({
 									{new Date(comment.date).toLocaleDateString()}
 								</span>
 							</div>
-							<div className="mb-2 flex">
+							{/* Promedio de estrellas por comentario individual */}
+							<div className="mb-2 flex items-center">
+								<span className="mr-2 text-sm font-medium">Calificación:</span>
 								{[...Array<number>(5)].map((_, index) => (
 									<Star
 										key={index}
@@ -303,10 +639,46 @@ export default function NewsDetailClient({
 										}
 									/>
 								))}
+								<span className="ml-2 text-sm font-semibold">
+									{comment.rating.toFixed(1)} / 5
+								</span>
 							</div>
 							<p className="mb-2 text-gray-600">{comment.comment}</p>
+							<div className="flex items-center gap-2">
+								<Button
+									variant="outline"
+									size="sm"
+									disabled={
+										(!likeEmailVerified || alreadyLiked) ??
+										likeLoading === comment.id
+									}
+									onClick={() => handleLike(comment.id)}
+								>
+									👍 {comment.likes ?? 0}
+								</Button>
+								{alreadyLiked && (
+									<span className="text-xs text-green-600">
+										¡Ya diste like!
+									</span>
+								)}
+								{comment.id === winnerCommentId && maxLikes > 0 && (
+									<span className="ml-2 text-xs font-bold text-yellow-600">
+										🥇 Más likes
+									</span>
+								)}
+								{isOwner && (
+									<Button
+										variant="destructive"
+										size="sm"
+										onClick={() => handleDeleteComment(comment.id)}
+									>
+										Eliminar
+									</Button>
+								)}
+							</div>
 						</div>
-					))}
+					);
+				})}
 			</div>
 		</div>
 	);

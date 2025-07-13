@@ -5,7 +5,14 @@ import Link from 'next/link';
 import { Home, Newspaper } from 'lucide-react';
 
 import { NewsCard } from '@/components/layout/news-card';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
 import { getBlobUrl } from '@/lib/blobUtils';
 
@@ -67,12 +74,6 @@ const newsItems = [
 ];
 
 export default function NoticiasPage(): JSX.Element {
-	// Definición de los breadcrumbs
-	const breadcrumbItems = [
-		{ href: '/', label: 'Inicio', icon: Home },
-		{ href: '/noticias', label: 'Noticias', icon: Newspaper },
-	];
-
 	// Función para mostrar tiempo relativo en español
 	function getRelativeTime(dateString: string) {
 		const now = new Date();
@@ -131,7 +132,21 @@ export default function NoticiasPage(): JSX.Element {
 	return (
 		<div className="space-y-8">
 			{/* Breadcrumbs */}
-			<Breadcrumbs items={breadcrumbItems} />
+			<Breadcrumb>
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<Home className="mr-1 inline-block size-4 align-text-bottom" />
+						<BreadcrumbLink asChild>
+							<Link href="/">Inicio</Link>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<Newspaper className="mr-1 inline-block size-4 align-text-bottom" />
+						<BreadcrumbPage>Noticias</BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
 
 			<section>
 				<h1 className="mb-4 text-4xl font-bold">Todas las Noticias de Anime</h1>

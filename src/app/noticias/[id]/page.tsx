@@ -9,12 +9,12 @@ export function generateStaticParams() {
 	return paths;
 }
 
-export default function NewsDetailPage({
+export default async function NewsDetailPage({
 	params,
 }: {
-	params: { id: string }; // <-- Fix: params is a plain object, not a Promise
+	params: Promise<{ id: string }>;
 }) {
-	const { id } = params; // <-- Remove await
+	const { id } = await params;
 	const newsItem = newsItems.find((item) => item.id === Number(id));
 
 	if (!newsItem) {

@@ -3,14 +3,17 @@ import { type NextRequest, NextResponse } from 'next/server';
 import {
 	addDoc,
 	collection,
+	deleteDoc,
+	doc,
+	type FirestoreDataConverter,
+	getDoc,
 	getDocs,
 	query,
-	where,
-	Timestamp,
-	type FirestoreDataConverter,
 	type QueryDocumentSnapshot,
-	type WithFieldValue,
 	type SnapshotOptions,
+	Timestamp,
+	where,
+	type WithFieldValue,
 } from 'firebase/firestore';
 
 import { db } from '@/db/firebaseConfig';
@@ -21,6 +24,8 @@ interface Comment {
 	newsId: string;
 	rating: number;
 	userName: string;
+	likes?: number;
+	likedBy?: string[];
 }
 
 const commentConverter: FirestoreDataConverter<Comment> = {
@@ -31,6 +36,8 @@ const commentConverter: FirestoreDataConverter<Comment> = {
 			newsId: comment.newsId,
 			rating: comment.rating,
 			userName: comment.userName,
+			likes: comment.likes ?? 0,
+			likedBy: comment.likedBy ?? [],
 		};
 	},
 	fromFirestore: (
@@ -53,6 +60,8 @@ const commentConverter: FirestoreDataConverter<Comment> = {
 			newsId: String(data.newsId),
 			rating: Number(data.rating),
 			userName: String(data.userName),
+			likes: typeof data.likes === 'number' ? data.likes : 0,
+			likedBy: Array.isArray(data.likedBy) ? data.likedBy : [],
 		};
 	},
 };
@@ -77,6 +86,8 @@ export async function GET(req: NextRequest) {
 			id: doc.id,
 			...data,
 			date: data.date.toDate(),
+			likes: data.likes ?? 0,
+			likedBy: data.likedBy ?? [],
 		};
 	});
 	return NextResponse.json(comments, { status: 200 });
@@ -91,6 +102,14 @@ export async function POST(req: NextRequest) {
 				{ status: 400 }
 			);
 		}
+		// Validación de correo en backend
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailRegex.test(userName)) {
+			return NextResponse.json(
+				{ error: 'userName must be a valid email address' },
+				{ status: 400 }
+			);
+		}
 
 		const newComment: Comment = {
 			comment,
@@ -98,6 +117,8 @@ export async function POST(req: NextRequest) {
 			newsId,
 			rating,
 			userName,
+			likes: 0,
+			likedBy: [],
 		};
 		const commentsRef = collection(db, 'comments').withConverter(
 			commentConverter
@@ -108,6 +129,57 @@ export async function POST(req: NextRequest) {
 		const errorMessage = error instanceof Error ? error.message : String(error);
 		return NextResponse.json(
 			{ error: `Failed to submit comment: ${errorMessage}` },
+			{ status: 500 }
+		);
+	}
+}
+
+export async function DELETE(req: NextRequest) {
+	try {
+		const body: unknown = await req.json();
+		// Type guard to ensure body is an object with string properties
+		const commentId =
+			typeof body === 'object' &&
+			body !== null &&
+			'commentId' in body &&
+			typeof (body as Record<string, unknown>).commentId === 'string'
+				? (body as Record<string, unknown>).commentId
+				: '';
+		const userEmail =
+			typeof body === 'object' &&
+			body !== null &&
+			'userEmail' in body &&
+			typeof (body as Record<string, unknown>).userEmail === 'string'
+				? (body as Record<string, unknown>).userEmail
+				: '';
+		if (!commentId || !userEmail) {
+			return NextResponse.json(
+				{ error: 'commentId and userEmail are required' },
+				{ status: 400 }
+			);
+		}
+		// Correct usage: get the collection reference with converter, then use doc(collectionRef, id)
+		const commentsRef = collection(db, 'comments').withConverter(
+			commentConverter
+		);
+		const commentRef = doc(commentsRef, commentId as string); // Ensure commentId is string
+		const commentSnap = await getDoc(commentRef);
+		if (!commentSnap.exists()) {
+			return NextResponse.json({ error: 'Comment not found' }, { status: 404 });
+		}
+		const data = commentSnap.data();
+		if (typeof data.userName !== 'string' || data.userName !== userEmail) {
+			return NextResponse.json(
+				{ error: 'No autorizado para eliminar este comentario' },
+				{ status: 403 }
+			);
+		}
+		await deleteDoc(commentRef);
+		return NextResponse.json({ ok: true });
+	} catch (error) {
+		const errorMessage = error instanceof Error ? error.message : String(error);
+		return NextResponse.json(
+			{ error: `Failed to delete comment: ${errorMessage}` },
 			{ status: 500 }
 		);
 	}
