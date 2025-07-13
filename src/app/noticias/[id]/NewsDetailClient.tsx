@@ -9,6 +9,7 @@ import { Home, Newspaper, Star } from 'lucide-react';
 import { FaPlay } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 
+import { deleteCommentAction } from '@/app/actions/commentActions';
 import { ImageCarousel } from '@/components/layout/ImageCarousel';
 import {
 	Breadcrumb,
@@ -145,16 +146,21 @@ export default function NewsDetailClient({
 			body: JSON.stringify({ email, code }),
 		});
 		if (res.ok) {
-			toast.success('Correo verificado.', {
-				position: 'top-right',
-				autoClose: 3000,
-				hideProgressBar: true,
-			});
 			if (type === 'comment') {
+				toast.success('Correo verificado. Ya puedes comentar.', {
+					position: 'top-right',
+					autoClose: 5000,
+					hideProgressBar: true,
+				});
 				setCommentEmailVerified(true);
 				localStorage.setItem('userCommentEmail', email);
 				localStorage.setItem('commentEmailVerified', 'true');
 			} else {
+				toast.success('¡Correo verificado! Ya puedes dar likes.', {
+					position: 'top-right',
+					autoClose: 7000,
+					hideProgressBar: true,
+				});
 				setLikeEmailVerified(true);
 				localStorage.setItem('userLikeEmail', email);
 				localStorage.setItem('likeEmailVerified', 'true');
@@ -296,29 +302,16 @@ export default function NewsDetailClient({
 			});
 			return;
 		}
-		try {
-			const response = await fetch('/api/comment', {
-				method: 'DELETE',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ commentId, userEmail: userCommentEmail }),
-			});
-			if (!response.ok) {
-				const errorText = await response.text();
-				toast.error(`Error al eliminar comentario: ${errorText}`, {
-					position: 'top-right',
-					autoClose: 3000,
-					hideProgressBar: true,
-				});
-				return;
-			}
+		const result = await deleteCommentAction(commentId, userCommentEmail);
+		if (result.ok) {
 			toast.success('Comentario eliminado.', {
 				position: 'top-right',
 				autoClose: 3000,
 				hideProgressBar: true,
 			});
 			await fetchComments();
-		} catch (_error) {
-			toast.error('Error al eliminar comentario.', {
+		} else {
+			toast.error(result.error ?? 'Error al eliminar comentario.', {
 				position: 'top-right',
 				autoClose: 3000,
 				hideProgressBar: true,
@@ -355,9 +348,11 @@ export default function NewsDetailClient({
 				comments.length
 			: 0;
 
-	// Ordena: primero el de más estrellas, luego por fecha descendente
+	// Ordena: primero el comentario con más likes, luego por fecha descendente
 	const sortedComments = [...comments].sort((a, b) => {
-		if (b.rating !== a.rating) return b.rating - a.rating;
+		const likesA = a.likes ?? 0;
+		const likesB = b.likes ?? 0;
+		if (likesB !== likesA) return likesB - likesA;
 		return b.date.getTime() - a.date.getTime();
 	});
 
